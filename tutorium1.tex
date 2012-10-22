@@ -284,7 +284,7 @@
 \subsection{Reguläre Sprachen}
 \begin{frame}
 \frametitle{Rechtslineare Grammatiken}
-Eine Grammatik $G = ( V, \Sigma, P, S)$
+Eine Grammatik $G = ( T, V, S, P)$
 \begin{itemize}
 	\item $T$ = Menge der Terminale (a.k.a. Alphabet der Sprache)
 	\item $V$ = Menge der Nichtterminale (zu T disjunkt)
@@ -303,8 +303,8 @@ bei der alle Produktionen so aussehen:
 		\item $A, C \in V$
 		\item $b \in T$
 	\end{itemize}
-heißt rechtslinear bzw. regulär. 
 \end{itemize}
+heißt rechtslinear bzw. regulär. 
 \end{frame}
 
 \begin{frame}
@@ -417,11 +417,12 @@ B^{+}C \neq B + C
 \subsection{Akzeptor $\rightarrow$ Grammatik}
 \begin{frame}
 	\frametitle{Akzeptor $\rightarrow$ Grammatik}
-	Umwandlung von einem endlichen Akzeptor $M = (Q,\Sigma,\delta,q_0,F)$ in eine rechtslineare Grammatik $\mathcal{G} = (T,V,S,P)$:
+	Umwandlung von einem endlichen Akzeptor $M = (Q,\Sigma,\delta,q_0,F)$ in eine rechtslineare Grammatik $G = (T,V,S,P)$:
 	\begin{enumerate}
 		\item $T := \Sigma$.
-		\item $\forall q \in Q$ ein Nichtterminalsymbol in $V$ definieren, wobei $S \; q_0$ entspricht.
-		\item $P := \{(X \rightarrow tY) \;\vert\; (q_X,t)=q_Y \in \delta\} \;\bigcup\; \{(Z \rightarrow \lambda) \;\vert\; q_Z \in F\}$.
+		\item $\forall q \in Q$ ein Nichtterminalsymbol in $V$ definieren, wobei $S \; q_0$ zugeordnet ist.
+		\item $P := \{(X \rightarrow tY) \;\vert\; (q_X,t)=q_Y \in \delta\} \;\bigcup\; \{(Z \rightarrow \lambda) \;\vert\; q_Z \in F\}$.~\\
+		Wobei $X$, $Y$ und $Z$ jene Nichtterminalsymbole sind, welche $q_X$, $q_Y$, bzw. $q_Z$ zugeordnet sind. 
 	\end{enumerate}
 \end{frame}
 
