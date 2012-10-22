@@ -144,6 +144,141 @@
 		\item Fragen/Vorschläge/Anmerkungen willkommen!
 	\end{itemize}
 \end{frame}
+\section{Endliche Automaten}
+\subsection{Deterministische endliche Automaten}
+\begin{frame}
+\frametitle{Deterministische endliche Automaten}
+
+	\begin{minipage}{0.5 \textwidth}
+	 \raggedright{ Ein deterministischer endlicher Automat $M$ ist ein 5-Tupel 
+        \[
+        M= (Q,\Sigma,\delta,s,F).
+        \] }
+        \begin{itemize}
+        \item $Q$:  endliche Zustandsmenge
+        \item $\Sigma$:    endliches Alphabet
+        \item $\delta$:   Zustandsübergangsfunktion $Q\times \Sigma \rightarrow Q$
+        \item $s$:   Startzustand $\in Q$
+        \item $F$:   Endzustandsmenge $\subseteq Q$
+        \end{itemize}
+	\end{minipage}
+	\hfill
+    \begin{minipage}{0.45 \textwidth}        
+        \begin{center}
+        	\includegraphics[scale=1]{images/beispielDEA1.pdf}
+        \end{center}
+    \end{minipage}
+\end{frame}
+%\begin{frame}
+%	\frametitle{DEA: Aufgaben}
+%	\begin{enumerate}
+%	\item 
+%		Lösen Sie folgendes Rätsel mit Hilfe eines deterministischen
+%		endlichen Automaten:
+%		\begin{quote}
+%		  Es stehen drei Wasserkrüge mit einem Fassungsvermögen
+%		  von 3, 5 bzw. 7 $l$ zur Verfügung, um eine Wassermenge von
+%		  einem Liter abzumessen, d.~h. in einem der Krüge soll sich genau
+%		  diese Menge Wassers befinden. Zu Beginn sind der kleinste und
+%		  der größte Krug gefüllt. Da Ihr Augenmaß schlecht
+%		  ist, darf Wasser nur so von einem Krug in einen anderen
+%		  gegossen werden, dass der eine ganz geleert oder der andere
+%		  ganz gefüllt wird (ohne dass Wasser verschüttet wird).
+%		\end{quote}
+%		Geben Sie den Übergangsgraphen eines Automaten an, dessen
+%		akzeptierte Sprache genau die zulässigen lösenden
+%		Umfüllreihenfolgen kodiert, sowie ein kürzestes Lösungswort.
+%	\end{enumerate}
+%\end{frame}
+%\begin{frame}
+%\frametitle{DEA: Aufgabe}
+%\begin{enumerate}
+%\setcounter{enumi}{1}
+%\item Geben Sie einen regulären Ausdruck für die vom DEA mit nachfolgendem Zustandsgraphen erkannte Sprache an:
+%\begin{center}
+%\begin{tikzpicture}[node distance=2cm,shorten >=1pt,auto]
+%\node[state,initial,initial where=above]   (q_0)                {$q_0$};
+%\node[state]           (q_1) [left of=q_0]  {$q_1$};
+%\node[state,accepting] (q_2) [below of=q_0] {$q_2$};
+%\node[state,accepting] (q_3) [left of=q_2]  {$q_3$};
+%\path[->]	(q_0) 	edge 			node {$b$} 		(q_2)
+%			edge 			node {$c$} 		(q_1)
+%			edge 			node {$a$} 		(q_3)
+%		(q_1)	edge [loop above]	node {$a$,$b$,$c$}	()
+%		(q_2)	edge [bend left]	node {$a$}		(q_3)
+%			edge [bend left=90,looseness=2.2]	node {$b$,$c$}		(q_1)
+%		(q_3)	edge			node {$a$,$c$}		(q_1)
+%			edge			node {$b$}		(q_2);
+%\end{tikzpicture}
+%\end{center}
+%\end{enumerate}
+%\end{frame}
+%\begin{frame}
+%	\begin{enumerate}
+%	\setcounter{enumi}{2}
+%	\item Aufgabe: Konstruiere einen DEA, der alle durch 5 teilbaren Zahlen akzeptiert. Als Eingabe erhält der Automat dabei die Zahl in ihrer binären Darstellung. Also ist $\Sigma = \{0, 1\}$. Z.B. soll Automat $10_{10} = 1010_{2}$ akzeptieren, aber $7_{10} = 111_{2}$ ablehnen.
+%	\pause \\[10pt]
+%	Tip: Restklassen als Zustände modellieren
+%	\end{enumerate}
+%\end{frame}
+%\begin{frame}
+%	\frametitle{DEA: Lösung}
+%	\begin{enumerate}
+%	\setcounter{enumi}{2}
+%	\item Idee
+%		\begin{itemize}
+%		\item $Q = (q_0, q_1, q_2, q_3, q_4)$\\
+%		\item $\Sigma = \{0,1\}$
+%		\item $\delta(q_n, c) = q_{n \cdot 2 + c\mbox{ mod }5}$ mit $c\in\Sigma$\\
+%		\item $s = q_0$\\
+%		\item $F = \{q_0\}$
+%		\end{itemize}
+%	\end{enumerate}
+%\end{frame}
+\subsection{Nichtdeterministische endliche Automaten}
+\begin{frame}
+\frametitle{Nichtdeterministische endliche Automaten}
+
+	\begin{minipage}{0.5 \textwidth}
+        Ein nichtdeterministischer endlicher Automat $M$ ist ein 5-Tupel
+        \[
+        M= (Q,\Sigma,\delta,s,F).
+        \]
+        \begin{itemize}
+        \item $Q$:  endliche Zustandsmenge
+        \item $\Sigma$:    endliches Alphabet
+        \item \textcolor{red}{$\delta$:   Zustandsübergangsfunktion $Q\times (\Sigma \cup \varepsilon) \rightarrow \pot(Q)$}
+        \item $s$:   Startzustand $\in Q$
+        \item $F$:   Endzustandsmenge $\subseteq Q$
+        \end{itemize}
+\vspace{0.5cm}
+	Damit der NEA ein Wort akzeptiert, muss es \emph{einen} akzeptierenden Weg geben.
+	
+	\end{minipage}
+	\hfill
+    \begin{minipage}{0.45 \textwidth}        
+        \begin{center}
+        	\includegraphics[scale=1]{images/beispielNEA.pdf}
+        \end{center}
+    \end{minipage}
+\end{frame}
+\begin{frame}
+	\frametitle{NEA: Beispiel}
+	\begin{figure}
+	\begin{tikzpicture}
+	\node[draw,circle] (q_0) at (0,0) {$q_0$};
+	\node[draw,circle] (q_1) at (2,0) {$q_1$};
+	\node[draw,circle,double] (q_2) at (4,0) {$q_2$};
+	\draw[->] (-1,0) -- (q_0);
+	\draw[->] (q_0) -- (q_1) node[midway,anchor=south] {$a$};
+	\draw[->] (q_1) -- (q_2) node[midway,anchor=south] {$b$};
+	\draw (q_1) edge [loop above] node {$a$, $b$} (q_1);
+	\end{tikzpicture}
+	\end{figure}
+ 	Bei Eingabe von $b$ im Zustand $q_1$ gibt es mehrere Möglichkeiten. \vspace{0.5cm}
+	
+	(siehe Berechnungsbaum an der Tafel).
+\end{frame}
 
 \section{Reguläre Sprachen}
 \subsection{Reguläre Sprachen}
