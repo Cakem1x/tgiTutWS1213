@@ -1,0 +1,331 @@
+\documentclass[10pt,oneside,onecolumn,a4paper,german,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{german}
+\usepackage{amsmath,amsfonts,amssymb,latexsym,textcomp}
+\usepackage{tikz}
+\pagestyle{plain}
+\pagenumbering{arabic}
+\parskip0.5ex plus0.1ex minus0.1ex
+\parindent0pt
+\voffset-1.04cm
+\topmargin0pt
+\headheight0pt
+\headsep0pt
+\topskip0pt
+\textheight26.7cm
+\footskip20pt
+\hoffset-1.04cm
+\oddsidemargin0pt
+\evensidemargin0pt
+\textwidth18cm
+\marginparsep0pt
+\marginparwidth0pt
+\begin{document}
+
+\newcommand{\start}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+  \draw [->] (#1*2-0.9,#2) -- (#1*2-0.4,#2);
+}
+\newcommand{\state}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+}
+\newcommand{\final}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+  \draw (#1*2,#2*2) circle(0.32cm);
+}
+\newcommand{\tol}[4]
+{
+  \draw (#1+#3,#2*2) node[above]{$#4$};
+  \draw [->] (#1*2-0.4,#2*2) -- (#3*2+0.4,#2*2);
+}
+\newcommand{\tor}[4]
+{
+  \draw (#1+#3,#2*2) node[above]{$#4$};
+  \draw [->] (#1*2+0.4,#2*2) -- (#3*2-0.4,#2*2);
+}
+\newcommand{\tot}[4]
+{
+  \draw (#1*2,#2+#3) node[right]{$#4$};
+  \draw [->] (#1*2,#2*2+0.4) -- (#1*2,#3*2-0.4);
+}
+\newcommand{\tob}[4]
+{
+  \draw (#1*2,#2+#3) node[right]{$#4$};
+  \draw [->] (#1*2,#2*2-0.4) -- (#1*2,#3*2+0.4);
+}
+\newcommand{\totl}[5]
+{
+  \draw (#1+#3,#2+#4) node[above right]{$#5$};
+  \draw [->] (#1*2-0.283,#2*2+0.283) -- (#3*2+0.283,#4*2-0.283);
+}
+\newcommand{\totr}[5]
+{
+  \draw (#1+#3,#2+#4) node[above left]{$#5$};
+  \draw [->] (#1*2+0.283,#2*2+0.283) -- (#3*2-0.283,#4*2-0.283);
+}
+\newcommand{\tobl}[5]
+{
+  \draw (#1+#3,#2+#4) node[below right]{$#5$};
+  \draw [->] (#1*2-0.283,#2*2-0.283) -- (#3*2+0.283,#4*2+0.283);
+}
+\newcommand{\tobr}[5]
+{
+  \draw (#1+#3,#2+#4) node[below left]{$#5$};
+  \draw [->] (#1*2+0.283,#2*2-0.283) -- (#3*2-0.283,#4*2+0.283);
+}
+\newcommand{\rloopl}[3]
+{
+  \draw (#1*2-1,#2*2) node[left]{$#3$};
+  \draw [->] (#1*2-0.35,#2*2-0.2) arc (-30:-320:0.32cm);
+}
+\newcommand{\rloopr}[3]
+{
+  \draw (#1*2+1,#2*2) node[right]{$#3$};
+  \draw [->] (#1*2+0.35,#2*2+0.2) arc (150:-140:0.32cm);
+}
+\newcommand{\rloopt}[3]
+{
+  \draw (#1*2,#2*2+1) node[above]{$#3$};
+  \draw [->] (#1*2-0.2,#2*2+0.35) arc (240:-50:0.32cm);
+}
+\newcommand{\rloopb}[3]
+{
+  \draw (#1*2,#2*2-1) node[below]{$#3$};
+  \draw [->] (#1*2+0.2,#2*2-0.35) arc (60:-230:0.32cm);
+}
+\newcommand{\lloopl}[3]
+{
+  \draw (#1*2-1,#2*2) node[left]{$#3$};
+  \draw [->] (#1*2-0.35,#2*2+0.2) arc (30:320:0.32cm);
+}
+\newcommand{\lloopr}[3]
+{
+  \draw (#1*2+1,#2*2) node[right]{$#3$};
+  \draw [->] (#1*2+0.35,#2*2-0.2) arc (-150:140:0.32cm);
+}
+\newcommand{\lloopt}[3]
+{
+  \draw (#1*2,#2*2+1) node[above]{$#3$};
+  \draw [->] (#1*2+0.2,#2*2+0.35) arc (-60:230:0.32cm);
+}
+\newcommand{\lloopb}[3]
+{
+  \draw (#1*2,#2*2-1) node[below]{$#3$};
+  \draw [->] (#1*2-0.2,#2*2-0.35) arc (-240:50:0.32cm);
+}
+
+\section*{Tutorien-Übungsblatt 1}
+
+\subsection*{Aufgabe 1}
+Gegeben sei der folgende endliche Automat:\\
+$\mathcal{M} = (\mathcal{Q},\Sigma,\delta,S,\mathcal{F})$ mit
+$\Sigma = \{a,b\}$, $\mathcal{Q} = \{S,B,C,D\}$, $\mathcal{F} = \{B,C\}$
+und $\delta$ gegeben durch:
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\start{0}{0}{S}
+\totr{0}{0}{1}{1}{a}
+\tobr{0}{0}{1}{-1}{b}
+\final{1}{1}{B}
+\rloopt{1}{1}{a}
+\draw (3,1) node[above right]{$b$};
+\draw [->] (2.283,1.717) -- (3.717,0.283);
+\final{1}{-1}{C}
+\draw (3,-1) node[below right]{$a$};
+\draw [->] (2.283,-1.717) -- (3.717,-0.283);
+\rloopb{1}{-1}{b}
+\state{2}{0}{D}
+\rloopr{2}{0}{a,b}
+\end{tikzpicture}
+\end{center}
+\begin{enumerate}
+\item Geben Sie die von diesem Automaten akzeptierte Sprache in einem regulären
+Ausdruck an!
+\item Um was für einen Automaten handelt es sich?
+\item Konstruieren Sie einen äquivalenten endlichen Automaten, der nur einen
+einzigen Endzustand besitzt!
+\item Geben Sie eine linkslineare Grammatik für die Sprache dieses Automaten an,
+die keine überflüssigen\\
+Nichtterminale und Regeln enthält!
+\end{enumerate}
+
+\subsection*{Aufgabe 2}
+\begin{enumerate}
+\item Formulieren Sie einen regulären Ausdruck über dem Alphabet $\Sigma =
+\{0,1\}$, der jedes beliebige Wort erfasst,\\
+wobei die vorletzte Ziffer $0$ sein soll!
+\item Geben Sie für diese Sprache den möglichst größten Chomsky-Typ und eine
+zugehörige Grammatik an!
+\item Geben Sie einen dazugehörigen Automaten an, der diese Sprache akzeptiert!
+\end{enumerate}
+
+\subsection*{Aufgabe 3}
+Gegeben sei der folgende endliche Akzeptor $\mathcal{M}$ mit dem Eingabealphabet
+$\Sigma = \{a,b,c,d\}$:
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\start{0}{0}{q_0}
+\tor{0}{0}{1}{a,b}
+\state{1}{0}{q_1}
+\rloopt{1}{0}{a,b}
+\totr{1}{0}{3}{1}{c}
+\state{3}{1}{q_2}
+\rloopt{3}{1}{c}
+\draw (8,1) node[above right]{$d$};
+\draw [->] (6.283,1.717) -- (9.717,0.283);
+\final{5}{0}{q_3}
+\tol{5}{0}{1}{d}
+\end{tikzpicture}
+\end{center}
+\begin{enumerate}
+\item Welche Sprache $\mathcal{L}(\mathcal{M})$ wird von dem Akzeptor $\mathcal{M}$
+akzeptiert?
+\item Konstruieren Sie aus $\mathcal{M}$ eine rechtslineare Grammatik, die
+$\mathcal{L}(\mathcal{M})$ erzeugt!
+\end{enumerate}
+
+\subsection*{Aufgabe 4}
+Die Sprache $\mathcal{L}$ sei durch den regulären Ausdruck $(aa^*b^*)^*cc^*$
+definiert.
+\begin{enumerate}
+\item Geben Sie eine rechtslineare Grammatik $\mathcal{G}$ an, die $\mathcal{L}$
+erzeugt!
+\item Konstruieren Sie aus $\mathcal{G}$ einen endlichen Akzeptor, der $\mathcal{L}$
+akzeptiert!
+\end{enumerate}
+
+\newpage
+
+\subsection*{Lösung zu Aufgabe 1}
+\begin{enumerate}
+\item $(a \cdot a^*) + (b \cdot b^*)  = (a^+) + (b^+)$
+\item Es handelt sich um einen (endlichen) Akzeptor.
+\item So könnte ein gesuchter nichtdeterministischer endlicher Automat aussehen:
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\start{0}{0}{q_0}
+\totr{0}{0}{1}{1}{\varepsilon}
+\tobr{0}{0}{1}{-1}{\varepsilon}
+\state{1}{1}{q_1}
+\rloopt{1}{1}{a}
+\draw (3,1) node[above right]{$a$};
+\draw [->] (2.283,1.717) -- (3.717,0.283);
+\state{1}{-1}{q_2}
+\draw (3,-1) node[below right]{$b$};
+\draw [->] (2.283,-1.717) -- (3.717,-0.283);
+\rloopb{1}{-1}{b}
+\final{2}{0}{q_3}
+\end{tikzpicture}
+\end{center}
+\item Grammatik: $\mathcal{G} = (\mathcal{T},\mathcal{V},S,\mathcal{P})$ mit\\
+$\mathcal{V} := \{S,B,C\}$, $\mathcal{T} := \{a,b\}$,
+$\mathcal{P} := \{S \rightarrow Ca \; | \; Bb \; | \; a \; | \; b,
+B \rightarrow Bb \; | \; b, C \rightarrow Ca \; | \; a\}$
+\end{enumerate}
+
+\subsection*{Lösung zu Aufgabe 2}
+\begin{enumerate}
+\item $(0+1)^* \cdot 0 \cdot (0+1)$
+\item Die Sprache ist vom Chomsky-Typ 3!\\
+Grammatik: $\mathcal{G}=(\mathcal{T},\mathcal{V},S,\mathcal{P})$ mit\\
+$\mathcal{V} := \{S,B\}$, $\mathcal{T} := \{0,1\}$,
+$\mathcal{P} := \{S \rightarrow 0S \; | \; 1S \; | \; 0B, B \rightarrow 0 \; | \; 1\}$
+\item So könnte der gesuchte endliche Automat aussehen:\\
+$\mathcal{M} = (\mathcal{Q},\Sigma,\delta,S,\mathcal{F})$ mit
+$\Sigma = \{0,1\}$, $\mathcal{Q} = \{S,B,C\}$, $\mathcal{F} = \{C\}$
+und $\delta$ gegeben durch:
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\start{0}{0}{S}
+\rloopt{0}{0}{0,1}
+\tor{0}{0}{1}{0}
+\state{1}{0}{B}
+\tor{1}{0}{2}{0,1}
+\final{2}{0}{C}
+\draw [->] (4,0.4) arc (0:180:1cm);
+\draw (3,1.4) node[above]{$0$};
+\draw [->] (4,-0.4) arc (0:-180:2cm);
+\draw (2,-2.4) node[above]{$1$};
+\end{tikzpicture}
+\end{center}
+\end{enumerate}
+\newpage
+
+\subsection*{Lösung zu Aufgabe 3}
+\begin{enumerate}
+\item Der Akzeptor $\mathcal{M}$ akzeptiert die Sprache $\mathcal{L}(\mathcal{M}) =
+\{a,b\}^+\{c\}^+\{d\}(\{d\}\{a,b\}^*\{c\}^+\{d\})^*$.\\[10pt]
+Da sich die Sprache $\mathcal{L}(\mathcal{M})$ leichter und leserlicher mit einem
+regulären Ausdruck beschreiben lässt, folgt hier noch zusätzlich der reguläre
+Ausdruck $R$, der $\mathcal{L}(\mathcal{M})$ beschreibt:\\
+$R = (a+b)(a+b)^*cc^*d(d(a+b)^*cc^*d)^*$
+
+\item Aus dem endlichen Akzeptor $\mathcal{M} = (\mathcal{Q},\Sigma,\delta,q_0,
+\mathcal{F})$ kann direkt eine rechtslineare Grammatik konstruiert werden, die
+$\mathcal{L}(\mathcal{M})$ erzeugt:\\
+\underline{Schritt 1:} Definiere  das Terminalalphabet der Grammatik als das
+Eingabealphabet des Automaten, also $\mathcal{T} := \Sigma = \{a,b,c,d\}$.\\
+\underline{Schritt 2:} Füge für jeden Zustand $q$ des Akzeptors dem Variablenalphabet
+der Grammatik eine Variable hinzu: $\mathcal{V} := \{S,A,B,C\}$, wobei das
+Startzeichen $S$ dem Startzustand $q_0$, $A$ dem Zustand $q_1$, $B$ dem Zustand $q_2$
+und $C$ dem Zustand $q_3$ entspricht.\\
+\underline{Schritt 3:} Übersetze die Transitionen des Akzeptors in Produktionen der
+Grammatik. Füge dazu für jede Transition $\delta(q_l,x)=q_m$ des Akzeptors mit 
+$q_l,q_m \in Q, x \in \Sigma$ eine Produktion $V_1 \rightarrow xV_2$ hinzu,
+wobei $V_1$ und $V_2$ die Variablen sind, die den Zuständen $q_l$ und $q_m$
+entsprechen. Füge außerdem für jeden Endzustand des Akzeptors eine Produktion
+$V \rightarrow \lambda$ für die dem Endzustand entsprechenden Variable $V \in
+\mathcal{V}$ hinzu.
+Die Sprache $\mathcal{L}(\mathcal{M})$ wird damit also erzeugt von der Grammatik
+$\mathcal{G} = (\mathcal{T},\mathcal{V},S,\mathcal{P})$ mit dem Terminalalphabet
+$\mathcal{T} = \{a,b,c,d\}$, dem Variablenalphabet $\mathcal{V} = \{S,A,B,C\}$,
+dem Startzeichen $S$ und der Produktionenmenge\\
+$\mathcal{P} = \{S \rightarrow aA \; | \; bA\\
+A \rightarrow aA \; | \; bA \; | \; cB\\
+B \rightarrow cB \; | \; dC\\
+C \rightarrow dA \; | \; \lambda\}.$
+\end{enumerate}
+
+\subsection*{Lösung zu Aufgabe 4}
+\begin{enumerate}
+\item $\mathcal{L}$ wird von folgender Grammatik $\mathcal{G} = (\mathcal{T},\mathcal{V},
+S,\mathcal{P})$ mit Terminalalphabet $\mathcal{T} = \{a,b,c\}$ und
+Variablenalphabet $\mathcal{V} = \{S,A,B\}$ und folgenden Produktionen erzeugt:\\
+$S \rightarrow aA \; | \; cB$\\
+$A \rightarrow aA \; | \; bA \; | \; cB$\\
+$B \rightarrow cB \; | \; \lambda$
+\item Aus der rechtslinearen Grammatik $\mathcal{G}$ lässt sich folgendermaßen ein
+endlicher Akzeptor $\mathcal{M}$ konstruieren, der $\mathcal{L}$ akzeptiert, wobei
+das Eingabealphabet des Akzeptors das Terminalalphabet der Grammatik ist:\\
+\underline{Schritt 1}: Für jede Variable $V \in \mathcal{V}$ bekommt der Akzeptor
+einen Zustand $q_V$, dabei entspricht der Startzustand $q_S$ dem Startzeichen $S$.\\
+\underline{Schritt 2}: Für jede Produktion der Form $V_1 \rightarrow xV_2$ mit
+$V_1,V_2 \in \mathcal{V}$ und $x \in \mathcal{T}$ bekommt der Akzeptor eine
+Transition von $q_{V_1}$ nach $q_{V_2}$ mit Eingabezeichen x.\\
+\underline{Schritt 3}: Enthält die Grammatik für eine Variable $V \in \mathcal{V}$
+eine Produktion $V \rightarrow \lambda$, so wird der entsprechende Zustand $q_V$
+zum Endzustand.\\
+Damit erhalten wir folgenden Automaten:
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\start{0}{0}{q_S}
+\totr{0}{0}{1}{1}{a}
+\tor{0}{0}{2}{c}
+\state{1}{1}{q_A}
+\rloopt{1}{1}{a,b}
+\draw (3,1) node[above right]{$c$};
+\draw [->] (2.283,1.717) -- (3.717,0.283);
+\final{2}{0}{q_B}
+\rloopr{2}{0}{c}
+\end{tikzpicture}
+\end{center}
+\end{enumerate}
+
+\end{document}
