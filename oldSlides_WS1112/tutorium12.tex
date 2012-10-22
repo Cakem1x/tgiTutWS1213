@@ -1,0 +1,373 @@
+\include{includes/common_start}
+\tutnr{12}
+
+\section{Kellerautomaten}
+\subsection{Kellerautomat}
+
+\begin{frame}
+	\frametitle{Berechnungsmodelle für Grammatiken}
+	
+	\begin{itemize}
+		\item \textbf{Typ-0-Grammatiken / semientscheidbar:} Turingmaschinen
+		\item \textbf{Typ-1-Grammatiken / kontextsensitiv:} linear beschränkte Turingmaschinen (LBA)
+		\item \textbf{Typ-2-Grammatiken / kontextfrei:} \only<1>{?} \only<2>{Kellerautomaten!}
+		\item \textbf{Typ-3-Grammatiken / regulär:} Endliche Automaten
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Definition}
+Ein (nichtdeterministischer) \textbf{Kellerautomat} (NPDA bzw PDA, Pushdown Automaton) besteht aus $(Q, \Sigma, \Gamma, q_0, Z_0,\delta, F)$, wobei
+\begin{itemize}
+\item $Q$ endliche Zustandsmenge
+\item $\Sigma$ endliches Eingabealphabet
+\item $\Gamma$ endliches Stack-Alphabet
+\item $q_0 \in Q$ Anfangszustand
+\item $Z_0 \in \Gamma$ Initialisierung des Stacks
+\item $\delta : Q \times ( \Sigma \cup \{\varepsilon\}) \times \Gamma \rightarrow 2^{Q \times \Gamma^*}$
+\begin{itemize}
+\item $\delta(q, a, Z) \subseteq \{(q,\gamma) : q \in Q, \gamma \in \Gamma^*\}$
+\item $\delta(q, \varepsilon, Z) \subseteq \{(q,\gamma) : q \in Q, \gamma \in \Gamma^*\}$
+\end{itemize}
+\item $F \subseteq Q$ Menge der akzeptierenden Endzustände, $F=\emptyset$ ist möglich.
+
+
+\vspace{-4cm}\raggedleft{\includegraphics[width=0.5\textwidth]{images/PDA.png}}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zu Kellerautomaten}
+\begin{itemize}
+\item Akzeptieren nach Eingabeende, wenn \begin{itemize}
+	\item der Stack leer ist \emph{oder}
+	\item der Automat in einen akzeptierenden Zustand kommt.
+\end{itemize}
+\item Sind im Allgemeinen nichtdeterministisch
+\item Man kann Endzustände auch aus der Definition weglassen und alternativ verlangen, dass der Automat genau bei leerem Keller akzeptiert.
+\item Man kann sogar alle Zustände bis auf einen weglassen und alles in die Kellerbelegung kodieren
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Beispiel}
+$M = (Q, \Sigma, \Gamma, q_0, Z_0, \delta, F)$
+\begin{itemize}
+\item $Q = \{q_0, q_1, q_2\}$
+\item $\Sigma = \{a,b\}$
+\item $\Gamma = \{\#,X\}$
+\item $Z_0 = \#$
+\item $F = \{q_2\}$
+\end{itemize}
+\begin{figure}
+\begin{tikzpicture}[node distance=2.5cm,shorten >=1pt,auto]
+\node[state,initial]   (q_0)                {$q_0$};
+\node[state]           (q_1) [right of=q_0] {$q_1$};
+\node[state,accepting] (q_2) [right of=q_1] {$q_2$};
+\path[->]	(q_0) 	edge 			node {$(b,X,\varepsilon)$}				(q_1)
+			edge [loop above]	node {${(a,X,XX)} \atop {(a,\#,X\#)}$}	 	()
+		(q_1)	edge			node {$(\varepsilon,\#,\varepsilon)$}			(q_2)
+			edge [loop above]	node {$(b,X,\varepsilon)$}				();
+\end{tikzpicture}
+\end{figure}
+
+\begin{itemize}
+\item Welche Sprache akzeptiert dieser Automat?
+\end{itemize}
+\end{frame}
+
+\section{Greibach-Normalform}
+\subsection{Greibach-Normalform}
+
+\begin{frame}
+	\frametitle{Motivation zur Greibach-Normalform}
+	
+	\begin{itemize}
+		\item Reguläre Grammatiken: $\textcolor{KITgreen}{A} \rightarrow \textcolor{KITseablue}{a}$ oder $\textcolor{KITgreen}{A} \rightarrow \textcolor{KITseablue}{a}\textcolor{KITred}{B}$
+		\item Passendes Modell: Endliche Automaten
+		\begin{itemize}
+			\item \textcolor{KITgreen}{Sind in einem Zustand}
+			\item \textcolor{KITseablue}{Lesen ein Symbol von der Eingabe}
+			\item \textcolor{KITred}{Wechseln in den nächsten Zustand}
+		\end{itemize}
+	\end{itemize}
+	
+	\ducttape{0.5cm} \pause
+	
+	\begin{itemize}
+		\item Kontextfreie Grammatiken: \only<3>{$\textcolor{KITgreen}{A} \rightarrow \textcolor{KITseablue}{a}\textcolor{KITred}{\alpha}$ mit $\alpha \in V^\ast$}
+		\item Passendes Modell: Kellerautomaten
+		\item Hier: Kellerautomat mit nur einem Zustand
+		\begin{itemize}
+			\item \textcolor{KITgreen}{Lesen ein Symbol vom Stack}
+			\item \textcolor{KITseablue}{Lesen ein Symbol von der Eingabe}
+			\item \textcolor{KITred}{Schreiben beliebig viele Symbole auf den Stack}
+		\end{itemize}
+	\end{itemize}
+	
+	\ducttape{0.5cm}
+	
+	\pause $\Rightarrow$ Greibach-Normalform!
+\end{frame}
+
+\begin{frame}
+\frametitle{Greibach Normalform}
+\begin{exampleblock}{Definition}
+Eine kontextfreie Grammatik ist in \textbf{Greibach-Normalform}, wenn alle Ableitungsregeln von der Form 
+$$ A \rightarrow a\alpha \text{ mit } A \in V\text{, } a\in \Sigma \text{ und } \alpha \in V^*$$
+sind.
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zur Greibach-Normalform}
+\begin{itemize}
+\item Weitere Normalform für CH-2 Grammatiken, d.h. jede Grammatik kann in Greibach-Normalform gebracht werden
+\item Zur Konstruktion von Kellerautomaten aus Grammatiken
+\item Es kann stärker, aber äquivalent, verlangt werden, dass auf der rechten Seite höchstens zwei Variablen vorkommen.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Umwandlung in Greibach-Normalform}
+\begin{exampleblock}{Nebenbemerkung}
+Im folgenden stehen Kleinbuchstaben für Terminale, Großbuchstaben für einzelne Nichtterminale und griechische Buchstaben für (eventuell) mehrere Nichtterminale 
+\end{exampleblock}
+Die Grammatik sei zunächst in Chomsky-Normalform.
+\end{frame}
+
+\begin{frame}
+\frametitle{Los geht's!}
+\begin{block}{Annahmen}
+\begin{itemize}
+ \item Wir gehen davon aus, dass die Grammatik $G$ in Chomsky-Normalform ist, mit $V = \{A_1, \ldots, A_m \}$ und $\Sigma = \{a_1, \ldots, a_n\}$
+ \item Folglich sind alle Regeln von der Form $A_i \rightarrow A_jA_k$ oder $A_i \rightarrow a_j$
+\end{itemize}
+\end{block}
+\begin{block}{Schritt 1}
+
+Ziel: Alle Variablen haben am Beginn der rechten Seite keine Variablen mit gleicher oder niedrigerer Nummer.
+
+\begin{itemize}
+\item Für alle Variablen $V_i$
+\begin{itemize}
+\item Für alle Variablen $V_j$ mit $j<i$
+\begin{itemize}
+\item Simuliere alle Regeln für $A_j$ bei Produktionen der Form $A_i \rightarrow A_j\alpha$.
+\end{itemize}
+\item Für Produktionen der Form $A_i \rightarrow A_i\alpha$ führe eine neue Variable ein \\ (wie: siehe nächste Folie).
+\end{itemize}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{$A_i \rightarrow A_i\alpha$}
+Für Regeln der Form 
+$$A \rightarrow A\alpha_1 \mid \ldots \mid A\alpha_r$$
+$$A \rightarrow \beta_1 \mid \ldots \mid \beta_s$$
+(wobei $\beta_i$ nicht mit $A$ beginnt) führe ein neues Nichtterminal $B$ ein. Ersetze nun die Regeln
+$$A \rightarrow A\alpha_1 \mid \ldots \mid A\alpha_r$$
+durch
+$$A \rightarrow \beta_1B \mid \ldots \mid \beta_sB$$
+$$B \rightarrow \alpha_1 \mid \ldots \mid \alpha_r$$
+$$B \rightarrow \alpha_1B \mid \ldots \mid \alpha_rB$$
+\end{frame}
+
+\begin{frame}
+ \frametitle{Schritt 2}
+Gehe nun die Produktionen absteigend nach $k$ sortiert durch und simuliere bei alle Regeln mit $A_k \rightarrow A_j\alpha$ die Produktionen für $A_j$ auf der rechten Seite. \micropause
+Da alle Regeln mit einem $A_i$ als linker Seite der Greibach-Normalform genügen, kann man dieses Verfahren nun bei den neuen Regeln für $B_1,\ldots$ auch anwenden.  \micropause
+
+Danach ist die Grammatik in Greibach-Normalform.
+\end{frame}
+
+\begin{frame}
+\frametitle{Aufgabe zur Greibach-Normalform}
+Sei die Grammatik $G$ gegeben durch
+\begin{itemize}
+ \item $\Sigma = \{0, 1\}$
+ \item $V = \{A_1, A_2, A_3\}$
+ \item $S = A_1$
+ \item $R = \{$
+\end{itemize}
+
+\begin{tabular}{ll}
+ 	 & $A_1 \rightarrow A_2A_3,$ \\
+ 	& $A_2 \rightarrow A_3A_1,$ \\
+ 	&	$A_2 \rightarrow 1,$ \\
+ 	&	$A_3 \rightarrow A_1A_2,$ \\
+ 	& $A_3 \rightarrow 0$ \\
+ 	$ \}$ &
+ 	\end{tabular}
+ 	
+\ducttape{1cm}
+
+Bringe $G$ in Greibach-Normalform.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Lösung}
+\begin{itemize}
+ \item $V=\{A_1, A_2, A_3, B_3\}$
+ \item $\Sigma = A_1$
+ \item $S = A_1$
+ \item $R = \{A_1 \rightarrow 1A_3, A_1 \rightarrow 0B_3A_1A_3, A_1 \rightarrow 1A_3A_2A_1A_3, A_1 \rightarrow 0A_1A_3, A_1 \rightarrow 1A_3A_2B_3A_1A_3,
+ A_2 \rightarrow 0B_3, A_2 \rightarrow 1A_3A_2A_1, A_2 \rightarrow 0A_1, A_2 \rightarrow 1A_3A_2B_3A_1, A_2 \rightarrow 1,
+ A_3 \rightarrow 0B_3, A_3 \rightarrow 1A_3A_2B_3, A_3 \rightarrow 1A_3A_2, A_3 \rightarrow 0,
+ B_3 \rightarrow 1A_3A_2A_2, B_3 \rightarrow 0B_3A_1A_3A_3A_2, B_3 \rightarrow 1A_3A_2A_1A_3A_3A_2, B_3 \rightarrow 0A_1A_3A_3A_2,
+ B_3 \rightarrow 1A_3A_2B_3A_1A_3A_3A_2, B_3 \rightarrow 1A_3A_3A_2B_3, B_3 \rightarrow 0B_3A_1A_3A_3A_2B_3, B_3 \rightarrow 1A_3A_2A_1A_3A_3A_2B_3
+ B_3 \rightarrow 0A_1A_3A_3A_2B_3, B_3 \rightarrow 1A_3A_2B_3A_1A_3A_3A_2B_3
+ \}$
+\end{itemize}
+\pause
+Die ursprüngliche Grammatik hatte nur fünf Regeln.
+\end{frame}
+
+\section{Beides zusammen}
+%TODO: Beispiel Kellerautomat
+\subsection{Kellerautomat aus Greibach-Normalform}
+\begin{frame}
+ \frametitle{Kellerautomat aus Greibach-Normalform}
+ \begin{block}{Erinnerung: Greibach-Normalform}
+  Eine kontextfreie Grammatik ist in \textbf{Greibach-Normalform}, wenn alle Ableitungsregeln von der Form   
+  \[ A \rightarrow a\alpha \text{ mit } A \in V\text{,} a\in \Sigma \text{ und } \alpha \in V^*\]
+  sind.
+ \end{block}
+ \pause
+ \begin{block}{Erinnerung: Übergangsfunktion des Kellerautomaten}
+ Die Eingabe enthält einen Zustand, ein $a \in \Sigma \cup \{\varepsilon\}$ und ein Zeichen des Stacks.
+ \[\delta : Q \times ( \Sigma \cup \{\varepsilon\}) \times \Gamma \rightarrow 2^{Q \times \Gamma^*}\]
+ \vspace{-0.5cm}
+ \end{block}
+ \pause
+ Wie könnte man mit einer Grammatik $G$ in Greibach-Normalform einen Kellerautomaten konstruieren, der $L(G)$ erkennt?
+\end{frame}
+
+\begin{frame}
+ \frametitle{Kellerautomat aus Greibach-Normalform}
+ \begin{block}{Konstruktion des Kellerautomaten}
+ Gegeben sei eine kontextfreie Grammatik \(G = (\Sigma, V, S, R)\) in Greibach-Normalform.\\
+ Konstruiere einen Kellerautomaten \(PDA = (Q, \Sigma', \Gamma, q_0, Z_0, \delta, F)\) mit:
+ \begin{itemize}
+  \item $Q := \{q_0\}$
+  \item $F := \emptyset$
+  \item $\Sigma' := \Sigma$
+  \item $\Gamma := V$
+  \item $Z_0 := S$
+  \item $\delta(q_0, a, A) :=  \{(q_0,\alpha) | (A \rightarrow a \alpha) \in R \}$
+ \end{itemize}
+ \end{block}
+ \pause
+ Der Automat akzeptiert durch leeren Stack.
+\end{frame}
+
+\begin{frame}
+ \frametitle{Kellerautomat}
+\(PDA = (Q, \Sigma', \Gamma, q_0, Z_0, \delta, F)\) mit:
+ \begin{itemize}
+  \item $Q := \{q_0\}$
+  \item $F := \emptyset$
+  \item $\Sigma' := \Sigma$
+  \item $\Gamma := V$
+  \item $Z_0 := A_1$
+  \item $\delta$ siehe nächste Folie
+ \end{itemize}
+ \begin{block}{Umwandlung}
+ Aus \(A_1 \rightarrow 1A_3, A_1 \rightarrow 1A_3A_2A_1A_3, A_1 \rightarrow 1A_3A_2B_3A_1A_3\)
+ wird \(\delta(q_0, A_1, 1) = \{(q_0, A_3), (q_0, A_3A_2A_1A_3), (q_0, A_3A_2B_3A_1A_3) \}\)
+ \end{block}
+\end{frame}
+
+\begin{frame}
+ \frametitle{$\delta$}
+\begin{itemize}
+ \item \(\delta(q_0, A_1, 0) = \{ (q_0, B_3A_1A_3), (q_0, A_1A_3)\}\)
+ \item \(\delta(q_0, A_1, 1) = \{(q_0, A_3), (q_0, A_3A_2A_1A_3), (q_0, A_3A_2B_3A_1A_3) \}\)
+ \item \(\delta(q_0, A_2, 0) = \{(q_0, B_3), (q_0, A_1)\}\)
+ \item \(\delta(q_0, A_2, 1) = \{(q_0, A_3A_2A_1), (q_0, A_3A_2B_3A_1), (q_0, \varepsilon)\}\)
+ \item \(\delta(q_0, A_3, 0) = \{(q_0, B_3), (q_0, \varepsilon)\}\)
+ \item \(\delta(q_0, A_3, 1) = \{(q_0, A_3A_2B_3), (q_0, A_3A_2, A_3)\}\)
+ \item $\delta(q_0, B_3, 0) = \{(q_0, B_3A_1A_3A_3A_2), (q_0, A_1A_3A_3A_2), (q_0, B_3A_1A_3A_3A_2B_3),$ $ (q_0, A_1A_3A_3A_2B_3)\}$
+ \item \(\delta(q_0, B_3, 1) = \{(q_0, A_3A_2A_2), (q_0, A_3A_2A_1A_3A_3A_2), (q_0, A_3A_2B_3A_1A_3A_3A_2),$ $
+ (q_0, A_3A_3A_2B_3), (q_0, A_3A_2A_1A_3A_3A_2B_3), (q_0, A_3A_2B_3A_1A_3A_3A_2B_3)\}\)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Tripelkonstruktion}
+ \begin{itemize}
+  \item Umkehrung der Konstruktionsrichtung
+  \item Aus einem PDA $\mathcal{A} = (Q, \Sigma, \Gamma, \delta, q_0, Z_0)$, der durch leeren Stack akzeptiert, wird eine Grammatik $G$ mit $L_{\mathcal{A}} = L(G)$ erzeugt.
+ \end{itemize} 
+ \begin{itemize}
+  \item $V := \menge{[q, X, p]}{p, q \in Q, X \in \Gamma} \cup \{S\}$
+  \item $R := $
+  \begin{itemize}
+   \item $S \rightarrow [q_0, Z_0, q]$ für alle $q \in Q$
+   \item $[q, X, q_{m+1}] \rightarrow a[q_1, Y_1, q_2] ... [q_m, Y_m, q_{m+1}]$ für alle $q_2$, ..., $q_{m+1} \in Q$,
+   falls $(q_1, Y_1, ..., Y_m) \in \delta(q, a, X)$
+  \end{itemize}
+ \end{itemize}
+
+\end{frame}
+
+%TODO: Beispiel Tripelkonstruktion
+
+\begin{frame}
+	\frametitle{Aufgabe}
+	
+	Über dem Alphabet $\Sigma=\{(,)\}$ ist die Sprache $L_{()}$  der korrekten
+Klammerausdrücke gegeben. Ferner ist die Grammatik $G_{()}$ gegeben.
+Dabei ist $G_{()} = (\{(,)\}, \{S\}, S, R)$ mit 
+$$R=\{S \rightarrow \epsilon|SS|(S)\}$$
+\only<1>{
+\begin{enumerate}
+ \item Konstruiere einen Kellerautomaten, der die Sprache $L_{()}$ durch leeren Stack erkennt. Modifiziere diesen Kellerautomaten so, dass er $L_{()}$ durch akzeptierenden Endzustand erkennt.
+ \item Dokumentiere eine akzeptierende Berechnung der Wortes $(()())$.
+\end{enumerate}
+}
+
+\only<2>{
+\begin{enumerate}
+ \setcounter{enumi}{2}
+ \item Zeige, dass $G_{()}$ genau $L_{()}$ erzeugt.
+ \item Was ist das maximale $k$, so dass $G_{()}$ Chomsky-Typ $k$ hat?
+ \item Gibt es eine Grammatik mit Chomsky-Typ $k+1$, die $L_{()}$ erzeugt? 
+       Begründe deine Antwort.
+ \item Bestimme eine Grammatik $G'$ für $L_{()} \setminus \{\epsilon\}$ in Greibach-Normalform und zeige exemplarisch, wie man daraus einen Kellerautomaten für $L_{()}$ ableiten kann.
+\end{enumerate}
+}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Wiederholung Chomsky-Hierarchie}
+ $u \in V^+$, $v \in (\Sigma \cup V)^\ast$, $A \in V$, $a \in \Sigma$.
+
+ Ausnahme: S kommt bei Chomsky-1-Grammatiken nicht auf rechten Seiten vor.
+ \begin{table}
+ \begin{center}
+ \begin{tabular}{| l | l | p{1.4cm} | c | c | c | c | l |}
+ \hline
+ & & & \multicolumn{4}{|c|}{Abgeschlossen} &\\
+ Typ & Bezeichnung & Regeln & $\cup$ & $\cap$ & $\cdot$ & $L^c$ & Modell\\ \hline
+   0 & \only<-1>{&&&&&&}\only<2->{semientscheidbar & beliebig & ja & ja & ja & nein & TM} \\ \hline
+   1 & \only<-2>{&&&&&&}\only<3->{kontextsensitiv & $u \rightarrow v$ $|u| \leq |v|$ & ja & ja & ja & ja & LBA} \\ \hline
+   2 & \only<-3>{&&&&&&}\only<4->{kontextfrei & $A \rightarrow v$ & ja & nein & ja & nein & PDA} \\ \hline
+   3 & \only<-4>{&&&&&&}\only<5->{regulär & $A \rightarrow a$  $A \rightarrow aB$ & ja & ja & ja & ja & NEA} \\ \hline
+ \end{tabular}
+ \end{center}
+ \end{table}
+\end{frame}
+
+\section{Schluss}
+\subsection{Aus!}
+\begin{frame}
+\frametitle{Bis zum nächsten Mal!}
+	\begin{figure}[H]
+		\includegraphics[width= \textwidth]{images/dilbert-69231}
+	\end{figure}
+\end{frame}
+
+\include{includes/common_end}

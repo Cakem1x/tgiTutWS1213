@@ -1,0 +1,345 @@
+\include{includes/common_start}
+\tutnr{6}
+
+\section{Die Klasse \classNP}
+\subsection{Spam}
+\begin{frame}
+\frametitle{$\mathcal{NP}$}
+
+$\mathcal{NP}$ ist (analog zu $\mathcal{P}$) die Klasse aller Sprachen, die von einer nichtdeterministischen Turingmaschine in Polyzeit erkannt werden.
+
+\ducttape{1cm}
+
+\textbf{Anmerkung}: Die Frage, ob $\mathcal{P} = \mathcal{NP}$ gilt oder nicht, ist ein großes, offenes Problem.
+\end{frame}
+
+\begin{frame}
+\frametitle{Grundidee: $\mathcal{NP}$-Entscheider}
+Üblicherweise geht eine NTM, die ein Problem aus $\mathcal{NP}$ entscheidet, folgendermaßen vor: 
+\begin{enumerate}
+\item Rate sogenannten "`Zeugen"' dafür, dass $x \in L$ (nichtdeterministisch)
+\item Überprüfe, ob Zeuge korrekt (in Polyzeit).
+\item Falls ja akzeptiere; falls nein, lehne ab.
+\end{enumerate}
+Man spricht daher auch von den \emph{effizient verifizierbaren} Entscheidungsproblemen.
+\end{frame}
+
+\begin{frame}
+\frametitle{$\mathcal{NP}$}
+
+\begin{block}{Definition aus dem Skript (S.~56)}
+"`Lasch"' ausgedrückt: $\Pi$ gehört zu \classNP, falls $\Pi$ folgende Eigenschaft hat:
+
+Ist die Antwort bei Eingabe eines Beispiels $I$ von $\Pi$ "`Ja"', so kann die Korrektheit der Antwort in polynomieller Zeit überprüft werden.
+\end{block}
+
+\ducttape{1cm}
+
+Ist diese Formulierung so korrekt?
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{\recipe Zeigen, dass ein Problem in \classNP{} liegt}
+	
+	\textbf{Gegeben:} Entscheidungsproblem $\Pi$
+	
+	\textbf{Aufgabe:} Zeige, dass $\Pi \in \classNP$ gilt.
+	
+	\ducttape{.5cm}
+
+	\begin{block}{Lösung}	
+	\begin{enumerate}
+		\item Gib an, was das NTM-Orakel als \textbf{Zeugen} für die Lösung auf das Band schreiben könnte.
+		\item Zeige, dass solch ein Zeuge in \textbf{polynomieller Zeit} von einer \textbf{DTM} verifiziert werden kann.
+	\end{enumerate}
+		
+	\end{block}
+	
+	\begin{block}{Beispiel}
+	Zeige: $SAT \in \classNP$.
+	
+	"`$SAT \in \classNP$ gilt, da für eine gegebene Variablenbelegung in polynomieller Zeit von einer DTM überprüft werden kann, ob sie erfüllend ist."'
+	\end{block}
+		
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Zeitkomplexität}
+\begin{block}{Definition aus der Übung}
+    Berechnungszeit für NTM $\mathcal{M}$ mit Eingabe $x \in \Sigma^*$: \\
+    $$t(x) := \begin{cases}
+                \text{\# Schritte der \emph{schnellsten} akzeptierenden} \\ \hspace{0.5cm}\text{Berechnung, falls  } x \in L(\mathcal{M})\\ 
+                1 \text{, sonst}
+             \end{cases} $$
+ 
+    Zeitkomplexitätsfunktion $T_\mathcal{M} : \mathbb{N}_0 \rightarrow \mathbb{N}$ \\
+    $$T_\mathcal{M}(n) := \text{max}\menge{\vphantom{x^j_j} t(x)}{\abs{x} = n }$$
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Aufgabe}
+	
+	Sei $\mathcal{M}$ eine NTM (RV-Modell) mit Zeitkomplexitätsfunktion $T_\mathcal{M} : \N_0 \rightarrow \N$.
+	
+	Die Funktion $T_\mathcal{M}$ sei durch $f : \N_0 \rightarrow \N$ beschränkt und $f$ sei berechenbar.
+	
+	Zeige: Die von $\mathcal{M}$ akzeptierte Sprache $L(\mathcal{M})$ ist entscheidbar.
+	
+	\invincible \pause
+	\begin{block}{Lösungsskizze}
+	
+	Baue TM, die $L(\mathcal{M})$ entscheidet, wie folgt: \\ Sei $x$ die Eingabe und $n := \abs{x}$.
+	
+	\begin{itemize}
+		\item Berechne $f(n)$
+		\item Für alle Orakelwörter bis Länge $f(n)$:
+		\begin{itemize}
+		\item Simuliere $\mathcal{M}$ mit aktuellem Orakelwort
+		\item Falls $\mathcal{M}$ akzeptiert, akzeptiere
+		\item Falls $\mathcal{M}$ ablehnt oder mehr als $f(n)$ Schritte braucht, probiere nächstes Orakelwort
+		\end{itemize}
+		\item Falls $\mathcal{M}$ für kein Orakelwort akzeptiert, lehne ab.
+	\end{itemize}
+	\vincible
+	\end{block}
+\end{frame}
+
+% NP vollständigkeit
+\section{\classNP{}-Vollständigkeit}
+\subsection{Eggs}
+
+\begin{frame}
+\frametitle{Wiederholung: Polynomielle Transformation}
+\begin{block}{Definition (Vorlesung)}
+Eine polynomielle Transformation einer Sprache $L_1$ in eine Sprache $L_2$ ist eine Funktion
+$f: \Sigma^*_1 \rightarrow \Sigma^*_2$ mit den Eigenschaften:
+\begin{enumerate}
+\item $f$ ist in polynomieller Zeit von einer deterministischen TM berechenbar.
+\item Für alle $x$ gilt: $x \in L_1 \iff f(x) \in  L_2$
+\end{enumerate}
+Wir schreiben dann: $L_1 \propto L_2$ ($L_1$ ist polynomiell transformierbar in (reduzierbar auf) $L_2$ ).
+\end{block}
+
+\begin{itemize}
+	\item $L_2$ ist das "`schwerere"' Problem.
+	\item Kann man $L_2$ entscheiden, so kann man mit polynomiellem Aufwand auch $L_1$ entscheiden.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{$\mathcal{NP}$-Schwere}
+\begin{block}{$\mathcal{NP}$-Schwere}
+Eine Sprache $L_1$ ist $\mathcal{NP}$-schwer gdw. 
+\[\forall L_2 \in \mathcal{NP} \,\, : \,\, L_2 \propto L_1\]
+\end{block}
+\textbf{Anmerkung}: In diesem Sinne sind die $\mathcal{NP}$-schweren Probleme mindestens so schwer zu lösen wie alle Probleme in $\mathcal{NP}$.
+\end{frame}
+
+% Polyreduktion ist Transitiv, daher ist NPC cool
+\begin{frame}
+\frametitle{Transitivität von Polyreduktionen und $\mathcal{NP}$}
+Polynomielle Transformationen sind transitiv, d.h. wenn $L_1 \propto L_2$ und $L_2 \propto L_3$, dann gilt auch $L_1 \propto L_3$.\\[8pt]
+Ist $L_3 \in \mathcal{NP}$, so wissen wir, dass auch $L_1$ sowie $L_2 \in \mathcal{NP}$. Man spricht auch davon, $L_1$ und $L_2$ auf $L_3$ polynomiell reduziert zu haben.\\[8pt]
+Gegeben eine Sprache $L_N$, von der wir wissen, dass sie $\mathcal{NP}$-schwer ist, was wäre ein möglicher Ansatz, um für eine weitere Sprache $L_X$ die $\mathcal{NP}$-Schwere zu beweisen?\\[8pt]
+\invincible\pause
+\ducttape{1.5cm}
+Man zeigt $L_N \propto L_X$.
+\vincible
+\end{frame}
+
+\begin{frame}
+\frametitle{$\mathcal{NP}$-Vollständigkeit}
+Eine Sprache $L$ ist $\mathcal{NP}$-vollständig genau dann, wenn
+$$L \in \mathcal{NP}$$ sowie $$L\mbox{ ist $\mathcal{NP}$-schwer}$$
+
+\begin{itemize}
+	\item $\Rightarrow \mathcal{NP}$-vollständige Probleme sind die "`schwersten"' Probleme aus $\mathcal{NP}$.\\
+	\item Interessant vor allem, da man aus Aussagen über \classNP{}-vollständige Probleme viel über alle Probleme aus $\mathcal{NP}$ schließen kann.
+	\item Wäre etwa $SAT \in \mathcal{P}$, so wäre $\mathcal{P} = \mathcal{NP}$. (Warum?)
+\end{itemize}
+
+% NP-schweres Problem, das nicht in NP liegt: z.B. Halteproblem (Reduktion von SAT auf TM, die alle Belegungen durchprobiert und in Endlosschleife übergeht, falls keine Belegung erfüllend ist.)
+\end{frame}
+
+\begin{frame}
+\frametitle{CLIQUE}
+\begin{block}{Problem}
+\textbf{Gegeben:} Graph $G = (V, E)$ und ein Parameter $K \leq |V|$\\
+\textbf{Frage:} Gibt es in G eine Clique der Größe mindestens $K$?
+\end{block}
+\begin{block}{Erinnerung}
+Eine Clique ist ein vollständig verbundener Teilgraph, also eine Menge $V' \subseteq V$, so dass für alle $i,j \in V'$ mit $i\neq j$ gilt: $(i, j) \in E$.
+\end{block}
+\textit{Dieses Problem ist $\mathcal{NP}$-vollständig.}
+\end{frame}
+
+\frame[label=graph]{
+\frametitle{CLIQUE-Beispiel}
+
+\begin{figure}[H]
+\begin{tikzpicture}[scale=1.8]
+\tikzstyle{every node}=[circle, thick, minimum size = 7mm, draw]
+\draw node (v1) at (0,2) {1};
+\draw node (v2) at (1,2) {2};
+\draw node (v3) at (2,2) {3};
+\draw node (v4) at (0,1) {4};
+\draw node (v5) at (1,1) {5};
+\draw node (v6) at (2,1) {6};
+\draw node (v7) at (0,0) {7};
+\draw node (v8) at (1,0) {8};
+\draw node (v9) at (2,0) {9};
+\draw (v1) to (v4);
+\draw (v1) to (v8);
+\draw (v1) to [bend left] (v9);
+\draw (v1) to (v5);
+\draw (v1) to (v6);
+\draw (v2) to (v4);
+\draw (v2) to (v7);
+\draw (v2) to [bend right] (v8);
+\draw (v2) to (v9);
+\draw (v2) to (v6);
+\draw (v3) to (v4);
+\draw (v3) to [bend left] (v7);
+\draw (v3) to (v5);
+\draw (v3) to (v8);
+\draw (v3) to [bend left] (v9);
+\draw (v4) to (v8);
+\draw (v4) to (v9);
+\draw (v5) to (v7);
+\draw (v5) to (v9);
+\draw (v6) to (v7);
+\draw (v6) to (v8);
+\end{tikzpicture}
+\end{figure}
+\begin{itemize}
+\item Hat dieser Graph eine 3-CLIQUE?
+\invincible \pause
+\item Hat dieser Graph eine 4-CLIQUE?
+\vincible
+\end{itemize}
+}
+
+\begin{frame}
+\frametitle{$\mathcal{NP}$-Vollständigkeitsbeweis}
+\begin{itemize}
+ \item $CLIQUE \in \mathcal{NP}$: Übungsblatt\\
+ \item $CLIQUE\mbox{ } \mathcal{NP}$-schwer: Wir zeigen $3SAT \propto CLIQUE$. (Warum?)\\\invincible\pause
+ Wir müssen eine polynomielle Transformation von $3SAT$-Instanzen in $CLIQUE$-Instanzen angeben. (Warum?)\\ \vincible
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{$\mathcal{NP}$-Vollständigkeitsbeweis}
+Sei $C = \{c_1, \ldots, c_n\}$ eine $3SAT$-Instanz mit 
+$$ c_i = x_{i,1} \vee x_{i,2} \vee x_{i,3} \mbox{ mit } x_{i,j} \in \{u_1,\ldots,u_m,\neglit{u_1},\ldots,\neglit{u_m}\} $$
+
+\pause
+
+Konstruiere eine $CLIQUE$-Instanz $(G = (\alert<3>{V}, \alert<4>{E}), \alert<5>{K})$ folgendermaßen:
+
+\pause
+
+$$\alert<3>{V} := (v_{1,1}, v_{1,2}, v_{1,3}, v_{2,1},\ldots,v_{n,1},v_{n,2},v_{n,3})$$
+
+Jeder Knoten steht also für ein Literal in der $3SAT$-Instanz. 
+
+\pause
+
+$$\alert<4>{E} := \menge{(v_{i,j},v_{k,m})}{x_{i,j} \neq \neglit{x_{k,m}} \wedge i \neq k}$$%TODO Bar sucks, \lineover or smth?
+Zwei Knoten sind verbunden, wenn sie gleichzeitig erfüllbar sind und nicht in der gleichen Klausel stehen. 
+
+\pause 
+$$\alert<5>{K} := n$$
+Wir suchen nach einer Clique der Größe $n$.\\
+
+\end{frame}
+
+\begin{frame}
+\frametitle{$\mathcal{NP}$-Vollständigkeitsbeweis}
+\begin{itemize}
+\item Wenn eine $n$-Clique existiert:
+\begin{itemize}
+	\item $n$ erfüllbare Literale
+	\item Alle in jeweils unterschiedlichen Klauseln \\ \small{(da Literalknoten in derselben Klausel nicht verbunden sind)}
+	\item $\leadsto$ erfüllende Wahrheitsbelegung
+\end{itemize}
+\pause \item Wenn eine erfüllende Wahrheitsbelegung existiert:
+\begin{itemize}
+	\item In jeder Klausel mindestens ein Literal erfüllt
+	\item Nimm aus jeder Klausel ein erfülltes Literal
+	\item Diese bilden zusammen eine Clique nach Definition des Graphen: \\ \small{"`Zwei Knoten sind verbunden, wenn sie gleichzeitig erfüllbar sind und nicht in der gleichen Klausel stehen."'}
+\end{itemize}
+\end{itemize}
+
+\pause
+
+Also: $C$ ist Ja-Instanz von $3SAT$ $\Leftrightarrow$ $(G,K)$ ist Ja-Instanz von $CLIQUE$.
+
+\pause
+
+\ducttape{.3cm}
+
+Transformation ist außerdem in Polyzeit machbar $\Rightarrow$ $3SAT \propto CLIQUE$ $\Rightarrow$ $CLIQUE$ ist \classNP{}-schwer.
+
+\pause
+
+\ducttape{.3cm}
+
+Da $CLIQUE$ $\mathcal{NP}$-schwer ist und in $\mathcal{NP}$ liegt $\Rightarrow$ $CLIQUE$~$\mathcal{NP}$-vollständig.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Beispiel}
+	
+	Reduktion folgender $3SAT$-Instanz auf eine $CLIQUE$-Instanz:
+	
+	$$C = \{ (x_1 \vee x_2 \vee x_3), (x_1 \vee \neglit{x_2} \vee \neglit{x_3}), (\neglit{x_1} \vee x_2 \vee x_3) \}$$
+\end{frame}
+
+\againframe{graph}
+
+\begin{frame}
+	\frametitle{\recipe \classNP{}-Vollständigkeit eines Problems zeigen}
+	
+	\textbf{Gegeben:} Entscheidungsproblem $\Pi$
+	
+	\textbf{Aufgabe:} Zeige, dass $\Pi$ \classNP{}-vollständig ist. [evtl: Benutze hierzu die \classNP{}-Vollständigkeit von $X$.]
+	
+	\ducttape{.5cm}
+
+	\begin{block}{Lösung}	
+	\begin{enumerate}
+		\item Zeige: $\Pi \in \classNP$ (!)
+		\item Finde ein passendes \classNP{}-vollständiges Problem $X$ bzw. wähle das $X$ aus der Aufgabenstellung.
+		\item "`Sei eine Instanz $I$ von $X$ gegeben. Konstruiere daraus eine Instanz $I'$ von $\Pi$ wie folgt: …"' $\rightarrow$ Konstruktion beschreiben
+		\item Zeige, dass Ja-Instanzen genau auf Ja-Instanzen abgebildet werden.
+		\item Erwähne, dass die Konstruktion in \textbf{polynomieller Zeit} geht.
+	\end{enumerate}
+		
+	\end{block}
+	
+\end{frame}
+
+\begin{frame}
+\frametitle{Allgemeines zu $\classNP$-Vollständigkeitsbeweisen}
+In der Regel ist es schwer zu zeigen, dass ein Problem $\mathcal{NP}$-schwer ist, aber leicht zu zeigen, dass ein Problem in $\mathcal{NP}$ liegt.\\[8pt]
+Da man üblicherweise ein $\mathcal{NP}$-vollständiges Problem als Vorausetzung für die Reduktion benötigt (Ausnahme: Satz von Cook), lohnt es sich einige kennen zu lernen.
+\end{frame}
+
+\section{Schluss}
+\subsection{Ham}
+
+\begin{frame}
+	\frametitle{Bis zum nächsten Mal!}
+	
+	\begin{center}
+		\includegraphics[width=\textwidth]{images/221_strip.jpg}
+	\end{center}
+\end{frame}
+
+\include{includes/common_end}

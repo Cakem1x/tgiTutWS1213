@@ -1,0 +1,233 @@
+\include{includes/common_start}
+\tutnr{10}
+
+\section{Chomsky-Hierarchie}
+\subsection*{derp}
+\frame{
+\frametitle{Grammatiken}
+\begin{block}{Definition}
+ Eine Grammatik ist ein Regelsystem, mit dem sich die Wörter einer Sprache erzeugen lassen. Sie besteht aus vier Komponenten:
+ \begin{itemize}
+  \item ein endliches \textbf{Alphabet} $\Sigma$ (auch Terminale genannt)
+  \item eine endliche Menge $V$ mit $V \cap \Sigma = \emptyset$ von \textbf{Variablen} (auch Nichtterminale genannt)
+  \item ein \textbf{Startsymbol} $S \in V$
+  \item eine endliche Menge von \textbf{Ableitungsregeln} $R$ (auch Produktionen genannt).
+  Eine Ableitungsregel ist ein Paar ($l,r)$, wobei $l \in (V \cup \Sigma)^+$ und $r \in (V \cup \Sigma)^*$ ist.
+  Wir schreiben meist $l \rightarrow r$.
+ \end{itemize}
+\end{block}
+}
+
+\frame{
+\frametitle{Beispiel}
+\begin{exampleblock}{Beispiel: Sprache der Palindrome}
+\begin{align*}
+V = &\{S\}\\
+\Sigma = &\{0,1\}\\
+R = &\{ S \rightarrow \varepsilon \mid 0 \mid 1,\\
+       &S \rightarrow 0S0 \mid 1S1 \} 
+\end{align*}
+\end{exampleblock}
+}
+
+\frame{
+\frametitle{Chomsky-Hierarchie}
+Von Noam Chomsky definiert, um natürliche Sprachen formalisieren zu können. \\
+Wir definieren Klassen von Sprachen, die von Grammatiken mit bestimmten Einschränkungen erzeugt werden:
+\begin{itemize}
+\item CH-3 Regulär/Rechtslinear
+\item CH-2 Kontextfrei
+\item CH-1 Kontextsensitiv/Längenbeschränkt
+\item CH-0 Beliebig \only<2>{(rekursiv aufzählbar)}
+\end{itemize}
+Es gilt: $$CH\text{-}3 \subset CH\text{-}2 \subset CH\text{-}1 \subset CH\text{-}0$$
+Frage: Welche Sprachen liegen nicht in CH-0 ?
+\pause
+}
+
+\frame{
+\frametitle{CH-0}
+Rekursiv aufzählbare Sprachen
+\begin{itemize}
+\item Sprachen, die von einer beliebigen Grammatik erzeugt werden
+\item Genau die Sprachen, die DTM \& NTM \emph{akzeptieren} können
+\end{itemize}
+
+}
+
+\frame{
+\frametitle{CH-1}
+Kontextsensitive/längenbeschränkte Sprachen
+\begin{itemize}
+\item Sprachen, die von Grammatiken erzeugt werden, deren Ableitungen eine linke Seite besitzen, die höchstens so lang ist wie ihre rechte Seite. D.h. Produktionen machen das Wort nie kürzer.\\
+$\Rightarrow$ entscheidbar
+\item (Genau die Sprachen, die von linear beschränken Turingmaschinen erkannt werden)
+\pause
+\item $\rightarrow$ vgl. Klasse $\mathcal{NTAPE}$(n)
+\end{itemize}
+\pause
+~\micropause
+\begin{block}{Beispiel}
+\begin{itemize}
+\item $\{ a^nb^nc^n \mid n \in \N \}$
+\item Syntaktisch korrektes C (typedef)
+\item Die Sprache der wohlgeformten Latex-Dokumente
+\end{itemize}
+\end{block}
+}
+
+\frame{
+\frametitle{CH-2}
+Kontextfreie Sprachen
+\begin{itemize}
+\item Grammatiken, deren Ableitungsregeln auf der linken Seite immer aus genau einem Nichtterminalsymbol bestehen
+\item Genau die Sprachen, die von Kellerautomaten erkannt werden (Vorgriff)
+\end{itemize}
+~\micropause
+\begin{block}{Beispiele}
+\begin{itemize}
+\item $\{ a^nb^n \mid n \in \N \}$
+\item Viele natürlichen Sprachen
+\item Die Sprache der gültigen Klammerausdrücke
+\item Die Sprache der regulären Ausdrücke
+\end{itemize}
+\end{block}
+}
+
+\frame{
+\frametitle{CH-3}
+Reguläre Sprachen
+\begin{itemize}
+\item Grammatiken, deren Ableitungsregeln ausschließlich die folgende Form haben:
+$$A\rightarrow v \mbox{ mit } A \in V \mbox{ und } v = \varepsilon \mbox{ oder } v = aB \mbox{ mit } a \in \Sigma \mbox{,} B \in V$$
+\item Genau die Sprachen, die von endlichen Automaten erkannt werden
+\end{itemize}
+~\micropause
+\begin{block}{Beispiele}
+\begin{itemize}
+\item Alle endlichen Sprachen
+\item Tokens ($\rightarrow$ vgl. Compilerbau)
+\item Die Sprache der kontextfreien Grammatiken über festem Alphabet
+\item Perl Regexes \emph{nicht}
+\end{itemize}
+\end{block}
+}
+
+\section{Aufgaben}
+\subsection*{seufz}
+
+\begin{frame}
+\frametitle{Aufgabe}
+Gegeben sei die Grammatik $G = (\Sigma, V, S, R)$ mit $\Sigma = \{a, b\}$,
+$V = \{S, A\}$ und 
+\[ R = \{S \rightarrow AA, \quad A \rightarrow AAA,
+\quad A \rightarrow bA, \quad A \rightarrow Ab, \quad A \rightarrow a\}. \]
+
+\begin{itemize}
+  \item Welchen Typ in der Chomsky-Hierarchie hat $G$?
+
+  \item Welche Zeichenketten aus $\Sigma^*$ k\"onnen in vier Schritten abgeleitet werden?
+
+  \item Sei $\alpha = (b^*ab^*ab^*)^+$ ein regul\"arer Ausdruck.
+        Zeige: $L(\alpha) \subseteq L(G)$.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Aufgabe: CH-1-Grammatiken}
+Konstruiere eine Typ-1-Grammatik, welche die Sprache
+
+\begin{quote}
+  $L = \{a^n b^n c^n \, | \, n \geq 1\}$
+\end{quote}
+
+erzeugt.
+
+\invincible
+\pause
+\begin{block}{Lösung}
+\ducttape{-1cm}
+\begin{align*}
+&\Sigma = \{a, b, c\} \\
+&V = \{ S, S', \#, B, C \} \\
+&S \rightarrow S' \\
+&S' \rightarrow aS'\#C \mid aBC \\
+&C\# \rightarrow \#C \\
+&B\# \rightarrow BB \\
+&B \rightarrow b \\
+&C \rightarrow c
+\end{align*}
+\end{block}
+\vincible
+\end{frame}
+
+\begin{frame}
+\frametitle{Aufgabe: CH-2-Grammatiken}
+Gib eine kontextfreie Grammatik an, die die Sprache
+\begin{quote}
+  $L = \{w \in \Sigma^* \, | \, w \text{ enth\"alt mehr Nullen als Einsen}\}$  
+\end{quote}
+\"uber dem Alphabet $\Sigma = \{0, 1\}$ beschreibt.
+
+\invincible
+\pause
+\begin{block}{Lösung}
+\begin{align*}
+&\Sigma = \{ 0, 1 \} \\
+&V = \{ S, \# \} \\
+&S \rightarrow \#0\# \\
+&\# \rightarrow 0\#1 \mid 1\#0 \mid \#\# \mid 0\# \mid \varepsilon
+\end{align*}
+\end{block}
+\vincible
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Aufgabe: CH-3-Grammatiken}
+Gib unter Anwendung des Verfahrens aus Satz 5.5 eine Grammatik an,
+welche genau die Sprache erzeugt, die folgender DEA akzeptiert:
+
+\begin{center}\includegraphics[scale=0.8]{./images/dea1.pdf}\end{center}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Aufgabe}
+\begin{enumerate}
+\item Bestimme eine möglichst kurze Grammatik $G_R$ für reguläre Ausdrücke über dem Alphabet $\Sigma = \{0,1\}$ mit maximalem Chomsky-Typ.
+\item Bestimme einen Ableitungsbaum für das Wort $1^* \cup (01)^*$. 
+\item Ist die Grammatik eindeutig? Diskutiere, ob es eine eindeutige Grammatik für reguläre Ausdrücke geben kann, falls die angegebene Grammatik mehrdeutig ist.
+\end{enumerate}
+
+\invincible
+\pause
+\begin{block}{Lösung}
+\ducttape{-1cm}
+\begin{align*}
+&\Sigma = \{ 0, 1, \vphantom{0}^\ast, \cup, \epsilon, \emptyset, (, ) \} \\
+&V = \{ S, P, K \} \\
+\\
+&S \rightarrow P \cup S \mid P \\
+&P \rightarrow KP \mid K \\
+&K \rightarrow 0 \mid 1 \mid \epsilon \mid \emptyset \mid T^\ast \mid (S)
+\end{align*}
+\end{block}
+\vincible
+\end{frame}
+
+\frame{
+\frametitle{Probleme}
+Es gibt einige interessante Probleme, mit deren Entscheidbarkeit, Komplexität bzw. Abgeschlossenheit wir uns noch befassen (jeweils für die Klassen)
+\begin{itemize}
+\item Das Wortproblem
+\item Vereinigung
+\item Schnitt
+\item Komplement
+\item Konkatenation
+\item Kleenescher Abschluss (*-Operator)
+\end{itemize}
+}
+
+\include{includes/common_end}

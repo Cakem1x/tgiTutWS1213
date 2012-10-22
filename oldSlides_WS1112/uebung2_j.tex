@@ -1,0 +1,91 @@
+\include{includes/common_start}
+\uebnr{2}
+
+\setbeamercovered{invisible}
+
+\begin{frame}
+	\frametitle{Danke!}
+	
+	Ihr macht es eurem Tutor nicht allzu schwer:
+	
+	\begin{itemize}
+		\item Lesbare Schrift
+		\item Standardaufgaben richtig gelöst
+		\item Teils interessante Lösungsansätze :-)
+	\end{itemize}
+	
+	Bitte weiter so!
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ein wichtiger Unterschied}
+	
+	\begin{center}
+		\huge{$\{\varepsilon\}$ vs. $\emptyset$}
+	\end{center}
+	
+	\begin{itemize}
+		\item Was haben diese beiden Dinge gemeinsam?
+		\item Was unterscheidet sie?
+	\end{itemize}
+	
+	\pause
+	
+	\begin{itemize}
+		\item Beides sind \emph{Mengen}.
+		\item Beides sind Teilmengen von $\Sigma^*$, also \emph{formale Sprachen} \\ (für beliebiges $\Sigma$).
+	\end{itemize}
+	
+	\pause
+	
+	\textbf{Aber:}
+	
+	\begin{itemize}
+		\item Diese beiden Dinge sind nicht das Gleiche!
+		\item $\{\varepsilon\}$ enthält genau ein Wort (nämlich $\varepsilon$).
+		\item $\emptyset = \{\}$ enthält \emph{kein} Wort (auch nicht $\varepsilon$).
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ein wichtiger Unterschied}
+	
+	\begin{center}
+		\huge{$\{\varepsilon\}$ vs. $\emptyset$}
+	\end{center}
+	
+	Für eine beliebige formale Sprache $A$ gilt:
+	
+	\begin{itemize}
+		\item $A \cdot \{\varepsilon\}$ = \only<2->{$A$}
+		\item $A \cdot \emptyset$ = \only<3->{$\emptyset$}		
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Lästige Formalien}
+	
+	\begin{quote}
+		Sei $L := \menge{a^p}{p \text{ Primzahl}}$
+		
+		Wähle $w = a^p$. \hspace{0.5cm} $\dots$
+	\end{quote}
+	
+	Was ist an dieser Formulierung falsch?
+	
+	\pause \ducttape{1cm}
+	
+	$p$ ist nur innerhalb der Menge definiert!
+	
+	\ducttape{0.5cm}
+	
+	\textbf{Richtig:}
+	
+	\begin{itemize}
+		\item Wähle $w = a^p, p$ Primzahl $\Rightarrow w \in L$.
+		\item Wähle $w = a^q, q$ Primzahl $\Rightarrow w \in L$.
+		\item Sei $n \in \N$ beliebig, aber fest. Wähle $w \in L$ mit $\abs{w} \geq n$.		
+	\end{itemize}
+\end{frame}
+
+\include{includes/common_end}

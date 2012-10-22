@@ -1,0 +1,68 @@
+\include{includes/common_start}
+\uebnr{4}
+
+\invincible
+
+\begin{frame}
+	\frametitle{Komplexitätsfragen}
+	
+	Ist folgende Sprache über $\Sigma = \{a, \ldots, z\}$ in \classP{}? $$L := \menge{\left\langle x, k \right\rangle}{x \in \Sigma^*, \text{ in } x \text{ kommt mindestens } k \text{-mal das Zeichen } a \text { vor} }$$
+	
+	\pause Ich behaupte: \textbf{Nein,} wenn $\classP \neq \classNP$!
+	
+	\pause Begründung: $L$ ist das CLIQUE-Problem, und CLIQUE ist \classNP{}-vollständig.
+	
+	\pause
+	\begin{itemize}
+		\item Knoten $\mathop{\hat{=}}$ Zeichen von $x$
+		\item Kanten: zwischen $a$-Knoten
+		\item Cliquengröße: $k$
+	\end{itemize}
+	
+	\pause Beispiel: $x = panamakanal$, $k = 5$ $\Rightarrow$
+	
+	\raggedleft { \ducttape{-2.5cm} \includegraphics[scale=.6]{images/panama.pdf} }
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Quatsch mit Soße!}
+	
+	\begin{itemize}
+	\item	Ich habe gerade gezeigt: $L$ $\propto$ CLIQUE.
+	\item In Worten: CLIQUE ist mindestens so schwer wie $L$.
+	\item Irgendwie klar, da CLIQUE $\classNP$-vollständig, also $\classNP$-schwer.
+	\item Für die $\classNP$-Vollständigkeit von $L$ wäre aber zu zeigen: CLIQUE	$\propto$ $L$.
+	\end{itemize} 
+	
+	\pause
+	
+	\begin{block}{Merke:}
+	\alert{Um zu zeigen, dass ein Problem \textit{nicht} in \classP{} liegt, muss man ein anderes Problem, das nicht in \classP{} liegt, \textbf{auf dieses Problem reduzieren}!}
+	\end{block}
+\end{frame}
+
+\vincible
+
+\begin{frame}
+	\frametitle{Allgemeines}
+	
+	\begin{itemize}
+		\item Beschreibungen in Beweisen: oft \textit{sehr} schwammig
+		\begin{itemize}
+			\item In der Klausur wird vermutlich strenger korrigiert!
+		\end{itemize}
+		\pause \item Optimierungsproblem $\rightarrow$ Entscheidungsproblem:
+		\begin{itemize}
+			\item Optimierungsproblem: "`Finde eine optimale Lösung"' \\ Entscheidungsproblem "`Existiert eine Lösung mit Wert $k$?"'
+		\end{itemize}
+		\pause \item Semientscheidbare Sprachen
+		\begin{itemize}
+			\item Sei $L$ eine semientscheidbare Sprache, die von einer TM $\mathcal{M}$ erkannt wird.
+			\item Was macht $\mathcal{M}$ für eine Eingabe $x \in L$?
+			\pause \item Was macht $\mathcal{M}$ für eine Eingabe $x \not\in L$?
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\include{includes/common_end}

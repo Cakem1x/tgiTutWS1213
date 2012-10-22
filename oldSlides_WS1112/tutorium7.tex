@@ -1,0 +1,389 @@
+\include{includes/common_start}
+\tutnr{7}
+
+\section{Wiederholung}
+\subsection{}
+
+\begin{frame}
+\frametitle{Allgemeines zu $\classNP$-Vollständigkeitsbeweisen}
+In der Regel ist es schwer zu zeigen, dass ein Problem $\mathcal{NP}$-schwer ist, aber leicht zu zeigen, dass ein Problem in $\mathcal{NP}$ liegt.\\[8pt]
+Da man üblicherweise ein $\mathcal{NP}$-vollständiges Problem als Voraussetzung für die Reduktion benötigt (Ausnahme: Satz von Cook), lohnt es sich einige kennen zu lernen.
+\end{frame}
+
+\section{SAT \& Co.}
+\subsection{}
+
+\begin{frame}
+\frametitle{SAT (SATisfiability = Erfüllbarkeitsproblem)}
+\begin{block}{Problem}
+\textbf{Gegeben:} Formel in konjunktiver Normalform
+\begin{itemize}
+ \item Menge $U$ von Variablen
+ \item Menge $C$ von Klauseln (Disjunktionen) über $U$
+\end{itemize} $$ \underbrace{(\stackrel{\text{Literale}}{\stackrel{\downarrow}{\vphantom{\neglit{a}}a} \vee \stackrel{\downarrow}{\vphantom{\neglit{b}}b} \vee \stackrel{\downarrow}{\neglit{c}}})}_\text{Klausel} \wedge \underbrace{(b \vee c)}_\text{Klausel} \wedge \underbrace{(\neglit{a} \vee \neglit{b} \vee \neglit{c})}_\text{Klausel}$$
+
+\textbf{Frage:} Existiert eine (alle Klauseln) erfüllende Variablenbelegung?
+\end{block}
+\pause \begin{itemize}
+\item \emph{Das} Standardproblem.
+\item "`Erstes"' $\classNP{}$-vollständiges Problem (Satz von Cook)
+\item Es gibt viele hochoptimierte "`SAT-Solver"'. Steht man in der Praxis vor einem $\mathcal{NP}$-Problem, kann eine Transformation auf $SAT$ sinnvoll sein.
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{3SAT}
+\begin{block}{Problem}
+\textbf{Gegeben:}
+\begin{itemize}
+ \item Menge $U$ von Variablen
+ \item Menge $C$ von Klauseln über $U$ \\ Jede Klausel enthält genau \emph{genau 3} Literale
+\end{itemize} $$C = \{ (x_1 \vee x_2 \vee x_3), (x_1 \vee \neglit{x_2} \vee \neglit{x_3}), (\neglit{x_1} \vee x_2 \vee x_3) \}$$
+
+\textbf{Frage:} Existiert eine erfüllende Wahrheitsbelegung von $C$?
+\end{block}
+\begin{itemize}
+\item Bietet sich bei Reduktion eher an als SAT, da übersichtlicher
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{MAX2SAT}
+\begin{block}{Problem}
+\textbf{Gegeben:}
+\begin{itemize}
+ \item Menge $U$ von Variablen
+ \item Menge $C$ von Klauseln über $U$, wobei jede Klausel genau zwei Literale enthält
+ \item Zahl $K \in \mathbb{N}$
+\end{itemize}
+\textbf{Frage:} Existiert eine Wahrheitsbelegung, die mindestens $K$ Klauseln erfüllt?
+\end{block}
+
+\begin{itemize}
+	\item $MAX2SAT$ ist $\classNP$-vollständig, aber $2SAT$ ist in $\classP$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Aufgabe}
+	
+	Haben die folgenden SAT-Instanzen eine Lösung? Gib eine erfüllende Wahrheitsbelegung an oder zeige, dass keine existieren kann.
+\begin{enumerate}
+ \item $\{(a \vee b \vee \neglit{c}), (b \vee c), (\neglit{a} \vee \neglit{b} \vee \neglit{c})\}$
+ \item $\{(\neglit{a} \vee b), (\neglit{b} \vee  a), (a \vee b \vee \neglit{c}), (\neglit{a} \vee c), (\neglit{a} \vee \neglit{b} \vee \neglit{c}), (\neglit{c} \vee \neglit{b}), (a \vee b \vee c)\}$
+\end{enumerate}
+\end{frame}
+
+\section{Komplementsprachen}
+\subsection{}
+
+\begin{frame}
+\frametitle{Komplementsprachen}
+\begin{block}{Definition}
+Zu einer Sprache $L \subseteq \Sigma^*$ definieren wir $\co L$ als das Komplement der Sprache, also
+$\co L := \Sigma^*\setminus L$.
+\end{block}
+Für eine Klasse von Sprachen wie $\classP$ definieren wir die "`co"'-Klasse (wie z.B. $\co\classP$) als Menge der Komplemente (und nicht etwa als Komplement der Klasse -- warum?).\\[8pt]
+\pause
+\textbf{Beispiel:} \co 3SAT: Die aussagenlogischen Formeln mit 3 Variablen pro Klausel, die nicht erfüllbar sind.\\[8pt]
+
+\pause
+\textbf{Aufgabe:} Beschreibe \co CLIQUE.\\[8pt] % everybody loves CLIQUE
+
+\pause
+\textbf{Aufgabe:} Gelten folgende Behauptungen?
+\begin{itemize}
+    \item $\classP = \co\classP$ ?
+    \item $\classNP = \co\classNP$ ?
+    \invincible \pause
+    \item $\classNP \neq \co\classNP \Rightarrow \classP \neq \classNP$ ?
+    \vincible
+\end{itemize}
+\end{frame}
+
+\section{Graphenprobleme}
+\subsection{}
+
+\begin{frame}
+\frametitle{Aufgabe}
+Betrachte das Problem INDEPENDENT SET (IS):
+
+\begin{itemize}
+ \item \textbf{Gegeben:} Graph $G=(V, E)$, Parameter $K \leq |V|$
+ \item \textbf{Frage:} Gibt es eine unabhängige Menge der Größe $K$ in $G$, d.~h.\  eine Menge $V' \subseteq V$ mit $|V'| \geq K$, sodass $\{v, w\} \notin E$ für alle $v, w \in V'$? 
+\end{itemize}
+
+\only<1> {
+
+Finde in folgendem Graphen $G_1 = (V_1, E_1)$ eine unabhängige Menge maximaler Größe:
+
+\begin{center}\includegraphics[scale=1.5]{images/tut7-graph}\end{center}
+
+}
+
+\only<2> {
+	Formuliere das komplementäre Problem co-INDEPENDENT SET.
+}
+
+\only<3> {
+	Zeichne $\neglit{G_1}=(V_1, \neglit{E_1})$, wobei $\neglit{E_1}=\menge{\{v, w\}}{v, w \in V_1, \{v,w\} \notin E_1}$.
+	
+        Bestimme eine Clique maximaler Größe in $\neglit{G_1}$.
+        
+        Was fällt dabei auf?
+}
+
+\only<4> {
+
+Beweise die $\mathcal{NP}$-Vollständigkeit von IS. Gehe dabei wie folgt vor:
+\begin{enumerate}
+ \item Zeige: IS $\in \mathcal{NP}$.
+ \item Zeige: $V'$ Clique in $G \Longleftrightarrow$ $V'$ unabhängige Menge in $\neglit{G}=(V, \neglit{E})$, wobei $\neglit{E}= \menge{\{v, w\}}{v, w \in V, \{v, w\} \notin E}$
+ \item Zeige, dass IS $\mathcal{NP}$-schwer ist.
+\end{enumerate}
+
+\raggedleft{\vspace{-.5cm} \includegraphics[scale=1]{images/tut7-graph}}
+
+}
+\end{frame}
+
+\begin{frame}
+\frametitle{COLOR}
+\begin{block}{Problem}
+\textbf{Gegeben:} Graph $G = (V, E)$ und ein Parameter $K \in \mathbb{N}$\\
+\textbf{Frage:} Gibt es eine Knotenfärbung von $G$ mit höchstens $K$ Farben, sodass zwei adjazente Knoten verschiedene Farben besitzen?
+\end{block}
+\begin{itemize}
+\item Bei festem $K$ nur $\mathcal{NP}$-vollständig für $K \geq 3$ (sonst in $\mathcal{P}$).
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Aufgabe}
+	
+	Für welche $K$ ist der folgende Graph eine Ja-Instanz für das Problem COLOR?
+	
+	\begin{center}\includegraphics[scale=1.5]{images/tut7-graph}\end{center}
+\end{frame}
+
+\section{Mengenprobleme}
+\subsection{}
+
+\begin{frame}
+\frametitle{EXACT COVER}
+\begin{block}{Problem}
+\textbf{Gegeben:} Eine Menge $\mathcal{S}$ von Teilmengen einer Menge $X$\\
+\textbf{Frage:} Gibt es eine Teilmenge $\mathcal{S}^*$ von $\mathcal{S}$, sodass jedes Element aus $X$ in genau einem der $s \in \mathcal{S}^*$ enthalten ist?
+\end{block}
+
+\pause \begin{block}{Beispiel}
+	$$ X = \{a, b, c, d, e, f, g, h \}$$
+	$$ \mathcal{S} = \{\{a, c, e\}, \{a, f, g\}, \{b, d\}, \{b, f, h\}, \{e, h, i\}, \{f, h, i\}, \{d, g, i\}\}$$
+	
+	\solution{$$ \mathcal{S}^* = \{\{a, c, e\}, \{b, f,  h\}, \{d, g, i\}\} $$}
+\end{block}
+\end{frame}
+
+%\begin{frame}
+%\frametitle{Sudoku}
+%Sudoku lässt sich als EXACT-COVER Instanz formulieren!\\
+%Definiere:\\
+%Sei $V = \{1,2,\ldots,9\}$ die Menge der möglichen Lösungen für ein Kästchen.
+%Sei $S = \{s_{11}, s_{12},\ldots,s_{19},s_{21},\ldots,s_{99}\}$ die Menge der Sudokukästchen.
+%Seien weiterhin $r_i = \{s_{i1}, s_{i2}, \ldots s_{i9}\}$ eine Reihe und $R$ die Menge der Reihen.
+%Analog sei $c_i = \{s_{1i}, s_{2i}, \ldots, s_{9i}\}$ eine Spalte und $C$ die Menge der Spalten.
+%Seien nun noch $b_k$ die Kästchen, die zum Block $k$ gehören, und $B$ die Menge der Blöcke.
+%%Hier sollte man alles mal an die Tafel schreiben, sonst ist das zu unübersichtlich ^^
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{Sudoku}
+%Betrachte nun die folgende Menge: $U := R \times C \cup R \times V \cup C \times V \cup B \times V$, $U$ ist unsere Menge $X$ (aus der Formulierung des EXACT-COVER-Problems).\\
+%Definiere: $S_{ijkl} := \{(r_i,c_j),(r_i,v_l),(c_j,v_l),(b_k,v_l)\} \subset U$.\\[8pt]
+%Wird $S_{ijkl}$ in die Lösung aufgenommen, so kodiert dies, dass im Kästchen $s_{ij}$ im Block $b_k$ der Wert $v_l$ steht.\\
+%Die Menge $M$ aller $S_{ijkl}$ ist unsere Menge an Teilmengen.\\
+%Um zu garantieren, dass in einem bestimmten Feld $s_{i'j'}$ eine bestimmte Zahl $v_{l'}$ steht, kann man einfach die $S_{ijkl}$ mit $i = i'$ und $j = j'$ sowie $l \neq l'$ aus $M$ entfernen.
+%\end{frame}
+
+\begin{frame}
+\frametitle{SUBSET-SUM}
+\begin{block}{Problem}
+\textbf{Gegeben:}
+\begin{itemize}
+ \item Eine Menge $S$ von Ganzzahlen
+ \item Eine Ganzzahl $n$.
+\end{itemize}
+\textbf{Frage:}
+Gibt es eine Teilmenge $S^*$, sodass die Summe der Elemente von $S^*$ gleich $n$ ist?
+\end{block}
+\end{frame}
+%% - PARTITION
+\begin{frame}
+\frametitle{PARTITION}
+\begin{block}{Problem}
+\textbf{Gegeben:} Eine Menge von natürlichen Zahlen\\
+\textbf{Frage:} Kann man diese Zahlen in zwei Mengen aufteilen, sodass die Summe der Zahlen in den beiden Mengen gleich ist?
+\end{block}
+\end{frame}
+
+%\begin{frame}
+%\frametitle{BIN-PACKING}
+%\begin{block}{Problem}
+%\textbf{Gegeben:}
+%\begin{itemize}
+% \item Eine Anzahl $K$ an Behältern der Größe $b \in \mathbb{N}$ und eine Anzahl $n \in \mathbb{N}$ ''Objekte'' mit den Gewichten $a_1, a_2,\ldots,a_n$.
+%\end{itemize}
+%\textbf{Frage:}
+%Können die Objekte so auf die Behälter verteilt werden, dass keiner der Behälter Objekte enthält, deren Gewicht in der Summe $b$ übersteigt?
+%\end{block}
+%\end{frame}
+
+\section{Mehr Graphenprobleme}
+\subsection{}
+
+\begin{frame}
+\frametitle{Aufgabe}
+Ein Vertex Cover eines Graphen $G=(V,E)$ ist eine Teilmenge $V'\subseteq V$, so
+dass jede Kante aus $E$ zu mindestens einem Knoten aus $V'$ inzident ist.
+
+Das Problem \textsc{VERTEX COVER} besteht nun darin, zu entscheiden, ob es
+für einen Graphen $G=(V,E)$ und einen Parameter $k \leq |V|$ ein Vertex Cover
+der Größe höchstens $k$ gibt.
+
+\begin{enumerate}
+	\item Finde in folgendem Graphen ein Vertex Cover minimaler Größe: 
+	
+		\begin{center}\includegraphics[scale=1.2]{images/tut7-graph}\end{center}
+		
+	\item Zeige, dass \textsc{VERTEX COVER} $\cal{NP}$-vollständig ist. 
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Lösungsskizze}
+	
+	\textbf{VERTEX COVER $\in \classNP$:} Für eine gegebene Menge $V'$ kann in Polyzeit überprüft werden, ob sie eine Teilmenge von $V$ ist und alle Kanten von $G$ zu mindestens einem Knoten aus $V'$ inzident sind.
+	
+	\pause \ducttape{.3cm}
+	
+	\textbf{VERTEX COVER \classNP{}-schwer:} Reduktion von INDEPENDENT SET:
+	
+	\begin{itemize}
+		\item Gegeben eine Instanz $(G = (V,E), K)$ von INDEPENDENT SET.
+		\item Konstruiere daraus eine Instanz $(G' = G, K' = \abs{V} - K)$ von VERTEX COVER (geht offensichtlich in Polyzeit).
+		\pause	\item Behauptung: Es gibt ein Independent Set mit Größe $K$ in $G$ \\ $\Leftrightarrow$ Es gibt ein Vertex Cover der Größe $\abs{V} - K$ von $G$.
+		\pause \item Beweis: $V' \subseteq V$ ist Independent Set der Größe $K$ \\ $\Leftrightarrow$ Keine zwei Knoten aus $V'$ sind durch eine Kante verbunden \\ $\Leftrightarrow$ Jede Kante ist zu höchstens einem Knoten aus $V'$ inzident \\ $\Leftrightarrow$ Jede Kante ist zu mindestens einem Knoten aus $V \setminus V'$ inzident \\ $\Leftrightarrow$ $V \setminus V'$ ist ein Vertex Cover von $G$ $\qedhere$
+	\end{itemize}
+\end{frame}
+
+\section{Mehr Mengenprobleme}
+\subsection{}
+
+\begin{frame}
+ \frametitle{KNAPSACK}
+ 
+ \begin{block}{Problem}
+ \textbf{Gegeben:} $(M, w, c, W, C)$
+ \begin{itemize}
+  \item endliche Menge von Objekten $M$
+  \item Gewichtsfunktion $w:M \rightarrow \mathbb{N}_0$
+  \item Wertfunktion $c:M \rightarrow \mathbb{N}_0$
+  \item Maximalgewicht $W$ und Minimalwert $C$ $\in \N_0$
+ \end{itemize}
+ \end{block}
+ 
+\textbf{Frage:} Existiert eine Teilmenge $M' \subseteq M$ mit $$\sum_{a\in M'} w(a) \leq W \text{ und } \sum_{a\in  M'} c(a) \geq C\text{  ?}$$
+
+\pause
+
+Was wären das zugehörige Optimalwertproblem und Optimierungsproblem?
+\end{frame}
+
+\begin{frame}
+ \frametitle{KNAPSACK -- Beispiel}
+ Gegeben: Instanz $I$ von KNAPSACK mit $M = {i_1, i_2, i_3, i_4}$
+  \begin{center}
+\begin{tabular}{l|l|l|l|l}
+	  &$i_1$ &$i_2$ &$i_3$ 	&$i_4$\\
+  \hline
+	w &10	 &5	&5	&8\\
+  \hline
+	c &7	 &10	&5	&8\\	
+\end{tabular}
+\end{center}
+\begin{itemize}
+ \item $W$ = 15
+ \item $C$ = 18
+\end{itemize}
+Ist $I$ eine Ja-Instanz?
+\end{frame}
+
+\begin{frame}
+\frametitle{Lösungsansätze}
+\begin{block}{Orakel}
+  $M' = \{i_2$, $i_4\}$ ist eine gültige Lösung. $I$ ist somit eine Ja-Instanz.
+ \end{block}
+\begin{block}{Exponentieller Ansatz}
+ Teste alle $2^4 = 16$ mögliche Teilmengen $M' \subseteq M$, ob sie die Bedingung erfüllen. 
+\end{block}
+\begin{block}{Greedy-Ansatz -- nicht immer optimal}
+ Sortiere die Elemente $i \in M$ nach dem Verhältnis $c(i)/w(i)$. 
+ Füge so lange Elemente mit dem besten Verhältnis aller $i \not\in M'$ zu $M'$ hinzu, solange $\sum_{i \in M'} w(i) \leq W$ mit dem hinzugefügten Element noch gilt.
+ 
+ Informell: Möglichst wertvolle Dinge einpacken, bis der Rucksack voll ist.
+\end{block}
+\invincible
+\pause
+\begin{block}{Dynamische Programmierung}
+ In $\mathcal{O}(\abs M W)$!
+\end{block}
+\vincible
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Aufgabe}
+Gegeben sei folgende Instanz $I=(M, w, c, W, C)$ von KNAPSACK:
+
+\begin{itemize}
+\item $M := \{x_1, \ldots, x_7\}$
+\item Gewichtsfunktion $w$ und die Kostenfunktion $c$ sind durch folgende Tabelle gegeben:
+
+\begin{center}
+\begin{tabular}{l|l|l|l|l|l|l|l}
+	  &$x_1$ &$x_2$ &$x_3$ 	&$x_4$ 	&$x_5$ 	&$x_6$ 	&$x_7$\\ 	
+  \hline
+	w &6	 &6	&5	&5	&3	&4	&1\\
+  \hline
+	c &8	 &10	&8	&8	&5	&6	&2\\
+\end{tabular}
+\end{center}
+\item Die obere Schranke für das Gewicht sei $W:=12$
+\end{itemize}
+
+Für welche $C$ ist $I$ eine Ja-Instanz?  
+\end{frame}
+
+\section{Schluss}
+\subsection{Ham}
+
+\begin{frame}
+\frametitle{Und viele mehr!}
+Es gibt (sehr) viele Probleme, von denen man weiß, dass sie $NP$-vollständig sind. Es gibt ein "`klassisches"' Paper von Richard Karp, in dem 21 Probleme vorgestellt werden, die großteils recht bekannt sind.\\
+Wer nicht genug bekommen kann, darf in "`Introduction to the Theory of Computation"' von Michael Sipser schauen, dort gibt es sehr viele.\\[10pt]
+Es kann durchaus nützlich sein zu wissen, dass ein Problem $\mathcal{NP}$-vollständig ist; dann kann man aufhören, nach einem effizienten Algorithmus zu suchen.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Bis zum nächsten Mal!}
+	
+	\begin{figure}[H]
+		\includegraphics[height=0.9 \textheight]{images/287_np_complete.png}
+		
+		\textit{\scriptsize{General solutions get you a 50\% tip.}}
+	\end{figure}
+\end{frame}
+
+\include{includes/common_end}

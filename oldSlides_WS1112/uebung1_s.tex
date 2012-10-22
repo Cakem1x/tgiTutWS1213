@@ -1,0 +1,40 @@
+\include{includes/common_start}
+\uebnr{1}
+
+\begin{frame}
+	\begin{center}
+	\includegraphics[height=0.85 \textheight]{images/gutti.jpg}
+	\end{center}
+	
+	\textcolor{gray}{\tiny{http://de.wikipedia.org/w/index.php?title=Datei:Guttenberg-800.jpg}}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Häufige Fehler}		
+		\begin{itemize}
+			\item Entgegen Gerüchten der Übungsleiter schreibt man ''Ullrich'' mit zwei l :) .\pause
+            \item Aufgabe 1: Mengengleichheit und Aussagenäquivalenz nicht verwechseln \pause
+            \item Aufgabe 2: Nur Sprachen, nicht Wörter, können regulär sein.
+            \item Aufgabe 2: Reguläre Ausdrücke kennen nur Vereinigung und Konkatenation, keinen Schnitt. \pause
+            \item Aufgabe 3: Wenn systematische Durcharbeitung eines Verfahrens verlangt ist, führt kein Weg vorbei. \pause
+            \item Aufgabe 4: $q$ liegt immer in $E(q)$.
+            \item Aufgabe 4: bei $\epsilon$-Entfernung Schleifen und akzeptierende Zustände nicht vergessen
+        \end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{Aufgabe 7: Allgemeines Schema}
+	
+	\begin{itemize}
+        \item Annahme: L ist regulär.
+		\item Sei $n$ dann wie im Pumping-Lemma \emph{(also innerhalb des Beweises beliebig!)}.
+		\item Wähle $w=\text{\textbf{ passendes Wort } , sodass } w\in L, \abs{w} > n$
+		\item Sei nun $w=uvx$ eine \emph{beliebige} Zerlegung mit $\abs{uv} \le n, v\neq \epsilon$
+        \item $[$Dann haben $u, v, x$ die Form ... $]$
+        \item Für $i=\textbf{eineZahl}$ ist $uv^ix \not\in L$, im Widerspruch zum Pumping-Lemma.
+        \item Also ist L nicht regulär.
+        \vspace{1cm}
+        \item Manchmal muss $i$ je nach Zerlegung unterschiedlich gewählt werden \\ (auf dem Übungsblatt allerdings nicht).
+	\end{itemize}
+\end{frame}
+
+\include{includes/common_end}

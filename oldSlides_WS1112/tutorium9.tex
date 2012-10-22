@@ -1,0 +1,196 @@
+\include{includes/common_start}
+\tutnr{9}
+
+\section{Langweilige Theorie}
+\subsection{Trololo}
+
+\begin{frame}
+	\frametitle{Motivation}
+	
+	\begin{itemize}
+		\item Manche Optimierungsprobleme sind \classNP{}-schwer \\ $\Rightarrow$ (wahrscheinlich) keine effiziente Lösung. \pause
+		\item Wir wollen trotzdem eine schnelle Lösung! \\ (muss dafür nicht optimal sein) \\ \pause $\Rightarrow$ Approximation
+
+    \vspace{-1cm}\raggedleft{\includegraphics<3>[width=3cm]{images/challenge_accepted.png}}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Gütegarantien}
+	
+	\begin{itemize}
+		\item Vergleich der Worst-Case-Lösung mit der optimalen Lösung
+		\item $\Pi$ Optimierungsproblem, $I$ Instanz von $\Pi$: \\ OPT($I$) ist der Wert der/einer optimalen Lösung.
+		\item $\mathcal{A}(I)$ ist der Wert der (Approximations-)Lösung, die Algorithmus $\mathcal{A}$ für $I$ liefert.
+	\end{itemize}
+	
+	\pause	
+	
+	\only<1-3>{
+	\begin{block}{Absolute Gütegarantie (Differenzengarantie)}
+		\begin{itemize}
+			\item $\abs{\opt{I} - \A{I}} \leq K$ für alle $I \in D_\Pi$
+			\item Wünschenswerteste Gütegarantie \pause
+			\item Für \classNP{}-vollständige Probleme gibt es oft\\ keinen absoluten Approximationsalgorithmus.
+
+            \vspace{-1cm}\raggedleft{\includegraphics<3>[width=2cm]{images/okay.jpg}}
+		\end{itemize}
+	\end{block}
+	}
+	
+	\only<4>{
+	\begin{block}{Relative Gütegarantie}
+		\begin{itemize}
+			\item $\mathcal{R}_\mathcal{A}(I) := \begin{cases} \frac{\A{I}}{\opt{I}} & \text{falls } \Pi \text{ Minimierungsproblem} \\ & \\ \frac{\opt{I}}{\A{I}} & \text{falls } \Pi \text{ Maximierungsproblem} \end{cases}$ \micropause
+			\item Ist $\mathcal{R}_\mathcal{A}(I) \leq 1 + \varepsilon$ für alle $I$, so heißt $\mathcal{A}$ Algorithmus mit relativer Gütegarantie, insbesondere \textit{$\varepsilon$-approximativ}.
+		\end{itemize}
+	\end{block}
+	}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Beispiel: Greedy-Algorithmus $\mathcal{A}$ für KNAPSACK}
+	
+	\begin{itemize}
+		\item Sortiere die Gegenstände nach "`Gewichtsdichten"' $p_i := \frac{c_i}{w_i}$
+		\item Nimm so viele Gegenstände mit möglichst großer Gewichtsdichte, bis der Rucksack voll ist.
+		\item Laufzeit in $\mathcal{O}(n \log{n})$
+	\end{itemize}
+	
+	\pause
+	
+	\begin{theorem}
+		$\mathcal{A}$ ist ein 1-Approximationsalgorithmus für KNAPSACK.
+	\end{theorem}
+	
+	\pause
+	
+	\begin{proof}
+		O.B.d.A. sei $w_1 \leq W$. Es gilt $\A{I} \geq c_1 \cdot \left\lfloor \frac{W}{w_1} \right\rfloor \text{für alle }I.$ \pause 
+		$$\alert{\opt{I}} \leq c_1 \cdot \frac{W}{w_1} \leq c_1 \cdot \left(  \left\lfloor \frac{W}{w_1} \right\rfloor + 1 \right) \leq 2 \cdot c_1 \cdot \left\lfloor \frac{W}{w_1} \right\rfloor \leq \alert{2 \cdot \A{I}}$$
+		
+		Also $\mathcal{R}_\mathcal{A}(I) \leq 2$.
+	\end{proof}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Gütegarantien revisited}
+	
+	\begin{itemize}
+		\item Oft interessiert uns nur der asymptotische Gütewert:
+	
+	$$\mathcal{R}_\mathcal{A}^\infty := \inf\menge{r}{\exists N_0 > 0\, \forall I \in D_\Pi, \opt{I} \geq N_0: \mathcal{R}_\mathcal{A} \leq r}$$
+	
+		\item "`Beste allgemeingültige Gütegarantie von $\mathcal{A}$"'
+	\end{itemize}
+	
+	\pause
+	
+	\begin{theorem}
+		Falls $\classP{} \neq \classNP{}$, dann existiert kein relativer Approximationsalgorithmus $\mathcal{A}$ für COLOR mit $\mathcal{R}_\mathcal{A}^\infty \leq \frac{4}{3}$.
+	\end{theorem}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Approximationsschemata}
+	
+	\begin{itemize}
+		\item Ziel: \textbf{Beliebig genaue} Approximation an optimale Lösung.
+		\item Natürlich gilt: Bessere Approximation $\Rightarrow$ höhere Laufzeit.
+	\end{itemize}
+	
+	\pause
+	
+	\begin{block}{Polynomiales Approximationsschema (PAS) für ein Optimierungsproblem $\Pi$}
+		Familie von Algorithmen $\menge{A_\varepsilon}{\varepsilon > 0}$, sodass $A_\varepsilon$ ein $\varepsilon$-approximativer Algorithmus für $\Pi$ ist. \micropause
+		
+		Falls die Laufzeit von $A_\varepsilon$ polynomial von $\frac{1}{\varepsilon}$ abhängt, heißt das Approximationsschema \textbf{vollpolynomial}.
+	\end{block}
+	
+	\pause
+	
+	\begin{block}{Beispiel}
+		Skript S.\ 85/86: Ein $\varepsilon$-approximativer Algorithmus für KNAPSACK mit Laufzeit $\O{n^3 \cdot \frac{1}{\varepsilon}}$ \micropause
+		
+		$\Rightarrow \menge{A_\varepsilon}{\varepsilon > 0}$ ist ein FPAS für Knapsack.
+	\end{block}
+\end{frame}
+
+\section{Tolle Praxis}
+\subsection{Blablabla}
+
+\begin{frame}
+	\frametitle{Aufgabe}
+	
+	\only<1-6>{Gegeben ist ein ungerichteter Graph $G$. 
+Ein \textit{Matching} $M$ in $G$ ist eine Kantenmenge, sodass keine zwei Kanten in $M$ zum gleichen Knoten inzident sind.
+Ein \emph{inklusionsmaximales Matching} ist ein Matching, das keine echte Teilmenge von einem anderen Matching ist.
+Ein \emph{maximales Matching} ist ein Matching von maximaler Kardinalität.}
+
+\pause
+
+\invincible
+\begin{itemize}
+ \only<1-2>{\item Gib in dem Graphen an der Tafel ein inklusionsmaximales und ein maximales Matching an.}
+ \only<3-4>{
+    \item Gib einen Greedy-Approximationsalgorithmus an, der ein inklusionsmaximales Matching berechnet.
+
+    \only<4>{Idee: Erweitere $M$ sukzessive um Kanten, die noch nicht zu einer Kante aus $M$ adjazent sind.}
+    }
+ \only<5-6,10-11>{
+    \item Zeige, dass die Größe eines maximalen Matchings eine untere Schranke für die Größe jedes Vertex Covers ist.
+    
+    \only<6>{Idee: Für jede gematchte Kante muss ein inzidenter Knoten im Vertex Cover liegen, diese inzidenten Knoten sind nach Def. paarweise verschieden}
+    }
+ \only<7-9>{
+    \item Betrachte ein inklusionsmaximales Matching $M$ in $G=(V,E)$. Sei
+ \[ T := \menge{v \in V}{\text{ $v$ ist adjazent zu einer Kante in $M$}} \]
+    Was kann man über den Subgraph sagen, der von den Knoten $V \setminus T$ induziert wird?
+
+    \only<8-9>{Er ist kantenfrei!}
+    }
+ \only<9-11>{\item Schließe aus dem letzten Teil, dass $2|M|$ die Größe eines Vertex Covers von $G$ ist.}
+ \only<10-11>{
+    \item Benutze die letzten Teile, um zu zeigen, dass der Greedy-Approximationsalgorithmus, der ein inklusionsmaximales Matching berechnet, eine $1$-Approximation für ein maximales Matching ist.
+
+    \only<11>{
+        Berechne mit unserem Approximationsalgorithmus ein inklusionsmaximales Matching $M$. Sei $V$ das dazugehörige Vertex Cover und $M'$ ein maximales Matching. Dann gilt \micropause
+        $2\abs{M} = \abs{V} \geq \abs{M'}$ \micropause
+        $\Rightarrow R_\A{I} = \frac{\opt{I}}{\A{I}} = \frac{\abs{M'}}{\abs{M}} \leq 2$
+        }
+    }
+\end{itemize}
+\vincible
+\end{frame}
+
+\begin{frame}
+	\frametitle{Aufgabe}
+	
+	Sei $G=(V,E)$ ein ungerichteter Graph mit eindeutigen Kantengewichten $c(u,v)$ für jede Kante $\{u,v\}$ in $E$.
+Für jeden Knoten $v \in V$, sei $\max(v)=\arg\max_{(u,v)\in E}\{c(u,v)\}$ die gewichtsmaximale inzidente Kante von $v$.
+Sei $S_G=\{\max(v) \mid v \in V\}$ und sei $T_G$ der gewichtsmaximale Spannbaum von $G$, das heißt der Spannbaum von maximalem Gesamtgewicht.
+Für jede Menge $E' \subseteq E$ definieren wir $c(E')=\sum_{(u,v)\in E'}c(u,v)$.
+\begin{enumerate}
+ \item Finde ein Beispiel mit mindestens 4 Knoten, so dass $S_G=T_G$.
+ \item Finde ein Beispiel mit mindestens 4 Knoten, so dass $S_G\not=T_G$.
+ \item Beweise, dass $S_G\subseteq T_G$ für jeden Graph $G$ gilt.
+ \item Beweise, dass $c(T_G)\leq 2c(S_G)$ für jeden Graphen $G$ gilt.
+ \item Gib einen 1-Approximationsalgorithmus zur Berechnung eines maximalen Spannbaums an.
+\end{enumerate}
+\end{frame}
+
+\section{Schluss}
+\subsection{Rhabarber}
+
+\begin{frame}
+	\frametitle{Bis zum nächsten Mal!}
+	
+	\begin{figure}[H]
+		\includegraphics[width= \textwidth]{images/399_traveling_salesman}
+		
+		\textit{\scriptsize{What's the complexity class of the best linear programming cutting-plane techniques? I couldn't find it anywhere. Man, the Garfield guy doesn't have these problems $\ldots$}}
+		
+	\end{figure}
+\end{frame}
+
+\include{includes/common_end}
