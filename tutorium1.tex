@@ -187,6 +187,37 @@
 	}
 \end{frame}
 
+\section{Chomsky-Hierarchie}
+\subsection{Chomsky-Hierarchie}
+\begin{frame}
+	\frametitle{Chomsky-Hierarchie}
+	\begin{itemize}
+		\item \textbf{Chomsky Typ 3}
+		\begin{itemize}
+			\item Reguläre Sprachen (z.B. rechtslineare Sprachen)
+			\item Reguläre Ausdrücke
+			\item Endliche Automaten
+		\end{itemize}
+		\item \textbf{Chomsky Typ 2}
+		\begin{itemize}
+			\item $Ch3 \subseteq Ch2$
+			\item Kontextfreie Sprachen
+			\item Nichtdeterministische Kellerautomaten
+			\item Programmiersprachen sind in der Regel Ch2
+		\end{itemize}
+		\item \textbf{Chomsky Typ 1}
+		\begin{itemize}
+			\item $Ch2 \subseteq Ch1$
+			\item Kontextsensitiven Sprachen
+			\item Nichtdeterministische, linear platzbeschränkte Turingmaschine
+		\end{itemize}
+		\item \textbf{Chomsky Typ 0}
+		\begin{itemize}
+			\item $Ch1 \subseteq Ch0$
+			\item Semi-entscheidbare Sprachen (durch Turingmaschine)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
 \subsection{Aufgabe 2}
 \begin{frame}
 	\frametitle{Aufgabe 2}
