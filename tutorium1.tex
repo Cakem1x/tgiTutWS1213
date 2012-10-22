@@ -413,6 +413,18 @@ B^{+}C \neq B + C
 	\end{enumerate}
 \end{frame}
 
+\section{Akzeptor $\leftrightarrow$ Grammatik}
+\subsection{Akzeptor $\rightarrow$ Grammatik}
+\begin{frame}
+	\frametitle{Akzeptor $\rightarrow$ Grammatik}
+	Umwandlung von einem endlichen Akzeptor $M = (Q,\Sigma,\delta,q_0,F)$ in eine rechtslineare Grammatik $\mathcal{G} = (T,V,S,P)$:
+	\begin{enumerate}
+		\item $T := \Sigma$.
+		\item $\forall q \in Q$ ein Nichtterminalsymbol in $V$ definieren, wobei $S \; q_0$ entspricht.
+		\item $P := \{(X \rightarrow tY) \;\vert\; (q_X,t)=q_Y \in \delta\} \;\bigcup\; \{(Z \rightarrow \lambda) \;\vert\; q_Z \in F\}$.
+	\end{enumerate}
+\end{frame}
+
 \subsection{Aufgabe 3}
 \begin{frame}
 	\frametitle{Aufgabe 3}
