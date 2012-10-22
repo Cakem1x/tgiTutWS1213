@@ -1,6 +1,102 @@
 \include{includes/common_start}
 \tutnr{1}
-
+\newcommand{\start}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+  \draw [->] (#1*2-0.9,#2) -- (#1*2-0.4,#2);
+}
+\newcommand{\state}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+}
+\newcommand{\final}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+  \draw (#1*2,#2*2) circle(0.32cm);
+}
+\newcommand{\tol}[4]
+{
+  \draw (#1+#3,#2*2) node[above]{$#4$};
+  \draw [->] (#1*2-0.4,#2*2) -- (#3*2+0.4,#2*2);
+}
+\newcommand{\tor}[4]
+{
+  \draw (#1+#3,#2*2) node[above]{$#4$};
+  \draw [->] (#1*2+0.4,#2*2) -- (#3*2-0.4,#2*2);
+}
+\newcommand{\tot}[4]
+{
+  \draw (#1*2,#2+#3) node[right]{$#4$};
+  \draw [->] (#1*2,#2*2+0.4) -- (#1*2,#3*2-0.4);
+}
+\newcommand{\tob}[4]
+{
+  \draw (#1*2,#2+#3) node[right]{$#4$};
+  \draw [->] (#1*2,#2*2-0.4) -- (#1*2,#3*2+0.4);
+}
+\newcommand{\totl}[5]
+{
+  \draw (#1+#3,#2+#4) node[above right]{$#5$};
+  \draw [->] (#1*2-0.283,#2*2+0.283) -- (#3*2+0.283,#4*2-0.283);
+}
+\newcommand{\totr}[5]
+{
+  \draw (#1+#3,#2+#4) node[above left]{$#5$};
+  \draw [->] (#1*2+0.283,#2*2+0.283) -- (#3*2-0.283,#4*2-0.283);
+}
+\newcommand{\tobl}[5]
+{
+  \draw (#1+#3,#2+#4) node[below right]{$#5$};
+  \draw [->] (#1*2-0.283,#2*2-0.283) -- (#3*2+0.283,#4*2+0.283);
+}
+\newcommand{\tobr}[5]
+{
+  \draw (#1+#3,#2+#4) node[below left]{$#5$};
+  \draw [->] (#1*2+0.283,#2*2-0.283) -- (#3*2-0.283,#4*2+0.283);
+}
+\newcommand{\rloopl}[3]
+{
+  \draw (#1*2-1,#2*2) node[left]{$#3$};
+  \draw [->] (#1*2-0.35,#2*2-0.2) arc (-30:-320:0.32cm);
+}
+\newcommand{\rloopr}[3]
+{
+  \draw (#1*2+1,#2*2) node[right]{$#3$};
+  \draw [->] (#1*2+0.35,#2*2+0.2) arc (150:-140:0.32cm);
+}
+\newcommand{\rloopt}[3]
+{
+  \draw (#1*2,#2*2+1) node[above]{$#3$};
+  \draw [->] (#1*2-0.2,#2*2+0.35) arc (240:-50:0.32cm);
+}
+\newcommand{\rloopb}[3]
+{
+  \draw (#1*2,#2*2-1) node[below]{$#3$};
+  \draw [->] (#1*2+0.2,#2*2-0.35) arc (60:-230:0.32cm);
+}
+\newcommand{\lloopl}[3]
+{
+  \draw (#1*2-1,#2*2) node[left]{$#3$};
+  \draw [->] (#1*2-0.35,#2*2+0.2) arc (30:320:0.32cm);
+}
+\newcommand{\lloopr}[3]
+{
+  \draw (#1*2+1,#2*2) node[right]{$#3$};
+  \draw [->] (#1*2+0.35,#2*2-0.2) arc (-150:140:0.32cm);
+}
+\newcommand{\lloopt}[3]
+{
+  \draw (#1*2,#2*2+1) node[above]{$#3$};
+  \draw [->] (#1*2+0.2,#2*2+0.35) arc (-60:230:0.32cm);
+}
+\newcommand{\lloopb}[3]
+{
+  \draw (#1*2,#2*2-1) node[below]{$#3$};
+  \draw [->] (#1*2-0.2,#2*2-0.35) arc (-240:50:0.32cm);
+}
 \section{Organisatorisches}
 
 \subsection{Organisatorisches}
@@ -47,6 +143,102 @@
 		\item Dabei Fokus auf Übungsbetrieb
 		\item Fragen/Vorschläge/Anmerkungen willkommen!
 	\end{itemize}
+\end{frame}
+
+\subsection*{Aufgabe 1}
+\begin{frame}
+	\frametitle{Aufgabe 1}
+	\only<1>{
+	Gegeben sei der folgende endliche Automat:\\
+	$\mathcal{M} = (\mathcal{Q},\Sigma,\delta,S,\mathcal{F})$ mit
+	$\Sigma = \{a,b\}$, $\mathcal{Q} = \{S,B,C,D\}$, $\mathcal{F} = \{B,C\}$
+	und $\delta$ gegeben durch:
+	}
+	\only<2>{\vspace{-1.7 cm}}
+	\begin{center}
+		\resizebox{4cm}{!} {%
+		\begin{tikzpicture}[line width=1pt]
+			\start{0}{0}{S}
+			\totr{0}{0}{1}{1}{a}
+			\tobr{0}{0}{1}{-1}{b}
+			\final{1}{1}{B}
+			\rloopt{1}{1}{a}
+			\draw (3,1) node[above right]{$b$};
+			\draw [->] (2.283,1.717) -- (3.717,0.283);
+			\final{1}{-1}{C}
+			\draw (3,-1) node[below right]{$a$};
+			\draw [->] (2.283,-1.717) -- (3.717,-0.283);
+			\rloopb{1}{-1}{b}
+			\state{2}{0}{D}
+			\rloopr{2}{0}{a,b}
+		\end{tikzpicture}%
+		}
+	\end{center}
+	\only<2>{
+	\begin{enumerate}
+		\item Geben Sie die von diesem Automaten akzeptierte Sprache in einem regulären
+		Ausdruck an!
+		\item Um was für einen Automaten handelt es sich?
+		\item Konstruieren Sie einen äquivalenten endlichen Automaten, der nur einen
+		einzigen Endzustand besitzt!
+		\item Geben Sie eine linkslineare Grammatik für die Sprache dieses Automaten an,
+		die keine überflüssigen Nichtterminale und Regeln enthält!
+	\end{enumerate}
+	}
+\end{frame}
+
+\subsection{Aufgabe 2}
+\begin{frame}
+	\frametitle{Aufgabe 2}
+	\begin{enumerate}
+		\item Formulieren Sie einen regulären Ausdruck über dem Alphabet $\Sigma =
+		\{0,1\}$, der jedes beliebige Wort erfasst,\\
+		wobei die vorletzte Ziffer $0$ sein soll!
+		\item Geben Sie für diese Sprache den möglichst größten Chomsky-Typ und eine
+		zugehörige Grammatik an!
+		\item Geben Sie einen dazugehörigen Automaten an, der diese Sprache akzeptiert!
+	\end{enumerate}
+\end{frame}
+
+\subsection{Aufgabe 3}
+\begin{frame}
+	\frametitle{Aufgabe 3}
+	Gegeben sei der folgende endliche Akzeptor $\mathcal{M}$ mit dem Eingabealphabet
+	$\Sigma = \{a,b,c,d\}$:
+	\begin{center}
+		\begin{tikzpicture}[line width=1pt]
+			\start{0}{0}{q_0}
+			\tor{0}{0}{1}{a,b}
+			\state{1}{0}{q_1}
+			\rloopt{1}{0}{a,b}
+			\totr{1}{0}{3}{1}{c}
+			\state{3}{1}{q_2}
+			\rloopt{3}{1}{c}
+			\draw (8,1) node[above right]{$d$};
+			\draw [->] (6.283,1.717) -- (9.717,0.283);
+			\final{5}{0}{q_3}
+			\tol{5}{0}{1}{d}
+		\end{tikzpicture}
+	\end{center}
+	\begin{enumerate}
+		\item Welche Sprache $\mathcal{L}(\mathcal{M})$ wird von dem Akzeptor $\mathcal{M}$
+		akzeptiert?
+		\item Konstruieren Sie aus $\mathcal{M}$ eine rechtslineare Grammatik, die
+		$\mathcal{L}(\mathcal{M})$ erzeugt!
+	\end{enumerate}
+\end{frame}
+
+\subsection{Aufgabe 4}
+\begin{frame}
+	\frametitle{Aufgabe 4}
+	Die Sprache $\mathcal{L}$ sei durch den regulären Ausdruck $(aa^*b^*)^*cc^*$
+	definiert.
+	\begin{enumerate}
+		\item Geben Sie eine rechtslineare Grammatik $\mathcal{G}$ an, die $\mathcal{L}$
+		erzeugt!
+		\item Konstruieren Sie aus $\mathcal{G}$ einen endlichen Akzeptor, der $\mathcal{L}$
+	akzeptiert!
+	\end{enumerate}
 \end{frame}
 
 \section{Schluss}
