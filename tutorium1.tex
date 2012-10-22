@@ -145,6 +145,53 @@
 	\end{itemize}
 \end{frame}
 
+\section{Reguläre Sprachen}
+\subsection{Reguläre Sprachen}
+\begin{frame}
+\frametitle{Rechtslineare Grammatiken}
+Eine Grammatik $G = ( V, \Sigma, P, S)$
+\begin{itemize}
+	\item $T$ = Menge der Terminale (a.k.a. Alphabet der Sprache)
+	\item $V$ = Menge der Nichtterminale (zu T disjunkt)
+	\item $S \in V$ = Startsymbol
+	\item $P \subset V^{+} \times (V \bigcup T)^{*}$ = Menge der Produktionen
+\end{itemize}
+bei der alle Produktionen so aussehen:
+\begin{itemize}
+	\item $A \rightarrow \lambda$
+	\begin{itemize}
+		\item $A \in V$
+		\item $\lambda$ ist leeres Wort
+	\end{itemize}
+	\item $A \rightarrow bC$
+	\begin{itemize}
+		\item $A, C \in V$
+		\item $b \in T$
+	\end{itemize}
+heißt rechtslinear bzw. regulär. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Reguläre Ausdrücke}
+$A$ ist ein regulärer Ausdruck über dem Alphabet $\Sigma$ wenn:
+\begin{itemize}
+	\item $A = \lambda$
+	\item $A = x \in \Sigma$
+	\item $A = B^{*} = \{\lambda, B, BB, BBB, \ldots\}$
+	\item $A = B^{+} = \{B, BB, BBB, \ldots\}$
+	\item $A = B \cdot C = \{BC\}$
+	\item $A = B + C = \{B, C\}$
+\end{itemize}
+Wobei B und C ebenfalls reguläre Ausdrücke über $\Sigma$ sind.
+~\\~\\~\\~\\
+
+Bitte deutlich schreiben:
+\begin{equation*}
+B^{+}C \neq B + C
+\end{equation*}
+\end{frame}
+
 \subsection*{Aufgabe 1}
 \begin{frame}
 	\frametitle{Aufgabe 1}
@@ -240,7 +287,7 @@
 	akzeptiert!
 	\end{enumerate}
 \end{frame}
-
+	
 \section{Schluss}
 \subsection{Schluss}
 
