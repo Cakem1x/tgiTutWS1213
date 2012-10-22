@@ -1,0 +1,65 @@
+\documentclass[t]{beamer}
+\usetheme[deutsch]{KIT}
+\setbeamercovered{transparent}
+\setbeamertemplate{navigation symbols}{}
+
+\KITfoot{Tutoriumsmaterial von Alexander Kwiatkowski, Michael Vollmer und Matthias Holoch \hspace{2.5cm} Basierend auf den Folien von Simon Stroh und Moritz v. Looz}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{ifthen}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{ngerman}
+\usepackage[normalem]{ulem}
+\usetikzlibrary{automata}
+\usenavigationsymbols
+
+
+\title{Theoretische Grundlagen der Informatik}
+\subtitle{Tutorium}
+\author{Alexander Kwiatkowski, Michael Vollmer und Matthias Holoch}
+
+\institute[IKS]{Institut für Kryptographie und Sicherheit}
+
+\TitleImage[height=\titleimageht]{images/tmaschine.png}
+
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\M}{\ensuremath{\mathcal{M}}}
+\newcommand{\classP}{\ensuremath{\mathcal{P}}}
+\newcommand{\classNP}{\ensuremath{\mathcal{NP}}}
+\newcommand{\co}{\ensuremath{\mathsf{co\text{-}}}}
+\newcommand{\pot}{\ensuremath{\mathcal{P}}}
+\newcommand{\abs}[1]{\ensuremath{\left\vert #1 \right\vert}}
+\newcommand{\menge}[2]{\ensuremath{\left\lbrace #1 \,\middle\vert\, #2 \right\rbrace}}
+\newcommand{\ducttape}[1]{\vspace{#1}}
+\newcommand{\neglit}[1]{\overline{#1\vphantom{x^a}}}
+\newcommand{\recipe}{\raisebox{-.3cm}{\includegraphics[scale=.15]{images/chefs-cap.png}}\hspace{0.2cm}}
+\newcommand{\opt}[1]{\ensuremath{\text{OPT}(#1)}}
+\newcommand{\A}[1]{\ensuremath{\mathcal{A}(#1)}}
+\renewcommand{\O}[1]{\ensuremath{\mathcal{O}(#1)}}
+\newcommand{\msout}[1]{\text{\sout{\ensuremath{#1}}}}
+
+\newcommand{\invincible}{\setbeamercovered{invisible}} %  "Yesss! I am invincible!!" (Boris Grishenko)
+\newcommand{\vincible}{\setbeamercovered{transparent}}
+\renewcommand{\solution}[1]{\invincible \pause #1 \vincible}
+\newcommand{\micropause}{\\[8pt]}
+
+% \@ifundefined{tikzset}{}{\tikzset{initial text=}} % Text "start" bei Startknoten unterdrücken
+\tikzstyle{every node}=[thick]
+\tikzstyle{every line}=[thick]
+
+\newcommand{\tutnr}[1]{
+  \subtitle{Tutorium #1}
+	\begin{frame}
+		\maketitle
+	\end{frame}
+}
+
+\newcommand{\uebnr}[1]{
+  \subtitle{Anmerkungen zum #1. Übungsblatt}
+	\begin{frame}
+		\maketitle
+	\end{frame}
+}
+
+\begin{document}
