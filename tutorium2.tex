@@ -137,7 +137,138 @@ Produktionen sind nicht immer eindeutig.
 \end{frame}
 
 \section{Potenzmengenkonstruktion}
+\subsection{Eliminierung von $\lambda$-Übergängen}
+\begin{frame}
+	\frametitle{Eliminierung von $\lambda$-Übergängen}
+	\begin{block}{Allgemein}
+	\begin{itemize}
+	 \item Zu jedem nichtdeterministischen endlichen Automaten mit $\lambda$-Übergängen gibt es einen äquivalenten nichtdeterministischen
+	 endlichen Automaten ohne $\lambda$-Übergänge, der nicht mehr Zustände hat.
+	 \item äquivalent heißt, er akzeptiert die selbe Sprache.
+	\item Der $\lambda$-Abschluss $E(q)$ eines Zustandes $q$ ist definiert als die Menge aller Zustände, die von $q$ aus durch lediglich $\lambda$-Übergänge erreichbar sind ($q$ selbst zählt auch dazu).
+	\end{itemize}
+	\end{block}
+\end{frame}
+\begin{frame}
+\frametitle{Eliminierung von $\lambda$-Übergängen}
+	\begin{block}{Konstruktion}
+	Zu einem NEA \(A := (Q, \Sigma, \delta, s, F)\) mit $\lambda$-Übergängen konstruieren wir einen 
+	  äquivalenten NEA \(\tilde{A} := (\tilde{Q}, \Sigma, \tilde{\delta}, \tilde{s}, \tilde{F})\) mit
+	 \begin{itemize}
+	 \item gleicher Zustandsmenge \(\tilde{Q} := Q\)
+	 \item gleichem Startzustand \(\tilde{s} := s\)
+	 \item neuer Endzustandsmenge \(\tilde{F} := \menge{q \in Q}{E(q)\cap F \neq \emptyset}\)
+	 \begin{itemize}
+	 	\item ``alle Zustände, in deren $\lambda$-Abschluss ein Endzustand liegt''
+	 \end{itemize}
+	 \item neuer Übergangsfunktion $\tilde{\delta}(q,a) := 
+	 \begin{cases}
+	  \{q\}			& \text{falls $a = \lambda$} \\
+	 \delta(E(q),a)	& \text{sonst}
+	 \end{cases}$
+	 \end{itemize}
+	\end{block}
+	\begin{block}{Eigenschaften von \(\tilde{A}\)}
+	 \(L(\tilde{A}) = L(A)\) und \(|\tilde{Q}| = |Q|\).
+	\end{block}
+
+\end{frame}
+
 \subsection{Potenzmengenkonstruktion}
+
+\frame{
+\frametitle{Potenzmengenkonstruktion}
+Zu jedem nichtdeterministischen endlichen Automaten existiert ein äquivalenter deterministischer endlicher Automat.
+ \begin{figure}[H]
+ \begin{center}
+ \begin{tikzpicture}[node distance=1.7cm]
+ \tikzstyle{every node}=[circle, thick, minimum size = 7mm]
+ \tikzstyle{normal}=[draw]
+ \node[normal] 	(q0)		{$q_0$};
+ \node[normal] 	(q1)	[right of=q0] {$q_1$};
+ \node[normal,double]		(q2)	[right of=q1]{$q_2$};
+ \node 		(s) 	[left of =q0, xshift=0.5cm]	{};
+ 
+ \draw[->](s) to (q0);
+ \draw[->](q0) to node[above]{y} (q1);
+ \draw[->, loop above](q1) to node[above]{y,x} (q1);
+ \draw[->](q1) to node[above]{x} (q2);x
+ \end{tikzpicture}
+ \end{center}
+ \end{figure}
+In eine Tabelle werden die Automatenzustände und ihre Folgezustände bei jeweiliger Eingabe eingetragen. \\
+\begin{center}
+\vspace{-6pt}
+\begin{tabular}{l|l|l}
+    & y & x \\
+\hline
+ $\{q_0\}$ 	&	 $\{q_1\}$	&	$\emptyset$ \\
+ $\{q_1\}$	&	$\{q_1\}$	&	$\textcolor{red}{\{q_1, q2 \}}$\\
+\end{tabular}
+\end{center}
+}
+\frame{
+\frametitle{Potenzmengenkonstruktion}
+Ein \textcolor{red}{neuer Zustand} entsteht, wenn man von einem alten Zustand durch eine Eingabe in mehrere Zustände kommt.
+\vspace{-0.3cm}
+\begin{center}
+\begin{tabular}{l|l|l}
+    & y & x \\
+\hline
+ $\{q_0\}$ 	&	 $\{q_1\}$	&	$\emptyset$ \\
+ $\{q_1\}$	&	$\{q_1\}$	&	$\textcolor{red}{\{q_1, q_2\}}$\\
+ $\textcolor{red}{\{q_1, q_2\}}$ & 	$\{q_1\}$	&	$\{q_1, q_2\}$\\
+ $\emptyset$	&	$\emptyset$		& 	$\emptyset$
+\end{tabular}
+\end{center}
+\vspace{-1cm}
+\begin{figure}[H]
+\begin{center}
+ \begin{tikzpicture}[node distance=1.7cm]
+ \tikzstyle{every node}=[circle, thick, minimum size = 7mm]
+ \tikzstyle{normal}=[draw]
+ \node[normal] 	(q0)		{\{$q_0$\}};
+ \node[normal] 	(q1)	[right of=q0] {\{$q_1$\}};
+ \node[normal,double,node distance=2.4cm]		(q2)	[right of=q1]{\{$q_1, q_2$\}};
+ \node[normal]	(f) at (1,-1)	{$\emptyset$};
+ \node 		(s) 	[left of =q0, xshift=0.5cm]	{};
+  \draw[->](q0) to node[above]{y}(q1);
+  \draw[->](s) to (q0);
+  \draw[->](q0) to node[below]{x}(f);
+  \draw[->,loop above](q1) to node[above]{y}(q1);
+  \draw[->,bend left](q1) to node[above]{x}(q2);
+  \draw[->, bend left](q2) to node[below]{y}(q1);
+  \draw[->, loop right](q2) to node[right]{x}(q2);
+  \draw[->, loop right](f) to node[right]{y,x}(f);
+\end{tikzpicture}
+\end{center}
+\end{figure}
+}
+\frame{
+\frametitle{Potenzmengenkonstruktion}
+Die Einträge der ersten Spalte sind die neuen Zustände. Alle Mengen, die einen Endzustand enthalten, sind wiederum im neuen Automaten Endzustände.
+\begin{figure}[H]
+\begin{center}
+ \begin{tikzpicture}[node distance=1.7cm]
+ \tikzstyle{every node}=[circle, thick, minimum size = 7mm]
+ \tikzstyle{normal}=[draw]
+ \node[normal] 	(q0)		{\{$q_0$\}};
+ \node[normal] 	(q1)	[right of=q0] {\{$q_1$\}};
+ \node[normal,double,node distance=2.4cm]		(q2)	[right of=q1]{\{$q_1, q_2$\}};
+ \node[normal]	(f) at (1,-1)	{$\emptyset$};
+ \node 		(s) 	[left of =q0, xshift=0.5cm]	{};
+  \draw[->](q0) to node[above]{y}(q1);
+  \draw[->](s) to (q0);
+  \draw[->](q0) to node[below]{x}(f);
+  \draw[->,loop above](q1) to node[above]{y}(q1);
+  \draw[->,bend left](q1) to node[above]{x}(q2);
+  \draw[->, bend left](q2) to node[below]{y}(q1);
+  \draw[->, loop right](q2) to node[right]{x}(q2);
+  \draw[->, loop right](f) to node[right]{y,x}(f);
+\end{tikzpicture}
+\end{center}
+\end{figure}
+}
 	
 \subsection{Aufgabe 3}
 \begin{frame}
@@ -187,7 +318,7 @@ Produktionen sind nicht immer eindeutig.
 			\state{0}{-1}{q_2}
 			\tot{0}{-1}{0}{b}
 			\start{2}{0}{s_1}
-			\tor{2}{0}{3}{\varepsilon}
+			\tor{2}{0}{3}{\lambda}
 			\tob{2}{0}{-1}{a}
 			\final{3}{0}{s_2}
 			\draw [->] (6,0.4) arc (0:180:1cm);
