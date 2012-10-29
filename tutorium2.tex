@@ -1,3 +1,4 @@
+
 \include{includes/common_start}
 \include{includes/tutBlatt_methods}
 \tutnr{2}
@@ -107,6 +108,20 @@ Produktionen sind nicht immer eindeutig.
 \subsection{Minimierung}
 
 \begin{frame}
+\frametitle{Automatenminimierung}
+\begin{itemize}
+	\item Schritt 1: nicht erreichbare Zustände entfernen
+	\item Schritt 2: Liste mit Paaren von Zuständen erstellen (Matrixform)
+	\item Schritt 3: Alle Paare, die einen akzeptierenden und einen nicht-akzeptierenden enthalten entfernen (bzw. eine 1 in die Matrix schreiben)
+	\item Schritt 4: Alle Paare bei denen es eine Eingabe gibt, sodass das Paar der resultierenden Zustände bereits entfernt wurde und das Paar nicht zweimal den selben Zustand enthält, entfernen~\\
+	Formal:
+	\begin{multline*}
+	\forall (q_i q_j) \in F \text{ mit } (\delta(q_i, w), \delta(q_j, w)) \notin F \land \delta(q_i, w) \neq \delta(q_j, w)\}:\\
+	\text{Entferne } (q_i, q_j) \text{ aus F}
+	\end{multline*}
+	\item Schritt 5: Wiederhole Schritt 4 bis nichts mehr entfernt wird.
+	\item Schritt 6: Leere Felder in der Matrix zeigen welche Zustände die selbe Äquivalenzklasse haben
+\end{itemize}
 \end{frame}
 
 \subsection{Aufgabe 3}
