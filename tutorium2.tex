@@ -1,4 +1,5 @@
 \include{includes/common_start}
+\include{includes/tutBlatt_methods}
 \tutnr{2}
 
 \section{Altlasten}
@@ -10,12 +11,141 @@
 \section{Äquivalenzklassen}
 \subsection{Äquivalenzklassen}
 
+\subsection{Aufgabe 1}
+\begin{frame}
+	\frametitle{Aufgabe 1}
+		Gegeben sei der folgende endliche Automat:\\
+		$\mathcal{M} = (\mathcal{Q},\Sigma,\delta,s_0,\mathcal{F})$ mit
+		$\mathcal{Q} = \{s_0,s_1,s_2,s_3,s_4\}, \Sigma = \{0,1\}, \mathcal{F} = \{s_4\}$
+		und $\delta$ gegeben durch:
+	\begin{center}
+		\resizebox{4.5cm}{!} {%
+		\begin{tikzpicture}[line width=1pt]
+			\start{0}{0}{s_0}
+			\totr{0}{0}{1}{1}{0}
+			\tor{0}{0}{1}{1}
+			\state{1}{1}{s_1}
+			\tor{1}{1}{2}{0}
+			\tob{1}{1}{0}{1}
+			\state{1}{0}{s_2}
+			\tor{1}{0}{2}{0}
+			\rloopb{1}{0}{1}
+			\state{2}{0}{s_3}
+			\tot{2}{0}{1}{0}
+			\draw [->] (4,-0.4) arc (0:-180:2cm);
+			\draw (2,-2.4) node[below]{$1$};
+			\final{2}{1}{s_4}
+			\rloopr{2}{1}{0,1}
+		\end{tikzpicture}%
+		}
+	\end{center}
+	\begin{enumerate}
+		\item Ist der gegebene endliche Automat deterministisch?
+		\item Zeichnen Sie den Äquivalenzklassenautomaten!
+		\item Geben Sie die Äquivalenzklassen der Zustände vom entstandenen Automaten an!
+	\end{enumerate}
+\end{frame}
+
 \section{Minimierung}
 \subsection{Minimierung}
+
+\subsection{Aufgabe 2}
+\begin{frame}
+	\frametitle{Aufgabe 2}
+	Gegeben sei ein nichtdeterministischer endlicher Automat (NEA):\\
+	$\mathcal{M} = (\mathcal{Q},\Sigma,\delta,q_0,\mathcal{F})$ mit
+	$\mathcal{Q} = \{q_0,q_1,q_2\}, \Sigma = \{a,b\}, \mathcal{F} = \{q_2\}$
+	und $\delta$ gegeben durch:
+	\begin{center}
+		\resizebox{4.5cm}{!} {%
+		\begin{tikzpicture}[line width=1pt]
+			\start{0}{0}{q_0}
+			\tor{0}{0}{1}{a}
+			\state{1}{0}{q_1}
+			\rloopt{1}{0}{a,b}
+			\tor{1}{0}{2}{b}
+			\final{2}{0}{q_2}
+		\end{tikzpicture}%
+		}
+	\end{center}
+	\begin{enumerate}
+		\item Geben Sie einen entsprechenden deterministischen endlichen Automaten
+		(DEA) an, der die gleiche\\
+		Sprache akzeptiert! Benutzen Sie hierbei das Potenzmengenkonstruktionsverfahren!
+		\item Ist der entstandene Automat vollständig? Wenn nicht, wie kann man den
+		Automaten vervollständigen?\\
+		Welche Mengen stellen bei dem Potenzmengenkonstruktionsverfahren einen
+		Fehlerzustand dar?
+	\end{enumerate}
+\end{frame}
 
 \section{Potenzmengenkonstruktion}
 \subsection{Potenzmengenkonstruktion}
 	
+\subsection{Aufgabe 3}
+\begin{frame}
+	\frametitle{Aufgabe 3}
+	Gegeben sei der folgende deterministische endliche Automat:\\
+	$\mathcal{M} = (\mathcal{Q},\Sigma,\delta,q_0,\mathcal{F})$ mit
+	$\mathcal{Q} = \{q_0,q_1,q_2,q_3,q_4,q_5\}, \Sigma = \{0,1\}, \mathcal{F} =
+	\{q_3,q_5\}$ und $\delta$ gegeben durch:
+	\begin{center}
+		\resizebox{5.5cm}{!} {%
+		\begin{tikzpicture}[line width=1pt]
+			\start{0}{0}{q_0}
+			\tobr{0}{0}{1}{-1}{0}
+			\tor{0}{0}{1}{1}
+			\state{1}{0}{q_1}
+			\tor{1}{0}{2}{0}
+			\rloopt{1}{0}{1}
+			\state{2}{0}{q_2}
+			\tor{2}{0}{3}{0}
+			\final{3}{0}{q_3}
+			\rloopt{3}{0}{1}
+			\state{1}{-1}{q_4}
+			\tor{1}{-1}{2}{0}
+			\final{2}{-1}{q_5}
+			\draw (5,-1) node[below right]{$1$};
+			\draw [->] (4.283,-1.717) -- (5.717,-0.283);
+		\end{tikzpicture}%
+		}
+	\end{center}
+	\begin{enumerate}
+		\item Vervollständigen Sie den Automaten, d.h. führen Sie einen Fehlerzustand ein!
+		\item Minimieren Sie den vervollständigten Automaten!
+	\end{enumerate}
+\end{frame}
+
+\subsection{Aufgabe 4}
+\begin{frame}
+	\frametitle{Aufgabe 4}
+	Gegeben seien die folgenden beiden nichtdeterministischen endlichen Automaten:
+	\begin{center}
+		\resizebox{6.5cm}{!} {%
+		\begin{tikzpicture}[line width=1pt]
+			\startfinal{0}{0}{q_1}
+			\rloopt{0}{0}{a}
+			\draw [->] (0.4,0) arc (90:-90:1cm);
+			\draw (1.4,-1) node[right]{$a,b$};
+			\state{0}{-1}{q_2}
+			\tot{0}{-1}{0}{b}
+			\start{2}{0}{s_1}
+			\tor{2}{0}{3}{\varepsilon}
+			\tob{2}{0}{-1}{a}
+			\final{3}{0}{s_2}
+			\draw [->] (6,0.4) arc (0:180:1cm);
+			\draw (5,1.4) node[above]{$a$};
+			\state{2}{-1}{s_3}
+			\draw (5,-1) node[below right]{$a,b$};
+			\draw [->] (4.283,-1.717) -- (5.717,-0.283);
+			\rloopb{2}{-1}{b}
+		\end{tikzpicture}%
+		}
+	\end{center}
+	Wandeln Sie diese mittels des Potenzmengenkonstruktionsverfahrens in
+	deterministische endliche Automaten um!
+\end{frame}
+
 \section{Schluss}
 \subsection{Schluss}
 
