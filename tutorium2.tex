@@ -5,8 +5,49 @@
 \section{Altlasten}
 \subsection{Altlasten}
 
+\begin{frame}
+\frametitle{Automaten und ihre Fehlerzustände}
+\begin{itemize}
+	\item Ein vollständiger DEA benötigt einen expliziten Fehlerzustand.
+	\item Ein DEA mit implizitem Fehlerzustand (alle nicht eingezeichneten Überführungen führen in den Fehlerzustand)
+	\item Ein NEA wird i.d.R. nicht vollständig dargestellt ($\Rightarrow$ also kann Fehlerzustand auch implizit sein)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wdh. Übungsblatt}
+\begin{itemize}
+	\item Jeder muss eine eigene Abgabe anfertigen
+	\item Lerngruppen bis 5 Personen
+	\item Letzte Aufgabe (mit Stern) wird nicht gewertet
+\end{itemize}
+\end{frame}
+
 \section{Semi-Thue-Systeme}
 \subsection{Semi-Thue-Systeme}
+
+\begin{frame}
+\frametitle{Semi-Thue-Systeme}
+Ein Semi-Thue-System besteht aus
+\begin{itemize}
+	\item einem nichtleeren Alphabet $A$
+\end{itemize}
+und
+\begin{itemize}
+	\item einer Produktionsmenge $P \subset \{A^* \rightarrow A^*\}$
+\end{itemize}~\\
+Beispiel:~\\
+$A = \{a, b, c\}$~\\
+$P = \{ab \rightarrow c, bc \rightarrow a, aa \rightarrow \lambda, cc \rightarrow \lambda\}$~\\~\\
+Beispieleingaben:
+\begin{description}
+	\item[abc] $\Rightarrow$ cc $\Rightarrow$ $\lambda$~\\
+	$\Rightarrow$ aa $\Rightarrow$ $\lambda$~\\
+	\item[aab] $\Rightarrow$ cb~\\
+	$\Rightarrow$ ac
+\end{description}
+Produktionen sind nicht immer eindeutig.
+\end{frame}
 
 \section{Äquivalenzklassen}
 \subsection{Äquivalenzklassen}
