@@ -106,39 +106,9 @@ Produktionen sind nicht immer eindeutig.
 \section{Minimierung}
 \subsection{Minimierung}
 
-\subsection{Aufgabe 2}
 \begin{frame}
-	\frametitle{Aufgabe 2}
-	Gegeben sei ein nichtdeterministischer endlicher Automat (NEA):\\
-	$\mathcal{M} = (\mathcal{Q},\Sigma,\delta,q_0,\mathcal{F})$ mit
-	$\mathcal{Q} = \{q_0,q_1,q_2\}, \Sigma = \{a,b\}, \mathcal{F} = \{q_2\}$
-	und $\delta$ gegeben durch:
-	\begin{center}
-		\resizebox{4.5cm}{!} {%
-		\begin{tikzpicture}[line width=1pt]
-			\start{0}{0}{q_0}
-			\tor{0}{0}{1}{a}
-			\state{1}{0}{q_1}
-			\rloopt{1}{0}{a,b}
-			\tor{1}{0}{2}{b}
-			\final{2}{0}{q_2}
-		\end{tikzpicture}%
-		}
-	\end{center}
-	\begin{enumerate}
-		\item Geben Sie einen entsprechenden deterministischen endlichen Automaten
-		(DEA) an, der die gleiche\\
-		Sprache akzeptiert! Benutzen Sie hierbei das Potenzmengenkonstruktionsverfahren!
-		\item Ist der entstandene Automat vollständig? Wenn nicht, wie kann man den
-		Automaten vervollständigen?\\
-		Welche Mengen stellen bei dem Potenzmengenkonstruktionsverfahren einen
-		Fehlerzustand dar?
-	\end{enumerate}
 \end{frame}
 
-\section{Potenzmengenkonstruktion}
-\subsection{Potenzmengenkonstruktion}
-	
 \subsection{Aufgabe 3}
 \begin{frame}
 	\frametitle{Aufgabe 3}
@@ -170,6 +140,39 @@ Produktionen sind nicht immer eindeutig.
 	\begin{enumerate}
 		\item Vervollständigen Sie den Automaten, d.h. führen Sie einen Fehlerzustand ein!
 		\item Minimieren Sie den vervollständigten Automaten!
+	\end{enumerate}
+\end{frame}
+
+\section{Potenzmengenkonstruktion}
+\subsection{Potenzmengenkonstruktion}
+
+\subsection{Aufgabe 2}
+\begin{frame}
+	\frametitle{Aufgabe 2}
+	Gegeben sei ein nichtdeterministischer endlicher Automat (NEA):\\
+	$\mathcal{M} = (\mathcal{Q},\Sigma,\delta,q_0,\mathcal{F})$ mit
+	$\mathcal{Q} = \{q_0,q_1,q_2\}, \Sigma = \{a,b\}, \mathcal{F} = \{q_2\}$
+	und $\delta$ gegeben durch:
+	\begin{center}
+		\resizebox{4.5cm}{!} {%
+		\begin{tikzpicture}[line width=1pt]
+			\start{0}{0}{q_0}
+			\tor{0}{0}{1}{a}
+			\state{1}{0}{q_1}
+			\rloopt{1}{0}{a,b}
+			\tor{1}{0}{2}{b}
+			\final{2}{0}{q_2}
+		\end{tikzpicture}%
+		}
+	\end{center}
+	\begin{enumerate}
+		\item Geben Sie einen entsprechenden deterministischen endlichen Automaten
+		(DEA) an, der die gleiche\\
+		Sprache akzeptiert! Benutzen Sie hierbei das Potenzmengenkonstruktionsverfahren!
+		\item Ist der entstandene Automat vollständig? Wenn nicht, wie kann man den
+		Automaten vervollständigen?\\
+		Welche Mengen stellen bei dem Potenzmengenkonstruktionsverfahren einen
+		Fehlerzustand dar?
 	\end{enumerate}
 \end{frame}
 
