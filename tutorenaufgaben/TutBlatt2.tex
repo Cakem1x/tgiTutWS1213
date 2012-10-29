@@ -1,0 +1,458 @@
+\documentclass[10pt,oneside,onecolumn,a4paper,german,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{german}
+\usepackage{amsmath,amsfonts,amssymb,latexsym,textcomp}
+\usepackage{tikz}
+\pagestyle{plain}
+\pagenumbering{arabic}
+\parskip0.5ex plus0.1ex minus0.1ex
+\parindent0pt
+\voffset-1.04cm
+\topmargin0pt
+\headheight0pt
+\headsep0pt
+\topskip0pt
+\textheight26.7cm
+\footskip20pt
+\hoffset-1.04cm
+\oddsidemargin0pt
+\evensidemargin0pt
+\textwidth18cm
+\marginparsep0pt
+\marginparwidth0pt
+\begin{document}
+
+\newcommand{\start}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+  \draw [->] (#1*2-0.9,#2) -- (#1*2-0.4,#2);
+}
+\newcommand{\startfinal}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+  \draw (#1*2,#2*2) circle(0.32cm);
+  \draw [->] (#1*2-0.9,#2) -- (#1*2-0.4,#2);
+}
+\newcommand{\state}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+}
+\newcommand{\final}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+  \draw (#1*2,#2*2) circle(0.32cm);
+}
+\newcommand{\tol}[4]
+{
+  \draw (#1+#3,#2*2) node[above]{$#4$};
+  \draw [->] (#1*2-0.4,#2*2) -- (#3*2+0.4,#2*2);
+}
+\newcommand{\tor}[4]
+{
+  \draw (#1+#3,#2*2) node[above]{$#4$};
+  \draw [->] (#1*2+0.4,#2*2) -- (#3*2-0.4,#2*2);
+}
+\newcommand{\tot}[4]
+{
+  \draw (#1*2,#2+#3) node[right]{$#4$};
+  \draw [->] (#1*2,#2*2+0.4) -- (#1*2,#3*2-0.4);
+}
+\newcommand{\tob}[4]
+{
+  \draw (#1*2,#2+#3) node[right]{$#4$};
+  \draw [->] (#1*2,#2*2-0.4) -- (#1*2,#3*2+0.4);
+}
+\newcommand{\totl}[5]
+{
+  \draw (#1+#3,#2+#4) node[above right]{$#5$};
+  \draw [->] (#1*2-0.283,#2*2+0.283) -- (#3*2+0.283,#4*2-0.283);
+}
+\newcommand{\totr}[5]
+{
+  \draw (#1+#3,#2+#4) node[above left]{$#5$};
+  \draw [->] (#1*2+0.283,#2*2+0.283) -- (#3*2-0.283,#4*2-0.283);
+}
+\newcommand{\tobl}[5]
+{
+  \draw (#1+#3,#2+#4) node[below right]{$#5$};
+  \draw [->] (#1*2-0.283,#2*2-0.283) -- (#3*2+0.283,#4*2+0.283);
+}
+\newcommand{\tobr}[5]
+{
+  \draw (#1+#3,#2+#4) node[below left]{$#5$};
+  \draw [->] (#1*2+0.283,#2*2-0.283) -- (#3*2-0.283,#4*2+0.283);
+}
+\newcommand{\rloopl}[3]
+{
+  \draw (#1*2-1,#2*2) node[left]{$#3$};
+  \draw [->] (#1*2-0.35,#2*2-0.2) arc (-30:-320:0.32cm);
+}
+\newcommand{\rloopr}[3]
+{
+  \draw (#1*2+1,#2*2) node[right]{$#3$};
+  \draw [->] (#1*2+0.35,#2*2+0.2) arc (150:-140:0.32cm);
+}
+\newcommand{\rloopt}[3]
+{
+  \draw (#1*2,#2*2+1) node[above]{$#3$};
+  \draw [->] (#1*2-0.2,#2*2+0.35) arc (240:-50:0.32cm);
+}
+\newcommand{\rloopb}[3]
+{
+  \draw (#1*2,#2*2-1) node[below]{$#3$};
+  \draw [->] (#1*2+0.2,#2*2-0.35) arc (60:-230:0.32cm);
+}
+\newcommand{\lloopl}[3]
+{
+  \draw (#1*2-1,#2*2) node[left]{$#3$};
+  \draw [->] (#1*2-0.35,#2*2+0.2) arc (30:320:0.32cm);
+}
+\newcommand{\lloopr}[3]
+{
+  \draw (#1*2+1,#2*2) node[right]{$#3$};
+  \draw [->] (#1*2+0.35,#2*2-0.2) arc (-150:140:0.32cm);
+}
+\newcommand{\lloopt}[3]
+{
+  \draw (#1*2,#2*2+1) node[above]{$#3$};
+  \draw [->] (#1*2+0.2,#2*2+0.35) arc (-60:230:0.32cm);
+}
+\newcommand{\lloopb}[3]
+{
+  \draw (#1*2,#2*2-1) node[below]{$#3$};
+  \draw [->] (#1*2-0.2,#2*2-0.35) arc (-240:50:0.32cm);
+}
+
+\section*{Tutorien-Übungsblatt 2}
+
+\subsection*{Aufgabe 1}
+Gegeben sei der folgende endliche Automat:\\
+$\mathcal{M} = (\mathcal{Q},\Sigma,\delta,s_0,\mathcal{F})$ mit
+$\mathcal{Q} = \{s_0,s_1,s_2,s_3,s_4\}, \Sigma = \{0,1\}, \mathcal{F} = \{s_4\}$
+und $\delta$ gegeben durch:
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\start{0}{0}{s_0}
+\totr{0}{0}{1}{1}{0}
+\tor{0}{0}{1}{1}
+\state{1}{1}{s_1}
+\tor{1}{1}{2}{0}
+\tob{1}{1}{0}{1}
+\state{1}{0}{s_2}
+\tor{1}{0}{2}{0}
+\rloopb{1}{0}{1}
+\state{2}{0}{s_3}
+\tot{2}{0}{1}{0}
+\draw [->] (4,-0.4) arc (0:-180:2cm);
+\draw (2,-2.4) node[below]{$1$};
+\final{2}{1}{s_4}
+\rloopr{2}{1}{0,1}
+\end{tikzpicture}
+\end{center}
+\begin{enumerate}
+\item Ist der gegebene endliche Automat deterministisch?
+\item Zeichnen Sie den Äquivalenzklassenautomaten!
+\item Geben Sie die Äquivalenzklassen der Zustände vom entstandenen Automaten an!
+\end{enumerate}
+
+\subsection*{Aufgabe 2}
+Gegeben sei ein nichtdeterministischer endlicher Automat (NEA):\\
+$\mathcal{M} = (\mathcal{Q},\Sigma,\delta,q_0,\mathcal{F})$ mit
+$\mathcal{Q} = \{q_0,q_1,q_2\}, \Sigma = \{a,b\}, \mathcal{F} = \{q_2\}$
+und $\delta$ gegeben durch:
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\start{0}{0}{q_0}
+\tor{0}{0}{1}{a}
+\state{1}{0}{q_1}
+\rloopt{1}{0}{a,b}
+\tor{1}{0}{2}{b}
+\final{2}{0}{q_2}
+\end{tikzpicture}
+\end{center}
+\begin{enumerate}
+\item Geben Sie einen entsprechenden deterministischen endlichen Automaten
+(DEA) an, der die gleiche\\
+Sprache akzeptiert! Benutzen Sie hierbei das Potenzmengenkonstruktionsverfahren!
+\item Ist der entstandene Automat vollständig? Wenn nicht, wie kann man den
+Automaten vervollständigen?\\
+Welche Mengen stellen bei dem Potenzmengenkonstruktionsverfahren einen
+Fehlerzustand dar?
+\end{enumerate}
+
+\subsection*{Aufgabe 3}
+Gegeben sei der folgende deterministische endliche Automat:\\
+$\mathcal{M} = (\mathcal{Q},\Sigma,\delta,q_0,\mathcal{F})$ mit
+$\mathcal{Q} = \{q_0,q_1,q_2,q_3,q_4,q_5\}, \Sigma = \{0,1\}, \mathcal{F} =
+\{q_3,q_5\}$ und $\delta$ gegeben durch:
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\start{0}{0}{q_0}
+\tobr{0}{0}{1}{-1}{0}
+\tor{0}{0}{1}{1}
+\state{1}{0}{q_1}
+\tor{1}{0}{2}{0}
+\rloopt{1}{0}{1}
+\state{2}{0}{q_2}
+\tor{2}{0}{3}{0}
+\final{3}{0}{q_3}
+\rloopt{3}{0}{1}
+\state{1}{-1}{q_4}
+\tor{1}{-1}{2}{0}
+\final{2}{-1}{q_5}
+\draw (5,-1) node[below right]{$1$};
+\draw [->] (4.283,-1.717) -- (5.717,-0.283);
+\end{tikzpicture}
+\end{center}
+\begin{enumerate}
+\item Vervollständigen Sie den Automaten, d.h. führen Sie einen Fehlerzustand ein!
+\item Minimieren Sie den vervollständigten Automaten!
+\end{enumerate}
+
+\newpage
+
+\subsection*{Aufgabe 4}
+Gegeben seien die folgenden beiden nichtdeterministischen endlichen Automaten:
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\startfinal{0}{0}{q_1}
+\rloopt{0}{0}{a}
+\draw [->] (0.4,0) arc (90:-90:1cm);
+\draw (1.4,-1) node[right]{$a,b$};
+\state{0}{-1}{q_2}
+\tot{0}{-1}{0}{b}
+\start{2}{0}{s_1}
+\tor{2}{0}{3}{\varepsilon}
+\tob{2}{0}{-1}{a}
+\final{3}{0}{s_2}
+\draw [->] (6,0.4) arc (0:180:1cm);
+\draw (5,1.4) node[above]{$a$};
+\state{2}{-1}{s_3}
+\draw (5,-1) node[below right]{$a,b$};
+\draw [->] (4.283,-1.717) -- (5.717,-0.283);
+\rloopb{2}{-1}{b}
+\end{tikzpicture}
+\end{center}
+Wandeln Sie diese mittels des Potenzmengenkonstruktionsverfahrens in
+deterministische endliche\\
+Automaten um!
+
+\newpage
+
+\subsection*{Lösung zu Aufgabe 1}
+\begin{enumerate}
+\item Ja!
+\item Der minimale Automat:
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\state{0}{0}{s_0s_2}
+\draw [->] (-0.8,0.8) -- (-0.23,0.33);
+\tor{0}{0}{1}{0}
+\lloopl{0}{0}{1}
+\state{1}{0}{s_1s_3}
+\tor{1}{0}{2}{0}
+\draw [->] (2,0.4) arc (0:180:1cm);
+\draw (1,1.4) node[above]{$1$};
+\final{2}{0}{s_4}
+\lloopr{2}{0}{0,1}
+\draw (0,-2) node{$[\varepsilon]$};
+\draw [->] (0,-1) -- (0,-0.5);
+\draw [->] (0,-1) -- (0,-1.7);
+\draw (2,-2) node{$[0]$};
+\draw [->] (2,-1) -- (2,-0.5);
+\draw [->] (2,-1) -- (2,-1.7);
+\draw (4,-2) node{$[00]$};
+\draw [->] (4,-1) -- (4,-0.5);
+\draw [->] (4,-1) -- (4,-1.7);
+\end{tikzpicture}
+\end{center}
+\item Die Äquivalenzklassen der Zustände vom minimalen Automaten:\\
+$[\varepsilon] \; = \{w \in \{0,1\}^* \; | \; w \; \mbox{enthält nicht 00 und
+endet nicht mit 0}\}$\\
+$[0] \; = \{w \in \{0,1\}^* \; | \; w \; \mbox{enthält nicht 00 und endet mit 0}\}$\\
+$[00] = \{w \in \{0,1\}^* \; | \; w \; \mbox{enthält 00}\}$
+\end{enumerate}
+
+\subsection*{Lösung zu Aufgabe 2}
+\begin{enumerate}
+\item
+$\begin{array}[t]{c|c|c}
+& a & b \\
+\hline
+\{q_0\} & \{q_1\} & \varnothing \\
+\hline
+\{q_1\} & \{q_1\} & \{q_1,q_2\} \\
+\hline
+\varnothing & \varnothing & \varnothing \\
+\hline
+\{q_1,q_2\} & \{q_1\} & \{q_1,q_2\}
+\end{array}$\\[4pt]
+Der DEA sieht folgendermaßen aus:
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\start{0}{0}{s_0}
+\tor{0}{0}{1}{a}
+\tob{0}{0}{-1}{b}
+\state{1}{0}{s_1}
+\rloopt{1}{0}{a}
+\tor{1}{0}{2}{b}
+\state{0}{-1}{s_2}
+\rloopl{0}{-1}{a,b}
+\final{2}{0}{s_3}
+\draw [->] (4,-0.4) arc (0:-180:1cm);
+\draw (3,-1.4) node[below]{$a$};
+\rloopt{2}{0}{b}
+\end{tikzpicture}
+\end{center}
+Hierbei sind die neuen Zustände durch die Potenzmengenkonstruktion (PMK):\\
+$s_0 = \{q_0\}, s_1 = \{q_1\}, s_2 = \varnothing, s_3 = \{q_1,q_2\}$
+\item Beim Potenzmengenkonstruktionsverfahren stellt zunächst die leere Menge,
+aber auch jede Menge, die nur\\
+Fehlerzustände des ursprünglichen Automaten enthält, im neuen Automaten einen
+Fehlerzustand dar.
+\end{enumerate}
+
+\newpage
+
+\subsection*{Lösung zu Aufgabe 3}
+\begin{enumerate}
+\item Der vervollständigte Automat:\\
+$\mathcal{M} = (\mathcal{Q},\Sigma,\delta,q_0,\mathcal{F})$ mit
+$\mathcal{Q} = \{q_0,q_1,q_2,q_3,q_4,q_5,q_6\}, \Sigma = \{0,1\}, \mathcal{F} =
+\{q_3,q_5\}$ und $\delta$ gegeben durch:
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\start{0}{0}{q_0}
+\tobr{0}{0}{1}{-2}{0}
+\tor{0}{0}{1}{1}
+\state{1}{0}{q_1}
+\tor{1}{0}{2}{0}
+\rloopt{1}{0}{1}
+\state{2}{0}{q_2}
+\tor{2}{0}{3}{0}
+\tob{2}{0}{-1}{1}
+\final{3}{0}{q_3}
+\tobl{3}{0}{2}{-1}{0}
+\rloopt{3}{0}{1}
+\state{1}{-2}{q_4}
+\tor{1}{-2}{3}{0}
+\totr{1}{-2}{2}{-1}{1}
+\final{3}{-2}{q_5}
+\totl{3}{-2}{2}{-1}{0}
+\tot{3}{-2}{0}{1}
+\state{2}{-1}{q_6}
+\rloopl{2}{-1}{0,1}
+\end{tikzpicture}
+\end{center}
+\item Die Minimierung:\\
+$\begin{array}[t]{|c|c|c|c|c|c|c|c|}
+\hline
+q_0 &  X  &  X  &  X  &  X  &  X  &  X  &  X \\
+\hline
+q_1 &     &  X  &  X  &  X  &  X  &  X  &  X \\
+\hline
+q_2 &  1  &  1  &  X  &  X  &  X  &  X  &  X \\
+\hline
+q_3 &  0  &  0  &  0  &  X  &  X  &  X  &  X \\
+\hline
+q_4 &  1  &  1  &     &  0  &  X  &  X  &  X \\
+\hline
+q_5 &  0  &  0  &  0  &     &  0  &  X  &  X \\
+\hline
+q_6 &  2  &  2  &  1  &  0  &  1  &  0  &  X \\
+\hline
+    & q_0 & q_1 & q_2 & q_3 & q_4 & q_5 & q_6 \\
+\hline
+\end{array}$\\[4pt]
+Der minimierte Automat:\\
+$\mathcal{M} = (\mathcal{Q},\Sigma,\delta,s_0,\mathcal{F})$ mit
+$\mathcal{Q} = \{s_0,s_1,s_2,s_3\}, \Sigma = \{0,1\}, \mathcal{F} = \{s_2\}$
+und $\delta$ gegeben durch:
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\start{0}{0}{s_0}
+\tor{0}{0}{1}{0}
+\rloopt{0}{0}{1}
+\state{1}{0}{s_1}
+\tor{1}{0}{2}{0}
+\tob{1}{0}{-1}{1}
+\final{2}{0}{s_2}
+\tobl{2}{0}{1}{-1}{0}
+\rloopt{2}{0}{1}
+\state{1}{-1}{s_3}
+\rloopl{1}{-1}{0,1}
+\end{tikzpicture}
+\end{center}
+Hierbei ersetzen die neuen Zustände durch die Minimierung die alten Zustände
+wie folgt:\\
+$s_0 \; \mbox{ersetzt} \; q_0,q_1$\\
+$s_1 \; \mbox{ersetzt} \; q_2,q_4$\\
+$s_2 \; \mbox{ersetzt} \; q_3,q_5$\\
+$s_3 \; \mbox{ersetzt} \; q_6$
+\end{enumerate}
+
+\newpage
+
+\subsection*{Lösung zu Aufgabe 4}
+$\begin{array}[t]{l|c|c}
+& a & b \\
+\hline
+r_1 := \{q_1\} & \{q_1,q_2\} & \{q_2\} \\
+\hline
+r_2 := \{q_1,q_2\} & \{q_1,q_2\} & \{q_1,q_2\} \\
+\hline
+r_3 := \{q_2\} & \varnothing & \{q_1\} \\
+\hline
+r_4 := \varnothing & \varnothing & \varnothing
+\end{array}$\\[4pt]
+Der 1. DEA sieht folgendermaßen aus:
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\startfinal{0}{0}{r_1}
+\tob{0}{0}{-1}{a}
+\tor{0}{0}{1}{b}
+\final{0}{-1}{r_2}
+\rloopr{0}{-1}{a,b}
+\state{1}{0}{r_3}
+\tor{1}{0}{2}{a}
+\draw [->] (2,0.4) arc (0:180:1cm);
+\draw (1,1.4) node[above]{$b$};
+\state{2}{0}{r_4}
+\rloopr{2}{0}{a,b}
+\end{tikzpicture}
+\end{center}
+
+$\begin{array}[t]{l|c|c}
+& a & b \\
+\hline
+z_1 := \{s_1,s_2\} & \{s_1,s_2,s_3\} & \varnothing \\
+\hline
+z_2 := \{s_1,s_2,s_3\} & \{s_1,s_2,s_3\} & \{s_2,s_3\} \\
+\hline
+z_3 := \varnothing & \varnothing & \varnothing \\
+\hline
+z_4 := \{s_2,s_3\} & \{s_1,s_2\} & \{s_2,s_3\}
+\end{array}$\\[4pt]
+Der 2. DEA sieht folgendermaßen aus:
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\startfinal{0}{0}{z_1}
+\tor{0}{0}{1}{a}
+\tob{0}{0}{-1}{b}
+\final{1}{0}{z_2}
+\rloopr{1}{0}{a}
+\tob{1}{0}{-1}{b}
+\state{0}{-1}{z_3}
+\rloopl{0}{-1}{a,b}
+\final{1}{-1}{z_4}
+\totl{1}{-1}{0}{0}{a}
+\rloopr{1}{-1}{b}
+\end{tikzpicture}
+\end{center}
+
+\end{document}
