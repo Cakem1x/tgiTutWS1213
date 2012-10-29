@@ -10,6 +10,22 @@
 
 \section{Äquivalenzklassen}
 \subsection{Äquivalenzklassen}
+\begin{frame}
+	\frametitle{Äquivalenzklassen}
+	\begin{block} {Äquivalenz}
+		\begin{itemize}
+			\item Zwei Zustände sind äquivalent, wenn es für das Erreichen eines Endzustandes durch Abarbeiten eines Wortes $w$ unerheblich ist, aus welchem der beiden Zustände wir starten.
+		\end{itemize}
+	\end{block}
+	\begin{block} {Definition}
+  Zwei Zustände $p$ und $q$ eines deterministischen endlichen Automaten heißen \emph{äquivalent} ($p \equiv q$),
+  wenn für alle Wörter $w\in\Sigma^*$ gilt:
+  \[
+   \delta(p, w)\in F \Leftrightarrow \delta(q, w)\in F
+  \]
+  Offensichtlich ist $\equiv$ eine Äquivalenzrelation. Mit $[p]$ bezeichnen wir die \emph{Äquivalenzklasse} der zu $p$ äquivalenten Zustände.
+  \end{block}
+\end{frame}
 
 \subsection{Aufgabe 1}
 \begin{frame}
