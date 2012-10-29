@@ -26,6 +26,29 @@
 \section{Semi-Thue-Systeme}
 \subsection{Semi-Thue-Systeme}
 
+\begin{frame}
+\frametitle{Semi-Thue-Systeme}
+Ein Semi-Thue-System besteht aus
+\begin{itemize}
+	\item einem nichtleeren Alphabet $A$
+\end{itemize}
+und
+\begin{itemize}
+	\item einer Produktionsmenge $P \subset \{A^* \rightarrow A^*\}$
+\end{itemize}~\\
+Beispiel:~\\
+$A = \{a, b, c\}$~\\
+$P = \{ab \rightarrow c, bc \rightarrow a, aa \rightarrow \lambda, cc \rightarrow \lambda\}$~\\~\\
+Beispieleingaben:
+\begin{description}
+	\item[abc] $\Rightarrow$ cc $\Rightarrow$ $\lambda$~\\
+	$\Rightarrow$ aa $\Rightarrow$ $\lambda$~\\
+	\item[aab] $\Rightarrow$ cb~\\
+	$\Rightarrow$ ac
+\end{description}
+Produktionen sind nicht immer eindeutig.
+\end{frame}
+
 \section{Äquivalenzklassen}
 \subsection{Äquivalenzklassen}
 
