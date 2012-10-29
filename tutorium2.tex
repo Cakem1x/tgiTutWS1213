@@ -1,3 +1,4 @@
+
 \include{includes/common_start}
 \include{includes/tutBlatt_methods}
 \tutnr{2}
@@ -43,7 +44,7 @@ Beispieleingaben:
 \begin{description}
 	\item[abc] $\Rightarrow$ cc $\Rightarrow$ $\lambda$~\\
 	$\Rightarrow$ aa $\Rightarrow$ $\lambda$~\\
-	\item[aab] $\Rightarrow$ cb~\\
+	\item[aab] $\Rightarrow$ b~\\
 	$\Rightarrow$ ac
 \end{description}
 Produktionen sind nicht immer eindeutig.
@@ -106,33 +107,54 @@ Produktionen sind nicht immer eindeutig.
 \section{Minimierung}
 \subsection{Minimierung}
 
-\subsection{Aufgabe 2}
 \begin{frame}
-	\frametitle{Aufgabe 2}
-	Gegeben sei ein nichtdeterministischer endlicher Automat (NEA):\\
+\frametitle{Automatenminimierung}
+\begin{itemize}
+	\item Schritt 1: nicht erreichbare Zustände entfernen
+	\item Schritt 2: Liste mit Paaren von Zuständen erstellen (Matrixform)
+	\item Schritt 3: Alle Paare, die einen akzeptierenden und einen nicht-akzeptierenden enthalten entfernen (bzw. eine 1 in die Matrix schreiben)
+	\item Schritt 4: Alle Paare bei denen es eine Eingabe gibt, sodass das Paar der resultierenden Zustände bereits entfernt wurde und das Paar nicht zweimal den selben Zustand enthält, entfernen~\\
+	Formal:
+	\begin{multline*}
+	\forall (q_i q_j) \in F \text{ mit } (\delta(q_i, w), \delta(q_j, w)) \notin F \land \delta(q_i, w) \neq \delta(q_j, w)\}:\\
+	\text{Entferne } (q_i, q_j) \text{ aus F}
+	\end{multline*}
+	\item Schritt 5: Wiederhole Schritt 4 bis nichts mehr entfernt wird.
+	\item Schritt 6: Leere Felder in der Matrix zeigen welche Zustände die selbe Äquivalenzklasse haben
+\end{itemize}
+\end{frame}
+
+\subsection{Aufgabe 3}
+\begin{frame}
+	\frametitle{Aufgabe 3}
+	Gegeben sei der folgende deterministische endliche Automat:\\
 	$\mathcal{M} = (\mathcal{Q},\Sigma,\delta,q_0,\mathcal{F})$ mit
-	$\mathcal{Q} = \{q_0,q_1,q_2\}, \Sigma = \{a,b\}, \mathcal{F} = \{q_2\}$
-	und $\delta$ gegeben durch:
+	$\mathcal{Q} = \{q_0,q_1,q_2,q_3,q_4,q_5\}, \Sigma = \{0,1\}, \mathcal{F} =
+	\{q_3,q_5\}$ und $\delta$ gegeben durch:
 	\begin{center}
-		\resizebox{4.5cm}{!} {%
+		\resizebox{5.5cm}{!} {%
 		\begin{tikzpicture}[line width=1pt]
 			\start{0}{0}{q_0}
-			\tor{0}{0}{1}{a}
+			\tobr{0}{0}{1}{-1}{0}
+			\tor{0}{0}{1}{1}
 			\state{1}{0}{q_1}
-			\rloopt{1}{0}{a,b}
-			\tor{1}{0}{2}{b}
-			\final{2}{0}{q_2}
+			\tor{1}{0}{2}{0}
+			\rloopt{1}{0}{1}
+			\state{2}{0}{q_2}
+			\tor{2}{0}{3}{0}
+			\final{3}{0}{q_3}
+			\rloopt{3}{0}{1}
+			\state{1}{-1}{q_4}
+			\tor{1}{-1}{2}{0}
+			\final{2}{-1}{q_5}
+			\draw (5,-1) node[below right]{$1$};
+			\draw [->] (4.283,-1.717) -- (5.717,-0.283);
 		\end{tikzpicture}%
 		}
 	\end{center}
 	\begin{enumerate}
-		\item Geben Sie einen entsprechenden deterministischen endlichen Automaten
-		(DEA) an, der die gleiche\\
-		Sprache akzeptiert! Benutzen Sie hierbei das Potenzmengenkonstruktionsverfahren!
-		\item Ist der entstandene Automat vollständig? Wenn nicht, wie kann man den
-		Automaten vervollständigen?\\
-		Welche Mengen stellen bei dem Potenzmengenkonstruktionsverfahren einen
-		Fehlerzustand dar?
+		\item Vervollständigen Sie den Automaten, d.h. führen Sie einen Fehlerzustand ein!
+		\item Minimieren Sie den vervollständigten Automaten!
 	\end{enumerate}
 \end{frame}
 
@@ -269,38 +291,34 @@ Die Einträge der ersten Spalte sind die neuen Zustände. Alle Mengen, die einen
 \end{center}
 \end{figure}
 }
-	
-\subsection{Aufgabe 3}
+
+\subsection{Aufgabe 2}
 \begin{frame}
-	\frametitle{Aufgabe 3}
-	Gegeben sei der folgende deterministische endliche Automat:\\
+	\frametitle{Aufgabe 2}
+	Gegeben sei ein nichtdeterministischer endlicher Automat (NEA):\\
 	$\mathcal{M} = (\mathcal{Q},\Sigma,\delta,q_0,\mathcal{F})$ mit
-	$\mathcal{Q} = \{q_0,q_1,q_2,q_3,q_4,q_5\}, \Sigma = \{0,1\}, \mathcal{F} =
-	\{q_3,q_5\}$ und $\delta$ gegeben durch:
+	$\mathcal{Q} = \{q_0,q_1,q_2\}, \Sigma = \{a,b\}, \mathcal{F} = \{q_2\}$
+	und $\delta$ gegeben durch:
 	\begin{center}
-		\resizebox{5.5cm}{!} {%
+		\resizebox{4.5cm}{!} {%
 		\begin{tikzpicture}[line width=1pt]
 			\start{0}{0}{q_0}
-			\tobr{0}{0}{1}{-1}{0}
-			\tor{0}{0}{1}{1}
+			\tor{0}{0}{1}{a}
 			\state{1}{0}{q_1}
-			\tor{1}{0}{2}{0}
-			\rloopt{1}{0}{1}
-			\state{2}{0}{q_2}
-			\tor{2}{0}{3}{0}
-			\final{3}{0}{q_3}
-			\rloopt{3}{0}{1}
-			\state{1}{-1}{q_4}
-			\tor{1}{-1}{2}{0}
-			\final{2}{-1}{q_5}
-			\draw (5,-1) node[below right]{$1$};
-			\draw [->] (4.283,-1.717) -- (5.717,-0.283);
+			\rloopt{1}{0}{a,b}
+			\tor{1}{0}{2}{b}
+			\final{2}{0}{q_2}
 		\end{tikzpicture}%
 		}
 	\end{center}
 	\begin{enumerate}
-		\item Vervollständigen Sie den Automaten, d.h. führen Sie einen Fehlerzustand ein!
-		\item Minimieren Sie den vervollständigten Automaten!
+		\item Geben Sie einen entsprechenden deterministischen endlichen Automaten
+		(DEA) an, der die gleiche\\
+		Sprache akzeptiert! Benutzen Sie hierbei das Potenzmengenkonstruktionsverfahren!
+		\item Ist der entstandene Automat vollständig? Wenn nicht, wie kann man den
+		Automaten vervollständigen?\\
+		Welche Mengen stellen bei dem Potenzmengenkonstruktionsverfahren einen
+		Fehlerzustand dar?
 	\end{enumerate}
 \end{frame}
 
@@ -318,7 +336,7 @@ Die Einträge der ersten Spalte sind die neuen Zustände. Alle Mengen, die einen
 			\state{0}{-1}{q_2}
 			\tot{0}{-1}{0}{b}
 			\start{2}{0}{s_1}
-			\tor{2}{0}{3}{\lambda}
+			\tor{2}{0}{3}{\varepsilon}
 			\tob{2}{0}{-1}{a}
 			\final{3}{0}{s_2}
 			\draw [->] (6,0.4) arc (0:180:1cm);
