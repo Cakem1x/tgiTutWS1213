@@ -1,0 +1,442 @@
+\documentclass[10pt,oneside,onecolumn,a4paper,german,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{german}
+\usepackage{amsmath,amsfonts,amssymb,latexsym,textcomp}
+\usepackage{tikz}
+\pagestyle{plain}
+\pagenumbering{arabic}
+\parskip0.5ex plus0.1ex minus0.1ex
+\parindent0pt
+\voffset-1.04cm
+\topmargin0pt
+\headheight0pt
+\headsep0pt
+\topskip0pt
+\textheight26.7cm
+\footskip20pt
+\hoffset-1.04cm
+\oddsidemargin0pt
+\evensidemargin0pt
+\textwidth18cm
+\marginparsep0pt
+\marginparwidth0pt
+\begin{document}
+
+\newcommand{\start}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+  \draw [->] (#1*2-0.9,#2) -- (#1*2-0.4,#2);
+}
+\newcommand{\startfinal}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+  \draw (#1*2,#2*2) circle(0.32cm);
+  \draw [->] (#1*2-0.9,#2) -- (#1*2-0.4,#2);
+}
+\newcommand{\state}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+}
+\newcommand{\final}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+  \draw (#1*2,#2*2) circle(0.32cm);
+}
+\newcommand{\tol}[4]
+{
+  \draw (#1+#3,#2*2) node[above]{$#4$};
+  \draw [->] (#1*2-0.4,#2*2) -- (#3*2+0.4,#2*2);
+}
+\newcommand{\tor}[4]
+{
+  \draw (#1+#3,#2*2) node[above]{$#4$};
+  \draw [->] (#1*2+0.4,#2*2) -- (#3*2-0.4,#2*2);
+}
+\newcommand{\tot}[4]
+{
+  \draw (#1*2,#2+#3) node[right]{$#4$};
+  \draw [->] (#1*2,#2*2+0.4) -- (#1*2,#3*2-0.4);
+}
+\newcommand{\tob}[4]
+{
+  \draw (#1*2,#2+#3) node[right]{$#4$};
+  \draw [->] (#1*2,#2*2-0.4) -- (#1*2,#3*2+0.4);
+}
+\newcommand{\totl}[5]
+{
+  \draw (#1+#3,#2+#4) node[above right]{$#5$};
+  \draw [->] (#1*2-0.283,#2*2+0.283) -- (#3*2+0.283,#4*2-0.283);
+}
+\newcommand{\totr}[5]
+{
+  \draw (#1+#3,#2+#4) node[above left]{$#5$};
+  \draw [->] (#1*2+0.283,#2*2+0.283) -- (#3*2-0.283,#4*2-0.283);
+}
+\newcommand{\tobl}[5]
+{
+  \draw (#1+#3,#2+#4) node[below right]{$#5$};
+  \draw [->] (#1*2-0.283,#2*2-0.283) -- (#3*2+0.283,#4*2+0.283);
+}
+\newcommand{\tobr}[5]
+{
+  \draw (#1+#3,#2+#4) node[below left]{$#5$};
+  \draw [->] (#1*2+0.283,#2*2-0.283) -- (#3*2-0.283,#4*2+0.283);
+}
+\newcommand{\rloopl}[3]
+{
+  \draw (#1*2-1,#2*2) node[left]{$#3$};
+  \draw [->] (#1*2-0.35,#2*2-0.2) arc (-30:-320:0.32cm);
+}
+\newcommand{\rloopr}[3]
+{
+  \draw (#1*2+1,#2*2) node[right]{$#3$};
+  \draw [->] (#1*2+0.35,#2*2+0.2) arc (150:-140:0.32cm);
+}
+\newcommand{\rloopt}[3]
+{
+  \draw (#1*2,#2*2+1) node[above]{$#3$};
+  \draw [->] (#1*2-0.2,#2*2+0.35) arc (240:-50:0.32cm);
+}
+\newcommand{\rloopb}[3]
+{
+  \draw (#1*2,#2*2-1) node[below]{$#3$};
+  \draw [->] (#1*2+0.2,#2*2-0.35) arc (60:-230:0.32cm);
+}
+\newcommand{\lloopl}[3]
+{
+  \draw (#1*2-1,#2*2) node[left]{$#3$};
+  \draw [->] (#1*2-0.35,#2*2+0.2) arc (30:320:0.32cm);
+}
+\newcommand{\lloopr}[3]
+{
+  \draw (#1*2+1,#2*2) node[right]{$#3$};
+  \draw [->] (#1*2+0.35,#2*2-0.2) arc (-150:140:0.32cm);
+}
+\newcommand{\lloopt}[3]
+{
+  \draw (#1*2,#2*2+1) node[above]{$#3$};
+  \draw [->] (#1*2+0.2,#2*2+0.35) arc (-60:230:0.32cm);
+}
+\newcommand{\lloopb}[3]
+{
+  \draw (#1*2,#2*2-1) node[below]{$#3$};
+  \draw [->] (#1*2-0.2,#2*2-0.35) arc (-240:50:0.32cm);
+}
+\newcommand{\cyksymbol}[3]
+{
+  \draw (#2*#1-#1*0.5,-0.25) node {#3};
+}
+\newcommand{\cykfield}[4]
+{
+  \draw (#2*#1-#1+#3*#1*0.5-#1*0.5,#3*0.5-0.5) rectangle
+        (#2*#1   +#3*#1*0.5-#1*0.5,#3*0.5    );
+  \draw (#2*#1-#1+#3*#1*0.5       ,#3*0.5-0.5+0.25) node{$#4$};
+}
+
+\section*{Tutorien-"Ubungsblatt 3}
+
+\subsection*{Aufgabe 1}
+Gegeben sei die Sprache $\mathcal{L} = \{w \in \{a,b\}^* \; | \; w \;
+\mbox{enth"alt gleich viele $a$ wie $b$}\}$.
+\begin{enumerate}
+\item Wie lautet das Pumping Lemma? Was genau muss man zeigen, falls man die
+Kontraposition des\\
+Pumping Lemmas verwenden will?
+\item Zeigen Sie mit Hilfe des Pumping Lemmas, dass L nicht regul"ar ist!
+\item Zeigen Sie mit Hilfe des Pumping Lemmas, dass die Sprache $\mathcal{L}' =
+\{a^p\; | \; p \; \mbox{Primzahl}\}$ nicht regul"ar ist.
+\item Betrachten Sie nun die Sprache $\mathcal{L}'' = \{a,aab,aaab\}$! Ist diese
+regul"ar? Falls ja, geben Sie einen endlichen\\
+Automaten an, der diese Sprache akzeptiert! Kann man mit dem Pumping Lemma zeigen,
+dass die\\
+Sprache regul"ar ist?
+\end{enumerate}
+
+\subsection*{Aufgabe 2}
+Gegeben sei die folgende Grammatik: $\mathcal{G} = (\mathcal{T},\mathcal{V},S,
+\mathcal{P})$ mit\\
+$\mathcal{T} := \{a,b,c,d\}$, $\mathcal{V} := \{S,A,D,M\}$, $\mathcal{P} := \{
+S \rightarrow AMD \; | \; M, A \rightarrow AA \; | \; a, D \rightarrow DD \; | \; d,
+M \rightarrow bMc \; | \; \lambda\}$
+\begin{enumerate}
+\item Geben Sie die erzeugte Sprache an!
+\item Wandeln Sie die gegebene kontextfreie Grammatik $\mathcal{G}$ in eine
+"aquivalente kontextfreie Grammatik $\mathcal{G}'$ in\\
+Chomsky-Normalform um, indem sie jeden Schritt durch eine neue Grammatik beschreiben!
+\item Zeigen oder widerlegen Sie mit Hilfe des CYK-Algorithmus, ob die folgenden
+W"orter in der Sprache $\mathcal{L}$\\
+liegen, die durch die Grammatik $\mathcal{G}$ erzeugt wird!
+\begin{enumerate}
+\item $aabbccdd$
+\item $abbcc$
+\item $abcdd$
+\end{enumerate}
+\end{enumerate}
+
+\subsection*{Aufgabe 3}
+Gegeben sei folgende Sprache f"ur das Alphabet $\Sigma = \{a,b,c\}$:
+\begin{eqnarray*}
+\mathcal{L} = \{w_1w_2 \in \Sigma^* \; | \; w_1 \in \{a,b\}^*,w_2 \in \{b,c\}^*,
+\#_a w_1 + \#_b w_1 = \#_b w_2 + \#_c w_2\}
+\end{eqnarray*}
+Hier gibt $\#_x w$ die H"aufigkeit des Vorkommens eines Zeichens $x \in \Sigma$ in
+einem Wort $w \in \Sigma^*$ an.
+\begin{enumerate}
+\item Zeigen Sie, dass $\mathcal{L}$ nicht regul"ar ist!
+\item Geben Sie eine Chomsky-2-Grammatik an, die genau die Sprache $\mathcal{L}$
+erzeugt!
+\item Geben Sie einen Kellerautomaten $\mathcal{M}$ an, der genau die Sprache
+$\mathcal{L}$ erkennt! Zeichnen Sie den\\
+Zustands"ubergangsgraphen f"ur $\mathcal{M}$!
+\end{enumerate}
+
+\newpage
+
+\subsection*{L"osung zu Aufgabe 1}
+\begin{enumerate}
+\item Das Pumping Lemma: Sei $L$ eine Sprache "uber einem Alphabet $\Sigma$.\\
+$L \; \mbox{regul"ar} \Rightarrow \exists \; n \in \mathbb{N}:
+\forall \; \omega \in L, |\omega| \geq n: \exists \; \alpha,\beta,\gamma \in
+\Sigma^{*}, \omega = \alpha\beta\gamma:$\\
+$\beta \not= \lambda \wedge |\alpha\beta| \leq n \wedge
+\forall \; i \in \mathbb{N}_0: \alpha\beta^i\gamma \in L$\\[4pt]
+Kontraposition des Pumping Lemmas: Sei $L$ eine Sprache "uber einem Alphabet
+$\Sigma$.\\
+$\forall \; n \in \mathbb{N}: \exists \; \omega \in L, |\omega| \geq n:
+\forall \; \alpha,\beta,\gamma \in \Sigma^{*}, \omega = \alpha\beta\gamma:$\\
+$\beta = \lambda \vee |\alpha\beta| > n \vee \exists \; i \in \mathbb{N}_0:
+\alpha\beta^i\gamma \notin L \Rightarrow L \; \mbox{nicht regul"ar}$\\[4pt]
+Falls man also die Kontraposition des Pumping Lemmas verwenden will, muss man
+zu \underline{jeder nat"urlichen Zahl} als Mindestwortl"ange \underline{ein
+beliebiges, frei w"ahlbares} Wort $\omega$ finden, dass \underline{jede m"ogliche}
+Zerlegung von $\omega$ eine der drei Eigenschaften des Pumping Lemmas verletzt.
+Dazu betrachtet man der Einfachheit wegen nur alle Zerlegungen von $\omega$, die
+die ersten beiden Eigenschaften des Pumping Lemmas erf"ullen, und zeigt dann, dass
+diese die dritte Eigenschaft verletzen.
+\item \underline{Behauptung:} $\mathcal{L}$ nicht regul"ar\\
+\underline{Beweis:} Verwendung der Kontraposition des Pumping Lemmas\\
+Sei $n_0 \in \mathbb{N}$ beliebig.\\
+W"ahle $\omega \in \mathcal{L}$ geeignet mit $|\omega| \geq n_0$, w"ahle also
+beispielsweise $\omega = a^{n_0}b^{n_0}$. $\Rightarrow$\\
+$\forall \; \alpha,\beta,\gamma \in \{a,b\}^*, \omega = \alpha\beta\gamma,
+\beta \not= \lambda, |\alpha\beta| \leq n_0: \alpha\beta = a^k$ mit
+$k \in \mathbb{N}_0, 1 \leq k \leq n_0$\\
+Seien also $\beta = a^i$ mit $i \in \mathbb{N}_0, 1 \leq i \leq n_0$,
+$\alpha = a^j$ mit $j \in \mathbb{N}_0, 0 \leq j \leq n_0-i$ und
+$\gamma = a^{n_0-i-j}b^{n_0}$. $\Rightarrow$\\
+Es gelten $\omega=\alpha\beta\gamma,\beta \not= \lambda,|\alpha\beta| \leq n_0$.\\
+Aber $\alpha\beta^2\gamma = a^{n_0+i}b^{n_0} \notin L$ wegen $i \geq 1$.
+$\Rightarrow L \; \mbox{nicht regul"ar}$ 
+\item \underline{Behauptung:} $\mathcal{L}'$ nicht regul"ar\\
+\underline{Beweis:} Verwendung der Kontraposition des Pumping Lemmas\\
+Sei $n_0 \in \mathbb{N}$ beliebig.\\
+W"ahle $\omega \in \mathcal{L}$ geeignet mit $|\omega| \geq n_0$, w"ahle also
+beispielsweise $\omega = a^p$ mit $p \; \mbox{Primzahl}, p \geq n_0 + 2$.
+$\Rightarrow$\\
+$\forall \; \alpha,\beta,\gamma \in \{a\}^*, \omega = \alpha\beta\gamma,
+\beta \not= \lambda, |\alpha\beta| \leq n_0: \alpha\beta = a^k$ mit
+$k \in \mathbb{N}_0, 1 \leq k \leq n_0$\\
+Seien also $\beta = a^i$ mit $i \in \mathbb{N}_0, 1 \leq i \leq n_0$,
+$\alpha = a^j$ mit $j \in \mathbb{N}_0, 0 \leq j \leq n_0-i$ und
+$\gamma = a^{p-i-j}$. $\Rightarrow$\\
+Es gelten $\omega=\alpha\beta\gamma,\beta \not= \lambda,|\alpha\beta| \leq n_0$.\\
+Aber $\alpha\beta^{p-i}\gamma = a^{j}a^{i\cdot(p-i)}a^{p-i-j} = a^{(i+1)\cdot(p-i)}
+\notin L$, denn wegen $i \geq 1$ folgt $i+1 \geq 2$ und wegen $p \geq n_0 + 2$ und
+$i+j \leq n_0$ folgt $p-i \geq p-i-j = p-(i+j) \geq p-n_0 \geq 2$.
+$\Rightarrow L \; \mbox{nicht regul"ar}$
+\item Ja, die Sprache ist regul"ar, denn \underline{jede endliche} Sprache ist
+regul"ar. Folgender endliche Automat akzeptiert $\mathcal{L}''$:
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\start{0}{0}{q_0}
+\tor{0}{0}{1}{a}
+\final{1}{0}{q_1}
+\tor{1}{0}{2}{a}
+\state{2}{0}{q_2}
+\tor{2}{0}{3}{a}
+\tob{2}{0}{-1}{b}
+\state{3}{0}{q_3}
+\tobl{3}{0}{2}{-1}{b}
+\final{2}{-1}{q_4}
+\end{tikzpicture}
+\end{center}
+Man kann mit dem Pumping Lemma niemals zeigen, dass eine Sprache regul"ar ist.
+\end{enumerate}
+
+\subsection*{L"osung zu Aufgabe 2}
+\begin{enumerate}
+\item Die gesuchte Sprache ist $\mathcal{L}(\mathcal{G}) = \{a^mb^nc^nd^k \; | \;
+m,k \in \mathbb{N}, n \in \mathbb{N}_0\} \cup \{b^nc^n \; | \; n \in \mathbb{N}_0\}$.
+\item Wir gehen in 3 Schritten vor und konstruieren zu $\mathcal{G}$ "aquivalente
+Grammatiken $\mathcal{G}_i = (\mathcal{T},\mathcal{V}_i,S,\mathcal{P}_i)$ f"ur
+$i \in \{1,2,3\}$, die der Chomsky-Normalform immer n"aher kommen.
+\begin{itemize}
+\item F"ur jedes Terminalzeichen $a \in \mathcal{T}$ und f"ur jede Produktion, die
+dieses Terminalzeichen $a$ auf der rechten Seite enth"alt, ausgenommen nat"urlich
+Produktionen der Form $V \rightarrow a$ mit $V \in \mathcal{V}$, wird jedes Vorkommen
+von $a$ in der Produktion durch ein \underline{neues} Nichtterminalzeichen $A$,
+welches in die Variablenmenge aufgenommen wird, ersetzt und zus"atzlich wird noch
+die Produktion $A \rightarrow a$ hinzugef"ugt.\\
+Dies ergibt: $\mathcal{V}_1 := \{S,A,B,C,D,M\}$ und\\
+$\mathcal{P}_1 := \{
+S \rightarrow AMD \; | \; M, A \rightarrow AA \; | \; a, D \rightarrow DD \; | \; d,
+M \rightarrow BMC \; | \; \lambda, B \rightarrow b, C \rightarrow c\}$
+\item In diesem Schritt werden alle Produktionen der Form $V \rightarrow \lambda$
+f"ur $V \in \mathcal{V}, V \not= S$ entfernt. Dazu m"ussen diese Produktion aber
+vorher \underline{rekursiv} durch ihre ``Vorwegnahme'' mit den anderen Produktionen
+``verschmolzen'' werden, es wird also f"ur jede Produktion mit einem der obigen $V$
+auf der rechten Seite eine neue Produktion ohne dieses $V$ hinzugef"ugt.\\
+Dies ergibt: $\mathcal{V}_2 := \{S,A,B,C,D,M\}$ und\\
+$\mathcal{P}_2 := \{
+S \rightarrow AMD \; | \; AD \; | \; M \; | \; \lambda, A \rightarrow AA \; | \; a,
+D \rightarrow DD \; | \; d, M \rightarrow BMC \; | \; BC, B \rightarrow b,
+C \rightarrow c\}$
+
+\newpage
+
+\item Im letzten Schritt werden die Produktionen, deren rechte Seite nur aus einer
+einzigen oder mehr als zwei Variablen bestehen, durch einen Trick ersetzt. Bei den
+einzelnen Variablen werden diese Produktionen wieder durch ihre ``Vorwegnahme'' mit
+den anderen Produktionen ``verschmolzen''. F\"ur die Produktionen mit mehr als zwei
+Variablen auf der rechten Seite werden \underline{neue} Nichterminale eingef\"uhrt
+und dazu passende Produktionen hinzugef"ugt.\\
+Dies ergibt: $\mathcal{V}_3 := \{S,A,B,C,D,M,X,Y\}$ und\\
+$\mathcal{P}_3 := \{
+S \rightarrow AX \; | \; AD \; | \; BY \; | \; BC \; | \; \lambda, A \rightarrow AA
+\; | \; a, D \rightarrow DD \; | \; d, M \rightarrow BY \; | \; BC, X \rightarrow MD,
+Y \rightarrow MC,$\\
+$B \rightarrow b, C \rightarrow c\}$
+\end{itemize}
+\item
+\begin{enumerate}
+\item $aabbccdd \in \mathcal{L}$?
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\cyksymbol{1}{1}{a}
+\cyksymbol{1}{2}{a}
+\cyksymbol{1}{3}{b}
+\cyksymbol{1}{4}{b}
+\cyksymbol{1}{5}{c}
+\cyksymbol{1}{6}{c}
+\cyksymbol{1}{7}{d}
+\cyksymbol{1}{8}{d}
+\cykfield{1}{1}{1}{A}
+\cykfield{1}{2}{1}{A}
+\cykfield{1}{3}{1}{B}
+\cykfield{1}{4}{1}{B}
+\cykfield{1}{5}{1}{C}
+\cykfield{1}{6}{1}{C}
+\cykfield{1}{7}{1}{D}
+\cykfield{1}{8}{1}{D}
+\cykfield{1}{1}{2}{A}
+\cykfield{1}{2}{2}{}
+\cykfield{1}{3}{2}{}
+\cykfield{1}{4}{2}{S,M}
+\cykfield{1}{5}{2}{}
+\cykfield{1}{6}{2}{}
+\cykfield{1}{7}{2}{D}
+\cykfield{1}{1}{3}{}
+\cykfield{1}{2}{3}{}
+\cykfield{1}{3}{3}{}
+\cykfield{1}{4}{3}{Y}
+\cykfield{1}{5}{3}{}
+\cykfield{1}{6}{3}{}
+\cykfield{1}{1}{4}{}
+\cykfield{1}{2}{4}{}
+\cykfield{1}{3}{4}{S,M}
+\cykfield{1}{4}{4}{}
+\cykfield{1}{5}{4}{}
+\cykfield{1}{1}{5}{}
+\cykfield{1}{2}{5}{*}
+\cykfield{1}{3}{5}{X}
+\cykfield{1}{4}{5}{}
+\cykfield{1}{1}{6}{}
+\cykfield{1}{2}{6}{S}
+\cykfield{1}{3}{6}{X}
+\cykfield{1}{1}{7}{S}
+\cykfield{1}{2}{7}{S}
+\cykfield{1}{1}{8}{S}
+\end{tikzpicture}
+\end{center}
+Markierung $*$ f"ur n"achste Teilaufgabe!
+\item $abbcc \in \mathcal{L}$?\\
+Es gilt $abbcc \notin \mathcal{L}$, da dann das mit $*$ markierte Feld in der
+vorherigen Teilaufgabe die Startvariable $S$ enthalten m"usste! Man kann also
+die L"osung des CYK-Algorithmus zu einem bestimmten Wort f"ur Teilworte
+weiterverwenden!
+\item $abcdd \in \mathcal{L}$?
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\cyksymbol{1}{1}{a}
+\cyksymbol{1}{2}{b}
+\cyksymbol{1}{3}{c}
+\cyksymbol{1}{4}{d}
+\cyksymbol{1}{5}{d}
+\cykfield{1}{1}{1}{A}
+\cykfield{1}{2}{1}{B}
+\cykfield{1}{3}{1}{C}
+\cykfield{1}{4}{1}{D}
+\cykfield{1}{5}{1}{D}
+\cykfield{1}{1}{2}{}
+\cykfield{1}{2}{2}{S,M}
+\cykfield{1}{3}{2}{}
+\cykfield{1}{4}{2}{D}
+\cykfield{1}{1}{3}{}
+\cykfield{1}{2}{3}{X}
+\cykfield{1}{3}{3}{}
+\cykfield{1}{1}{4}{S}
+\cykfield{1}{2}{4}{X}
+\cykfield{1}{1}{5}{S}
+\end{tikzpicture}
+\end{center}
+\end{enumerate}
+\end{enumerate}
+
+\subsection*{L"osung zu Aufgabe 3}
+\begin{enumerate}
+\item Wir verwenden das Pumping-Lemma. Man w"ahlt das Wort $w = a^nc^n \in
+\mathcal{L}$, wobei $n \in \mathbb{N}$ die Konstante aus dem Pumping-Lemma ist. Dann
+gilt mit $w = \alpha\beta\gamma$, wobei $|\alpha\beta| \leq n$ und $\beta \not=
+\lambda$, dass $\alpha$, $\beta$ und $\gamma$ von der Form $\alpha = a^{n-r_1-r_2}$,
+$\beta = a^{r_1}$ ($r_1 > 0$), $\gamma = a^{r_2}c^n$ ($r_2 \geq 0$) sind. Damit ist
+$w^\prime = \alpha\beta^2\gamma = a^{n+r_1}c^n \notin \mathcal{L}$, da die Zerlegung
+von $w^\prime = w_1w_2$ eindeutig in $w_1 = a^{n+r_1}$ und $w_2 = c^{n}$ vorgegeben
+ist und $\#_a w_1 \neq \#_c w_2$ gilt. Damit ist $\mathcal{L}$ nicht regul"ar.
+\item Die Grammatik $\mathcal{G} = (\mathcal{T},\mathcal{V},S,\mathcal{P})$ mit den
+Terminalen $\mathcal{T} = \{a,b,c\}$, den Nichtterminalen $\mathcal{V} = \{S,X\}$
+und den Produktionen $\mathcal{P}$
+\begin{eqnarray*}
+S \rightarrow aXb \; | \; aXc \; | \; bXb \; | \; bXc \; | \; ab \; | \; ac \; | \;
+bb \; | \; bc \; | \; \lambda \\
+X \rightarrow aXb \; | \; aXc \; | \; bXb \; | \; bXc \; | \; ab \; | \; ac \; | \;
+bb \; | \; bc
+\end{eqnarray*}
+leistet das Gew"unschte. Der Induktionsbeweis hierzu besteht darin zu zeigen, dass
+f"ur alle Teilableitugen $w = w_1Xw_2$ gilt $w_1 \in \{a,b\}^*$, $w_2 \in \{b,c\}^*$
+und $\#_a w_1 + \#_b w_1 = \#_b w_2 + \#_c w_2$. Man sieht recht einfach, dass der
+erste Ableitungsschritt hierf"ur die Induktionsverankerung und der zweite den
+Induktionsschritt liefert.
+\item Ein Kellerautomat $\mathcal{M} = (\mathcal{Q},\Sigma,\Gamma,\delta,q_0,
+\mathcal{F})$ mit $\Gamma = \{\#,T\}$ und der Akzeptionsbedingung ``leerer Keller'',
+der die Sprache $\mathcal{L}$ akzeptiert, kann beispielsweise so aussehen:
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\state{0}{1}{q_1}
+\rloopt{0}{1}{(a,\lambda,T),(b,\lambda,T)}
+\tor{0}{1}{3}{(b,T,\lambda),(c,T,\lambda)}
+\state{3}{1}{q_2}
+\rloopt{3}{1}{(b,T,\lambda),(c,T,\lambda)}
+\tob{3}{1}{0}{(\lambda,\#,\lambda)}
+\startfinal{0}{0}{q_0}
+\tot{0}{0}{1}{(\lambda,\lambda,\#)}
+\final{3}{0}{q_3}
+\end{tikzpicture}
+\end{center}
+\end{enumerate}
+
+\end{document}
