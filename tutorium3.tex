@@ -11,6 +11,21 @@
 \subsection{Aufgabe 1}
 \begin{frame}
 	\frametitle{Aufgabe 1}
+	Gegeben sei die Sprache $\mathcal{L} = \{w \in \{a,b\}^* \; | \; w \;
+	\mbox{enth"alt gleich viele $a$ wie $b$}\}$.
+	\begin{enumerate}
+		\item Wie lautet das Pumping Lemma? Was genau muss man zeigen, falls man die
+		Kontraposition des\\
+		Pumping Lemmas verwenden will?
+		\item Zeigen Sie mit Hilfe des Pumping Lemmas, dass L nicht regul"ar ist!
+		\item Zeigen Sie mit Hilfe des Pumping Lemmas, dass die Sprache $\mathcal{L}' =
+		\{a^p\; | \; p \; \mbox{Primzahl}\}$ nicht regul"ar ist.
+		\item Betrachten Sie nun die Sprache $\mathcal{L}'' = \{a,aab,aaab\}$! Ist diese
+		regul"ar? Falls ja, geben Sie einen endlichen\\
+		Automaten an, der diese Sprache akzeptiert! Kann man mit dem Pumping Lemma zeigen,
+		dass die\\
+		Sprache regul"ar ist?
+	\end{enumerate}
 \end{frame}
 
 \section{Chomsky-Normalform}
@@ -22,6 +37,17 @@
 \subsection{Aufgabe 2a}
 \begin{frame}
 	\frametitle{Aufgabe 2}
+	Gegeben sei die folgende Grammatik: $\mathcal{G} = (\mathcal{T},\mathcal{V},S,
+	\mathcal{P})$ mit\\
+	$\mathcal{T} := \{a,b,c,d\}$, $\mathcal{V} := \{S,A,D,M\}$, $\mathcal{P} := \{
+	S \rightarrow AMD \; | \; M, A \rightarrow AA \; | \; a, D \rightarrow DD \; | \; d,
+	M \rightarrow bMc \; | \; \lambda\}$
+	\begin{enumerate}
+		\item Geben Sie die erzeugte Sprache an!
+		\item Wandeln Sie die gegebene kontextfreie Grammatik $\mathcal{G}$ in eine
+		"aquivalente kontextfreie Grammatik $\mathcal{G}'$ in\\
+		Chomsky-Normalform um, indem sie jeden Schritt durch eine neue Grammatik beschreiben!
+	\end{enumerate}
 \end{frame}
 
 \section{CYK-Algorithmus}
@@ -32,7 +58,26 @@
 
 \subsection{Aufgabe 2b}
 \begin{frame}
-	\frametitle{Aufgabe 2}
+	\frametitle{Aufgabe 2 Fortsetzung}
+	Gegeben sei die folgende Grammatik: $\mathcal{G} = (\mathcal{T},\mathcal{V},S,
+	\mathcal{P})$ mit\\
+	$\mathcal{T} := \{a,b,c,d\}$, $\mathcal{V} := \{S,A,D,M\}$, $\mathcal{P} := \{
+	S \rightarrow AMD \; | \; M, A \rightarrow AA \; | \; a, D \rightarrow DD \; | \; d,
+	M \rightarrow bMc \; | \; \lambda\}$
+	\begin{enumerate}
+		\item Geben Sie die erzeugte Sprache an!
+		\item Wandeln Sie die gegebene kontextfreie Grammatik $\mathcal{G}$ in eine
+		"aquivalente kontextfreie Grammatik $\mathcal{G}'$ in\\
+		Chomsky-Normalform um, indem sie jeden Schritt durch eine neue Grammatik beschreiben!
+		\item Zeigen oder widerlegen Sie mit Hilfe des CYK-Algorithmus, ob die folgenden
+		W"orter in der Sprache $\mathcal{L}$\\
+		liegen, die durch die Grammatik $\mathcal{G}$ erzeugt wird!
+		\begin{enumerate}
+			\item $aabbccdd$
+			\item $abbcc$
+			\item $abcdd$
+		\end{enumerate}
+	\end{enumerate}
 \end{frame}
 
 \section{Kellerautomaten}
@@ -44,6 +89,21 @@
 \subsection{Aufgabe 3}
 \begin{frame}
 	\frametitle{Aufgabe 3}
+	Gegeben sei folgende Sprache f"ur das Alphabet $\Sigma = \{a,b,c\}$:
+	\begin{eqnarray*}
+		\mathcal{L} = \{w_1w_2 \in \Sigma^* \; | \; w_1 \in \{a,b\}^*,w_2 \in \{b,c\}^*,
+		\#_a w_1 + \#_b w_1 = \#_b w_2 + \#_c w_2\}
+	\end{eqnarray*}
+	Hier gibt $\#_x w$ die H"aufigkeit des Vorkommens eines Zeichens $x \in \Sigma$ in
+	einem Wort $w \in \Sigma^*$ an.
+	\begin{enumerate}
+		\item Zeigen Sie, dass $\mathcal{L}$ nicht regul"ar ist!
+		\item Geben Sie eine Chomsky-2-Grammatik an, die genau die Sprache $\mathcal{L}$
+		erzeugt!
+		\item Geben Sie einen Kellerautomaten $\mathcal{M}$ an, der genau die Sprache
+		$\mathcal{L}$ erkennt! Zeichnen Sie den\\
+		Zustands"ubergangsgraphen f"ur $\mathcal{M}$!
+	\end{enumerate}
 \end{frame}
 
 \section{Schluss}
