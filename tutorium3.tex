@@ -73,9 +73,247 @@ Sei $\Sigma = \{a, b\}$ und $L = \{a^nb^n\,|\,n\geq0\}$. (Also $L = \{\varepsilo
 
 \section{Chomsky-Normalform}
 \subsection{Chomsky-Normalform}
+\frame{
+\frametitle{Chomsky-Normalform}
+Der Cocke-Younger-Kasami-Algorithmus (CYK) löst das Wortproblem für kontextfreie Sprachen (CH-2) in $\O{n^3}$.
+Um CYK anzuwenden, muss die gegebene Grammatik erst in Chomsky-Normalform gebracht werden. Das ist für jede CH-2-Grammatik möglich.
+\
+\begin{exampleblock}{Chomsky-Normalform}
+Eine CH-2-Grammatik \textit{G} $= (\Sigma,\mathcal{V,S,R) }$ ist in Chomsky-Normalform,  wenn jede Produktion aus $\mathcal{R}$ eine der folgenden Formen hat:
+\begin{itemize}
+\item  $A \rightarrow BC$
+\item  $A \rightarrow a$
+\end{itemize}
+Wobei gilt $A,B,C\in\mathcal{V}$ und $a \in \Sigma$.
+Um das leere Wort in der Sprache zu erlauben, lässt sich die Grammatik leicht mit neuem Startsymbol $S'$ ergänzen mit der Regel $$ S' \rightarrow S \mid \varepsilon $$
+\end{exampleblock}
+}
+
+
+%\subsection{Umwandlung in Chomsky-Normalform}
+\frame{
+\frametitle{Umwandlung in Chomsky-Normalform}
+\begin{enumerate}
+\item Für alle $\textcolor{red}{a} \in \Sigma$ und für alle Produktionen, auf deren rechter Seite $\textcolor{red}{a}$ vorkommt 
+(außer für $V  \rightarrow \textcolor{red}{a}$, mit $V \in\mathcal{V}$),
+wird jedes Vorkommen von $\textcolor{red}{a}$ durch ein \emph{neues} Nichtterminalsymbol $\textcolor{blue}{A}$ ersetzt
+%(und $A$ in die Variablenmenge aufgenommen)
+und die Produktion $\textcolor{blue}{A} \rightarrow \textcolor{red}{a}$ wird hinzugefügt.
+\end{enumerate}
+
+\begin{exampleblock}{Umwandlungsbeispiel (Schritt 1 von 4)}
+\begin{columns}[c]
+\begin{column}{0.3\textwidth}
+\begin{align*}
+\mathcal{S} &\rightarrow XY\\
+X &\rightarrow \textcolor{red}{a}X\textcolor{red}{b} \mid Z \mid \varepsilon\\
+Y &\rightarrow \textcolor{red}{cc}Y \mid \varepsilon\\
+Z &\rightarrow X\\
+\end{align*}
+\end{column}
+%
+\
+\begin{column}{0.05\textwidth}
+$\Rightarrow$
+\end{column}
+%
+\begin{column}{0.3\textwidth}
+\begin{align*}
+\mathcal{S} &\rightarrow XY\\
+X &\rightarrow \textcolor{blue}{A}X\textcolor{blue}{B} \mid Z \mid \varepsilon\\
+Y &\rightarrow \textcolor{blue}{CC}Y \mid \varepsilon\\
+Z &\rightarrow X\\
+\textcolor{blue}{A} &\rightarrow \textcolor{red}{a}\\
+\textcolor{blue}{B} &\rightarrow \textcolor{red}{b}\\
+\textcolor{blue}{C} &\rightarrow \textcolor{red}{c}\\
+\end{align*}
+\end{column}
+\end{columns}
+\end{exampleblock}
+}
+
+\frame{
+\frametitle{Umwandlung in Chomsky-Normalform}
+\begin{enumerate}
+\setcounter{enumi}{1}
+\item
+Für Produktionen mit mehr als zwei
+Variablen rechts werden \textcolor{blue}{ \emph{neue} Nichterminale} eingeführt
+und dazu \textcolor{blue}{passende Produktionen} hinzugefügt.
+\end{enumerate}
+
+\begin{exampleblock}{Umwandlungsbeispiel (Schritt 2 von 4)}
+\begin{columns}[c]
+\begin{column}{0.3\textwidth}
+\begin{align*}
+\mathcal{S} &\rightarrow XY\\
+X &\rightarrow \textcolor{red}{AXB} \mid Z \mid \varepsilon \\
+Y &\rightarrow \textcolor{red}{CCY} \mid \varepsilon \\
+Z &\rightarrow X\\
+A &\rightarrow a\\
+B &\rightarrow b\\
+C &\rightarrow c\\
+\end{align*}
+\end{column}
+%
+\
+\begin{column}{0.05\textwidth}
+$\Rightarrow$
+\end{column}
+%
+\begin{column}{0.3\textwidth}
+\begin{align*}
+\mathcal{S} &\rightarrow XY\\
+X &\rightarrow \textcolor{blue}{FB} \mid Z \mid \varepsilon \\
+Y &\rightarrow \textcolor{blue}{GY} \mid \varepsilon \\
+Z &\rightarrow X\\
+\textcolor{blue}{F} &\rightarrow \textcolor{blue}{AX}\\
+\textcolor{blue}{G} &\rightarrow \textcolor{blue}{CC}\\
+A &\rightarrow a\\
+B &\rightarrow b\\
+C &\rightarrow c\\
+\end{align*}
+\end{column}
+\end{columns}
+\end{exampleblock}
+}
+
 \begin{frame}
-	\frametitle{Chomsky-Normalform}
+\frametitle{Umwandlung in Chomsky-Normalform}
+\begin{enumerate}
+\setcounter{enumi}{2}
+\item Entfernen von Produktionen der Form $\textcolor{red}{V} \rightarrow \textcolor{red}{\varepsilon}$
+f"ur $V \in \mathcal{V}, v \neq \mathcal{S}$ \\ $\Rightarrow$ "`Vorwegnahme"' dieser Produktionen: Für jede Produktion mit einem der obigen $V$
+auf der rechten Seite wird eine \textcolor{blue}{neue Produktion} ohne dieses $V$ hinzugefügt.
+\end{enumerate}
+
+\begin{exampleblock}{Umwandlungsbeispiel (Schritt 3 von 4)}
+\ducttape{-0.25cm}
+\begin{columns}[c]
+\begin{column}{0.3\textwidth}
+\begin{align*}
+\mathcal{S} &\rightarrow XY\\
+\textcolor{red}{X} &\rightarrow FB \mid Z \mid \textcolor{red}{\varepsilon}\\
+\textcolor{red}{Y} &\rightarrow GY \mid \textcolor{red}{\varepsilon}\\
+Z &\rightarrow X\\
+F &\rightarrow AX\\
+G &\rightarrow CC\\
+A &\rightarrow a, B \rightarrow b, C \rightarrow c\\
+\end{align*}
+\end{column}
+%
+\
+\begin{column}{0.05\textwidth}
+$\Rightarrow$
+\end{column}
+%
+\begin{column}{0.3\textwidth}
+\begin{align*}
+\textcolor{red}{\mathcal{S}} &\rightarrow XY \mid \textcolor{blue}{X} \mid  \textcolor{blue}{Y} \mid \textcolor{blue}{\varepsilon}\\
+\textcolor{red}{X} &\rightarrow FB \mid Z \mid \textcolor{blue}{\msout{\varepsilon}}\\
+\textcolor{red}{Y} &\rightarrow GY \mid \textcolor{blue}{G}\\
+\textcolor{red}{Z} &\rightarrow X\mid \textcolor{blue}{\msout{\varepsilon}}\\
+F &\rightarrow AX \mid \textcolor{blue}{A}\\
+G &\rightarrow CC\\
+A &\rightarrow a, B \rightarrow b, C \rightarrow c\\
+\end{align*}
+\end{column}
+\end{columns}
+\end{exampleblock}
 \end{frame}
+
+
+
+\frame{
+\frametitle{Umwandlung in Chomsky-Normalform}
+\begin{enumerate}
+\setcounter{enumi}{3}
+\item
+Für Produktionen mit einer Variablen rechts werden Zyklen gesucht, 
+für gefundene Zyklen werden alle Vorkommnisse aller Variablen des Zyklus durch einen Repräsentanten ausgetauscht. Danach werden triviale Produktionen entfernt.
+\end{enumerate}
+
+\begin{exampleblock}{Umwandlungsbeispiel (Schritt 4a von 4)}
+\begin{columns}[c]
+\begin{column}{0.3\textwidth}
+\begin{align*}
+\mathcal{S} &\rightarrow XY \mid X \mid Y \mid \varepsilon \\
+\textcolor{red}{X} &\rightarrow FB \mid \textcolor{red}{Z} \\
+Y &\rightarrow GY \mid G \\
+\textcolor{red}{Z} &\rightarrow \textcolor{red}{X}\\
+F &\rightarrow AX \mid A\\
+G &\rightarrow CC\\
+A &\rightarrow a, B \rightarrow b, C \rightarrow c\\
+\end{align*}
+\end{column}
+%
+\
+\begin{column}{0.05\textwidth}
+$\Rightarrow$
+\end{column}
+%
+\begin{column}{0.3\textwidth}
+\begin{align*}
+\mathcal{S} &\rightarrow XY \mid X \mid Y \mid \varepsilon \\
+\textcolor{blue}{X} &\rightarrow FB \mid \msout{\textcolor{blue}{X}} \\
+Y &\rightarrow GY \mid G\\
+\msout{\textcolor{blue}{X}} &\rightarrow \msout{\textcolor{blue}{X}}\\
+F &\rightarrow AX\\
+G &\rightarrow CC\\
+A &\rightarrow a, B \rightarrow b, C \rightarrow c\\
+\end{align*}
+\end{column}
+\end{columns}
+\end{exampleblock}
+}
+
+\frame{
+\frametitle{Umwandlung in Chomsky-Normalform}
+\begin{enumerate}
+\setcounter{enumi}{3}
+\item
+Alle Regeln, die rechts eine einzelne Variable haben, werden durch "`Vorziehen"' der Regeln eliminiert.
+
+Außerdem wird ein neues Startsymbol eingeführt, falls eine Regel $\mathcal{S} \rightarrow \varepsilon$ existiert.
+\end{enumerate}
+
+\begin{exampleblock}{Umwandlungsbeispiel (Schritt 4b von 4)}
+\ducttape{-0.4cm}
+\begin{columns}[c]
+\begin{column}{0.3\textwidth}
+\begin{align*}
+\mathcal{S} &\rightarrow XY \mid \textcolor{red}{X} \mid  \textcolor{red}{Y} \mid \textcolor{red}{\varepsilon}\\
+X &\rightarrow FB\\
+Y &\rightarrow GY \mid \textcolor{red}{G}\\
+F &\rightarrow AX\\
+G &\rightarrow CC\\
+A &\rightarrow a\\
+B &\rightarrow b\\
+C &\rightarrow c\\
+\end{align*}
+\end{column}
+%
+\
+\begin{column}{0.05\textwidth}
+$\Rightarrow$
+\end{column}
+%
+\begin{column}{0.3\textwidth}
+\begin{align*}
+\textcolor{blue}{\mathcal{S}} & \rightarrow \textcolor{blue}{\mathcal{S'} \mid \varepsilon} \\
+\mathcal{S} &\rightarrow XY \mid \textcolor{blue}{FB} \mid \textcolor{blue}{GY} \mid \textcolor{blue}{CC}\\
+X &\rightarrow FB \\
+Y &\rightarrow GY \mid \textcolor{blue}{CC} \\
+F &\rightarrow AX\\
+G &\rightarrow CC\\
+A &\rightarrow a\\
+B &\rightarrow b\\
+C &\rightarrow c\\
+\end{align*}
+\end{column}
+\end{columns}
+\end{exampleblock}
+}
 
 \subsection{Aufgabe 2a}
 \begin{frame}
@@ -95,9 +333,33 @@ Sei $\Sigma = \{a, b\}$ und $L = \{a^nb^n\,|\,n\geq0\}$. (Also $L = \{\varepsilo
 
 \section{CYK-Algorithmus}
 \subsection{CYK-Algorithmus}
-\begin{frame}
-	\frametitle{CYK-Algorithmus}
-\end{frame}
+\frame{
+\frametitle{CYK Überblick}
+CYK ist ein Algorithmus, um das Wortproblem in CH-2 zu lösen. Um den Algorithmus anzuwenden, muss eine Grammatik in Chomsky-Normalform vorliegen.\\
+Grundidee zur Überprüfung eines Wortes der Länge $n$:
+\begin{itemize}
+\item Wir betrachen $V_{i,j} = $ Menge der Nichtterminale, aus denen das Teilwort der Position $i$ bis $j$ abgeleitet werden kann
+\item Die Frage, ob $V_{i,j}$ ableitbar ist, lässt sich entscheiden durch Betrachten aller möglichen $V_{i,k}$ und $V_{k+1,j}$
+\item $V_{i,i}$ sind trivial
+\item Bottom-up lässt sich dadurch $V_{1,n}$ berechnen
+\item Ist $S \in V_{1,n}$, so lässt sich das Wort ableiten
+\end{itemize}
+}
+
+\frame{
+\frametitle{CYK Beispiel}
+Gegeben sei die Grammatik \textit{G} $= \mathcal{(T,V,}S\mathcal{,P) }$  mit den folgenden Produktionen aus $\mathcal{P}$:
+\begin{align*}
+S & \rightarrow AX \mid AB \\
+X &\rightarrow SB \mid AB \\
+A &\rightarrow a\\
+B &\rightarrow b\\
+\end{align*}
+\begin{enumerate}
+	\item Lässt sich der CYK-Algorithmus auf $G$ anwenden?
+	\item Ist das Wort $aaabbb$ in der Sprache $\mathcal{L}(\textit{G})$?
+\end{enumerate}
+}
 
 \subsection{Aufgabe 2b}
 \begin{frame}
