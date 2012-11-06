@@ -23,34 +23,6 @@ Sei $L$ eine reguläre Sprache. Dann existiert eine Zahl $n \in \mathbb{N}$, sod
 
 \end{frame}
 
-\begin{frame}
-\frametitle{Pumping Lemma: Übersicht}
-\begin{itemize}
-\item Jede reguläre Sprache erfüllt das Pumping Lemma. Aber: Nicht jede Sprache, die das Pumping Lemma erfüllt, ist regulär!
-\item In der Übung wird üblicherweise die Kontraposition des Pumping-Lemmas verwendet: Man zeigt für eine Sprache, dass das Pumping-Lemma \emph{nicht} erfüllt ist, woraus folgt, dass diese Sprache \emph{nicht} regulär sein kann.
-
-\pause\item $ \neg\left[ \exists n \in \N \,:\, \forall w \in L, |w| > n \,:\, \exists uvx=w \,:\, \ldots \forall i \in \N \,:\, uv^i x \in L\right] $ \\ $ \Leftrightarrow \forall n \in \N \,:\, \exists w \in L, |w| > n \,:\, \forall uvx=w \,:\, \ldots \exists i \in \N \,:\, uv^i x \not\in L $
-
-\pause\begin{itemize}
-\item Finden wir für \emph{jedes} $n$ \emph{ein} $w$ mit $\left|w\right| > n$, so dass für \emph{jede} Darstellung $w = uvx$ mit $v \neq \varepsilon$ sowie $\left|uv\right| \leq n$ ein $i \in \mathbb{N}_0$ existiert mit $uv^ix \notin L$, dann ist $L$ nicht regulär.
-\end{itemize}
-\end{itemize}
-
-\end{frame}
-
-\begin{frame}
-\frametitle{Beispiel}
-Sei $\Sigma = \{a, b\}$ und $L = \{a^nb^n\,|\,n\geq0\}$. (Also $L = \{\varepsilon,ab, aabb, aaabbb, \ldots\}$)
-\begin{enumerate}[<+->]
-\item Sei $n \in \N$ beliebig, aber fest.
-\item Wähle $w = a^nb^n$.
-\item Es ist also $\left|w\right| > n$.
-\item Nun ist aber für \emph{jede} Darstellung $w = uvx$ mit $\left|uv\right| \leq n$ und $v \neq \varepsilon$ $v = a^m$ mit $m \geq 1$. Demnach ist $uv^0x = a^lb^n \neq L$, da $l < n$.
-\item Daher kann $L$ nicht regulär sein.
-\end{enumerate}
-
-\end{frame}
-
 \subsection{Aufgabe 1}
 \begin{frame}
 	\frametitle{Aufgabe 1}
