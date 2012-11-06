@@ -11,7 +11,7 @@
 Sei $L$ eine reguläre Sprache. Dann existiert eine Zahl $n \in \mathbb{N}$, sodass für jedes Wort $w \in L$ mit $\left|w \right| > n$ eine Darstellung $$w = uvx$$ existiert, so dass folgende Eigenschaften erfüllt sind:
 
 \begin{enumerate}
-\item $v \neq \varepsilon$ 
+\item $v \neq \lambda$
 \item $\left|uv\right| \leq n$ 
 \item Für alle $i \in \mathbb{N}_0$ gilt: $uv^ix \in L$
 \end{enumerate}
@@ -57,7 +57,7 @@ Eine CH-2-Grammatik \textit{G} $= (\Sigma,\mathcal{V,S,R) }$ ist in Chomsky-Norm
 \item  $A \rightarrow a$
 \end{itemize}
 Wobei gilt $A,B,C\in\mathcal{V}$ und $a \in \Sigma$.
-Um das leere Wort in der Sprache zu erlauben, lässt sich die Grammatik leicht mit neuem Startsymbol $S'$ ergänzen mit der Regel $$ S' \rightarrow S \mid \varepsilon $$
+Um das leere Wort in der Sprache zu erlauben, lässt sich die Grammatik leicht mit neuem Startsymbol $S'$ ergänzen mit der Regel $$ S' \rightarrow S \mid \lambda $$
 \end{exampleblock}
 }
 
@@ -78,8 +78,8 @@ und die Produktion $\textcolor{blue}{A} \rightarrow \textcolor{red}{a}$ wird hin
 \begin{column}{0.3\textwidth}
 \begin{align*}
 \mathcal{S} &\rightarrow XY\\
-X &\rightarrow \textcolor{red}{a}X\textcolor{red}{b} \mid Z \mid \varepsilon\\
-Y &\rightarrow \textcolor{red}{cc}Y \mid \varepsilon\\
+X &\rightarrow \textcolor{red}{a}X\textcolor{red}{b} \mid Z \mid \lambda\\
+Y &\rightarrow \textcolor{red}{cc}Y \mid \lambda\\
 Z &\rightarrow X\\
 \end{align*}
 \end{column}
@@ -92,8 +92,8 @@ $\Rightarrow$
 \begin{column}{0.3\textwidth}
 \begin{align*}
 \mathcal{S} &\rightarrow XY\\
-X &\rightarrow \textcolor{blue}{A}X\textcolor{blue}{B} \mid Z \mid \varepsilon\\
-Y &\rightarrow \textcolor{blue}{CC}Y \mid \varepsilon\\
+X &\rightarrow \textcolor{blue}{A}X\textcolor{blue}{B} \mid Z \mid \lambda\\
+Y &\rightarrow \textcolor{blue}{CC}Y \mid \lambda\\
 Z &\rightarrow X\\
 \textcolor{blue}{A} &\rightarrow \textcolor{red}{a}\\
 \textcolor{blue}{B} &\rightarrow \textcolor{red}{b}\\
@@ -119,8 +119,8 @@ und dazu \textcolor{blue}{passende Produktionen} hinzugefügt.
 \begin{column}{0.3\textwidth}
 \begin{align*}
 \mathcal{S} &\rightarrow XY\\
-X &\rightarrow \textcolor{red}{AXB} \mid Z \mid \varepsilon \\
-Y &\rightarrow \textcolor{red}{CCY} \mid \varepsilon \\
+X &\rightarrow \textcolor{red}{AXB} \mid Z \mid \lambda \\
+Y &\rightarrow \textcolor{red}{CCY} \mid \lambda \\
 Z &\rightarrow X\\
 A &\rightarrow a\\
 B &\rightarrow b\\
@@ -136,8 +136,8 @@ $\Rightarrow$
 \begin{column}{0.3\textwidth}
 \begin{align*}
 \mathcal{S} &\rightarrow XY\\
-X &\rightarrow \textcolor{blue}{FB} \mid Z \mid \varepsilon \\
-Y &\rightarrow \textcolor{blue}{GY} \mid \varepsilon \\
+X &\rightarrow \textcolor{blue}{FB} \mid Z \mid \lambda \\
+Y &\rightarrow \textcolor{blue}{GY} \mid \lambda \\
 Z &\rightarrow X\\
 \textcolor{blue}{F} &\rightarrow \textcolor{blue}{AX}\\
 \textcolor{blue}{G} &\rightarrow \textcolor{blue}{CC}\\
@@ -154,7 +154,7 @@ C &\rightarrow c\\
 \frametitle{Umwandlung in Chomsky-Normalform}
 \begin{enumerate}
 \setcounter{enumi}{2}
-\item Entfernen von Produktionen der Form $\textcolor{red}{V} \rightarrow \textcolor{red}{\varepsilon}$
+\item Entfernen von Produktionen der Form $\textcolor{red}{V} \rightarrow \textcolor{red}{\lambda}$
 f"ur $V \in \mathcal{V}, v \neq \mathcal{S}$ \\ $\Rightarrow$ "`Vorwegnahme"' dieser Produktionen: Für jede Produktion mit einem der obigen $V$
 auf der rechten Seite wird eine \textcolor{blue}{neue Produktion} ohne dieses $V$ hinzugefügt.
 \end{enumerate}
@@ -165,8 +165,8 @@ auf der rechten Seite wird eine \textcolor{blue}{neue Produktion} ohne dieses $V
 \begin{column}{0.3\textwidth}
 \begin{align*}
 \mathcal{S} &\rightarrow XY\\
-\textcolor{red}{X} &\rightarrow FB \mid Z \mid \textcolor{red}{\varepsilon}\\
-\textcolor{red}{Y} &\rightarrow GY \mid \textcolor{red}{\varepsilon}\\
+\textcolor{red}{X} &\rightarrow FB \mid Z \mid \textcolor{red}{\lambda}\\
+\textcolor{red}{Y} &\rightarrow GY \mid \textcolor{red}{\lambda}\\
 Z &\rightarrow X\\
 F &\rightarrow AX\\
 G &\rightarrow CC\\
@@ -181,10 +181,10 @@ $\Rightarrow$
 %
 \begin{column}{0.3\textwidth}
 \begin{align*}
-\textcolor{red}{\mathcal{S}} &\rightarrow XY \mid \textcolor{blue}{X} \mid  \textcolor{blue}{Y} \mid \textcolor{blue}{\varepsilon}\\
-\textcolor{red}{X} &\rightarrow FB \mid Z \mid \textcolor{blue}{\msout{\varepsilon}}\\
-\textcolor{red}{Y} &\rightarrow GY \mid \textcolor{blue}{G}\\
-\textcolor{red}{Z} &\rightarrow X\mid \textcolor{blue}{\msout{\varepsilon}}\\
+\textcolor{red}{\mathcal{S}} &\rightarrow XY \mid \textcolor{blue}{X} \mid  \textcolor{blue}{Y} \mid \textcolor{blue}{\lambda}\\
+\textcolor{red}{X} &\rightarrow FB \mid Z \mid \textcolor{blue}{\msout{\lambda}}\\
+\textcolor{red}{Y} &\rightarrow GY \mid \textcolor{blue}{G}\mid \textcolor{blue}{\msout{\lambda}}\\
+\textcolor{red}{Z} &\rightarrow X\\
 F &\rightarrow AX \mid \textcolor{blue}{A}\\
 G &\rightarrow CC\\
 A &\rightarrow a, B \rightarrow b, C \rightarrow c\\
@@ -209,7 +209,7 @@ für gefundene Zyklen werden alle Vorkommnisse aller Variablen des Zyklus durch 
 \begin{columns}[c]
 \begin{column}{0.3\textwidth}
 \begin{align*}
-\mathcal{S} &\rightarrow XY \mid X \mid Y \mid \varepsilon \\
+\mathcal{S} &\rightarrow XY \mid X \mid Y \mid \lambda \\
 \textcolor{red}{X} &\rightarrow FB \mid \textcolor{red}{Z} \\
 Y &\rightarrow GY \mid G \\
 \textcolor{red}{Z} &\rightarrow \textcolor{red}{X}\\
@@ -226,7 +226,7 @@ $\Rightarrow$
 %
 \begin{column}{0.3\textwidth}
 \begin{align*}
-\mathcal{S} &\rightarrow XY \mid X \mid Y \mid \varepsilon \\
+\mathcal{S} &\rightarrow XY \mid X \mid Y \mid \lambda \\
 \textcolor{blue}{X} &\rightarrow FB \mid \msout{\textcolor{blue}{X}} \\
 Y &\rightarrow GY \mid G\\
 \msout{\textcolor{blue}{X}} &\rightarrow \msout{\textcolor{blue}{X}}\\
@@ -246,7 +246,7 @@ A &\rightarrow a, B \rightarrow b, C \rightarrow c\\
 \item
 Alle Regeln, die rechts eine einzelne Variable haben, werden durch "`Vorziehen"' der Regeln eliminiert.
 
-Außerdem wird ein neues Startsymbol eingeführt, falls eine Regel $\mathcal{S} \rightarrow \varepsilon$ existiert.
+Außerdem wird ein neues Startsymbol eingeführt, falls eine Regel $\mathcal{S} \rightarrow \lambda$ existiert.
 \end{enumerate}
 
 \begin{exampleblock}{Umwandlungsbeispiel (Schritt 4b von 4)}
@@ -254,7 +254,7 @@ Außerdem wird ein neues Startsymbol eingeführt, falls eine Regel $\mathcal{S} 
 \begin{columns}[c]
 \begin{column}{0.3\textwidth}
 \begin{align*}
-\mathcal{S} &\rightarrow XY \mid \textcolor{red}{X} \mid  \textcolor{red}{Y} \mid \textcolor{red}{\varepsilon}\\
+\mathcal{S} &\rightarrow XY \mid \textcolor{red}{X} \mid  \textcolor{red}{Y} \mid \textcolor{red}{\lambda}\\
 X &\rightarrow FB\\
 Y &\rightarrow GY \mid \textcolor{red}{G}\\
 F &\rightarrow AX\\
@@ -272,7 +272,7 @@ $\Rightarrow$
 %
 \begin{column}{0.3\textwidth}
 \begin{align*}
-\textcolor{blue}{\mathcal{S}} & \rightarrow \textcolor{blue}{\mathcal{S'} \mid \varepsilon} \\
+\textcolor{blue}{\mathcal{S'}} & \rightarrow \textcolor{blue}{\mathcal{S} \mid \lambda} \\
 \mathcal{S} &\rightarrow XY \mid \textcolor{blue}{FB} \mid \textcolor{blue}{GY} \mid \textcolor{blue}{CC}\\
 X &\rightarrow FB \\
 Y &\rightarrow GY \mid \textcolor{blue}{CC} \\
@@ -368,10 +368,10 @@ B &\rightarrow b\\
 		\item $\Gamma$ endliches Stack-Alphabet
 		\item $q_0 \in Q$ Anfangszustand
 		\item $Z_0 \in \Gamma$ Initialisierung des Stacks
-		\item $\delta : Q \times ( \Sigma \cup \{\varepsilon\}) \times \Gamma \rightarrow 2^{Q \times \Gamma^*}$
+		\item $\delta : Q \times ( \Sigma \cup \{\lambda\}) \times \Gamma \rightarrow 2^{Q \times \Gamma^*}$
 		\begin{itemize}
 			\item $\delta(q, a, Z) \subseteq \{(q,\gamma) : q \in Q, \gamma \in \Gamma^*\}$
-			\item $\delta(q, \varepsilon, Z) \subseteq \{(q,\gamma) : q \in Q, \gamma \in \Gamma^*\}$
+			\item $\delta(q, \lambda, Z) \subseteq \{(q,\gamma) : q \in Q, \gamma \in \Gamma^*\}$
 		\end{itemize}
 		\item $F \subseteq Q$ Menge der akzeptierenden Endzustände, $F=\emptyset$ ist möglich.
 		
@@ -407,10 +407,10 @@ B &\rightarrow b\\
 			\node[state,initial]   (q_0)                {$q_0$};
 			\node[state]           (q_1) [right of=q_0] {$q_1$};
 			\node[state,accepting] (q_2) [right of=q_1] {$q_2$};
-			\path[->]	(q_0) 	edge 			node {$(b,X,\varepsilon)$}				(q_1)
+			\path[->]	(q_0) 	edge 			node {$(b,X,\lambda)$}				(q_1)
 			edge [loop above]	node {${(a,X,XX)} \atop {(a,\#,X\#)}$}	 	()
-			(q_1)	edge			node {$(\varepsilon,\#,\varepsilon)$}			(q_2)
-			edge [loop above]	node {$(b,X,\varepsilon)$}				();
+			(q_1)	edge			node {$(\lambda,\#,\lambda)$}			(q_2)
+			edge [loop above]	node {$(b,X,\lambda)$}				();
 		\end{tikzpicture}
 	\end{figure}
 	\begin{itemize}
@@ -444,11 +444,8 @@ B &\rightarrow b\\
 \begin{frame}
 \frametitle{Bis zum nächsten Mal!}
 \begin{center}
-  \includegraphics[height=0.8 \textheight]{images/xkcd_205.png} 
+  \includegraphics[width=1.5 \textheight]{images/schrodinger.jpg}
 \end{center}
-
-\begin{quote}\tiny{Nonrewritable tape?}
-\end{quote}
 \end{frame}
 
 \include{includes/common_end}
