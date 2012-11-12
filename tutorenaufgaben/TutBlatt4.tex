@@ -1,0 +1,376 @@
+\documentclass[10pt,oneside,onecolumn,a4paper,german,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{german}
+\usepackage{amsmath,amsfonts,amssymb,latexsym,textcomp}
+\usepackage{tikz}
+\pagestyle{plain}
+\pagenumbering{arabic}
+\parskip0.5ex plus0.1ex minus0.1ex
+\parindent0pt
+\voffset-1.04cm
+\topmargin0pt
+\headheight0pt
+\headsep0pt
+\topskip0pt
+\textheight26.7cm
+\footskip20pt
+\hoffset-1.04cm
+\oddsidemargin0pt
+\evensidemargin0pt
+\textwidth18cm
+\marginparsep0pt
+\marginparwidth0pt
+\begin{document}
+
+\newcommand{\start}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+  \draw [->] (#1*2-0.9,#2*2) -- (#1*2-0.4,#2*2);
+}
+\newcommand{\startfinal}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+  \draw (#1*2,#2*2) circle(0.32cm);
+  \draw [->] (#1*2-0.9,#2*2) -- (#1*2-0.4,#2*2);
+}
+\newcommand{\state}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+}
+\newcommand{\final}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+  \draw (#1*2,#2*2) circle(0.32cm);
+}
+\newcommand{\tol}[4]
+{
+  \draw (#1+#3,#2*2) node[above]{$#4$};
+  \draw [->] (#1*2-0.4,#2*2) -- (#3*2+0.4,#2*2);
+}
+\newcommand{\tor}[4]
+{
+  \draw (#1+#3,#2*2) node[above]{$#4$};
+  \draw [->] (#1*2+0.4,#2*2) -- (#3*2-0.4,#2*2);
+}
+\newcommand{\tot}[4]
+{
+  \draw (#1*2,#2+#3) node[right]{$#4$};
+  \draw [->] (#1*2,#2*2+0.4) -- (#1*2,#3*2-0.4);
+}
+\newcommand{\tob}[4]
+{
+  \draw (#1*2,#2+#3) node[right]{$#4$};
+  \draw [->] (#1*2,#2*2-0.4) -- (#1*2,#3*2+0.4);
+}
+\newcommand{\totl}[5]
+{
+  \draw (#1+#3,#2+#4) node[above right]{$#5$};
+  \draw [->] (#1*2-0.283,#2*2+0.283) -- (#3*2+0.283,#4*2-0.283);
+}
+\newcommand{\totr}[5]
+{
+  \draw (#1+#3,#2+#4) node[above left]{$#5$};
+  \draw [->] (#1*2+0.283,#2*2+0.283) -- (#3*2-0.283,#4*2-0.283);
+}
+\newcommand{\tobl}[5]
+{
+  \draw (#1+#3,#2+#4) node[below right]{$#5$};
+  \draw [->] (#1*2-0.283,#2*2-0.283) -- (#3*2+0.283,#4*2+0.283);
+}
+\newcommand{\tobr}[5]
+{
+  \draw (#1+#3,#2+#4) node[below left]{$#5$};
+  \draw [->] (#1*2+0.283,#2*2-0.283) -- (#3*2-0.283,#4*2+0.283);
+}
+\newcommand{\rloopl}[3]
+{
+  \draw (#1*2-1,#2*2) node[left]{$#3$};
+  \draw [->] (#1*2-0.35,#2*2-0.2) arc (-30:-320:0.32cm);
+}
+\newcommand{\rloopr}[3]
+{
+  \draw (#1*2+1,#2*2) node[right]{$#3$};
+  \draw [->] (#1*2+0.35,#2*2+0.2) arc (150:-140:0.32cm);
+}
+\newcommand{\rloopt}[3]
+{
+  \draw (#1*2,#2*2+1) node[above]{$#3$};
+  \draw [->] (#1*2-0.2,#2*2+0.35) arc (240:-50:0.32cm);
+}
+\newcommand{\rloopb}[3]
+{
+  \draw (#1*2,#2*2-1) node[below]{$#3$};
+  \draw [->] (#1*2+0.2,#2*2-0.35) arc (60:-230:0.32cm);
+}
+\newcommand{\lloopl}[3]
+{
+  \draw (#1*2-1,#2*2) node[left]{$#3$};
+  \draw [->] (#1*2-0.35,#2*2+0.2) arc (30:320:0.32cm);
+}
+\newcommand{\lloopr}[3]
+{
+  \draw (#1*2+1,#2*2) node[right]{$#3$};
+  \draw [->] (#1*2+0.35,#2*2-0.2) arc (-150:140:0.32cm);
+}
+\newcommand{\lloopt}[3]
+{
+  \draw (#1*2,#2*2+1) node[above]{$#3$};
+  \draw [->] (#1*2+0.2,#2*2+0.35) arc (-60:230:0.32cm);
+}
+\newcommand{\lloopb}[3]
+{
+  \draw (#1*2,#2*2-1) node[below]{$#3$};
+  \draw [->] (#1*2-0.2,#2*2-0.35) arc (-240:50:0.32cm);
+}
+\newcommand{\cyksymbol}[3]
+{
+  \draw (#2*#1-#1*0.5,-0.25) node {#3};
+}
+\newcommand{\cykfield}[4]
+{
+  \draw (#2*#1-#1+#3*#1*0.5-#1*0.5,#3*0.5-0.5) rectangle
+        (#2*#1   +#3*#1*0.5-#1*0.5,#3*0.5    );
+  \draw (#2*#1-#1+#3*#1*0.5       ,#3*0.5-0.5+0.25) node{$#4$};
+}
+
+\section*{Tutorien-"Ubungsblatt 4}
+
+\subsection*{Aufgabe 1}
+\begin{enumerate}
+\item Geben Sie f"ur die Sprache $\mathcal{L} = \{a^nb^nc^n \; | \; n \in
+\mathbb{N}\}$ eine Grammatik des h"ochstm"oglichen Chomsky-Typs an!
+\item Geben Sie f"ur die Sprache $\mathcal{L}' = \{a^{2^n} \; | \; n \in
+\mathbb{N}\}$ eine linear beschr"ankte Turing-Maschine an und zeichnen\\
+Sie diese Turing-Maschine auch als Graphen!
+\item Pr"ufen Sie, ob Ihre Turing-Maschine $aaaa$ als Eingabe akzeptiert!
+Pr"ufen Sie auch nach, ob $aaa$ \underline{nicht}\\
+akzeptiert wird!
+\item Zeigen Sie, dass die Sprache $\mathcal{L}'$ nicht kontextfrei ist!
+\end{enumerate}
+
+\subsection*{Aufgabe 2}
+\begin{enumerate}
+\item Eine nichtdeterministische Turingmaschine ist ein Tupel $\mathcal{TM} =
+(\mathcal{Q},\Sigma,\Gamma,\delta,q_0,\square,\mathcal{F})$ mit dem
+Eingabealphabet $\Sigma$, dem Bandalphabet $\Gamma \supseteq \Sigma$,
+dem Bandzeichen $\square \in \Gamma \setminus \Sigma$, der Zustandsmenge
+$\mathcal{Q}$, den Finalzust"anden $\mathcal{F} \subseteq \mathcal{Q}$ und
+dem Startzustand $q_0 \in \mathcal{Q}$. Da $\mathcal{TM}$ nichtdeterministisch
+ist, ist $\delta$ keine Zustands"ubergangsfunktion, sondern eine
+zustands"uberf"uhrende Relation $\delta \subseteq (\mathcal{Q} \times \Gamma)
+\times (\mathcal{Q} \times \Gamma \times \{L,N,R\})$. Dabei schreiben wir
+$\delta(q_1,X) = (q_2,Y,D)$, falls es ein Tupel $((q_1,X),(q_2,Y,D))$ in $\delta$
+gibt, d.h. falls wir in einem Zustand $q_1$ vom Band das Zeichen $X$ lesen und
+wir die Maschine in Zustand $q_2$ "uberf"uhren, das Zeichen $Y$ schreiben und den
+Lese-/Schreibkopf in Richtung $D \in \{L,N,R\}$ (also entweder nach links, nicht
+oder nach rechts) bewegen d"urfen.\\[4pt]
+Geben Sie nun eine nichtdeterministische Turingmaschine an, welche die Sprache
+$\mathcal{L} = \{ww \; | \; w \in \{a,b\}^*\}$ erkennt! Es gen"ugt dabei, den
+Zustands"ubergangsgraphen zu zeichnen und das verwendete Bandalphabet anzugeben.
+\item Gegeben sei folgende deterministische Turingmaschine $\mathcal{TM} =
+(\mathcal{Q},\Sigma,\Gamma,\delta,q_0,\#,\mathcal{F})$, wobei $\Sigma = \{a,b\}$,
+$\Gamma = \Sigma \cup \{B,\#\}$, den Zust"anden $\mathcal{Q} = \{q_0,\dots,q_7\}$,
+dem Startzustand $q_0$, den Finalzust"anden $\mathcal{F} = \{q_7\}$ und dem
+Bandzeichen $\#$. Der Zustands"ubergangsgraph ist gegeben durch:
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\start{0}{0}{q_0}
+\tob{0}{0}{-2}{(a,\#,R)}
+\tor{0}{0}{3.5}{(B,\#,R)}
+\draw (2,-2) node[above right]{$(\#,\#,N)$};
+\draw [->] (0.283,-0.283) -- (3.717,-3.717);
+\state{0}{-2}{q_1}
+\rloopb{0}{-2}{(a,a,R),(B,B,R)}
+\tol{0}{-2}{-2}{(b,B,L)}
+\state{-2}{-2}{q_2}
+\rloopb{-2}{-2}{(a,a,L),(B,B,L)}
+\totr{-2}{-2}{0}{0}{(\#,\#,R)}
+\state{3.5}{0}{q_3}
+\rloopt{3.5}{0}{(a,a,R),(B,B,R)}
+\tor{3.5}{0}{5}{(\#,\#,L)}
+\state{5}{0}{q_4}
+\tob{5}{0}{-2}{(a,\#,L)}
+\state{5}{-2}{q_5}
+\rloopb{5}{-2}{(a,a,L),(B,B,L)}
+\tol{5}{-2}{3.5}{(\#,\#,R)}
+\state{3.5}{-2}{q_6}
+\tot{3.5}{-2}{0}{(B,\#,R)}
+\tol{3.5}{-2}{2}{(\#,\#,N)}
+\final{2}{-2}{q_7}
+\end{tikzpicture}
+\end{center}
+Dabei sind die Kanten des Graphen so zu lesen, dass eine Kante von Zustand $q_i$
+nach $q_j$ mit der Kantenbeschriftung ``$(a,b,d)$'' den "Ubergang $\delta(q_i,a) =
+(q_j,b,d)$ darstellt. Falls es f"ur einen gegebenen Zustand und ein gegebenes
+Symbol keinen Zustands"ubergang gibt, bricht die Maschine die Berechnung ab.\\[4pt]
+Finden Sie die Sprache, die von der Turingmaschine $\mathcal{TM}$ akzeptiert wird!
+\end{enumerate}
+
+\newpage
+
+\subsection*{L"osung zu Aufgabe 1}
+\begin{enumerate}
+\item Eine m"ogliche Grammatik ist: $\mathcal{G} = (\mathcal{T},\mathcal{V},S,
+\mathcal{P})$ mit\\
+$\mathcal{T} := \{a,b,c\}$, $\mathcal{V} := \{S,X,Y\}$ und\\
+$\mathcal{P} := \{S \rightarrow aSXY \; | \; abY, YX \rightarrow XY,
+bX \rightarrow bb, bY \rightarrow bc, cY \rightarrow cc\}$\\
+Die gegebene Grammatik ist kontextsensitiv, also von Chomsky-Typ 1.\\[4pt]
+\underline{Behauptung:} $\mathcal{L}$ nicht kontextfrei\\
+\underline{Beweis:} Verwendung der Kontraposition des Pumping Lemmas\\
+Sei $n_0 \in \mathbb{N}$ beliebig.\\
+W"ahle $\omega \in \mathcal{L}$ geeignet mit $|\omega| \geq n_0$, w"ahle also
+beispielsweise $\omega = a^{n_0}b^{n_0}c^{n_0}$. $\Rightarrow$\\
+$\forall \; \alpha,\beta,\gamma,\delta,\epsilon \in \{a,b,c\}^*, \omega =
+\alpha\beta\gamma\delta\epsilon, |\beta\delta| \geq 1, |\beta\gamma\delta|
+\leq  n_0:$ $\beta$ und $\delta$ enthalten gemeinsam niemals alle 3 Zeichen.\\
+Dann gilt $\alpha\gamma\epsilon \notin \mathcal{L}$ wegen $|\beta\delta| \geq 1$.
+$\Rightarrow \mathcal{L} \; \mbox{nicht kontextfrei}$
+\item Eine m"ogliche linear beschr"ankte Turing-Maschine ist:\\
+$M := (\{q_0,q_1,q_2,q_3,q_4,q_5,q_6,q_F\}, \{a\}, \{a,b,\square\}, \delta,
+\square, q_0, \{q_5\})$,\\
+wobei $\delta$ im folgenden Graphen gegeben ist:
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\start{0}{0}{q_0}
+\tor{0}{0}{2}{(a,a,R)}
+\rloopt{0}{0}{(b,b,R)}
+\state{2}{0}{q_1}
+\tor{2}{0}{4}{(a,b,R)}
+\rloopt{2}{0}{(b,b,R)}
+\draw (4,-1) node[left]{$(\square,\square,N)$};
+\draw [->] (4,-0.4) -- (4,-1.6);
+\state{4}{0}{q_2}
+\draw [->] (8,-0.4) arc (0:-180:1.9cm);
+\draw (6,-2.4) node[below]{$(a,a,R)$};
+\rloopt{4}{0}{(b,b,R)}
+\tor{4}{0}{6}{(\square,\square,L)}
+\state{6}{0}{q_3}
+\tob{6}{0}{-2}{(a,a,L)}
+\rloopt{6}{0}{(b,b,L)}
+\state{2}{-1}{q_F}
+\state{2}{-2}{q_6}
+\rloopb{2}{-2}{(a,a,L),(b,b,L)}
+\draw (2,-2) node[below left]{$(\square,\square,R)$};
+\draw [->] (3.717,-3.717) -- (0.283,-0.283);
+\state{6}{-2}{q_4}
+\tol{6}{-2}{2}{(a,a,L)}
+\rloopb{6}{-2}{(b,b,L)}
+\tor{6}{-2}{7.5}{(\square,\square,N)}
+\final{7.5}{-2}{q_5}
+\end{tikzpicture}
+\end{center}
+\underline{Idee:} Die Anzahl der $a$ solange halbieren, bis entweder ein Rest "ubrig
+bleibt oder nur noch ein $a$ da ist\\
+(also von $\frac{2}{2}=1$).\\[4pt]
+In $q_1$ ist die Anzahl der $a$ ungerade, deshalb wird in den Fehlerzustand $q_F$
+gewechselt, falls die Eingabe zu Ende ist. In $q_2$ ist die Anzahl der $a$ gerade
+und beim "Ubergang zwischen $q_1$ und $q_2$ wird jedes zweite $a$ durch ein $b$
+ersetzt also die Anzahl der $a$ halbiert. Falls die Eingabe in $q_2$ zu Ende ist,
+wird die Richtung ge"andert, d.h. wir wandern auf dem Band r"uckwarts. In $q_4$
+gibt es nur ein einziges $a$ auf dem Band, falls nun kein weiteres $a$ folgt, sind
+wir fertig und wechseln in den Endzustand $q_5$. Ansonsten gehen wir "uber $q_6$
+an den Anfang des Wortes. Dann wiederholen wir den ganzen Vorgang.
+\item $aaaa \in \mathcal{L}'$?\\
+$(q_0)aaaa \rightarrow a(q_1)aaa \rightarrow ab(q_2)aa \rightarrow aba(q_1)a
+\rightarrow abab(q_2)\square \rightarrow aba(q_3)b \rightarrow ab(q_3)ab
+\rightarrow a(q_4)bab \rightarrow (q_4)abab \rightarrow$\\
+$(q_6)\square abab \rightarrow (q_0)abab \rightarrow a(q1)bab \rightarrow
+ab(q_1)ab \rightarrow abb(q_2)b \rightarrow abbb(q_2)\square \rightarrow
+abb(q_3)b \rightarrow ab(q_3)bb \rightarrow a(q_3)bbb \rightarrow$\\
+$(q_3)abbb \rightarrow (q_4)\square abbb \rightarrow (q_5)\square abbb$\\[4pt]
+$aaa \in \mathcal{L}'$?\\
+$(q_0)aaa \rightarrow a(q_1)aa \rightarrow ab(q_2)a \rightarrow aba(q_1)\square
+\rightarrow aba(q_F)\square$
+\item \underline{Behauptung:} $\mathcal{L}'$ nicht kontextfrei\\
+\underline{Beweis:} Verwendung der Kontraposition des Pumping Lemmas\\
+Sei $n \in \mathbb{N}$ beliebig.\\
+W"ahle $\omega \in \mathcal{L}'$ geeignet mit $|\omega| \geq n$, w"ahle also
+beispielsweise $\omega = a^{2^p}$ mit $p \in \mathbb{N}, 2^p > n$ (oder ganz
+speziell $w = a^{2^n}$). $\Rightarrow$\\
+$\forall \; \alpha,\beta,\gamma,\delta,\epsilon \in \{a\}^*, \omega =
+\alpha\beta\gamma\delta\epsilon, |\beta\delta| \geq 1, |\beta\gamma\delta|
+\leq  n:$\\
+$\beta = a^i$ mit $i \in \mathbb{N}_0, i \leq n$, $\delta = a^j$ mit $j \in
+\mathbb{N}_0, j \leq n-i, j+i \geq 1$, $\gamma = a^k$ mit $k \in \mathbb{N}_0,
+k \leq n-(i+j)$, $\alpha = a^l$ mit $l \in \mathbb{N}_0, l \leq 2^p-(i+j+k)$,
+$\epsilon = a^{2^p-(i+j+k+l)}$\\
+Dann gilt $\alpha\beta^2\gamma\delta^2\epsilon = a^{2^p+i+j} \notin \mathcal{L}'$,
+denn wegen $1 \leq |\beta\delta| = i+j \leq n < 2^p$ gilt $2^p < 2^p+i+j < 2^{p+1}$.
+$\Rightarrow \mathcal{L}' \; \mbox{nicht kontextfrei}$
+\end{enumerate}
+
+\newpage
+
+\subsection*{L"osung zu Aufgabe 2}
+\begin{enumerate}
+\item Das Alphabet $\Sigma = \{a,b\}$ ist bereits vorgegeben, wir w"ahlen
+$\Gamma = \{a,b,A,B,T,\square\}$, $\mathcal{Q} = \{q_0,\dots,q_7 \}$,
+den Startzustand $q_0$ und die Finalzust"ande $\mathcal{F} = \{q_7\}$.
+Die Zustands"ubergangsrelation definieren wir durch den folgenden
+Zustands"ubergangsgraphen:
+\begin{center}
+\begin{tikzpicture}[line width=1pt]
+\start{0}{0}{q_0}
+\draw (0,-1) node[below]{$(a,A,R),$};
+\draw (0,-1.5) node[below]{$(b,B,R)$};
+\draw [->] (0.2,-0.35) arc (60:-230:0.32cm);
+\totr{0}{0}{3}{1.5}{(a,T,N)}
+\tobr{0}{0}{3}{-1.5}{(b,T,N)}
+\draw [->] (0,0.4) arc (180:0:6cm);
+\draw (6,6.4) node[above]{$(\square,\square,N)$};
+\state{3}{1.5}{q_1}
+\draw (6,5) node[above]{$(A,A,L),$};
+\draw (6,4.5) node[above]{$(B,B,L),$};
+\draw (6,4) node[above]{$(T,T,L)$};
+\draw [->] (5.8,3.35) arc (240:-50:0.32cm);
+\tor{3}{1.5}{4.5}{(\square,\square,R)}
+\state{3}{-1.5}{q_2}
+\draw (6,-4) node[below]{$(A,A,L),$};
+\draw (6,-4.5) node[below]{$(B,B,L),$};
+\draw (6,-5) node[below]{$(T,T,L)$};
+\draw [->] (6.2,-3.35) arc (60:-230:0.32cm);
+\draw (7.5,-3) node[below]{$(\square,\square,R)$};
+\draw [->] (6.4,-3) -- (8.6,-3);
+\state{3}{0}{q_3}
+\draw (5,0.5) node[left]{$(A,A,R),$};
+\draw (5,0) node[left]{$(B,B,R),$};
+\draw (5,-0.5) node[left]{$(T,T,R)$};
+\draw [->] (5.65,-0.2) arc (-30:-320:0.32cm);
+\draw (6,1.5) node[left]{$(a,T,N)$};
+\draw [->] (6,0.4) -- (6,2.6);
+\draw (6,-1.5) node[left]{$(b,T,N)$};
+\draw [->] (6,-0.4) -- (6,-2.6);
+\tor{3}{0}{6}{(\square,\square,L)}
+\state{4.5}{1.5}{q_4}
+\tobl{4.5}{1.5}{3}{0}{(A,\square,R)}
+\state{4.5}{-1.5}{q_5}
+\totl{4.5}{-1.5}{3}{0}{(B,\square,R)}
+\state{6}{0}{q_6}
+\rloopr{6}{0}{(T,\square,L)}
+\tob{6}{0}{-1.5}{(\square,\square,N)}
+\final{6}{-1.5}{q_7}
+\end{tikzpicture}
+\end{center}
+Nehmen wir an, die Maschine liest ein Wort $w = vv$. Sie ersetzt zun"achst alle
+Vorkommen von $a$ durch $A$ und $b$ durch $B$ bis zu einem Punkt, an dem sie r"at,
+dass jetzt die Wiederholung des Wortes $v$ beginnt. Sie hat quasi das erste
+Vorkommen von $v$ ``in Gro"sbuchstaben'' "ubersetzt. Dann l"oscht sie einfach nur
+noch sukzessiv Paare von Gro"s- und Kleinbuchstaben der beiden Teilworte. Wenn am
+Ende nur noch Platzhalterzeichen $T$ auf dem Band waren, geht sie in den
+Finalzustand.
+\item Die Turingmaschine $\mathcal{TM}$ akzeptiert die Sprache $\mathcal{L}
+(\mathcal{TM}) = \{a^nb^na^n \; | \; n \in \mathbb{N}\}$. Durch die erste Schleife
+wird ein Wort $w = a^nb^na^n$ auf dem Band in die Form $w^\prime = B^na^n$
+"uberf"uhrt. Der Rest der Turingmaschine l"auft einfach nur noch jeweils von
+Anfang bis Ende des aktuellen Bandwortes hin und her und "uberf"uhrt Worte der
+Form $Bwa$ in $w$, bis das Band leer ist, dann wechselt $\mathcal{TM}$ in den
+Finalzustand.
+\end{enumerate}
+
+\end{document}
