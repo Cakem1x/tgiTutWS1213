@@ -149,6 +149,41 @@ B &\rightarrow b\\
 	\end{enumerate}
 \end{frame}
 
+\subsection{Pumping Lemma für kontextfreie Sprachen}
+\begin{frame}
+	\frametitle{Pumping-Lemma für kontextfreie Sprachen}
+	\begin{exampleblock}{Lemma}
+		Für jede kontextfreie Sprache $L$ gibt es eine Konstante $n \in \mathbb{N}$,
+		so dass sich jedes Wort $z \in L$ mit $|z| \geq n$ so als
+		$$ z = uvwxy $$
+		schreiben lässt, dass
+		\begin{itemize}
+			\item $|vx| \geq 1$,
+			\item $|vwx| \leq n$ und
+			\item für alle $i \geq 0$ das Wort $uv^iwx^iy \in L$ ist.
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Beweisidee}
+	\begin{itemize}
+		\item Jeder Knoten im Ableitungsbaum (wie wir ihn in CYK sehen) steht für ein Nichtterminalsymbol
+		\item Ab einer gewissen Höhe des Baumes (bzw. Länge des Wortes) muss ein Nichtterminal im Baum mehrmals in einer Reihe vorkommen
+		\item Man kann also aus einem Nichtterminalsymbol dasselbe Symbol wieder ableiten
+		\item Da das Wort durch jede Ableitung (außer zu Terminalsymbolen) länger wird, gibt es eine "`Schleife"' beim Ableiten
+		\item Diese Schleife kann man also "`pumpen"', also beliebig oft (oder auch gar nicht) durchlaufen
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Beweisidee}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.5]{images/pumping}
+	\end{figure}
+\end{frame}
+
 \subsection{Aufgabe 1}
 \begin{frame}
 	\frametitle{Aufgabe 1}
