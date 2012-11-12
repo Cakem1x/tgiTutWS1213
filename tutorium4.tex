@@ -20,52 +20,32 @@
 \subsection{Chomsky-Normalform}
 \frame{
 \frametitle{Chomsky-Normalform}
-}
-
-\section{CYK-Algorithmus}
-\subsection{CYK-Algorithmus}
-\frame{
-\frametitle{CYK Überblick}
-CYK ist ein Algorithmus, um das Wortproblem in CH-2 zu lösen. Um den Algorithmus anzuwenden, muss eine Grammatik in Chomsky-Normalform vorliegen.\\
-Grundidee zur Überprüfung eines Wortes der Länge $n$:
-\begin{itemize}
-\item Wir betrachen $V_{i,j} = $ Menge der Nichtterminale, aus denen das Teilwort der Position $i$ bis $j$ abgeleitet werden kann
-\item Die Frage, ob $V_{i,j}$ ableitbar ist, lässt sich entscheiden durch Betrachten aller möglichen $V_{i,k}$ und $V_{k+1,j}$
-\item $V_{i,i}$ sind trivial
-\item Bottom-up lässt sich dadurch $V_{1,n}$ berechnen
-\item Ist $S \in V_{1,n}$, so lässt sich das Wort ableiten
-\end{itemize}
-}
-
-\frame{
-\frametitle{CYK Beispiel}
-Gegeben sei die Grammatik \textit{G} $= \mathcal{(T,V,}S\mathcal{,P) }$  mit den folgenden Produktionen aus $\mathcal{P}$:
-\begin{align*}
-S & \rightarrow AX \mid AB \\
-X &\rightarrow SB \mid AB \\
-A &\rightarrow a\\
-B &\rightarrow b\\
-\end{align*}
 \begin{enumerate}
-	\item Lässt sich der CYK-Algorithmus auf $G$ anwenden?
-	\item Ist das Wort $aaabbb$ in der Sprache $\mathcal{L}(\textit{G})$?
+	\item Produktionen auf Terminale und Nicht-Terminale sortieren	
+	\item Produktionen auf mehr als ein Nicht-Terminal ersetzen
+	\item Produktionen auf $\lambda$ ersetzen
+	\item Produktionen auf ein Nicht-Terminal ersetzen
+	\item Neues Startsymbol einführen falls $S \rightarrow \lambda$ existiert
+	\item ???
+	\item PROFIT
 \end{enumerate}
 }
 
-\subsection{Alte Aufgabe 2b}
+\subsection{CYK-Algorithmus}
 \begin{frame}
-	\frametitle{Alte Aufgabe 2 Fortsetzung}
-	Gegeben sei die folgende Grammatik: $\mathcal{G} = (\mathcal{T},\mathcal{V},S,
-	\mathcal{P})$ mit\\
-	$\mathcal{T} := \{a,b,c,d\}$, $\mathcal{V} := \{S,A,D,M\}$, $\mathcal{P} := \{
-	S \rightarrow AMD \; | \; M, A \rightarrow AA \; | \; a, D \rightarrow DD \; | \; d,
-	M \rightarrow bMc \; | \; \lambda\}$
-	\begin{enumerate}
-		\item Geben Sie die erzeugte Sprache an!
-		\item Wandeln Sie die gegebene kontextfreie Grammatik $\mathcal{G}$ in eine
-		"aquivalente kontextfreie Grammatik $\mathcal{G}'$ in\\
-		Chomsky-Normalform um, indem sie jeden Schritt durch eine neue Grammatik beschreiben!
-		\item Zeigen oder widerlegen Sie mit Hilfe des CYK-Algorithmus, ob die folgenden
+\frametitle{CYK Übung}
+
+S' $\rightarrow$ S $| \lambda$~\\
+S $\rightarrow$ PD$|$QC~\\
+A $\rightarrow$ AA$|$a~\\
+D $\rightarrow$ DD$|$d~\\
+M $\rightarrow$ QC~\\
+B $\rightarrow$ b~\\
+C $\rightarrow$ c~\\
+P $\rightarrow$ AM$|$AA$|$a~\\
+Q $\rightarrow$ BM$|$b~\\~\\
+
+Zeigen oder widerlegen Sie mit Hilfe des CYK-Algorithmus, ob die folgenden
 		W"orter in der Sprache $\mathcal{L}$\\
 		liegen, die durch die Grammatik $\mathcal{G}$ erzeugt wird!
 		\begin{enumerate}
@@ -73,8 +53,30 @@ B &\rightarrow b\\
 			\item $abbcc$
 			\item $abcdd$
 		\end{enumerate}
-	\end{enumerate}
 \end{frame}
+
+%\begin{frame}
+%	\frametitle{Aufgabe 2 Fortsetzung}
+%	Gegeben sei die folgende Grammatik: $\mathcal{G} = (\mathcal{T},\mathcal{V},S,
+%	\mathcal{P})$ mit\\
+%	$\mathcal{T} := \{a,b,c,d\}$, $\mathcal{V} := \{S,A,D,M\}$, $\mathcal{P} := \{
+%	S \rightarrow AMD \; | \; M, A \rightarrow AA \; | \; a, D \rightarrow DD \; | \; d,
+%	M \rightarrow bMc \; | \; \lambda\}$
+%	\begin{enumerate}
+%		\item Geben Sie die erzeugte Sprache an!
+%		\item Wandeln Sie die gegebene kontextfreie Grammatik $\mathcal{G}$ in eine
+%		"aquivalente kontextfreie Grammatik $\mathcal{G}'$ in\\
+%		Chomsky-Normalform um, indem sie jeden Schritt durch eine neue Grammatik beschreiben!
+%		\item Zeigen oder widerlegen Sie mit Hilfe des CYK-Algorithmus, ob die folgenden
+%		W"orter in der Sprache $\mathcal{L}$\\
+%		liegen, die durch die Grammatik $\mathcal{G}$ erzeugt wird!
+%		\begin{enumerate}
+%			\item $aabbccdd$
+%			\item $abbcc$
+%			\item $abcdd$
+%		\end{enumerate}
+%	\end{enumerate}
+%\end{frame}
 
 \section{Kellerautomaten}
 \subsection{Kellerautomaten}
