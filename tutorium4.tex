@@ -14,6 +14,7 @@
 		\item[]Beh: $\forall u,v,x: w = uvx, |uv| \leq n, v \neq \lambda$ gilt: $\exists i \in \mathbb{N}_0: uv^ix \notin L$
 		\item[] Bew: $(\forall v$ gilt:)\underline{\hspace{4.5 cm}}
 		\item[] \hspace*{0.85 cm} \underline{\hspace{5.75 cm}}
+		\item[] Widerspruch zum Pumping Lemma $\Rightarrow$ L ist nicht kontextfrei.
 	\end{enumerate}
 \end{frame}
 
@@ -192,6 +193,29 @@ Zeigen oder widerlegen Sie mit Hilfe des CYK-Algorithmus, ob die folgenden
 		\centering
 		\includegraphics[scale=0.5]{images/pumping}
 	\end{figure}
+\end{frame}
+
+\frame{
+	\frametitle{Pumping Lemma Formalia (kontextfrei)}
+	Behauptung: L ist nicht kontextfrei. ~\\
+	Beweis:
+	\begin{enumerate}
+	\item[] Nehme an L sei kontextfrei.% Sei n wie im Pumping Lemma gefordert.
+	\item[] Sei n beliebig aber fest.
+	%\item Pumping Lemma: $\exists n \in N$, so dass jedes Wort $z \in L$ mit $|z| \ge n$ eine Zerlegung z = uvwxy besitzt mit $|vx|\ge 1$ und $|vwx|\le n$, so dass $uv^iwx^iy \in L$  für $\forall i\in \N_0$
+	\item[] Wähle z=\underline{\hspace{3cm}} $\in L$ mit $|z| \ge n$
+	%\item Zeige, dass für alle Zerlegungen von z, die den Regeln des Pumping Lemmas genügen, ein i existiert, sodass $uv^iwx^iy\not\in L$
+	\item[] Beh.: $\forall u,v,w,x,y: uvwxy=z$ mit $|vx|\ge 1$ und $|vwx|\le n$, $\exists i \in N$, so dass $uv^iwx^iy \not\in L$.
+	\item[] Bew.:\underline{\hspace{8cm}}
+	\item[] Widerspruch zum Pumping Lemma $\Rightarrow$ L ist nicht kontextfrei.
+	\end{enumerate}
+}
+
+\begin{frame}
+	\frametitle{Beispiel}
+	Zeige, dass die Sprache
+	\[L=\{\omega \omega|\omega \in \{0,1\}^*\}\]
+	nicht kontextfrei ist.
 \end{frame}
 
 \subsection{Aufgabe 1}
