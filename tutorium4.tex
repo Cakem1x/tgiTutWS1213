@@ -1,0 +1,162 @@
+\include{includes/common_start}
+\include{includes/tutBlatt_methods}
+\tutnr{3}
+
+\section{Altlasten}
+\subsection{Pumping Lemma}
+\begin{frame}
+	\frametitle{Pumping Lemma Formalia}
+
+\end{frame}
+
+\subsection{Chomsky-Normalform}
+\frame{
+\frametitle{Chomsky-Normalform}
+}
+
+\section{CYK-Algorithmus}
+\subsection{CYK-Algorithmus}
+\frame{
+\frametitle{CYK Überblick}
+CYK ist ein Algorithmus, um das Wortproblem in CH-2 zu lösen. Um den Algorithmus anzuwenden, muss eine Grammatik in Chomsky-Normalform vorliegen.\\
+Grundidee zur Überprüfung eines Wortes der Länge $n$:
+\begin{itemize}
+\item Wir betrachen $V_{i,j} = $ Menge der Nichtterminale, aus denen das Teilwort der Position $i$ bis $j$ abgeleitet werden kann
+\item Die Frage, ob $V_{i,j}$ ableitbar ist, lässt sich entscheiden durch Betrachten aller möglichen $V_{i,k}$ und $V_{k+1,j}$
+\item $V_{i,i}$ sind trivial
+\item Bottom-up lässt sich dadurch $V_{1,n}$ berechnen
+\item Ist $S \in V_{1,n}$, so lässt sich das Wort ableiten
+\end{itemize}
+}
+
+\frame{
+\frametitle{CYK Beispiel}
+Gegeben sei die Grammatik \textit{G} $= \mathcal{(T,V,}S\mathcal{,P) }$  mit den folgenden Produktionen aus $\mathcal{P}$:
+\begin{align*}
+S & \rightarrow AX \mid AB \\
+X &\rightarrow SB \mid AB \\
+A &\rightarrow a\\
+B &\rightarrow b\\
+\end{align*}
+\begin{enumerate}
+	\item Lässt sich der CYK-Algorithmus auf $G$ anwenden?
+	\item Ist das Wort $aaabbb$ in der Sprache $\mathcal{L}(\textit{G})$?
+\end{enumerate}
+}
+
+\subsection{Aufgabe 2b}
+\begin{frame}
+	\frametitle{Aufgabe 2 Fortsetzung}
+	Gegeben sei die folgende Grammatik: $\mathcal{G} = (\mathcal{T},\mathcal{V},S,
+	\mathcal{P})$ mit\\
+	$\mathcal{T} := \{a,b,c,d\}$, $\mathcal{V} := \{S,A,D,M\}$, $\mathcal{P} := \{
+	S \rightarrow AMD \; | \; M, A \rightarrow AA \; | \; a, D \rightarrow DD \; | \; d,
+	M \rightarrow bMc \; | \; \lambda\}$
+	\begin{enumerate}
+		\item Geben Sie die erzeugte Sprache an!
+		\item Wandeln Sie die gegebene kontextfreie Grammatik $\mathcal{G}$ in eine
+		"aquivalente kontextfreie Grammatik $\mathcal{G}'$ in\\
+		Chomsky-Normalform um, indem sie jeden Schritt durch eine neue Grammatik beschreiben!
+		\item Zeigen oder widerlegen Sie mit Hilfe des CYK-Algorithmus, ob die folgenden
+		W"orter in der Sprache $\mathcal{L}$\\
+		liegen, die durch die Grammatik $\mathcal{G}$ erzeugt wird!
+		\begin{enumerate}
+			\item $aabbccdd$
+			\item $abbcc$
+			\item $abcdd$
+		\end{enumerate}
+	\end{enumerate}
+\end{frame}
+
+\section{Kellerautomaten}
+\subsection{Kellerautomaten}
+\begin{frame}
+	\frametitle{Definition Kellerautomaten}
+	Ein (nichtdeterministischer) \textbf{Kellerautomat} (NPDA bzw PDA, Pushdown Automaton) besteht aus $(Q, \Sigma, \Gamma, q_0, Z_0,\delta, F)$, wobei
+	\begin{itemize}
+		\item $Q$ endliche Zustandsmenge
+		\item $\Sigma$ endliches Eingabealphabet
+		\item $\Gamma$ endliches Stack-Alphabet
+		\item $q_0 \in Q$ Anfangszustand
+		\item $Z_0 \in \Gamma$ Initialisierung des Stacks
+		\item $\delta : Q \times ( \Sigma \cup \{\lambda\}) \times \Gamma \rightarrow 2^{Q \times \Gamma^*}$
+		\begin{itemize}
+			\item $\delta(q, a, Z) \subseteq \{(q,\gamma) : q \in Q, \gamma \in \Gamma^*\}$
+			\item $\delta(q, \lambda, Z) \subseteq \{(q,\gamma) : q \in Q, \gamma \in \Gamma^*\}$
+		\end{itemize}
+		\item $F \subseteq Q$ Menge der akzeptierenden Endzustände, $F=\emptyset$ ist möglich.
+		
+		\vspace{-4cm}\raggedleft{\includegraphics[width=0.5\textwidth]{images/PDA.png}}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zu Kellerautomaten}
+\begin{itemize}
+\item Akzeptieren nach Eingabeende, wenn \begin{itemize}
+	\item der Stack leer ist \emph{oder}
+	\item der Automat in einen akzeptierenden Zustand kommt.
+\end{itemize}
+\item Sind im Allgemeinen nichtdeterministisch
+\item Man kann Endzustände auch aus der Definition weglassen und alternativ verlangen, dass der Automat genau bei leerem Keller akzeptiert.
+\item Man kann sogar alle Zustände bis auf einen weglassen und alles in die Kellerbelegung kodieren
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Beispiel}
+	$M = (Q, \Sigma, \Gamma, q_0, Z_0, \delta, F)$
+	\begin{itemize}
+		\item $Q = \{q_0, q_1, q_2\}$
+		\item $\Sigma = \{a,b\}$
+		\item $\Gamma = \{\#,X\}$
+		\item $Z_0 = \#$
+		\item $F = \{q_2\}$
+	\end{itemize}
+	\begin{figure}
+		\begin{tikzpicture}[node distance=2.5cm,shorten >=1pt,auto]
+			\node[state,initial]   (q_0)                {$q_0$};
+			\node[state]           (q_1) [right of=q_0] {$q_1$};
+			\node[state,accepting] (q_2) [right of=q_1] {$q_2$};
+			\path[->]	(q_0) 	edge 			node {$(b,X,\lambda)$}				(q_1)
+			edge [loop above]	node {${(a,X,XX)} \atop {(a,\#,X\#)}$}	 	()
+			(q_1)	edge			node {$(\lambda,\#,\lambda)$}			(q_2)
+			edge [loop above]	node {$(b,X,\lambda)$}				();
+		\end{tikzpicture}
+	\end{figure}
+	\begin{itemize}
+		\item Welche Sprache akzeptiert dieser Automat?
+	\end{itemize}
+\end{frame}
+
+\subsection{Aufgabe 3}
+\begin{frame}
+	\frametitle{Aufgabe 3}
+	Gegeben sei folgende Sprache f"ur das Alphabet $\Sigma = \{a,b,c\}$:
+	\begin{multline*}
+		\mathcal{L} = \{w_1w_2 \in \Sigma^* \; | \; w_1 \in \{a,b\}^*,w_2 \in \{b,c\}^*,\\
+		\#_a w_1 + \#_b w_1 = \#_b w_2 + \#_c w_2\}
+	\end{multline*}
+	Hier gibt $\#_x w$ die H"aufigkeit des Vorkommens eines Zeichens $x \in \Sigma$ in
+	einem Wort $w \in \Sigma^*$ an.
+	\begin{enumerate}
+		\item Zeigen Sie, dass $\mathcal{L}$ nicht regul"ar ist!
+		\item Geben Sie eine Chomsky-2-Grammatik an, die genau die Sprache $\mathcal{L}$
+		erzeugt!
+		\item Geben Sie einen Kellerautomaten $\mathcal{M}$ an, der genau die Sprache
+		$\mathcal{L}$ erkennt! Zeichnen Sie den\\
+		Zustands"ubergangsgraphen f"ur $\mathcal{M}$!
+	\end{enumerate}
+\end{frame}
+
+\section{Schluss}
+\subsection{Schluss}
+
+\begin{frame}
+\frametitle{Bis zum nächsten Mal!}
+\begin{center}
+  \includegraphics[width=1.5 \textheight]{images/schrodinger.jpg}
+\end{center}
+\end{frame}
+
+\include{includes/common_end}
