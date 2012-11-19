@@ -62,33 +62,6 @@ Eine Turingmaschine wird definiert als ein 7-Tupel bestehend aus:
 }
 
 \begin{frame}
-	\frametitle{Turingmaschine: Beispiel}
-
-	Seien $\Sigma = \{0,1\}$, $\Gamma = \{0,1,\sqcup\}$ und die Turingmaschine $\M =(\{q_0, q_1,q_2,q_f\},\Sigma, \sqcup, \Gamma,\delta,q_0,\{q_f\})$ mit folgender Überführungsfunktion gegeben:
-
-	\begin{center}
-	\begin{tikzpicture}[node distance=2.25cm,auto]
-	\node(q0)[state,initial]{$q_0$};
-	\node(q1)[state,right of=q0]{$q_1$};	
-	\node(q2)[state,right of=q1]{$q_2$};	
-	\node(qf)[state,accepting,right of=q2]{$q_f$};	
-
-	\path[->]       (q0) edge node{$0|1,R$} (q1)
-					(q1) edge node{$1|0,R$} (q2)
-	                (q1) edge[loop above] node{$0|1,R$} (q1)	                
-			        (q2) edge[loop above] node{$1|0,R$} (q2)
-			        (q2) edge node{$\sqcup|\sqcup,N$} (qf);
-					\end{tikzpicture}
-					\end{center} 
-
-	\begin{itemize}
-		\item Welche Wörter akzeptiert \M{}?
-		\item Wie verändert \M{} die Eingabe?
-	\end{itemize}			
-\end{frame}
-
-
-\begin{frame}
 \frametitle{Konfigurationen}
 Sei $\mathcal{M} =(Q,\Sigma, \sqcup, \Gamma,\delta,s,F)$ eine Turingmaschine.
 
@@ -107,11 +80,88 @@ Dies bedeutet:
 \end{itemize}
 \end{frame}
 
+\subsection{Aufgabe 3}
+\begin{frame}
+	\frametitle{Aufgabe zu deterministischen Turingmaschinen}
+	Geben Sie f"ur die nachfolgenden Sprachen "uber dem Alphabet $\Sigma = \{0,1\}$
+	jeweils eine Turingmaschine an,\\
+	die die entsprechende Sprache akzeptiert!
+	\begin{enumerate}
+		\item $\mathcal{L} = \{ \omega \in \{0,1\}^* \; | \; \omega \;
+		\mbox{enth"alt das Zeichen $0$ gleich oft wie das Zeichen $1$} \}$
+		\item $\mathcal{L}' = \{ \omega \in \{0,1\}^* \; | \; \omega \;
+		\mbox{enth"alt das Zeichen $0$ doppelt so oft wie das Zeichen $1$} \}$
+		\item $\mathcal{L}'' = \{ \omega \in \{0,1\}^* \; | \; \omega \;
+		\mbox{enth"alt das Zeichen $0$ nicht doppelt so oft wie das Zeichen $1$} \}$
+	\end{enumerate}
+\end{frame}
+
 \subsection{Nichtdeterministische Turingmaschine}
 \begin{frame}
 	\frametitle{Nichtdeterministische Turingmaschine}
 	TODO
 \end{frame}
+
+\subsection{Aufgabe 2}
+\begin{frame}
+\frametitle{Aufgabe}
+1. Eine nichtdeterministische Turingmaschine ist ein Tupel $\mathcal{TM} =
+(\mathcal{Q},\Sigma,\Gamma,\delta,q_0,\square,\mathcal{F})$ mit dem
+Eingabealphabet $\Sigma$, dem Bandalphabet $\Gamma \supseteq \Sigma$,
+dem Bandzeichen $\square \in \Gamma \setminus \Sigma$, der Zustandsmenge
+$\mathcal{Q}$, den Finalzust"anden $\mathcal{F} \subseteq \mathcal{Q}$ und
+dem Startzustand $q_0 \in \mathcal{Q}$. Da $\mathcal{TM}$ nichtdeterministisch
+ist, ist $\delta$ keine Zustands"ubergangsfunktion, sondern eine
+zustands"uberf"uhrende Relation $\delta \subseteq (\mathcal{Q} \times \Gamma)
+\times (\mathcal{Q} \times \Gamma \times \{L,N,R\})$. Dabei schreiben wir
+$\delta(q_1,X) = (q_2,Y,D)$, falls es ein Tupel $((q_1,X),(q_2,Y,D))$ in $\delta$
+gibt, d.h. falls wir in einem Zustand $q_1$ vom Band das Zeichen $X$ lesen und
+wir die Maschine in Zustand $q_2$ "uberf"uhren, das Zeichen $Y$ schreiben und den
+Lese-/Schreibkopf in Richtung $D \in \{L,N,R\}$ (also entweder nach links, nicht
+oder nach rechts) bewegen d"urfen.\\[4pt]
+Geben Sie nun eine nichtdeterministische Turingmaschine an, welche die Sprache
+$\mathcal{L} = \{ww \; | \; w \in \{a,b\}^*\}$ erkennt! Es gen"ugt dabei, den
+Zustands"ubergangsgraphen zu zeichnen und das verwendete Bandalphabet anzugeben.
+\end{frame}
+\begin{frame}
+\frametitle{Aufgabe}
+2. Gegeben sei folgende deterministische Turingmaschine $\mathcal{TM} =
+(\mathcal{Q},\Sigma,\Gamma,\delta,q_0,\#,\mathcal{F})$, wobei $\Sigma = \{a,b\}$,
+$\Gamma = \Sigma \cup \{B,\#\}$, den Zust"anden $\mathcal{Q} = \{q_0,\dots,q_7\}$,
+dem Startzustand $q_0$, den Finalzust"anden $\mathcal{F} = \{q_7\}$ und dem
+Bandzeichen $\#$. Der Zustands"ubergangsgraph ist gegeben durch:
+\begin{center}
+\resizebox{10cm}{!} {
+\begin{tikzpicture}[line width=1pt]
+\start{0}{0}{q_0}
+\tob{0}{0}{-2}{(a,\#,R)}
+\tor{0}{0}{3.5}{(B,\#,R)}
+\draw (2,-2) node[above right]{$(\#,\#,N)$};
+\draw [->] (0.283,-0.283) -- (3.717,-3.717);
+\state{0}{-2}{q_1}
+\rloopb{0}{-2}{(a,a,R),(B,B,R)}
+\tol{0}{-2}{-2}{(b,B,L)}
+\state{-2}{-2}{q_2}
+\rloopb{-2}{-2}{(a,a,L),(B,B,L)}
+\totr{-2}{-2}{0}{0}{(\#,\#,R)}
+\state{3.5}{0}{q_3}
+\rloopt{3.5}{0}{(a,a,R),(B,B,R)}
+\tor{3.5}{0}{5}{(\#,\#,L)}
+\state{5}{0}{q_4}
+\tob{5}{0}{-2}{(a,\#,L)}
+\state{5}{-2}{q_5}
+\rloopb{5}{-2}{(a,a,L),(B,B,L)}
+\tol{5}{-2}{3.5}{(\#,\#,R)}
+\state{3.5}{-2}{q_6}
+\tot{3.5}{-2}{0}{(B,\#,R)}
+\tol{3.5}{-2}{2}{(\#,\#,N)}
+\final{2}{-2}{q_7}
+\end{tikzpicture}
+}
+\end{center}
+Finden Sie die Sprache, die von der Turingmaschine $\mathcal{TM}$ akzeptiert wird!
+\end{frame}
+
 
 \subsection{Linear platzbeschränkte Turingmaschine}
 \begin{frame}
@@ -119,9 +169,21 @@ Dies bedeutet:
 	TODO
 \end{frame}
 
+\subsection{Aufgabe 1}
+\begin{frame}
+\frametitle{Aufgabe}
+\begin{enumerate}
+\item Geben Sie f"ur die Sprache $\mathcal{L}' = \{a^{2^n} \; | \; n \in
+\mathbb{N}\}$ eine linear beschr"ankte Turing-Maschine an und zeichnen\\
+Sie diese Turing-Maschine auch als Graphen!
+\item Pr"ufen Sie, ob Ihre Turing-Maschine $aaaa$ als Eingabe akzeptiert!
+Pr"ufen Sie auch nach, ob $aaa$ \underline{nicht}\\
+akzeptiert wird!
+\end{enumerate}
+\end{frame}
+
 \section{Schluss}
 \subsection{Schluss}
-
 \begin{frame}
 \frametitle{Bis zum nächsten Mal!}
 \begin{center}
