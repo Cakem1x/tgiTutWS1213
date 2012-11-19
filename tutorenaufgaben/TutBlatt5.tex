@@ -1,0 +1,338 @@
+\documentclass[10pt,oneside,onecolumn,a4paper,german,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{german}
+\usepackage{amsmath,amsfonts,amssymb,latexsym,textcomp,stmaryrd}
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+\pagestyle{plain}
+\pagenumbering{arabic}
+\parskip0.5ex plus0.1ex minus0.1ex
+\parindent0pt
+\voffset-1.04cm
+\topmargin0pt
+\headheight0pt
+\headsep0pt
+\topskip0pt
+\textheight26.7cm
+\footskip20pt
+\hoffset-1.04cm
+\oddsidemargin0pt
+\evensidemargin0pt
+\textwidth18cm
+\marginparsep0pt
+\marginparwidth0pt
+\begin{document}
+
+\newcommand{\start}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+  \draw [->] (#1*2-0.9,#2*2) -- (#1*2-0.4,#2*2);
+}
+\newcommand{\startfinal}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+  \draw (#1*2,#2*2) circle(0.32cm);
+  \draw [->] (#1*2-0.9,#2*2) -- (#1*2-0.4,#2*2);
+}
+\newcommand{\state}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+}
+\newcommand{\final}[3]
+{
+  \draw (#1*2,#2*2) node{$#3$};
+  \draw (#1*2,#2*2) circle(0.4cm);
+  \draw (#1*2,#2*2) circle(0.32cm);
+}
+\newcommand{\tol}[4]
+{
+  \draw (#1+#3,#2*2) node[above]{$#4$};
+  \draw [->] (#1*2-0.4,#2*2) -- (#3*2+0.4,#2*2);
+}
+\newcommand{\tor}[4]
+{
+  \draw (#1+#3,#2*2) node[above]{$#4$};
+  \draw [->] (#1*2+0.4,#2*2) -- (#3*2-0.4,#2*2);
+}
+\newcommand{\tot}[4]
+{
+  \draw (#1*2,#2+#3) node[right]{$#4$};
+  \draw [->] (#1*2,#2*2+0.4) -- (#1*2,#3*2-0.4);
+}
+\newcommand{\tob}[4]
+{
+  \draw (#1*2,#2+#3) node[right]{$#4$};
+  \draw [->] (#1*2,#2*2-0.4) -- (#1*2,#3*2+0.4);
+}
+\newcommand{\totl}[5]
+{
+  \draw (#1+#3,#2+#4) node[above right]{$#5$};
+  \draw [->] (#1*2-0.283,#2*2+0.283) -- (#3*2+0.283,#4*2-0.283);
+}
+\newcommand{\totr}[5]
+{
+  \draw (#1+#3,#2+#4) node[above left]{$#5$};
+  \draw [->] (#1*2+0.283,#2*2+0.283) -- (#3*2-0.283,#4*2-0.283);
+}
+\newcommand{\tobl}[5]
+{
+  \draw (#1+#3,#2+#4) node[below right]{$#5$};
+  \draw [->] (#1*2-0.283,#2*2-0.283) -- (#3*2+0.283,#4*2+0.283);
+}
+\newcommand{\tobr}[5]
+{
+  \draw (#1+#3,#2+#4) node[below left]{$#5$};
+  \draw [->] (#1*2+0.283,#2*2-0.283) -- (#3*2-0.283,#4*2+0.283);
+}
+\newcommand{\rloopl}[3]
+{
+  \draw (#1*2-1,#2*2) node[left]{$#3$};
+  \draw [->] (#1*2-0.35,#2*2-0.2) arc (-30:-320:0.32cm);
+}
+\newcommand{\rloopr}[3]
+{
+  \draw (#1*2+1,#2*2) node[right]{$#3$};
+  \draw [->] (#1*2+0.35,#2*2+0.2) arc (150:-140:0.32cm);
+}
+\newcommand{\rloopt}[3]
+{
+  \draw (#1*2,#2*2+1) node[above]{$#3$};
+  \draw [->] (#1*2-0.2,#2*2+0.35) arc (240:-50:0.32cm);
+}
+\newcommand{\rloopb}[3]
+{
+  \draw (#1*2,#2*2-1) node[below]{$#3$};
+  \draw [->] (#1*2+0.2,#2*2-0.35) arc (60:-230:0.32cm);
+}
+\newcommand{\lloopl}[3]
+{
+  \draw (#1*2-1,#2*2) node[left]{$#3$};
+  \draw [->] (#1*2-0.35,#2*2+0.2) arc (30:320:0.32cm);
+}
+\newcommand{\lloopr}[3]
+{
+  \draw (#1*2+1,#2*2) node[right]{$#3$};
+  \draw [->] (#1*2+0.35,#2*2-0.2) arc (-150:140:0.32cm);
+}
+\newcommand{\lloopt}[3]
+{
+  \draw (#1*2,#2*2+1) node[above]{$#3$};
+  \draw [->] (#1*2+0.2,#2*2+0.35) arc (-60:230:0.32cm);
+}
+\newcommand{\lloopb}[3]
+{
+  \draw (#1*2,#2*2-1) node[below]{$#3$};
+  \draw [->] (#1*2-0.2,#2*2-0.35) arc (-240:50:0.32cm);
+}
+\newcommand{\cyksymbol}[3]
+{
+  \draw (#2*#1-#1*0.5,-0.25) node {#3};
+}
+\newcommand{\cykfield}[4]
+{
+  \draw (#2*#1-#1+#3*#1*0.5-#1*0.5,#3*0.5-0.5) rectangle
+        (#2*#1   +#3*#1*0.5-#1*0.5,#3*0.5    );
+  \draw (#2*#1-#1+#3*#1*0.5       ,#3*0.5-0.5+0.25) node{$#4$};
+}
+
+\section*{Tutorien-"Ubungsblatt 5}
+
+\subsection*{Aufgabe 1}
+Gegeben sei folgende Grammatik $\mathcal{G} = (\{a,b,c\},\{S,A,B,C\},S,\mathcal{P})$
+mit\\
+$\mathcal{P} = \{S \rightarrow aABcb \; | \; aBC \; | \; CBABc,$\\
+$aA \rightarrow BCaAa \; | \; bb,$\\
+$BC \rightarrow CB,$\\
+$B \rightarrow aCaa \; | \; babAcc,$\\
+$aCa \rightarrow aAc \; | \; aca\}$.\\[4pt]
+L"osen Sie das Wortproblem anhand des in der Vorlesung angegebenen Algorithmus f"ur
+das Wort $w = acbbca$!
+
+\subsection*{Aufgabe 2}
+Geben Sie, sofern m"oglich, je eine L"osung f"ur die folgenden Post-Systeme an!
+Begr"unden Sie gegebenenfalls,\\
+warum es keine L"osung geben kann!
+\begin{enumerate}
+\item \begin{displaymath} \{ {aa \choose a}, {b \choose aa}, {a \choose aab} \}
+\end{displaymath}
+\item \begin{displaymath} \{ {01 \choose 0}, {0 \choose 101}, {101 \choose 0} \}
+\end{displaymath}
+\end{enumerate}
+
+\subsection*{Aufgabe 3}
+Geben Sie f"ur die nachfolgenden Sprachen "uber dem Alphabet $\Sigma = \{0,1\}$
+jeweils eine Turingmaschine an,\\
+die die entsprechende Sprache akzeptiert!
+\begin{enumerate}
+\item $\mathcal{L} = \{ \omega \in \{0,1\}^* \; | \; \omega \;
+\mbox{enth"alt das Zeichen $0$ gleich oft wie das Zeichen $1$} \}$
+\item $\mathcal{L}' = \{ \omega \in \{0,1\}^* \; | \; \omega \;
+\mbox{enth"alt das Zeichen $0$ doppelt so oft wie das Zeichen $1$} \}$
+\item $\mathcal{L}'' = \{ \omega \in \{0,1\}^* \; | \; \omega \;
+\mbox{enth"alt das Zeichen $0$ nicht doppelt so oft wie das Zeichen $1$} \}$
+\end{enumerate}
+
+\subsection*{Aufgabe 4}
+Zeigen Sie, dass die Sprache $\mathcal{L} = \{ \langle \mathcal{M} \rangle \; | \;
+\mbox{Turingmaschine $\mathcal{M}$ akzeptiert jede Eingabe} \}$ nicht entscheidbar
+ist!
+
+\newpage
+
+\subsection*{L"osung zu Aufgabe 1}
+Mit $|\omega| = 6$ ergibt die Anwendung des Algorithmus für kontextfreie Grammatiken
+folgende Tabelle:\\[4pt]
+\begin{tabular}{c|l}
+Durchlauf & $\mathcal{M}$ \\
+\hline
+0 & $\mathcal{M}_0 := \{S\}$ \\
+1 & $\mathcal{M}_1 := \mathcal{M}_0 \cup \{aABcb,aBC,CBABc\}$ \\
+2 & $\mathcal{M}_2 := \mathcal{M}_1 \cup \{bbBcb,aCB,aaCaaC\}$ \\
+3 & $\mathcal{M}_3 := \mathcal{M}_2 \cup \{aCaCaa,aaAcaC,aacaaC\}$ \\
+4 & $\mathcal{M}_4 := \mathcal{M}_3 \cup \{abbcaC,aAcCaa,acaCaa,aCaAca,aCacaa\}$ \\
+5 & $\mathcal{M}_5 := \mathcal{M}_4 \cup \{bbcCaa,aCbbca,acaAca,acacaa,aAcAca,
+aAccaa\}$ \\
+6 & $\mathcal{M}_6 := \mathcal{M}_5 \cup \{acbbca,...\}$ bzw. 
+$\mathcal{M}_6 := \mathcal{M}_5 \cup \{acbbca,bbcAca,bbccaa\}$ \\
+7 & $\mathcal{M}_7 := \mathcal{M}_6 \cup \varnothing$
+\end{tabular}\\[4pt]
+$acbbca \in \mathcal{M}_6 \Rightarrow acbbca \in \mathcal{L}(\mathcal{G})$
+
+\subsection*{L"osung zu Aufgabe 2}
+\begin{enumerate}
+\item Die k"urzeste L"osung ist $(1,3,2,1,1)$, welche das L"osungswort $aaabaaaa$
+erzeugt.
+\item Jede L"osung mu"s mit einem Wortpaar enden, bei dem das obere und das untere
+Wort auf dem gleichen\\
+Zeichen enden oder bei dem eines von den beiden W"ortern das leere Wort ist. Beides
+ist hier nicht der\\
+Fall, weswegen keine L"osung existieren kann.
+\end{enumerate}
+
+\subsection*{L"osung zu Aufgabe 3}
+\begin{enumerate}
+\item Turingmaschine zu $\mathcal{L}$:
+\begin{center}
+\begin{tikzpicture}[>=latex, shorten >=1pt, auto]
+  \draw (175.0pt, -298.0pt)node[state](0){$q_0$};
+  \draw (365.0pt, -298.0pt)node[state](1){$r$};
+  \draw (547.0pt, -298.0pt)node[state](2){$q_1$};
+  \draw (273.0pt, -115.0pt)node[state, initial, initial text =](3){$s$};
+  \draw (475.0pt, -115.0pt)node[state, accepting](4){$f$};
+  \draw (362.0pt, -417.0pt)node[state](5){$e$};
+  \path[->] (1) edge[loop above] node[text width=2cm,text centered]{1 : 1, L\\ 0 : 0, L\\ E : E, L}(1);
+  \path[->] (5) edge[loop above] node{$\square$ : $\square$, N}(5);
+  \path[->] (3) edge node{$\square$ : $\square$, N}(4);
+  \path[->] (2) edge node{1 : E, L}(1);
+  \path[->] (0) edge node{$\square$ : $\square$, N}(5);
+  \path[->] (2) edge[loop above] node[text width=2cm,text centered]{0 : 0, R\\ E : E, R}(2);
+  \path[->] (3) edge[loop above] node{E : E, R}(3);
+  \path[->] (0) edge[loop above] node[text width=2cm,text centered]{E : E, R\\ 1 : 1, R}(0);
+  \path[->] (0) edge node{0 : E, L}(1);
+  \path[->] (1) edge node{$\square$ : $\square$, R}(3);
+  \path[->] (2) edge node{$\square$ : $\square$, N}(5);
+  \path[->] (3) edge node{1 : E, R}(0);
+  \path[->] (3) edge node{0 : E, R}(2);
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\item Turingmaschine zu $\mathcal{L}'$:
+\begin{center}
+\begin{tikzpicture}[>=latex, shorten >=1pt, auto, scale=0.85]
+  \draw (244.0pt, -344.0pt)node[state](0){$q_0$};
+  \draw (341.0pt, -233.0pt)node[state](1){$r$};
+  \draw (438.0pt, -285.0pt)node[state](2){$q_1$};
+  \draw (268.0pt, -50.0pt)node[state, initial, initial text =](3){$s$};
+  \draw (399.0pt, -50.0pt)node[state, accepting](4){$f$};
+  \draw (350.0pt, -478.0pt)node[state](5){$e$};
+  \draw (135.0pt, -344.0pt)node[state](6){$q_{00}$};
+  \draw (631.0pt, -344.0pt)node[state](7){$q_{01}$};
+  \path[->] (1) edge node{$\square$ : $\square$, R}(3);
+  \path[->] (6) edge node{0 : E, R}(0);
+  \path[->] (1) edge[loop above] node[text width=2cm,text centered]{E : E, L\\ 0 : 0, L\\ 1 : 1, L}(1);
+  \path[->] (6) edge[loop above] node[text width=2cm,text centered]{1 : 1, R\\ E : E, R}(6);
+  \path[->] (2) edge[loop above] node[text width=2cm,text centered]{E : E, R\\ 0 : 0, R}(2);
+  \path[->] (0) edge[loop above] node[text width=2cm,text centered]{1 : 1, R\\ E : E, R}(0);
+  \path[->] (3) edge[loop above] node{E : E, R}(3);
+  \path[->] (7) edge[loop above] node{E : E, R}(7);
+  \path[->] (0) edge node{$\square$ : $\square$, N}(5);
+  \path[->] (7) edge node{0 : E, R}(2);
+  \path[->] (7) edge node{1 : E, R}(0);
+  \path[->] (2) edge node{1 : E, L}(1);
+  \path[->] (5) edge[loop above] node{$\square$ : $\square$, N}(5);
+  \path[->] (3) edge node{$\square$ : $\square$, N}(4);
+  \path[->] (6) edge node{$\square$ : $\square$, N}(5);
+  \path[->] (0) edge node{0 : E, L}(1);
+  \path[->] (3) edge node{1 : E, R}(6);
+  \path[->] (3) edge node{0 : E, R}(7);
+  \path[->] (2) edge node{$\square$ : $\square$, N}(5);
+  \path[->] (7) edge node{$\square$ : $\square$, N}(5);
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\item Turingmaschine zu $\mathcal{L}''$:
+\begin{center}
+\begin{tikzpicture}[>=latex, shorten >=1pt, auto, scale=0.85]
+  \draw (244.0pt, -344.0pt)node[state](0){$q_0$};
+  \draw (341.0pt, -233.0pt)node[state](1){$r$};
+  \draw (438.0pt, -285.0pt)node[state](2){$q_1$};
+  \draw (268.0pt, -50.0pt)node[state, initial, initial text =](3){$s$};
+  \draw (399.0pt, -50.0pt)node[state](4){$e$};
+  \draw (350.0pt, -478.0pt)node[state, accepting](5){$f$};
+  \draw (135.0pt, -344.0pt)node[state](6){$q_{00}$};
+  \draw (631.0pt, -344.0pt)node[state](7){$q_{01}$};
+  \path[->] (1) edge node{$\square$ : $\square$, R}(3);
+  \path[->] (6) edge node{0 : E, R}(0);
+  \path[->] (1) edge[loop above] node[text width=2cm,text centered]{E : E, L\\ 0 : 0, L\\ 1 : 1, L}(1);
+  \path[->] (6) edge[loop above] node[text width=2cm,text centered]{1 : 1, R\\ E : E, R}(6);
+  \path[->] (2) edge[loop above] node[text width=2cm,text centered]{E : E, R\\ 0 : 0, R}(2);
+  \path[->] (0) edge[loop above] node[text width=2cm,text centered]{1 : 1, R\\ E : E, R}(0);
+  \path[->] (3) edge[loop above] node{E : E, R}(3);
+  \path[->] (7) edge[loop above] node{E : E, R}(7);
+  \path[->] (0) edge node{$\square$ : $\square$, N}(5);
+  \path[->] (7) edge node{0 : E, R}(2);
+  \path[->] (7) edge node{1 : E, R}(0);
+  \path[->] (2) edge node{1 : E, L}(1);
+  \path[->] (4) edge[loop above] node{$\square$ : $\square$, N}(4);
+  \path[->] (3) edge node{$\square$ : $\square$, N}(4);
+  \path[->] (6) edge node{$\square$ : $\square$, N}(5);
+  \path[->] (0) edge node{0 : E, L}(1);
+  \path[->] (3) edge node{1 : E, R}(6);
+  \path[->] (3) edge node{0 : E, R}(7);
+  \path[->] (2) edge node{$\square$ : $\square$, N}(5);
+  \path[->] (7) edge node{$\square$ : $\square$, N}(5);
+\end{tikzpicture}
+\end{center}
+Es wurden im Vergleich zur vorherigen Turingmaschine nur die Zust"ande $f$ und $e$
+vertauscht!
+\end{enumerate}
+
+\subsection*{L"osung zu Aufgabe 4}
+\underline{Beweis:} Zeige die Reduktion $\mbox{HALT} \leq \mathcal{L}$!\\
+Konstruiere dazu aus einer Instanz $(\langle \mathcal{M} \rangle,w) \in \mbox{HALT}$,
+also aus der Turingmaschine $\mathcal{M}$ und deren Eingabe $w$,\\
+eine neue Turingmaschine $\mathcal{M}'$:\\
+- Leere das Band\\
+- Schreibe $w$ auf das Band\\
+- Simuliere $\mathcal{M}$\\
+- Gehe in einen akzeptierenden Zustand\\[4pt]
+Sei nun $f: \mbox{HALT} \to \mathcal{L}, (\langle \mathcal{M} \rangle,w) \mapsto \langle \mathcal{M}' \rangle$ die totale und berechenbare Funktion, die die Reduktion nach\\
+der obigen Beschreibung liefert. Dann gilt:\\[4pt]
+$(\langle \mathcal{M} \rangle,w) \in \mbox{HALT} \Leftrightarrow \mathcal{M} \;
+\mbox{h"alt bei der Eingabe von} \; w \Leftrightarrow \mathcal{M}' \;
+\mbox{akzeptiert jede Eingabe} \Leftrightarrow$\\
+$\langle\mathcal{M}' \rangle = f((\langle \mathcal{M} \rangle,w)) \in \mathcal{L}$\\[4pt]
+Damit ergibt sich aus der Annahme, dass $\mathcal{L}$ berechenbar ist, direkt,
+dass auch $\mbox{HALT}$ berechenbar ist. Dies ist\\
+aber ein Widerspruch, da $\mbox{HALT}$ als nicht berechenbar bekannt ist. Damit
+kann also $\mathcal{L}$ nicht berechenbar sein.
+
+\end{document}
