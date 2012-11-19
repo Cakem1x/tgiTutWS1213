@@ -16,6 +16,8 @@
 	Die Turingmaschine besteht aus einem beidseitig \emph{unendlichen} Eingabe- und Rechenband
 	mit einem frei beweglichen Lese-/Schreibkopf, der von einer \emph{endlichen} Kontrolle gesteuert wird. 
 	\begin{center}
+		\vspace{1cm}
+		\hspace{-12mm}
 		\includegraphics[scale=0.5]{images/tmaschine.png}
 	\end{center}
 \end{frame}
@@ -164,10 +166,17 @@ Finden Sie die Sprache, die von der Turingmaschine $\mathcal{TM}$ akzeptiert wir
 \end{frame}
 
 
-\subsection{Linear platzbeschränkte Turingmaschine}
+\subsection{Linear beschränkte Turingmaschine}
 \begin{frame}
-	\frametitle{Linear platzbeschränkte Turingmaschine}
-	TODO
+	\frametitle{Linear beschränkte Turingmaschine}
+	Eine linear beschränkte Turingmaschine (auch \emph{LBA} = Linear Bounded Automaton) darf den Bereich des Bandes auf dem die Eingabe steht nicht verlassen.\\
+	\vspace{2mm}
+	Variation:
+	\begin{itemize}
+		\item Die linear beschränkte Turingmaschine darf noch genau ein weiteres Zeichen rechts von dem Eingabewort zu verwenden. 
+	\end{itemize}
+	\vspace{2mm}
+	Die von der nichtdeterministischen linear beschränkten Turingmaschine akzeptierten Sprachen sind genau die kontextsensitiven Sprachen. (CH-1)
 \end{frame}
 
 \subsection{Aufgabe 1}
