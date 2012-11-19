@@ -1,0 +1,126 @@
+\include{includes/common_start}
+\include{includes/tutBlatt_methods}
+\tutnr{5}
+
+\section{Altlasten}
+\subsection{CYK}
+\begin{frame}
+	\frametitle{CYK Darstellungen}
+\end{frame}
+
+\section{Turingmaschine}
+\subsection{Allgemeine Turingmaschine}
+\subsection{Turingmaschine}
+\begin{frame}
+	\frametitle{Turingmaschine}
+	Die Turingmaschine besteht aus einem beidseitig \emph{unendlichen} Eingabe- und Rechenband
+	mit einem frei beweglichen Lese-/Schreibkopf, der von einer \emph{endlichen} Kontrolle gesteuert wird. 
+	\begin{center}
+		\includegraphics[scale=0.5]{images/tmaschine.png}
+	\end{center}
+\end{frame}
+\begin{frame}
+\frametitle{Turingmaschine}
+\begin{block}{Definiton}
+Eine Turingmaschine wird definiert als ein 7-Tupel bestehend aus:
+ \begin{itemize}
+ \item $Q$, einer endlichen Zustandsmenge
+ \item $\Sigma$, einem endlichen Eingabealphabet
+ \item $\sqcup$, einem Blanksymbol mit $\sqcup \notin \Sigma$
+ \item $\Gamma$, einem endlichen Bandalphabet mit $\Sigma \cup\{\sqcup\} \subseteq \Gamma$
+ \item $s \in Q$, einem Startzustand
+ \item $\delta$, einer Übergangsfunktion $\delta: Q\times\Gamma \rightarrow Q\times\Gamma\times\{L, R, N\}$
+ \item $F \subseteq Q$, einer Menge an Endzuständen
+ \end{itemize}
+\end{block}
+\begin{block}{Bemerkung}
+ Für $q\in F$ gilt: $\forall a \in \Gamma: \delta(q, a) = (q, a, N)$, d.h. die Berechnung der Turingmaschine stoppt.
+\end{block}
+\end{frame}
+
+\frame{
+	\frametitle{Graph einer Turingmaschine}
+	\begin{center}
+	\begin{tikzpicture}[node distance=2.25cm,auto]
+	\node(q0)[draw,circle,thick]{$q_0$};
+	\node (s) [node distance=1cm,left of =q0]{};
+	\node(q1)[draw,circle,thick,right of=q0]{$q_1$};
+	\node(qx)[right of=q1]{\dots};
+
+	\path[->]       (s) edge (q0)
+	                (q0) edge[bend left] node{$a|b,L$} (q1)
+			                (q1) edge[bend left] node{\dots} (qx);
+					\end{tikzpicture}
+					\end{center}
+
+					Dabei steht die Kantenbeschriftung "`$a|b,L$"' für den Übergang $\delta(q_0,a) =
+					(q_1,b,L)$.
+
+					\vspace{2mm}
+					Falls es für einen gegebenen Zustand und ein gegebenes
+					Symbol keinen Zustandsübergang gibt, bricht die Maschine die Berechnung ab. 
+}
+
+\begin{frame}
+	\frametitle{Turingmaschine: Beispiel}
+
+	Seien $\Sigma = \{0,1\}$, $\Gamma = \{0,1,\sqcup\}$ und die Turingmaschine $\M =(\{q_0, q_1,q_2,q_f\},\Sigma, \sqcup, \Gamma,\delta,q_0,\{q_f\})$ mit folgender Überführungsfunktion gegeben:
+
+	\begin{center}
+	\begin{tikzpicture}[node distance=2.25cm,auto]
+	\node(q0)[state,initial]{$q_0$};
+	\node(q1)[state,right of=q0]{$q_1$};	
+	\node(q2)[state,right of=q1]{$q_2$};	
+	\node(qf)[state,accepting,right of=q2]{$q_f$};	
+
+	\path[->]       (q0) edge node{$0|1,R$} (q1)
+					(q1) edge node{$1|0,R$} (q2)
+	                (q1) edge[loop above] node{$0|1,R$} (q1)	                
+			        (q2) edge[loop above] node{$1|0,R$} (q2)
+			        (q2) edge node{$\sqcup|\sqcup,N$} (qf);
+					\end{tikzpicture}
+					\end{center} 
+
+	\begin{itemize}
+		\item Welche Wörter akzeptiert \M{}?
+		\item Wie verändert \M{} die Eingabe?
+	\end{itemize}			
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Konfigurationen}
+Sei $\mathcal{M} =(Q,\Sigma, \sqcup, \Gamma,\delta,s,F)$ eine Turingmaschine.
+
+Angabe des aktuellen Berechnungszustandes: \emph{Konfiguration}
+
+$$w(q)av$$ 
+
+wobei $w,v \in \Gamma^*, a \in \Gamma$ und $q\in Q$. \\
+
+Dies bedeutet:
+
+\begin{itemize}
+	\item $\mathcal{M}$ befindet sich im Zustand $q$.
+	\item Der Lesekopf steht auf dem Zeichen $a$.
+	\item Links vom Lesekopf steht das Wort $w$ und rechts davon das Wort $v$ auf dem Rechenband.
+\end{itemize}
+\end{frame}
+
+\subsection{Linear platzbeschränkte Turingmaschine}
+\begin{frame}
+	\frametitle{Linear platzbeschränkte Turingmaschine}
+	TODO
+\end{frame}
+
+\section{Schluss}
+\subsection{Schluss}
+
+\begin{frame}
+\frametitle{Bis zum nächsten Mal!}
+\begin{center}
+  \includegraphics[width=1 \textheight]{images/xkcd_205.png}
+\end{center}
+\end{frame}
+
+\include{includes/common_end}
