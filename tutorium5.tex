@@ -31,7 +31,7 @@ Eine Turingmaschine wird definiert als ein 7-Tupel bestehend aus:
  \item $Q$, einer endlichen Zustandsmenge
  \item $\Sigma$, einem endlichen Eingabealphabet
  \item $\Gamma$, einem endlichen Bandalphabet mit $\Sigma \cup\{\sqcup\} \subseteq \Gamma$, wobei $\sqcup \notin \Sigma$
- \item $\delta$, einer Übergangsfunktion $\delta: Q\times\Gamma \rightarrow Q\times\Gamma\times\{L, R, N\}$
+ \item $\delta$, einer Übergangsfunktion $\delta: Q\times\Gamma \rightarrow Q\times\Gamma\times\{L, R\}$
  \item $s \in Q$, einem Startzustand
  %\item $F \subseteq Q$, einer Menge an Endzuständen
  \item $q_{accept}$, einem akzeptierenden Zustand
@@ -39,7 +39,7 @@ Eine Turingmaschine wird definiert als ein 7-Tupel bestehend aus:
  \end{itemize}
 \end{block}
 \begin{block}{Bemerkung}
- Für $q_{accept}$ und $q_{reject}$ gilt: $\forall a \in \Gamma: \delta(q, a) = (q, a, N)$, d.h. die Berechnung der Turingmaschine stoppt. Alle impliziten Übergänge führen in den Zustand $q_{reject}$.
+ In den Zuständen $q_{accept}$ und $q_{reject}$ hält die Turingmaschine unabhängig davon, was vom Band eingelesen wird. Zudem führen alle impliziten Übergänge in den Zustand $q_{reject}$.
 \end{block}
 \end{frame}
 
