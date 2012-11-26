@@ -1,0 +1,154 @@
+\documentclass[10pt,oneside,onecolumn,a4paper,german,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{german}
+\usepackage{amsmath,amsfonts,amssymb,latexsym,textcomp,stmaryrd}
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+\pagestyle{plain}
+\pagenumbering{arabic}
+\parskip0.5ex plus0.1ex minus0.1ex
+\parindent0pt
+\voffset-1.04cm
+\topmargin0pt
+\headheight0pt
+\headsep0pt
+\topskip0pt
+\textheight26.7cm
+\footskip20pt
+\hoffset-1.04cm
+\oddsidemargin0pt
+\evensidemargin0pt
+\textwidth18cm
+\marginparsep0pt
+\marginparwidth0pt
+\begin{document}
+
+\section*{Tutorien-"Ubungsblatt 6}
+
+\subsection*{Aufgabe 1}
+Zeigen Sie, dass die Sprache $\mathcal{L} = \{\langle\mathcal{M}\rangle \; | \;
+\mbox{Turingmaschine $\mathcal{M}$ hat mindestens einen unerreichbaren Zustand}\}$\\
+nicht entscheidbar ist!
+
+\subsection*{Aufgabe 2}
+Beweisen Sie, dass es eine G"odelnummer $n = \langle\mathcal{M}\rangle \in
+\mathbb{N}_0$ zu einer Turingmaschine $\mathcal{M}$ gibt, die die Funktion\\
+$f_n(x) = (n+x)^2$ f"ur alle $x \in \mathbb{N}_0$ berechnet!
+
+\subsection*{Aufgabe 3}
+Welche der folgenden Mengen sind rekursiv aufz"ahlbar? Beweisen Sie Ihre Aussage!
+\begin{enumerate}
+\item $M_1 := \{q \in \mathbb{Q} \; | \; 0<q<1\}$
+\item $M_2 := \{r \in \mathbb{R} \; | \; 0<r<1\}$
+\end{enumerate}
+
+\subsection*{Aufgabe 4}
+Sei $A \subseteq \mathbb{N}_0$ eine entscheidbare Menge. Zeigen Sie, dass
+$ B := \{x+2y^2+17+11^x \; | \; x,y \in A\}$ entscheidbar ist!
+
+\subsection*{L"osung zu Aufgabe 1}
+\underline{Beweis:} Es gilt: $\mathcal{L} \; \mbox{entscheidbar} \Leftrightarrow
+\bar{\mathcal{L}} \; \mbox{entscheidbar}$\\
+Zeige also die Reduktion $\mbox{HALT} \leq_m \bar{\mathcal{L}} = \{\langle\mathcal{M}
+\rangle \; | \; \mbox{Turingmaschine $\mathcal{M}$ hat keinen unerreichbaren
+Zustand}\}$!\\
+Konstruiere dazu aus einer Instanz $(\langle\mathcal{M}\rangle,w) \in \mbox{HALT}$,
+also aus der Turingmaschine $\mathcal{M}$ und deren Eingabe $w$,\\
+eine neue Turingmaschine $\mathcal{M}'$:\\
+1. Leere das Band\\
+2. Schreibe $w$ auf das Band\\
+3. Simuliere $\mathcal{M}$\\
+4. Gehe in einen speziellen Zustand $q_S$\\
+Dabei hat $\mathcal{M}'$ bez"uglich der Schritte 1. bis 3. keine unerreichbaren
+Zust"ande, der einzige potentiell\\
+unerreichbare Zustand ist also $q_S$.\\[4pt]
+Sei nun $f: \mbox{HALT} \to \bar{\mathcal{L}}, (\langle\mathcal{M}\rangle,w) \mapsto
+\langle\mathcal{M}'\rangle$ die totale und berechenbare Funktion, die die Reduktion
+nach der\\
+obigen Beschreibung liefert. Dann gilt:\\[4pt]
+$(\langle\mathcal{M}\rangle,w) \in \mbox{HALT} \Leftrightarrow \mathcal{M} \;
+\mbox{h"alt bei der Eingabe von} \; w \Leftrightarrow \mathcal{M}' \;
+\mbox{erreicht den Zustand} \; q_S \Leftrightarrow$\\
+$\mathcal{M}' \; \mbox{hat keinen unerreichbaren Zustand} \Leftrightarrow \langle
+\mathcal{M}'\rangle = f((\langle\mathcal{M}\rangle,w)) \in \bar{\mathcal{L}}$\\[4pt]
+Damit ergibt sich aus der Annahme, dass $\bar{\mathcal{L}}$ berechenbar ist, direkt,
+dass auch $\mbox{HALT}$ berechenbar ist. Dies ist\\
+aber ein Widerspruch, da $\mbox{HALT}$ als nicht berechenbar bekannt ist. Damit
+kann also $\bar{\mathcal{L}}$ und damit auch $\mathcal{L}$\\
+nicht berechenbar sein.
+
+\newpage
+
+\subsection*{L"osung zu Aufgabe 2}
+Wir wenden das Rekursionstheorem auf folgende Turingmaschine $\mathcal{M}$ an, welche eine Eingabe $x$ erh"alt:\\[4pt]
+1. Hole eigene Beschreibung $n = \langle \mathcal{M} \rangle$\\
+2. Berechne $y = n + x$\\
+3. Berechne $z = y^2$\\
+4. Gib $z$ aus\\[4pt]
+Sei $n = \langle\mathcal{M}'\rangle$ die G"odelnummer von $\mathcal{M}$. $\mathcal{M}$ berechnet also die Funktion $f_n(x) = (n+x)^2$.
+
+
+\subsection*{L"osung zu Aufgabe 3}
+\begin{enumerate}
+\item Es wird als bekannt vorausgesetzt, dass es berechenbare Bijektionen von
+$\mathbb{N}_0$ nach $\mathbb{N}_0^2$ gibt. Sei $f$ eine beliebige, aber feste
+derartige Bijektion. Seien $\kappa_1: \mathbb{N}_0^2 \to \mathbb{N}_0, (n_1,n_2)
+\mapsto n_1$ und $\kappa_2: \mathbb{N}_0^2 \to \mathbb{N}_0, (n_1,n_2) \mapsto n_2$
+die ebenfalls berechenbaren Projektionen.\\[4pt]
+Betrachte nun die Funktion $g: \mathbb{N}_0 \to \mathbb{Q}$ mit\\
+$g(x) := \left\{
+\begin{array}{c@{\hspace{0.5cm},\hspace{0.5cm}}l}
+\frac{\kappa_1(f(x))}{\kappa_2(f(x))} & \mbox{falls} \; 
+0 < \kappa_1(f(x)) < \kappa_2(f(x)) \\
+\frac{1}{2} & \mbox{sonst}
+\end{array}
+\right.$\\[4pt]
+$g$ ist berechenbar und es gilt $\mbox{Bild}(g) = M_1$, also ist $M_1$
+rekursiv aufz"ahlbar.
+\item \underline{Annahme:} $M_2$ ist rekursiv aufz"ahlbar\\
+Da $M_2 \not= \varnothing$ gilt, gibt es eine totale und berechenbare Funktion
+$f: \mathbb{N}_0 \to \mathbb{R}$ mit $\mbox{Bild}(f) = M_2$.\\
+Seien dann $f(0) = 0,a_{00}a_{01}... \; , \; f(1) = 0,a_{10}a_{11}... \; ,$ usw.,
+wobei also $a_{ij}$ die Ziffer der Nachkommastelle mit dem Positionsindex $j$ zu
+$f(i)$ bezeichnet.\\[4pt]
+Konstruiere $b := 0,b_1b_2...$ mit\\
+$b_i := \left\{
+\begin{array}{c@{\hspace{0.5cm},\hspace{0.5cm}}l}
+1 & \mbox{falls} \; a_{ii} \neq 1 \\
+0 & \mbox{sonst}
+\end{array}
+\right.$\\[4pt]
+Dann gilt $b \in M_2$, es muss also eine Zahl $n \in \mathbb{N}_0$ geben mit
+$f(n) = b$. Daraus folgt:\\
+$b_n = 1 \Leftrightarrow a_{nn} = b_n \neq 1$\\
+Dies ist ein Widerpruch, damit ist $M_2$ nicht rekursiv aufz"ahlbar.
+\end{enumerate}
+
+\subsection*{L"osung zu Aufgabe 4}
+Da die Funktion $x+2y^2+17+11^x$ streng monoton wachsend ist und zudem $A \subseteq
+\mathbb{N}_0$ gilt, folgt somit:\\
+$z \in B \Leftrightarrow \exists \; x,y \in A: 0 \leq x \leq z \wedge 0 \leq y \leq z
+\wedge z = x+2y^2+17+11^x$\\
+Da $A$ entscheidbar ist, ist damit ihre charakteristische Funktion $\chi_A$
+berechenbar.\\[4pt]
+Betrachte nun folgende Mehrband-Turingmschine, die auf dem ersten Band die Eingabe
+$z$ enth"alt:\\
+1. Initialisiere $x$ auf dem zweiten Band und $y$ auf dem dritten Band mit $0$\\
+2. Berechne auf weiteren B"andern $\chi_A(x)$, $\chi_A(y)$ und $x+2y^2+17+11^x$\\
+3. Pr"ufe, ob $\chi_A(x) = 1 \wedge \chi_A(y) = 1 \wedge x+2y^2+17+11^x = z$ gilt:\\
+- Falls ja: Ersetze $z$ auf dem ersten Band durch eine $1$ und stoppe\\
+- Falls nein: Gehe zu Schritt 4.\\
+4. Erh"ohe $y$ um $1$ und pr"ufe, ob $y \leq z$ gilt:\\
+- Falls ja: Gehe zu Schritt 2.\\
+- Falls nein: Setze $y$ auf $0$ zur"uck und gehe zu Schritt 5.\\
+5. Erh"ohe $x$ um $1$ und pr"ufe, ob $x \leq z$ gilt:\\
+- Falls ja: Gehe zu Schritt 2.\\
+- Falls nein: Ersetze $z$ auf dem ersten Band durch eine $0$ und stoppe\\[4pt]
+Die Turingmaschine berechnet die charakteristische Funktion $\chi_B$ und ist wie
+jede Mehrband-Turingmschine durch eine Einband-Turingmschine simulierbar. Wichtig
+ist dabei, dass alle Einzelschritte berechenbar sind. Daf"ur wird die Berechenbarkeit
+von $\chi_A$ ben"otigt. Zudem wird als bekannt vorausgesetzt, dass die diskrete
+Arithmetik auf $\mathbb{N}_0$ und damit der Term $x+2y^2+17+11^x$ berechenbar ist.
+
+\end{document}
