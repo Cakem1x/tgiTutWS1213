@@ -4,6 +4,24 @@
 \tutnr{6}
 
 \section{Gödelnummer}
+\subsection{Gödelnummer Erklärung}
+\begin{frame}
+	\frametitle{Gödelnummer}
+	\begin{itemize}
+		\item Jede Turingmaschine lässt sich eindeutig als natürliche Zahl darstellen. \\ Diese Zahl ist ihre \emph{Gödelnummer}.
+		\begin{itemize}
+			\item Das bedeutet auch, dass die Menge aller Turingmaschinen abzählbar ist!
+		\end{itemize}
+		\item Eine Möglichkeit eine Turingmaschine binär zu kodieren wäre folgende: \\
+		Alle $n$ Zustandsübergänge $\delta(q_i, x_j) = (q_k, x_l, d_m)$, \\
+		mit $d_1 = L$, $d_2 = N$, $d_3 = R$ \\
+		kodieren in \\
+		$111 code_1 11 code_2 11 ... 11 code_{n-1} 11 code_n 111$ \\
+		Wobei $code_r$ so kodiert ist: \\
+		$0^i 1 0^j 1 0^k 1 0^l 1 0^m$
+		\item Eine solche eindeutige Kodierung nennen wir Gödelisierung.
+	\end{itemize}
+\end{frame}
 
 
 \begin{frame}
