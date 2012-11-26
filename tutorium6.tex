@@ -8,19 +8,15 @@
 
 \begin{frame}
 	\frametitle{Universelle Turingmaschine}
-%\begin{block}{Universelle Turingmaschine}
 \begin{itemize}
-
-\item Eingabe:
-\begin{enumerate}
-\item Kodierung einer TM
-\item Eingabe für die zu simulierende TM
-\end{enumerate}
-\item Simulation der übergebenen TM
-\item Ausgabe: Ausgabe der simulierten TM.
-\end{itemize}
-%\end{block}
-%Eine universelle Turingmaschine ist eine Turingmaschine, mit der jegliche Turingmaschine simuliert werden kann. Sie erhält als Eingabe die Gödelnummer der zu simulierenden Turingmaschine und die zu bearbeitende Eingabe.
+	\item Eingabe:
+	\begin{enumerate}
+	\item Kodierung einer TM
+	\item Eingabe für die zu simulierende TM
+	\end{enumerate}
+	\item Simulation der übergebenen TM
+	\item Ausgabe: Ausgabe der simulierten TM.
+	\end{itemize}
 \end{frame}
 \section{Entscheidbarkeit}
 \subsection{Erklärung}
@@ -41,11 +37,6 @@
 	\item Eine TM \emph{realisiert} die Funktion $f: \Sigma^* \rightarrow \Gamma^*$ mit $$f(w) = \begin{cases} \text{Ausgabe der TM nach Abarbeitung von } w & \text{wenn die TM hält} \\ \text{undefiniert} & \text{sonst} \end{cases}$$
  \end{enumerate}
 \end{frame}
-\subsection{Beispiel B5 A4}
-\begin{frame}
-	\frametitle{Beispielaufgabe Entscheidbarkeit (B5 A4)}
-	Zeigen Sie, dass die Sprache \\ $\mathcal{L} = \{ \langle \mathcal{M} \rangle \; | \; \mbox{Turingmaschine $\mathcal{M}$ akzeptiert jede Eingabe} \}$ \\ nicht entscheidbar ist!
-\end{frame}
 \subsection{Halteproblem}
 \begin{frame}
 	\frametitle{Halteproblem}
@@ -57,11 +48,11 @@
 		\item Annahme: $K = \{ w \vert M_w(w)$ hält $\}$ [1] ist durch DTM $M_k$ entscheidbar.
 		\item Betrachte DTM $\tilde M$, die $M_k$ simuliert und genau dann akzeptiert, wenn $M_k$ nicht akzeptiert.
 		\begin{itemize}
-			\item $\tilde M(w)$ hält $\Leftrightarrow w \in K$ [2]
+			\item $\tilde M(w)$ hält $\Leftrightarrow w \not \in K$ [2]
 		\end{itemize}
 		\item Für die Kodierung $\tilde w$ von $\tilde M$ gilt:
 		\begin{align*}
-			\tilde w \in K \Leftrightarrow_1 M_{\tilde w}(\tilde w) \text{hält} \Leftrightarrow_2 \tilde w \in K
+			\tilde w \in K \Leftrightarrow_1 M_{\tilde w}(\tilde w) \text{hält} \Leftrightarrow_2 \tilde w \not \in K
 		\end{align*}
 	\end{itemize}
 	\begin{tabular}{|c|c|c|c|c|c|c|}
@@ -76,9 +67,14 @@
 	\hline
 	$\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & \color{red} $\ddots$ & $\vdots$ & $\vdots$\\
 	\hline
-	$w_3$ & 0 & 0 & 0 & $\cdots$ & \color{red} ??? & $\cdots$\\
+	$\tilde w$ & 0 & 0 & 0 & $\cdots$ & \color{red} ??? & $\cdots$\\
 	\hline
 	\end{tabular}
+\end{frame}
+\subsection{Beispiel B5 A4}
+\begin{frame}
+	\frametitle{Beispielaufgabe Entscheidbarkeit (B5 A4)}
+	Zeigen Sie, dass die Sprache \\ $\mathcal{L} = \{ \langle \mathcal{M} \rangle \; | \; \mbox{Turingmaschine $\mathcal{M}$ akzeptiert jede Eingabe} \}$ \\ nicht entscheidbar ist!
 \end{frame}
 \subsection{Aufgabe B6 A1}
 \begin{frame}
