@@ -6,12 +6,36 @@
 
 \section{Entscheidbarkeit}
 \subsection{Erklärung}
+\begin{frame}
+	 \begin{enumerate}
+  \item Eine TM \emph{akzeptiert} eine Eingabe $w \in \Sigma^*$, wenn sie nach Lesen von $w$ in einem Zustand aus $F$ stoppt.
+  \item Sie \emph{akzeptiert} eine Sprache $L \subseteq \Sigma^*$, wenn sie genau die Wörter $w$ aus $L$ als Eingabe akzeptiert.
+  \item Eine Sprache $L \subseteq \Sigma^*$ heißt \emph{rekursiv} oder \emph{entscheidbar}, wenn es eine Turingmaschine gibt, die auf allen Eingaben stoppt und
+	ein Wort $w \in \Sigma^*$ genau dann akzeptiert, wenn $w \in L$ gilt.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+ \begin{enumerate}
+ \setcounter{enumi}{3}
+  \item Eine Sprache $L \subseteq \Sigma^*$ heißt \emph{rekursiv-aufzählbar} oder \emph{semi-entscheidbar}, wenn es eine Turingmaschine gibt, die ein Wort $w \in \Sigma^*$ genau dann akzeptiert, wenn $w \in L$ gilt. \\ Das Verhalten der Turingmaschine für Eingaben $w \not\in L$ ist damit nicht definiert.
+	Sie stoppt entweder nicht in einem Endzustand oder aber stoppt gar nicht.
+	\item Eine TM \emph{realisiert} die Funktion $f: \Sigma^* \rightarrow \Gamma^*$ mit $$f(w) = \begin{cases} \text{Ausgabe der TM nach Abarbeitung von } w & \text{wenn die TM hält} \\ \text{undefiniert} & \text{sonst} \end{cases}$$
+ \end{enumerate}
+\end{frame}
 \subsection{Beispiel B5 A4}
 \begin{frame}
 	\frametitle{Beispielaufgabe Entscheidbarkeit (B5 A4)}
 	Zeigen Sie, dass die Sprache \\ $\mathcal{L} = \{ \langle \mathcal{M} \rangle \; | \; \mbox{Turingmaschine $\mathcal{M}$ akzeptiert jede Eingabe} \}$ \\ nicht entscheidbar ist!
 \end{frame}
 \subsection{Halteproblem}
+\begin{frame}
+	\frametitle{Halteproblem}
+	Das Halteproblem beschreibt die Aufgabe zu entscheiden, ob eine Turingmaschine bei gegeben Eingabewort hält oder nicht. Dieses Problem ist im allgemeinen Fall semi-entscheidbar, aber nicht entscheidbar.
+\end{frame}
+\begin{frame}
+	\frametitle{Beweisskizze}
+	
+\end{frame}
 \subsection{Aufgabe B6 A1}
 \begin{frame}
 	\frametitle{Aufgabe B6 A1}
