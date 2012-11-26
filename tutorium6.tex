@@ -1,5 +1,6 @@
 \include{includes/common_start}
 \include{includes/tutBlatt_methods}
+\include{amsmath}
 \tutnr{6}
 
 \section{Gödelnummer}
@@ -34,7 +35,32 @@
 \end{frame}
 \begin{frame}
 	\frametitle{Beweisskizze}
-	
+	\begin{itemize}
+		\item Annahme: $K = \{ w \vert M_w(w)$ hält $\}$ [1] ist durch DTM $M_k$ entscheidbar.
+		\item Betrachte DTM $\tilde M$, die $M_k$ simuliert und genau dann akzeptiert, wenn $M_k$ nicht akzeptiert.
+		\begin{itemize}
+			\item $\tilde M(w)$ hält $\Leftrightarrow w \in K$ [2]
+		\end{itemize}
+		\item Für die Kodierung $\tilde w$ von $\tilde M$ gilt:
+		\begin{align*}
+			\tilde w \in K \Leftrightarrow_1 M_{\tilde w}(\tilde w) \text{hält} \Leftrightarrow_2 \tilde w \in K
+		\end{align*}
+	\end{itemize}
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+	\hline
+	$K$ & $w_1$ & $w_2$ & $w_3$ & $\cdots$ & $\tilde w$ & $\cdots$\\
+	\hline
+	$w_1$ & \color{red} 1 & 1 & 1 & $\cdots$ & 0 & $\cdots$\\
+	\hline
+	$w_2$ & 0 & \color{red} 1 & 0 & $\cdots$ & 1 & $\cdots$\\
+	\hline
+	$w_3$ & 1 & 0 & \color{red} 0 & $\cdots$ & 1 & $\cdots$\\
+	\hline
+	$\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & \color{red} $\ddots$ & $\vdots$ & $\vdots$\\
+	\hline
+	$w_3$ & 0 & 0 & 0 & $\cdots$ & \color{red} ??? & $\cdots$\\
+	\hline
+	\end{tabular}
 \end{frame}
 \subsection{Aufgabe B6 A1}
 \begin{frame}
