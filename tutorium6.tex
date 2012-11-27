@@ -23,7 +23,6 @@
 	\end{itemize}
 \end{frame}
 
-
 \begin{frame}
 	\frametitle{Universelle Turingmaschine}
 \begin{itemize}
@@ -41,13 +40,14 @@
 \begin{frame}
 	\frametitle{Definitionen zur Entscheidbarkeit}
 	 \begin{enumerate}
-  \item Eine TM \emph{akzeptiert} eine Eingabe $w \in \Sigma^*$, wenn sie nach Lesen von $w$ in einem Zustand aus $F$ stoppt.
+  \item Eine TM \emph{akzeptiert} eine Eingabe $w \in \Sigma^*$, wenn sie nach Lesen von $w$ im akzeptierenden Zustand stoppt.
   \item Sie \emph{akzeptiert} eine Sprache $L \subseteq \Sigma^*$, wenn sie genau die Wörter $w$ aus $L$ als Eingabe akzeptiert.
   \item Eine Sprache $L \subseteq \Sigma^*$ heißt \emph{rekursiv} oder \emph{entscheidbar}, wenn es eine Turingmaschine gibt, die auf allen Eingaben stoppt und
 	ein Wort $w \in \Sigma^*$ genau dann akzeptiert, wenn $w \in L$ gilt.
 \end{enumerate}
 \end{frame}
 \begin{frame}
+	\frametitle{Definitionen zur Entscheidbarkeit}
  \begin{enumerate}
  \setcounter{enumi}{3}
   \item Eine Sprache $L \subseteq \Sigma^*$ heißt \emph{rekursiv-aufzählbar} oder \emph{semi-entscheidbar}, wenn es eine Turingmaschine gibt, die ein Wort $w \in \Sigma^*$ genau dann akzeptiert, wenn $w \in L$ gilt. \\ Das Verhalten der Turingmaschine für Eingaben $w \not\in L$ ist damit nicht definiert.
@@ -59,35 +59,6 @@
 \begin{frame}
 	\frametitle{Halteproblem}
 	Das Halteproblem beschreibt die Aufgabe zu entscheiden, ob eine Turingmaschine bei gegeben Eingabewort hält oder nicht. Dieses Problem ist im allgemeinen Fall semi-entscheidbar, aber nicht entscheidbar.
-\end{frame}
-\begin{frame}
-	\frametitle{Beweisskizze}
-	\begin{itemize}
-		\item Annahme: $K = \{ w \vert M_w(w)$ hält $\}$ [1] ist durch DTM $M_k$ entscheidbar.
-		\item Betrachte DTM $\tilde M$, die $M_k$ simuliert und genau dann akzeptiert, wenn $M_k$ nicht akzeptiert.
-		\begin{itemize}
-			\item $\tilde M(w)$ hält $\Leftrightarrow w \not \in K$ [2]
-		\end{itemize}
-		\item Für die Kodierung $\tilde w$ von $\tilde M$ gilt:
-		\begin{align*}
-			\tilde w \in K \Leftrightarrow_1 M_{\tilde w}(\tilde w) \text{hält} \Leftrightarrow_2 \tilde w \not \in K
-		\end{align*}
-	\end{itemize}
-	\begin{tabular}{|c|c|c|c|c|c|c|}
-	\hline
-	$K$ & $w_1$ & $w_2$ & $w_3$ & $\cdots$ & $\tilde w$ & $\cdots$\\
-	\hline
-	$w_1$ & \color{red} 1 & 1 & 1 & $\cdots$ & 0 & $\cdots$\\
-	\hline
-	$w_2$ & 0 & \color{red} 1 & 0 & $\cdots$ & 1 & $\cdots$\\
-	\hline
-	$w_3$ & 1 & 0 & \color{red} 0 & $\cdots$ & 1 & $\cdots$\\
-	\hline
-	$\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & \color{red} $\ddots$ & $\vdots$ & $\vdots$\\
-	\hline
-	$\tilde w$ & 0 & 0 & 0 & $\cdots$ & \color{red} ??? & $\cdots$\\
-	\hline
-	\end{tabular}
 \end{frame}
 \subsection{Beispiel B5 A4}
 \begin{frame}
