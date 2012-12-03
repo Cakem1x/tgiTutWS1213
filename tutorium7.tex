@@ -6,6 +6,19 @@
 \section{Kolmogorow Komplexität}
 \subsection{Kolmogorow Komplexität erklären}
 \subsection{Kolmogorow Aufgabe}
+\begin{frame}
+	\frametitle{Kolmogorow Komplexität: Aufgabe (B7 A1)}
+	\begin{enumerate}
+		\item Beweisen Sie, dass $K(x)$ nicht berechenbar ist!
+		\item Beweisen Sie, dass die Menge der nichtkomprimierbaren Strings $\mathcal{L}$
+		nicht rekursiv aufz"ahlbar ist!
+		\item Geben Sie eine m"oglichst gute obere Schranke f"ur die Kolmogorow-Komplexit"at von $0^n$ an!
+		\item Geben Sie eine m"oglichst gute obere Schranke f"ur die Kolmogorow-Komplexit"at der
+		Bin"ardarstellung der $n$-ten\\ Primzahl $p$ an!
+		\item Sei $x$ ein Palindrom. Geben sie eine m"oglichst gute obere Schranke f"ur $K(x)$ an!
+		\item Sei $\pi_n$ die Kreiszahl $\pi$ bis zur $n$-ten Nachkommastelle entwickelt. Geben Sie eine m"oglichst gute obere Schranke f"ur $\pi_n$ an.
+	\end{enumerate}
+\end{frame}
 
 \section{Rekursionstheorem}
 \subsection{Rekursionstheorem erklären}
@@ -34,13 +47,71 @@ Eine mögliche Art eine solche TM zu erstellen ist folgender:
 \end{itemize}
 \end{frame}
 
-\section{Lustige Notationen}
-\subsection{Lustige Notationen erklären}
+\section{Wiederholung einiger Begriffe}
+\subsection{Wiederholung einiger Begriffe}
+\begin{frame}
+	\frametitle{Wiederholung einiger Begriffe}
+	\begin{itemize}
+		\item Quantoren
+		\begin{itemize}
+			\item Existenzquantor $\exists x$: \\ Aussage muss für mindestens ein x aus dem Universum gelten.
+			\item Allquantor $\forall x$: Aussage muss für alle x aus dem Universum gelten.
+			\item Vorsicht bei Schachtelung von Quantoren: \\ $\forall x \exists y: x = y$ ist etwas völlig anderes als $\exists y \forall x: x = y$.
+		\end{itemize}
+		\item Ein Universum ist die Menge über der man eine Aussage betrachtet.
+		\item Eine Relation drückt aus, dass zwei Objekte zueinander in Beziehung stehen.
+		\begin{itemize}
+			\item Sei $R$ die Gleichheit, dann gilt $R(x, y) \Leftrightarrow x = y$.
+		\end{itemize}
+		\item Eine Theorie ist eine Menge $Th(U, R)$ induziert über dem Tupel $(U, R)$ mit einem Universum $U$ und einer Relation $R$. \\ 
+		Eine Formel $\phi$ ist Element einer Theorie, falls sie in Bezug auf $U$ bzw. $R$ wahr ist.
+		\begin{itemize}
+			\item Sei $\phi = \forall x \exists y: R_1(x,y)$. Dann gilt $\phi \in Th(\mathbb{Z}, >)$ aber $\phi \notin Th(\mathbb{N}, >)$.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
 
-\section{Aufgaben}
+\section{Weitere Aufgaben}
 \subsection{B7 A2}
+\begin{frame}
+	\frametitle{Weitere Aufgaben: B7 A2}
+	Geben Sie f"ur folgendende Formeln an ob diese in den besagten Theorien liegen
+	\begin{enumerate}
+		\item Ist $\phi_1 = \forall x \exists y \forall z: x + y = z$ in $\text{Th}(\mathbb{N,+})$?
+		\item Ist $\phi_2 = \forall x \exists y \forall z \exists w: (x + z = w ) \wedge (x + y = w)$  in $\text{Th}(\mathbb{N},+)$?
+		\item Ist $\phi_3 = \forall x \forall y \forall z \forall w \forall v \exists s: \neg(x + w = y) \vee \neg(y + v = z) \vee (x + s = z)$ in $\text{Th}(\mathbb{N},+)$?
+		\item Sei $\text{Th}(\mathbb{N},<)$ die Theorie der nat"urlichen Zahlen mit der Relation "`echt kleiner"'. Zeigen Sie: $\text{Th}(\mathbb{N},<)$ ist entscheidbar.
+	\end{enumerate}
+\end{frame}
 \subsection{B7 A3}
+\begin{frame}
+	\frametitle{Weitere Aufgaben: B7 A3}
+	Geben Sie Modelle f"ur die folgenden pr"adikatenlogischen Formeln an! Geben Sie dazu
+	jeweils ein Universum $\mathcal{U}$\\
+	und eine Interpretation der Relationszeichen $R_i$ an!
+	\begin{enumerate}
+		\item $\phi_1 =$ \hspace*{0.2cm} $\forall \; x \; (R_1(x,x))$ \hspace*{5.3cm}[K1.1]\\
+		\hspace*{0.85cm} $\wedge \forall \; x,y \; (R_1(x,y) \leftrightarrow R_1(y,x))$
+		\hspace*{3.2cm} [K1.2]\\
+		\hspace*{0.85cm} $\wedge \forall \; x,y,z \; ((R_1(x,y) \wedge R_1(y,z)) \rightarrow
+		R_1(x,z))$ \hspace*{1cm} [K1.3]
+		\item $\phi_2 =$ \hspace*{0.2cm} $\phi_1$\\
+		\hspace*{0.85cm} $\wedge \forall \; x \; (R_1(x,x) \rightarrow \neg R_2(x,x))$
+		\hspace*{3.25cm} [K2.1]\\
+		\hspace*{0.85cm} $\wedge \forall \; x,y \; (\neg R_1(x,y) \rightarrow (R_2(x,y)
+		\oplus R_2(y,x)))$ \hspace*{1cm} [K2.2]\\
+		\hspace*{0.85cm} $\wedge \forall \; x,y,z \; ((R_2(x,y) \wedge R_2(y,z)) \rightarrow
+		R_2(x,z))$ \hspace*{1cm}  [K2.3]\\
+		\hspace*{0.85cm} $\wedge \forall \; x \; \exists \; y \, (R_2(x,y))$ \hspace*{4.8cm}
+		[K2.4]
+	\end{enumerate}
+\end{frame}
 \subsection{B6 A4}
+\begin{frame}
+	\frametitle{Weitere Aufgaben: B6 A4}
+	Sei $A \subseteq \mathbb{N}_0$ eine entscheidbare Menge. Zeigen Sie, dass
+	$ B := \{x+2y^2+17+11^x \; | \; x,y \in A\}$ entscheidbar ist!
+\end{frame}
 
 \section{Schluss}
 \subsection{Schluss}
