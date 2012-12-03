@@ -26,13 +26,35 @@
 \section{SELF-Maschine / Quines}
 \subsection{SELF-Maschine / Quines erklären}
 
-\section{Notationen}
-\subsection{Notationen erklären}
+\section{Wiederholung einiger Begriffe}
+\subsection{Wiederholung einiger Begriffe}
+\begin{frame}
+	\frametitle{Wiederholung einiger Begriffe}
+	\begin{itemize}
+		\item Quantoren
+		\begin{itemize}
+			\item Existenzquantor $\exists x$: \\ Aussage muss für mindestens ein x aus dem Universum gelten.
+			\item Allquantor $\forall x$: Aussage muss für alle x aus dem Universum gelten.
+			\item Vorsicht bei Schachtelung von Quantoren: \\ $\forall x \exists y: x = y$ ist etwas völlig anderes als $\exists y \forall x: x = y$.
+		\end{itemize}
+		\item Ein Universum ist die Menge über der man eine Aussage betrachtet.
+		\item Eine Relation drückt aus, dass zwei Objekte zueinander in Beziehung stehen.
+		\begin{itemize}
+			\item Sei $R$ die Gleichheit, dann gilt $R(x, y) \Leftrightarrow x = y$.
+		\end{itemize}
+		\item Eine Theorie ist eine Menge $Th(U, R)$ induziert über dem Tupel $(U, R)$ mit einem Universum $U$ und einer Relation $R$. \\ 
+		Eine Formel $\phi$ ist Element einer Theorie, falls sie in Bezug auf $U$ bzw. $R$ wahr ist.
+		\begin{itemize}
+			\item Sei $\phi = \forall x \exists y: R_1(x,y)$. Dann gilt $\phi \in Th(\mathbb{Z}, >)$ aber $\phi \notin Th(\mathbb{N}, >)$.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
 
 \section{Weitere Aufgaben}
 \subsection{B7 A2}
 \begin{frame}
 	\frametitle{Weitere Aufgaben: B7 A2}
+	Geben Sie f"ur folgendende Formeln an ob diese in den besagten Theorien liegen
 	\begin{enumerate}
 		\item Ist $\phi_1 = \forall x \exists y \forall z: x + y = z$ in $\text{Th}(\mathbb{N,+})$?
 		\item Ist $\phi_2 = \forall x \exists y \forall z \exists w: (x + z = w ) \wedge (x + y = w)$  in $\text{Th}(\mathbb{N},+)$?
