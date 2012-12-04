@@ -23,14 +23,13 @@
 \section{Rekursionstheorem}
 \subsection{Rekursionstheorem erklären}
 \begin{frame}
-\frametitle{Das Rekursionstheorem 1.Form}
-Existiert eine TM M, die die Funktion t:$\Sigma^*\times \Sigma^*\rightarrow\Sigma^*$ berechnet, dann existiert eine TM R die t(<R>,w) berechnet, wobei w die Eingabe ist.\\
+\begin{block}{Das Rekursionstheorem 1.Form}
+Existiert eine TM M, die die Funktion t:$\Sigma^*\times \Sigma^*\rightarrow\Sigma^*$ berechnet, dann existiert eine TM R die t($\langle R\rangle$,w) berechnet, wobei w die Eingabe ist.
+\end{block}
 Dieses Theorem ist nicht nur auf Turingmaschinen beschränkt, sondern kann auch auf jede beliebige turingvollständige Codierungsform (wie z.B. Programmiersprachen) ausgedehnt werden.
-\end{frame}
-
-\begin{frame}
-\frametitle{Das Rekursionstheorem 2.Form}
-Für jede berechenbare Funktion f: $\Sigma^*\rightarrow\Sigma^*$ existiert eine TM F und eine TM G, wobei F und G die gleiche Funktion berechnen und f(<F>)=<G>.\\
+\begin{block}{Das Rekursionstheorem 2.Form}
+Für jede berechenbare Funktion f: $\Sigma^*\rightarrow\Sigma^*$ existiert eine TM F und eine TM G, wobei F und G die gleiche Funktion berechnen und $f(\langle F\rangle)=\langle G\rangle$.\\
+\end{block}
 Damit hat jede Programmtransformation einen Fixpunkt.
 \end{frame}
 
@@ -38,7 +37,7 @@ Damit hat jede Programmtransformation einen Fixpunkt.
 \subsection{SELF-Maschine / Quines erklären}
 \begin{frame}
 \frametitle{SELF-Maschine}
-Eine SELF-Maschine (auch Quine genannt) ist eine Turingmaschine, die ihre eigene Gödelnummer ausgibt und dann hält. Sie realisiert demnach die Funktion t(<SELF>,w)=<SELF>.\\
+Eine SELF-Maschine (auch Quine genannt) ist eine Turingmaschine, die ihre eigene Gödelnummer ausgibt und dann hält. Sie realisiert demnach die Funktion $t(\langle SELF\rangle,w)=\langle SELF\rangle$.\\
 Eine mögliche Art eine solche TM zu erstellen ist folgender:
 \begin{itemize}
 \item Man zerlegt die Turingmaschine in zwei Teile A und B. 
