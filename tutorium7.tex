@@ -5,6 +5,46 @@
 
 \section{Kolmogorow Komplexität}
 \subsection{Kolmogorow Komplexität erklären}
+
+\begin{frame}
+	\frametitle{Kolmogorow}
+	\only<1>{Beispiel: Das Wort, das aus 1000 Nullen besteht (Alphabet: ASCII)~\\~\\}
+	\only<2>{00000000000000000000000000000000000000000000000000~\\
+	00000000000000000000000000000000000000000000000000~\\
+	00000000000000000000000000000000000000000000000000~\\
+	00000000000000000000000000000000000000000000000000~\\
+	00000000000000000000000000000000000000000000000000~\\
+	00000000000000000000000000000000000000000000000000~\\
+	00000000000000000000000000000000000000000000000000~\\
+	00000000000000000000000000000000000000000000000000~\\
+	00000000000000000000000000000000000000000000000000~\\
+	00000000000000000000000000000000000000000000000000~\\
+	00000000000000000000000000000000000000000000000000~\\
+	00000000000000000000000000000000000000000000000000~\\
+	00000000000000000000000000000000000000000000000000~\\
+	00000000000000000000000000000000000000000000000000~\\
+	00000000000000000000000000000000000000000000000000~\\
+	00000000000000000000000000000000000000000000000000}
+	\only<3>{Eine Beschreibung eines Wortes w ist ein Programm bei dessen Ausführung das Wort erzeugt wird. Die Länge dieses Programmes ist dann ein d(w).~\\~\\
+	Program Nullfolge (n)~\\
+	"" begin~\\
+	"" "" for i:= 1 to n ~\\
+    "" "" "" print "0"~\\
+	"" end}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Kolmogorow}
+	Eine minimale Beschreibung eines Wortes $w$ heißt Kolmogorow-Komplexität $K(w)$
+	\begin{itemize}
+		\item Also: $\forall d(w): |d(w)| \geq |K(w)|$
+		\item Die Länge von $K(w)$ ist abhängig von der Struktur von $w$
+	\end{itemize}~\\
+	Falls $|K(w)| \geq |w|$ heißt das Wort unkomprimierbar.~\\~\\
+	Die Kolmogorow-Komplexität ist nicht \only<1>{entscheidbar}\only<2>{berechenbar} aber \only<1>{semi-entscheidbar}\only<2>{rekursiv aufzählbar}.
+
+\end{frame}
+
 \subsection{Kolmogorow Aufgabe}
 \begin{frame}
 	\frametitle{Kolmogorow Komplexität: Aufgabe (B7 A1)}
