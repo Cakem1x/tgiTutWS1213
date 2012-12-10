@@ -49,11 +49,29 @@
 	\end{block}
 \end{frame}
 \subsection{Aufgabe B8 A2}
+\begin{frame}
+	\frametitle{Aufgabe zu P, co-P (B8 A2)}
+	Die Komplexit"atsklasse \textbf{co-P} sei definiert als die Menge der Sprachen
+	$\mathcal{L}$, deren Komplementsprache $\mathcal{L}^C$ in der\\
+	Komplexit"atsklasse \textbf{P} liegt.\\
+	\underline{Erinnerung:} Zu einer Sprache $\mathcal{L}$ "uber einem Alphabet $\Sigma$
+	ist die Komplementsprache $\mathcal{L}^C = \Sigma^* \setminus \mathcal{L}$.\\[4pt]
+	Beweisen Sie: \textbf{co-P} = \textbf{P}
+\end{frame}
 
 \section{Graph Färbbarkeit}
 \subsection{Erklärung}
 \subsection{Beispiel}
 \subsection{Aufgabe B8 A3}
+\begin{frame}
+	\frametitle{Aufgabe zu Graphfärbbarkeit (B8 A3)}
+	Gegeben seien ein ungerichteter Graph $G = (V,E)$ mit Knoten $v \in V$ und
+	Kanten $e = (v_1,v_2) \in E$ mit $v_1, v_2 \in V$\\ und zwei Farben $A$ und $B$.\\
+	Beweisen Sie: Die Sprache $\mbox{2-COLOR} \; =$\\
+	$\{G \; | \; G = (V,E) \; \mbox{ungerichteter Graph mit} \; \exists \; \mbox{totale
+	Funktion} \; g: V \to \{A,B\}: \forall \; (v_1, v_2) \in E: g(v_1) \neq g(v_2)\}$\\
+	liegt in der Komplexit"atsklasse \textbf{P}.
+\end{frame}
 
 \section{2-SAT}
 \subsection{Erkläung}
@@ -61,7 +79,49 @@
 
 \section{Weitere Aufgaben}
 \subsection{2-COLOR auf 2-SAT Reduktion (B8 A4)}
+\begin{frame}
+	\frametitle{Reduktionsaufgabe (B8 A4)}
+	Das Problem 2-SAT ist folgenderma"sen definiert:\\
+	\begin{figure}[ht]
+	\setbox0\vbox{\small
+	\textbf{2-SAT}\\
+	Gegeben eine in ihrer Gr"o"se polynomiell beschr"ankte aussagenlogische Formel $F$
+	in konjuktiver Normalform, wobei jede Klausel genau 2 Literale enth"alt. $F$ hat
+	also die Form
+	\begin{eqnarray*}F = \Lambda_{i = 1}^n (L_i \vee N_i),\end{eqnarray*}
+	wobei $L_i$ und $N_i$ Literale sind, also von der Form $X$ oder $\neg X$ f"ur eine
+	Variable $X$ sind.\\
+	Gibt es eine erfüllende Belegung für $F$?
+	}
+	\centerline{\fbox{\box0}}
+	\end{figure}
+	Geben Sie eine polynomielle Reduktion von 2-COLOR auf 2-SAT an!
+\end{frame}
 \subsection{B8 A1}
+\begin{frame}
+	\frametitle{Aufgabe B8 A1}
+	\only<1>{
+	Ein Algorithmus, der eine Zahl $n \in \mathbb{N}$ als Eingabe erh"alt und pr"uft,
+	ob $n$ prim ist, sei gegeben durch die\\
+	nachfolgende Beschreibung einer Turingmaschine $\mathcal{M}$, die die Funktion
+	$f: \mathbb{N} \to \{0,1\}, n \mapsto
+	\left\{\begin{array}{c@{\hspace{0.2cm},\hspace{0.2cm}}l}
+	1 & n \; \mbox{prim}\\0 & \mbox{sonst}
+	\end{array}\right.$\\
+	realisiert.\\[4pt]}
+	\only<2>{
+	1. Initialisiere Z"ahler $z$ mit $2$ und Ausgabe $a$ mit $1$\\
+	2. Berechne $n \; \% \; z$\\
+	3. Pr"ufe, ob $n \; \% \; z = 0$ gilt:\\
+	- Falls ja: Setze $a$ auf $0$ und gehe zu Schritt 4.\\
+	- Falls nein: Gehe zu Schritt 4.\\
+	4. Pr"ufe, ob $z < n$ gilt:\\
+	- Falls ja: Erh"ohe $z$ um $1$ und gehe zu Schritt 2.\\
+	- Falls nein: L"osche das Band, schreibe $a$ auf das Band und stoppe\\[4pt]
+	Geben Sie die Komplexit"at des oben angegebenen Algortihmus bez"uglich der Eingabe
+	$n$ und auch bez"uglich der\\
+	L"ange der Bin"ardarstellung von $n$ an!}
+\end{frame}
 
 \section{Schluss}
 \subsection{Schluss}
