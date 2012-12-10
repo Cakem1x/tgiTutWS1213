@@ -6,9 +6,48 @@
 \section{Altlasten}
 \subsection{Reduktion}
 
-\section{P, NP}
+\section{SAT}
+\subsection{SAT}
+\begin{frame}
+\frametitle{SAT (SATisfiability = Erfüllbarkeitsproblem)}
+\begin{block}{Problem}
+\textbf{Gegeben:} Formel in konjunktiver Normalform
+\begin{itemize}
+ \item Menge $U$ von Variablen
+ \item Menge $C$ von Klauseln (Disjunktionen) über $U$
+\end{itemize} $$ \underbrace{(\stackrel{\text{Literale}}{\stackrel{\downarrow}{\vphantom{\neglit{a}}a} \vee \stackrel{\downarrow}{\vphantom{\neglit{b}}b} \vee \stackrel{\downarrow}{\neglit{c}}})}_\text{Klausel} \wedge \underbrace{(b \vee c)}_\text{Klausel} \wedge \underbrace{(\neglit{a} \vee \neglit{b} \vee \neglit{c})}_\text{Klausel}$$
+
+\textbf{Frage:} Existiert eine (alle Klauseln) erfüllende Variablenbelegung?
+\end{block}
+\end{frame}
+
+\section{$\mathcal{P}, \mathcal{NP}$}
 \subsection{Erklärung}
-\subsection{Beispiel}
+\begin{frame}
+	\frametitle{$\mathcal{P}, \mathcal{NP}$}
+	\ducttape{1cm}
+	$\mathcal{P}$ ist die Klasse aller Sprachen, die von einer deterministischen Turingmaschine in Polynomialzeit erkannt werden.\\
+	\ducttape{1cm}
+	$\mathcal{NP}$ ist die Klasse aller Sprachen, die von einer \textbf{nicht}deterministischen Turingmaschine in Polynomialzeit erkannt werden.\\
+	\ducttape{1cm}
+	\textbf{Anmerkungen: }
+	\begin{itemize}
+		\item $\mathcal{P} \subseteq \mathcal{NP}$.
+		\item Die Frage ob $\mathcal{P} = \mathcal{NP}$ gilt ist ein großes, ungeklärtes Problem.
+	\end{itemize}
+	\end{frame}
+
+\begin{frame}
+	\frametitle{Gedanklicher Trick für $\mathcal{NP}$}
+	Ein Problem liegt in $\mathcal{NP}$ falls man eine mögliche Lösung in Polynomialzeit von einer \textbf{deterministischen} Turingmaschine verifizieren lassen kann.
+	\begin{block}{Beispiel}
+		Zeige: \emph{SAT} $\in \mathcal{NP}$
+		\begin{enumerate}
+			\item Es werden nichtdeterministisch alle möglichen Variablenbelegungen aufs Band geschrieben.
+			\item Es gibt nun eine deterministische Turingmaschine welche die Variablenbelegung in Polynomialzeit überprüft.
+		\end{enumerate}
+	\end{block}
+\end{frame}
 \subsection{Aufgabe B8 A2}
 
 \section{Graph Färbbarkeit}
