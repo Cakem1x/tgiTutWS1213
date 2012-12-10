@@ -1,0 +1,225 @@
+\documentclass[10pt,oneside,onecolumn,a4paper,german,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{german}
+\usepackage{amsmath,amsfonts,amssymb,latexsym,textcomp,stmaryrd}
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+\pagestyle{plain}
+\pagenumbering{arabic}
+\parskip0.5ex plus0.1ex minus0.1ex
+\parindent0pt
+\voffset-1.04cm
+\topmargin0pt
+\headheight0pt
+\headsep0pt
+\topskip0pt
+\textheight26.7cm
+\footskip20pt
+\hoffset-1.04cm
+\oddsidemargin0pt
+\evensidemargin0pt
+\textwidth18cm
+\marginparsep0pt
+\marginparwidth0pt
+\begin{document}
+
+\section*{Tutorien-"Ubungsblatt 8}
+
+\subsection*{Aufgabe 1}
+Ein Algorithmus, der eine Zahl $n \in \mathbb{N}$ als Eingabe erh"alt und pr"uft,
+ob $n$ prim ist, sei gegeben durch die\\
+nachfolgende Beschreibung einer Turingmaschine $\mathcal{M}$, die die Funktion
+$f: \mathbb{N} \to \{0,1\}, n \mapsto
+\left\{\begin{array}{c@{\hspace{0.2cm},\hspace{0.2cm}}l}
+1 & n \; \mbox{prim}\\0 & \mbox{sonst}
+\end{array}\right.$\\
+realisiert:\\[4pt]
+1. Initialisiere Z"ahler $z$ mit $2$ und Ausgabe $a$ mit $1$\\
+2. Berechne $n \; \% \; z$\\
+3. Pr"ufe, ob $n \; \% \; z = 0$ gilt:\\
+- Falls ja: Setze $a$ auf $0$ und gehe zu Schritt 4.\\
+- Falls nein: Gehe zu Schritt 4.\\
+4. Pr"ufe, ob $z < n$ gilt:\\
+- Falls ja: Erh"ohe $z$ um $1$ und gehe zu Schritt 2.\\
+- Falls nein: L"osche das Band, schreibe $a$ auf das Band und stoppe\\[4pt]
+Geben Sie die Komplexit"at des oben angegebenen Algortihmus bez"uglich der Eingabe
+$n$ und auch bez"uglich der\\
+L"ange der Bin"ardarstellung von $n$ an!
+
+\subsection*{Aufgabe 2}
+Die Komplexit"atsklasse \textbf{co-P} sei definiert als die Menge der Sprachen
+$\mathcal{L}$, deren Komplementsprache $\mathcal{L}^C$ in der\\
+Komplexit"atsklasse \textbf{P} liegt.\\
+\underline{Erinnerung:} Zu einer Sprache $\mathcal{L}$ "uber einem Alphabet $\Sigma$
+ist die Komplementsprache $\mathcal{L}^C = \Sigma^* \setminus \mathcal{L}$.\\[4pt]
+Beweisen Sie: \textbf{co-P} = \textbf{P}
+
+\subsection*{Aufgabe 3 - Graph-2-F"arbbarkeit}
+Gegeben seien ein ungerichteter Graph $G = (V,E)$ mit Knoten $v \in V$ und
+Kanten $e = (v_1,v_2) \in E$ mit $v_1, v_2 \in V$\\ und zwei Farben $A$ und $B$.\\
+Beweisen Sie: Die Sprache $\mbox{2-COLOR} \; =$\\
+$\{G \; | \; G = (V,E) \; \mbox{ungerichteter Graph mit} \; \exists \; \mbox{totale
+Funktion} \; g: V \to \{A,B\}: \forall \; (v_1, v_2) \in E: g(v_1) \neq g(v_2)\}$\\
+liegt in der Komplexit"atsklasse \textbf{P}.
+
+\subsection*{Aufgabe 4}
+Das Problem 2-SAT ist folgenderma"sen definiert:\\
+\begin{figure}[ht]
+\setbox0\vbox{\small
+\textbf{2-SAT}\\
+Gegeben eine in ihrer Gr"o"se polynomiell beschr"ankte aussagenlogische Formel $F$
+in konjuktiver Normalform, wobei jede Klausel genau 2 Literale enth"alt. $F$ hat
+also die Form
+\begin{eqnarray*}F = \Lambda_{i = 1}^n (L_i \vee N_i),\end{eqnarray*}
+wobei $L_i$ und $N_i$ Literale sind, also von der Form $X$ oder $\neg X$ f"ur eine
+Variable $X$ sind.\\
+Gibt es eine erfüllende Belegung für $F$?
+}
+\centerline{\fbox{\box0}}
+\end{figure}\\
+Geben Sie eine polynomielle Reduktion von 2-COLOR auf 2-SAT an!
+
+\newpage
+
+\subsection*{L"osung zu Aufgabe 1}
+Die Komplexit"at bez"uglich der Eingabe $n$ ist $O(n)$. Sei die L"ange der
+Bin"ardarstellung von $n$ bezeichnet mit $|n|$, dann gilt: $|n| = \log_2(n)$.
+Daraus folgt, dass $n = 2^{|n|}$ ist. Somit ist die Komplexit"at in $O(2^{|n|})$.
+
+\subsection*{L"osung zu Aufgabe 2}
+\textbf{P} $\subseteq$ \textbf{co-P}:\\
+Sei $\mathcal{L} \in$ \textbf{P}. Dann gibt es eine polynomiale deterministische
+Turingmaschine $T$ mit der Zustandsmenge $Q$ und der Endzustandsmenge $F \subseteq
+Q$, die $\mathcal{L}$ akzeptiert, die also f"ur alle Eingaben $w \in \Sigma^*$ nach
+polynomialer Zeit h"alt und nur genau dann in einem Endzustand $q \in F$ h"alt,
+wenn $w \in \mathcal{L}$ gilt. Konstruiere daraus die polynomiale deterministische
+Turingmaschine $T'$, die "ahnlich aussieht wie $T$ und nur folgende "Anderungen
+aufweist:
+\begin{enumerate}
+\item Alle bisherigen Endzust"ande $q \in F$ sind in $T'$ \underline{keine}
+Endzust"ande mehr.
+\item Die Zustandsmenge $Q$ wird um zwei \underline{neue} Zust"ande $q^+,q^-$
+erweitert, wobei $T'$ in diesen beiden Zust"anden f"ur jedes Zeichen $a \in \Gamma$
+immer sofort h"alt und $q^+$ der einzige Endzustand von $T'$ ist.
+\item Statt in einem ehemaligen Endzustand $q \in F$ zu halten, geht $T'$ von diesem
+Zustand f"ur jedes Zeichen $a \in \Gamma$ in den neuen Zustand $q^-$ "uber.
+\item Statt f"ur ein Zeichen $a \in \Gamma$ in einem Zustand $q \in Q \setminus F$
+zu halten, geht $T'$ von diesem Zustand f"ur das Zeichen $a$ in den neuen Zustand
+$q^+$ "uber.
+\end{enumerate}
+$T'$ akzeptiert genau die Komplement"arsprache $\mathcal{L}^C$ und es gilt daher
+$\mathcal{L}^C \in$ \textbf{P}. Damit gilt also auch $\mathcal{L} \in$ \textbf{co-P}.
+\\[4pt]
+\textbf{co-P} $\subseteq$ \textbf{P}:\\
+Sei $\mathcal{L} \in$ \textbf{co-P}. Dann ist die Komplementsprache $\mathcal{L}^C
+\in$ \textbf{P}. Damit gibt es eine polynomiale deterministische Turingmaschine
+$T^C$, die $\mathcal{L}^C$ in polynomialer Zeit entscheidet. Analog zu oben kann
+man daraus eine polynomiale deterministische Turingmaschine $T$ konstruieren, die
+$\mathcal{L}$ akzeptiert. Damit ist $\mathcal{L} \in$ \textbf{P}.
+\\[4pt]
+Wir haben nun gezeigt, dass \textbf{P} $\subseteq$ \textbf{co-P} und \textbf{co-P}
+$\subseteq$ \textbf{P}, damit erhalten wir insgesamt \textbf{P} = \textbf{co-P}.
+
+\subsection*{L"osung zu Aufgabe 3}
+\textbf{Vorgehen:}\\
+Wir zeigen zuerst, dass ein Graph genau dann 2-f"arbbar ist, wenn er bipartit
+(siehe unten) ist. Es reicht dann zum Beweisen von 2-COLOR $\in$ \textbf{P}, einen
+polynomialen Algorithmus anzugeben, der pr"uft, ob ein Graph bipartit ist.\\[4pt]
+\textbf{Definition:}\\
+Ein Graph $G = (V,E)$ hei"st \textit{bipartit}, wenn sich seine Knoten in zwei
+disjunkte Mengen $M$ und $N$ einteilen lassen, so dass keine Knoten innerhalb der
+Teilmengen miteinander durch eine Kante verbunden sind. D.h. f"ur jede Kante
+$(v_1, v_2) \in E$ gilt $(v_1 \in M) \wedge (v_2 \in N)$ oder $(v_1 \in N) \wedge
+(v_2 \in M)$.\\[4pt]
+Jeder bipartite Graph ist 2-f"arbbar:\\
+Sei $G = (V,E)$ ein bipartiter Graph. Damit gibt es zwei disjunkte Teilmengen $M$ und
+$N$ wie in der obigen Definition von bipartit beschrieben. F"arbe nun alle Knoten in
+der Menge $M$ mit der Farbe $A$ und alle Knoten in der Menge $N$ mit der Farbe $B$.
+Zwei Knoten haben genau dann die gleiche Farbe, wenn sie in der gleichen Menge ($M$
+oder $N$) liegen. Da Knoten innerhalb der jeweiligen Mengen nicht durch Kanten
+miteinander verbunden sind, und damit nur Kanten zwischen einem Knoten aus $M$ und
+einem Knoten aus $N$ existieren, haben zwei durch Kanten verbundene Knoten nie die
+gleiche Farbe. Damit ist $G$ 2-f"arbbar, d.h. $G \in$ 2-COLOR.\\[4pt]
+Jeder 2-f"arbbare Graph ist bipartit:\\
+Sei $G \in$ 2-COLOR ein 2-f"arbbarer Graph. Dann gibt es eine 2-F"arbung $g: V \to
+\{A,B\}$ f"ur $G$. Definiere die Mengen $M$ und $N$ so, dass in $M$ alle Knoten $v$
+mit der Farbe $g(v) = A$ und in $N$ alle Knoten $v$ mit der Farbe $g(v) = B$ liegen.
+Knoten innerhalb von $M$ oder innerhalb von $N$ k"onnen nicht durch Kanten
+miteinander verbunden sein, denn sonst w"are ja $g$ keine korrekte 2-F"arbung. Damit
+haben wir die Knoten von $G$ in zwei disjunkte Mengen unterteilt, so dass keine
+Kanten zwischen Knoten innerhalb einer Menge existieren. Damit ist $G$ bipartit.
+\\[4pt]
+Insgesamt haben wir nun gezeigt, dass ein Graph $G$ genau dann in 2-COLOR ist, wenn
+er bipartit ist. Um zu testen, ob ein Graph $G$ in 2-COLOR ist, k"onnen wir also
+einen Algorithmus verwenden, der testet, ob $G$ bipartit ist.
+
+\newpage
+
+Ein Algorithmus, der in polynomialer Zeit pr"uft, ob ein Graph $G = (V, E)$ bipartit
+ist, ist z.B. der folgende:\\[4pt]
+1. Setze zu Beginn die zwei Mengen $M$ und $N$ auf die leere Menge: $M = N =
+\varnothing$.\\
+2. Falls der Graph nicht zusammenh"angend ist, f"uhre den Rest des Algorithmus f"ur
+jeden der nicht miteinander verbundenen Teilgraphen aus.\\
+3. Beginne mit einem beliebigen Knoten $v_0 \in V$. F"uge $v_0$ zu $M$ hinzu und
+f"uge au"serdem alle Knoten, die mit $v_0$ durch eine Kante verbunden sind, der
+Menge $N$ hinzu.\\
+4. F"ur alle Knoten $v \in M$: F"uge alle Knoten, die mit $v$ durch eine Kante
+verbunden und noch nicht in der Menge $M$ oder $N$ sind, der Menge $N$ hinzu.\\
+5. F"ur alle Knoten $v \in N$: F"uge alle Knoten, die mit $v$ durch eine Kante
+verbunden und noch nicht in der Menge $M$ oder $N$ sind, der Menge $M$ hinzu.\\
+6. Wiederhole 4. und 5., bis alle Knoten von $G$ in einer der beiden Mengen $M$
+oder $N$ sind.\\
+7. Gib als Ergebnis aus: Falls Knoten innerhalb von $M$ oder innerhalb von $N$
+durch eine Kante miteinander verbunden sind, ist der Graph nicht bipartit.
+Ansonsten ist der Graph bipartit.\\[4pt]
+\textbf{Aufwand:}\\
+Dieser Algorithmus hat polynomialen Aufwand in der Anzahl $n$ der Knoten: Das
+Sortieren in die Mengen $M$ und $N$ hat einen Aufwand von $O(n^2)$ (F"ur jeden
+Knoten alle Kanten durchgehen: $O(n^2)$, f"ur jeden verbundenen Knoten testen,
+ob er schon in $M$ oder $N$ liegt: $O(n)$). Das Testen, ob eine Kante zwischen
+zwei Knoten aus $M$ oder zwei Knoten aus $N$ existiert, hat auch einen Aufwand
+von $O(n^2)$. Damit hat der Algorithmus insgesamt polynomiale Laufzeit in der
+L"ange der Darstellung des Graphen (die etwa der Anzahl Knoten entspricht).\\[4pt]
+\textbf{Korrektheit:}\\
+Der Algorithmus funktioniert deshalb, weil in einem bipartiten Graphen $G = (V,E)$
+und der Aufteilung in die zwei Mengen $M$ und $N$ (nach der Definition) f"ur jeden
+Knoten $v \in M$ gilt, dass alle mit $v$ verbundenen Knoten in $N$ liegen, und
+umgekehrt. Der Algorithmus geht also erstmal davon aus, der Graph sei bipartit
+und stellt dann eine Partition in die Mengen $M$ und $N$ her. Falls $G$ wirklich
+bipartit ist, ist das Ergebnis eine korrekte Aufteilung in zwei disjunkte Mengen,
+innerhalb derer keine Kanten existieren. Falls nicht, so kann keine solche korrekte
+Aufteilung herauskommen, und damit m"ussen Knoten innerhalb von $M$ oder innerhalb
+von $N$ miteinander verbunden sein.
+
+\subsection*{L"osung zu Aufgabe 4}
+Sei $G = (V,E)$ ein ungerichteter Graph, f"ur den wir feststellen wollen, ob $G \in$
+2-COLOR gilt. Dazu seien wieder die beiden Farben $A$ und $B$ gegeben. Wir bilden
+f"ur die Reduktion zun"achst die Menge der zur Verf"ugung stehenden Variablen
+$\chi := \{X_v \; | \; v \in V\}$. Falls der gegebene Graph $G$ 2-f"arbbar ist, so
+gibt es eine 2-F"arbung $g: V \to \{A,B\}$, andernfalls gibt es zumindest eine
+Abbildung $g: V \to \{A,B\}$. Diese verwenden wir zur Definition einer
+Variablenbelegung:\\[4pt]
+$f: \chi \to \{\mbox{TRUE},\mbox{FALSE}\}, X_v \mapsto
+\left\{\begin{array}{c@{\hspace{0.5cm},\hspace{0.5cm}}l}
+\mbox{TRUE} & \mbox{falls} \; g(v) = A\\
+\mbox{FALSE} & \mbox{falls} \; g(v) = B
+\end{array}\right.$\\[4pt]
+Nun bilden wir jede Kante $(u,v) \in E$ auf die passende aussagenlogische Formel
+$(X_u \oplus X_v)$ ab. Die obige Variablenbelegung $f$ ergibt genau dann f"ur alle
+diese aussagenlogischen Formeln eine gemeinsame erf"ullende Variablenbelegung, wenn
+die zugrunde liegende Abbildung $g$ bereits eine korrekte 2-F"arbung und der Graph
+$G$ damit 2-f"arbbar ist. Nun m"ussen die Formeln noch in die richtige Form gebracht
+werden:\\[4pt]
+$(X_u \oplus X_v) \cong ((X_u \wedge \neg X_v) \vee (\neg X_u \wedge X_v)) \cong
+((X_u \vee X_v) \wedge (\neg X_u \vee \neg X_v))$\\[4pt]
+Wir erhalten somit f"ur jede Kante $(u,v) \in E$ die beiden Klauseln $X_u \vee X_v,
+\neg X_u \vee \neg X_v$ und f"ur den gesamten Graphen $G$ die 2-SAT-Instanz
+$K := \bigcup\limits_{(u,v) \in E} \{X_u \vee X_v,\neg X_u \vee \neg X_v\}$, die
+also genau dann eine erf"ullende Belegung besitzt, wenn $G$ 2-f"arbbar ist. Wir haben
+damit also eine Reduktion gefunden und m"ussen nur noch zeigen, dass diese mit
+polynomialem Aufwand m"oglich ist. Dies ist aber recht einfach einzusehen, da zur
+Bildung der Klauselmenge $K$ nach deren Definition nur einmal alle Kanten durchlaufen
+werden müssen, der Aufwand liegt also in $O(|E|) = O(|V|^2)$.
+\end{document}
