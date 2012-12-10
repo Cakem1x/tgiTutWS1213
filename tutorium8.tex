@@ -61,7 +61,32 @@
 
 \section{Graph Färbbarkeit}
 \subsection{Erklärung}
+\begin{frame}
+	\frametitle{Graph-n-Färbbarkeit}
+	\begin{block}{Kurzdefinition}
+	Gegeben ist ein ungerichteter Graph den man mit n Farben einfärben soll ohne das zwei benachbarte (mit einer Kante verbundenen) Knoten die gleiche Farbe haben.\\
+	\end{block}
+	\begin{block}{Formal}
+	Gegeben: Ein ungerichteter Graph $G = (V,E)$ mit Knoten $v \in V$ und Kanten $e=(v_1, v_2)\in E$ mit $v_1, v_2 \in V$ und n Farben $F_1, F_2 , ... , F_n \in F$.\\
+	Gesucht: Eine totale Funktion \[g: V \rightarrow F:\forall(v_1,v_2)\in E: g(v_1)\not=g(v_2)\]
+	\end{block}
+\end{frame}
 \subsection{Beispiel}
+\begin{frame}
+	\frametitle{Beispiel Graph-Färbbarkeit}
+	\textbf{Färbe diesen Graph mit 2 Farben}
+	\begin{center}
+	\includegraphics[scale=0.4]{images/Graph_2_Faerben}	
+	\end{center}
+\end{frame}
+\begin{frame}
+	\frametitle{Beispiel Graph-Färbbarkeit}
+	\textbf{Ist dieser Graph 3-Färbbar?}
+	\begin{center}
+	\includegraphics[scale=0.4]{images/4_Faerben}	
+	\end{center}
+\end{frame}
+
 \subsection{Aufgabe B8 A3}
 \begin{frame}
 	\frametitle{Aufgabe zu Graphfärbbarkeit (B8 A3)}
@@ -75,7 +100,32 @@
 
 \section{2-SAT}
 \subsection{Erkläung}
+\begin{frame}
+	\frametitle{n-SAT}
+	\begin{block}{Kurzdefinition}
+	Das selbe wie SAT allerdings enthalten ALLE Klauseln exakt n Literale enthält.\\
+	\end{block}
+	\begin{block}{Formal}
+\textbf{Gegeben:} Formel in konjunktiver Normalform
+\begin{itemize}
+ \item Menge $U$ von Variablen
+ \item Menge $C$ von Klauseln (Disjunktionen) über $U$ mit je exakt n Literalen
+\end{itemize} %$$ \underbrace{(\stackrel{\text{Literale}}{\stackrel{\downarrow}{\vphantom{\neglit{a}}a} \vee \stackrel{\downarrow}{\vphantom{\neglit{b}}b} \vee \stackrel{\downarrow}{\neglit{c}}})}_\text{Klausel} \wedge \underbrace{(b \vee c)}_\text{Klausel} \wedge \underbrace{(\neglit{a} \vee \neglit{b} \vee \neglit{c})}_\text{Klausel}$$
+
+\textbf{Frage:} Existiert eine (alle Klauseln) erfüllende Variablenbelegung?
+\end{block}
+
+\end{frame}
 \subsection{Beispiel}
+\begin{frame}
+	\frametitle{Beispiele}
+	\textbf{3-Sat}
+	\[U=\{ a,b,c,d \}\]
+	\[C=\{\{\neg a,\neg b,d\},\{\neg b,\neg a,c\},\{\neg c,\neg d, a\},\{b,c,d\}\}\]
+	\textbf{2-Sat}
+	\[U=\{ a,b,c,d,e \}\]
+	\[C=\{\{a,\neg b\},\{\neg b,\neg d\},\{b,\neg d\},\{\neg c,d\},\{d,e\},\{d,\neg e\}\}\]
+\end{frame}
 
 \section{Weitere Aufgaben}
 \subsection{2-COLOR auf 2-SAT Reduktion (B8 A4)}
