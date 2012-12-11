@@ -1,10 +1,49 @@
 \include{includes/common_start}
 \include{includes/tutBlatt_methods}
 \include{amsmath}
+
 \tutnr{8}
 
 \section{Altlasten}
 \subsection{Reduktion}
+
+\begin{frame}
+\frametitle{Reduktion}
+Aufgabe: Ist ein gegebenes $Problem$ A $attribut$?~\\~\\
+\begin{itemize}
+\item Nehme an, A ist $attribut$
+\item Suche ein geeignetes $Problem$ B, das bekanntermaßen (laut Vorlesung) $nicht$ $attribut$ ist
+\item Zeige: Wenn A $attribut$ ist, dann wäre B auch $attribut$
+\item Transformiere \textbf{alle} Instanzen von B zu Instanzen von A, wobei diese Transformation $attribut$ \textbf{nicht verändern} darf.
+\item Widerspruch!
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\vspace{-1 cm}
+Ist die Kolmogorow-Komplexität $L=\{\langle M \rangle \mid \text{TM M hat mind. einen nicht erreichbaren Zustand}\}$ entscheidbar?
+\begin{itemize}
+	\item Annahme: $L$ entscheidbar ($\Leftrightarrow \overline{L}$ entscheidbar)
+	\item Bekannt: Das Halteproblem ist nicht entscheidbar
+	\item Transformation f von (allen) Instanzen $\in$ Halt zu Instanzen von $\overline{L}$~\\ $f:(\langle M \rangle, w) \rightarrow \langle M' \rangle$
+	\item Konstruiere $M'$: $M'$ hat folgende Funktionsweise:
+	\begin{enumerate}
+		\item Leere das Band
+		\item Schreibe w auf das Band
+		\item Simuliere $M$
+		\item Gehe in einen zusätzlichen Zustand $q_s$
+	\end{enumerate}
+	\item Folgerung:
+	\begin{itemize}
+		\item $\langle M' \rangle = f((\langle M \rangle, w)) \in \overline{L}$
+		\item $\Leftrightarrow$ $M'$ hat keinen nicht erreichbaren Zustand
+		\item $\Leftrightarrow$ $M'$ geht in Zustand $q_s$
+		\item $\Leftrightarrow$ $M$ hält bei Eingabe w
+		\item $\Leftrightarrow (\langle M \rangle, w) \in HALT$
+	\end{itemize}
+	\item Also: $L$ entscheidbar $\Rightarrow \overline{L}$ entscheidbar $\Rightarrow$ HALT entscheidbar $\lightning$
+\end{itemize}
+\end{frame}
 
 \section{SAT}
 \subsection{SAT}
