@@ -1,0 +1,59 @@
+\include{includes/common_start}
+\include{includes/tutBlatt_methods}
+\include{amsmath}
+
+\tutnr{9}
+
+\section{Komplexitätsklassen}
+\subsection{Wiederholung: $\mathcal{P}, \mathcal{NP}$}
+\begin{frame}
+	\frametitle{$\mathcal{P}, \mathcal{NP}$}
+	
+	$\mathcal{P}$ ist die Klasse aller Sprachen, die von einer deterministischen Turingmaschine in Polynomialzeit erkannt werden.
+	\begin{block}{Formal}
+		foo
+	\end{block}
+	
+	$\mathcal{NP}$ ist die Klasse aller Sprachen, die von einer \textbf{nicht}deterministischen Turingmaschine in Polynomialzeit erkannt werden.
+	\begin{block}{Formal}
+		foo
+	\end{block}
+\end{frame}
+
+\subsection{$\mathcal{NP}$-schwer, $\mathcal{NP}$-vollständig}
+\begin{frame}
+	\frametitle{$\mathcal{NP}$-schwer, $\mathcal{NP}$-vollständig}
+	Ein Problem liegt in \textbf{$\mathcal{NP}$-schwer} (Englisch: $\mathcal{NP}$-hard) falls es \textbf{mindestens} so schwer ist wie jedes Problem in $\mathcal{NP}$.
+	
+	Also: Ist $L \in \mathcal{NP}$-schwer, dann ist jedes $L' \in \mathcal{NP}$ polynomiell reduzierbar auf $L$.
+	
+	\begin{block}{Formal}
+		$L \in \mathcal{NP}$-schwer $\Leftrightarrow \forall L' \in \mathcal{NP}: L' \preceq_p L$
+	\end{block}
+	
+	Nach dieser Definition kann $L$ also auch schwerer sein als alle Probleme in $\mathcal{NP}$. Liegt $L$ zusätzlich auch noch selbst in $\mathcal{NP}$, so nennt man $L$ \textbf{$\mathcal{NP}$-vollständig}. (Englisch: $\mathcal{NP}$-complete)
+\end{frame}
+
+\subsection{Aufgabe B9 A3}
+\begin{frame}
+	\frametitle{Aufgabe B9 A3}
+	Beweisen Sie folgende Aussagen:
+	\begin{enumerate}
+	\item Die Klasse $\mathcal{NP}$ ist unter Schnittbildung abgeschlossen.
+	\item Die Klasse $\mathcal{NP}$ ist unter Vereinigung abgeschlossen.
+	\end{enumerate}
+	Dabei nehmen wir an, dass alle Sprachen "uber dem bin"aren Alphabet $\Sigma =
+	\{0,1\}$ definiert sind.
+\end{frame}
+
+\section{Schluss}
+\subsection{Schluss}
+\begin{frame}
+\frametitle{Bis zum nächsten Mal!}
+\begin{center}
+	%TODO Comic ändern
+	\includegraphics[width= \textwidth]{images/399_traveling_salesman}
+\end{center}
+\end{frame}
+
+\include{includes/common_end}
