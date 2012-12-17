@@ -47,6 +47,23 @@
 \end{frame}
 
 \section{CLIQUE}
+\begin{frame}
+	\frametitle{CLIQUE}
+	\begin{block}{Kurzdefinition}
+	Enthält der Graph eine Teilgraph von mindestens n Knoten, bei der jeder Knoten eine Kante zu jedem anderen Knoten des Teilgraphs hat?
+	\end{block}
+	\begin{block}{Formal}
+	Gegeben: Ein ungerichteter Graph $G = (V,E)$ mit Knoten $v \in V$ und Kanten $e=(v_1, v_2)\in E$ mit $v_1, v_2 \in V$ und und eine $n \in \mathbb{N}$.\\
+	Gesucht: Ein Teilgraph $G' = (V',E')$ mit $|V'|\ge n$ und $\forall v'_1, v'_2\in V':\exists e'\in E': e'=(v_1,v_2)$.
+	\end{block}
+\end{frame}
+\begin{frame}
+	\frametitle{Beispiel}
+	\textbf{Gibt es eine Clique der Größe 4 in diesem Graphen?}
+	\begin{center}
+	\includegraphics[scale=0.6]{images/4CLIQUE}	
+	\end{center}
+\end{frame}
 \subsection{Aufgabe B9 A2}
 \begin{frame}
 	\frametitle{Aufgabe B9 A2}
@@ -81,6 +98,24 @@
 \end{frame}
 
 \section{Partition}
+\begin{frame}
+	\frametitle{PARTITION}
+	\begin{block}{Kurzdefinition}
+	Teile eine Menge natürlicher Zahlen in zwei Teilmengen, sodass die Summen der Elemente der Teilmengen gleichgroß sind.
+	\end{block}
+	\begin{block}{Formal}
+	Gegeben: Natürliche Zahlen $a_1,...,a_n \in \mathbb{N} \; (n \in 	\mathbb{N})$\\
+	Gesucht: Gibt es eine Teilmenge $J \subseteq \{1,...,n\}$ mit\\
+	\[\sum\limits_{1 \leq i \leq n, i \in J}a_i \; = \;
+	\sum\limits_{1 \leq i \leq n, i \notin J}a_i \text{?}\]
+	\end{block}
+\end{frame}
+\begin{frame}
+	\frametitle{Beispiele}
+	$\{16,8,4,3,1,1,1\}$\\
+	$\{7,4,8,2,12,8,9,3,6\}$\\
+	$\{5,8,9,2,6,4\}$
+\end{frame}
 
 \section{Bin Packing}
 \subsection{Aufgabe B9 A1}
