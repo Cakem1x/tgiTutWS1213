@@ -46,6 +46,73 @@
 	\{0,1\}$ definiert sind.
 \end{frame}
 
+\section{CLIQUE}
+\subsection{Aufgabe B9 A2}
+\begin{frame}
+	\frametitle{Aufgabe B9 A2}
+	Gehen Sie bei dieser Aufgabe durchweg von der Annahme $\mathcal{P} \neq \mathcal{NP}$
+	aus.
+	\only<1>{
+	\begin{tabbing}
+	\textbf{Problem:} 4-COLOR\\
+	\textit{Gegeben:} \= Ein ungerichteter Graph $G = (V,E)$\\
+	\textit{Gesucht:} \> Gibt es eine F"arbung der Knoten $V$, sodass je zwei durch eine\\
+	\> Kante aus $E$ miteinander verbundene Knoten unterschiedlich\\
+	\> gef"arbt sind, wenn nur vier unterschiedliche Farben zur\\
+	\> Verf"ugung stehen?
+	\end{tabbing}
+	Zeigen Sie, dass 4-COLOR $\mathcal{NP}$-vollst"andig ist!\\
+	\underline{Hinweis:} Es kann hilfreich sein, wenn Sie die $\mathcal{NP}$-
+	Vollst"andigkeit des Dreif"arbbarkeitsproblems 3-COLOR verwenden.
+	}
+	\only<2>{
+	\\Es ist bekannt, dass sowohl das Erf"ullbarkeitsproblem der Aussagenlogik SAT als
+	auch 3-SAT, das	Erf"ullbarkeitsproblem mit Beschr"ankung auf Klauseln mit nur 3
+	Literalen, $\mathcal{NP}$-vollst"andig sind.\\
+	Das Problem 3-CLIQUE ist wie folgt definiert:
+	\begin{tabbing}
+	\textbf{Problem:} 3-CLIQUE\\
+	\textit{Gegeben:} \= Ein ungerichteter Graph $G = (V,E)$\\
+	\textit{Gesucht:} \> Gibt es eine Clique (vollst"andig verbundener Teilgraph)\\
+	\> der Gr"o"se $3$ in $G$?
+	\end{tabbing}
+	Zeigen Sie, dass 3-CLIQUE \textbf{nicht} $\mathcal{NP}$-vollst"andig ist!
+	}
+\end{frame}
+
+\section{Partition}
+
+\section{Bin Packing}
+\subsection{Aufgabe B9 A1}
+\begin{frame}
+	\frametitle{Aufgabe B9 A1}
+	Gegeben sind die folgenden Probleme:
+	\begin{tabbing}
+	PARTITION:\\
+	\textit{Gegeben:} \= Nat"urliche Zahlen $a_1,...,a_n \in \mathbb{N} \; (n \in
+	\mathbb{N})$\\
+	\textit{Gesucht:} \> Gibt es eine Teilmenge $J \subseteq \{1,...,n\}$ mit\\
+	\> $\sum\limits_{1 \leq i \leq n, i \in J}a_i \; = \;
+	\sum\limits_{1 \leq i \leq n, i \notin J}a_i$?\\[8pt]
+	BIN PACKING:\\
+	\textit{Gegeben:} \> Eine Beh"altergr"o"se $b \in \mathbb{N}$, die Anzahl der
+	Beh"alter $k \in \mathbb{N}$\\
+	\> und Objekte $a_1,...,a_n \; (n \in \mathbb{N})$ mit\\
+	\> $a_i \in \mathbb{N}, a_i \leq b$ f"ur alle $i \in \{1,...,n\}$\\
+	\textit{Gesucht:} \> K"onnen die $n$ Objekte so auf die $k$ Beh"alter verteilt
+	werden,\\
+	\> dass kein Beh"alter "uberbeladen ist?\\
+	\end{tabbing}
+	\only<1>{
+	Zeigen Sie, dass BIN PACKING $\mathcal{NP}$-hart ist, wobei PARTITION als
+	$\mathcal{NP}$-vollst"andig vorausgesetzt werden darf!
+	}	
+	\only<2>{Gegeben seien die Objekte der PARTITION-Probleminstanz
+	$(a_1,a_2,a_3,a_4,a_5,a_6) = (1,1,2,3,4,5)$. Zeigen	oder widerlegen Sie, ob das transformierte und das urspr"ungliche Problem eine
+	L"osung besitzen!
+	}
+\end{frame}
+
 \section{Schluss}
 \subsection{Schluss}
 \begin{frame}
