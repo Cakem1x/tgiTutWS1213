@@ -1,0 +1,196 @@
+\documentclass[10pt,oneside,onecolumn,a4paper,german,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{german}
+\usepackage{amsmath,amsfonts,amssymb,latexsym,textcomp,stmaryrd}
+\pagestyle{plain}
+\pagenumbering{arabic}
+\parskip0.5ex plus0.1ex minus0.1ex
+\parindent0pt
+\voffset-1.04cm
+\topmargin0pt
+\headheight0pt
+\headsep0pt
+\topskip0pt
+\textheight26.7cm
+\footskip20pt
+\hoffset-1.04cm
+\oddsidemargin0pt
+\evensidemargin0pt
+\textwidth18cm
+\marginparsep0pt
+\marginparwidth0pt
+\begin{document}
+
+\section*{Tutorien-"Ubungsblatt 9}
+
+\subsection*{Aufgabe 1}
+Gegeben sind die folgenden Probleme:
+\begin{tabbing}
+PARTITION:\\
+\textit{Gegeben:} \= Nat"urliche Zahlen $a_1,...,a_n \in \mathbb{N} \; (n \in
+\mathbb{N})$\\
+\textit{Gesucht:} \> Gibt es eine Teilmenge $J \subseteq \{1,...,n\}$ mit
+$\sum\limits_{1 \leq i \leq n, i \in J}a_i \; = \;
+\sum\limits_{1 \leq i \leq n, i \notin J}a_i$?\\[8pt]
+BIN PACKING:\\
+\textit{Gegeben:} \> Eine Beh"altergr"o"se $b \in \mathbb{N}$, die Anzahl der
+Beh"alter $k \in \mathbb{N}$ und Objekte $a_1,...,a_n \; (n \in \mathbb{N})$ mit\\
+\> $a_i \in \mathbb{N}, a_i \leq b$ f"ur alle $i \in \{1,...,n\}$\\
+\textit{Gesucht:} \> K"onnen die $n$ Objekte so auf die $k$ Beh"alter verteilt
+werden, dass kein Beh"alter "uberbeladen ist?\\
+\> (Das hei"st: Existiert eine Abbildung $f: \{1,...,n\} \to \{1,...,k\}$,
+sodass f"ur alle $j \in \{1,...,k\}$ gilt:\\
+\> $\sum\limits_{1 \leq i \leq k, f(i) = j}a_i \; \leq \; b$?)
+\end{tabbing}
+\begin{enumerate}
+\item Zeigen Sie, dass BIN PACKING $\mathcal{NP}$-hart ist, wobei PARTITION als
+$\mathcal{NP}$-vollst"andig vorausgesetzt werden\\darf!
+\item Gegeben seien die Objekte der PARTITION-Probleminstanz
+$(a_1,a_2,a_3,a_4,a_5,a_6) = (1,1,2,3,4,5)$. Zeigen\\
+oder widerlegen Sie, ob das transformierte und das urspr"ungliche Problem eine
+L"osung besitzen!
+\end{enumerate}
+
+\subsection*{Aufgabe 2}
+Gehen Sie bei dieser Aufgabe durchweg von der Annahme $\mathcal{P} \neq \mathcal{NP}$
+aus. Sie k"onnen Aussagen verwenden, die in\\
+Vorlesung oder "Ubung gezeigt/behandelt wurden.
+\begin{enumerate}
+\item
+\begin{tabbing}
+\textbf{Problem:} 4-COLOR\\
+\textit{Gegeben:} \= Ein ungerichteter Graph $G = (V,E)$\\
+\textit{Gesucht:} \> Gibt es eine F"arbung der Knoten $V$, sodass je zwei durch eine
+Kante aus $E$ miteinander\\
+\> verbundene Knoten unterschiedlich gef"arbt sind, wenn nur vier unterschiedliche
+Farben zur\\
+\> Verf"ugung stehen?
+\end{tabbing}
+Zeigen Sie, dass 4-COLOR $\mathcal{NP}$-vollst"andig ist!\\
+\underline{Hinweis:} Es kann hilfreich sein, wenn Sie die $\mathcal{NP}$-
+Vollst"andigkeit des Dreif"arbbarkeitsproblems\\
+3-COLOR verwenden.
+\item
+Es ist bekannt, dass sowohl das Erf"ullbarkeitsproblem der Aussagenlogik SAT als
+auch 3-SAT, das\\
+Erf"ullbarkeitsproblem mit Beschr"ankung auf Klauseln mit nur 3
+Literalen, $\mathcal{NP}$-vollst"andig sind.\\
+Das Problem 3-CLIQUE ist wie folgt definiert:
+\begin{tabbing}
+\textbf{Problem:} 3-CLIQUE\\
+\textit{Gegeben:} \= Ein ungerichteter Graph $G = (V,E)$\\
+\textit{Gesucht:} \> Gibt es eine Clique (vollst"andig verbundener Teilgraph) der
+Gr"o"se $3$ in $G$?
+\end{tabbing}
+Zeigen Sie, dass 3-CLIQUE \textbf{nicht} $\mathcal{NP}$-vollst"andig ist!
+\end{enumerate}
+
+\subsection*{Aufgabe 3}
+Beweisen Sie folgende Aussagen:
+\begin{enumerate}
+\item Die Klasse $\mathcal{NP}$ ist unter Schnittbildung abgeschlossen.
+\item Die Klasse $\mathcal{NP}$ ist unter Vereinigung abgeschlossen.
+\end{enumerate}
+Dabei nehmen wir an, dass alle Sprachen "uber dem bin"aren Alphabet $\Sigma =
+\{0,1\}$ definiert sind.
+
+\newpage
+
+\subsection*{L"osung zu Aufgabe 1}
+\begin{enumerate}
+\item Hierzu wird die Reduktion PARTITION$\leq_p$BIN PACKING benutzt:\\[4pt]
+$(a_1,...,a_n) \mapsto
+\left\{\begin{array}{l@{\hspace{0.2cm}}l}
+\mbox{Beh"altergr"o"se:} & b := \sum\limits_{i=1}^n a_i/2\\
+\mbox{Beh"alteranzahl:} & k := 2\\
+\mbox{Objekte:} & (a_1,...,a_n)\\
+\end{array}\right.$\\[4pt]
+Falls eine L"osung des PARTITION-Problems existiert, dann gibt es nach Definition
+eine Teilmenge $J \subseteq \{1,...,n\}$ mit $\sum\limits_{1 \leq i \leq n, i \in J}
+a_i \; = \; \sum\limits_{1 \leq i \leq n, i \notin J} a_i$. Dann folgt:\\[4pt]
+$\sum\limits_{i=1}^n a_i = \sum\limits_{1 \leq i \leq n, i \in J} a_i +
+\sum\limits_{1 \leq i \leq n, i \notin J} a_i = 2 * \sum\limits_{1 \leq i \leq n,
+i \in J} a_i  \Rightarrow \sum\limits_{1 \leq i \leq n, i \in J} a_i =
+\sum\limits_{i=1}^n a_i/2 = b = \sum\limits_{1 \leq i \leq n, i \notin J} a_i$\\[4pt]
+Man kann also die Objekte zur Indexmenge $J$ in den ersten der beiden Beh"alter tun,
+der dann vollst"andig gef"ullt ist, und die restlichen Objekte in den anderen
+Beh"alter. Diese Reduktion ist polynomial, ihr Aufwand ist $O(n)$.
+\item F"ur die Objekte des BIN PACKING-Problems kann man eine L"osung finden, wenn
+man wie oben die Abbildung anwendet: $k = 2, b = \sum\limits_{i=1}^6 a_i/2 =
+(1+1+2+3+4+5)/2 = 8$. Somit ist das BIN PACKING-Problem mit der Indexmenge $J =
+\{1,4,5\}$ gel"ost, denn $\sum\limits_{1 \leq i \leq n, i \in J} a_i = 1+3+4 = 8 =
+b$ und $\sum\limits_{1 \leq i \leq n, i \notin J} a_i = 1+2+5 = 8 = b$. Die
+urspr"ungliche Probleminstanz f"ur PARTITION besitzt damit auch eine L"osung,
+n"amlich die Indexmenge $J$.
+\end{enumerate}
+
+\subsection*{L"osung zu Aufgabe 2}
+\begin{enumerate}
+\item
+Zun"achst einmal macht man sich klar, dass 4-COLOR in $\mathcal{NP}$ liegt. Das ist
+der Fall, denn r"at man eine F"arbung der Knoten, dann ist die Korrektheit der
+F"arbung in $O(|E|)$ Schritten verifizierbar, indem man schlicht "uber alle Kanten
+iteriert und "uberpr"uft, ob die Endknoten unterschiedlich gef"arbt sind.\\
+4-COLOR ist $\mathcal{NP}$-hart, denn wir k"onnen 3-COLOR auf 4-COLOR reduzieren.
+Sei $I$ eine Instanz von 3-COLOR mit $G = (V,E)$. Die Idee der Reduktion ist, einen
+weiteren Knoten zu $V$ hinzuzuf"ugen, der eine der 4 Farben von 4-COLOR zwingend
+``verbraucht'', dass kein weiterer Knoten dieselbe Farbe haben darf. Dazu verbindet
+man ihn einfach mit allen Knoten in $V$. Die 4-COLOR Instanz $I^\prime$ hat also
+$G^\prime = (V \cup \{v^\prime\}, E \cup \{(v,v^\prime) \; | \; v \in V\})$. Ist
+$G$ dreif"arbbar, so behalten wir die F"arbung der Knoten von $G$ in $G^\prime$ bei
+und f"arben $v^\prime$ in der vierten Farbe, $G^\prime$ ist dann also vierf"arbbar.
+Ist $G^\prime$ vierf"arbbar, so hat kein anderer Knoten die selbe Farbe wie
+$v^\prime$, da $v^\prime$ mit allen anderen Knoten verbunden ist. Durch Entfernen
+von $v^\prime$ aus $G^\prime$ erh"alt man somit eine korrekte Dreif"arbung von $G$,
+$G$ ist also dreif"arbbar.
+\item
+Wir geben einen Algorithmus an, der 3-CLIQUE in Polynomialzeit entscheidet. Da wir
+in dieser Aufgabe von der Annahme $\mathcal{P} \neq \mathcal{NP}$ ausgehen, kann
+3-CLIQUE nicht $\mathcal{NP}$-vollst"andig sein, denn sonst w"are $\mathcal{P} =
+\mathcal{NP}$. Das CLIQUE-Problem geh"ort zu den ``fixed parameter tractable''-
+Problemen. Das hei"st, ist die Gr"o"se einer Clique fest vorgegeben, in diesem
+Fall 3, so ist das zugeh"orige Entscheidungsproblem in Polynomialzeit l"osbar.
+Der Algorithmus verfolgt dabei schlicht den Brute-Force-Ansatz: Man betrachtet
+alle Tripel von Knoten und testet, ob diese eine Dreierclique bilden. Ist nach
+durchlaufen aller Tripel eine Dreierclique gefunden, so gibt man als Ausgabe ``JA''
+aus, ansonsten ``NEIN''. Es gibt insgesamt ${|V| \choose 3}$ Tripel von Knoten,
+daher ist der Aufwand des Algorithmus im wesentlichen $O({|V| \choose 3}) =
+O(|V|^3)$, was polynomial in der Eingabe ist.
+\end{enumerate}
+
+\subsection*{L"osung zu Aufgabe 3}
+\begin{enumerate}
+\item
+Seien $R_{L_1}, R_{L_2}$ die zu den $\mathcal{NP}$-Sprachen $L_1, L_2$ geh"orenden,
+polynomiell entscheidbaren Zeugenrelationen. Dann ist
+\begin{eqnarray*}
+R_{L_1 \cap L_2} := \{(x,(w_1,w_2)) \; | \; (x,w_1) \in R_{L_1} \wedge (x,w_2) \in
+R_{L_2}\}
+\end{eqnarray*}
+eine zu $L_1 \cap L_2$ geh"orende, polynomiell entscheidbare Zeugenrelation, denn es
+gilt:
+\begin{eqnarray*}
+&x \in L_1 \cap L_2 &\Leftrightarrow x \in L_1 \wedge x \in L_2\\
+&&\Leftrightarrow \exists \; w_1,w_2: (x,w_1) \in R_{L_1} \wedge (x,w_2) \in R_{L_2}\\
+&&\Leftrightarrow \exists \; (w_1,w_2): (x,(w_1,w_2)) \in R_{L_1 \cap L_2}
+\end{eqnarray*}
+
+\newpage
+
+\item
+Analog ist
+\begin{eqnarray*}
+R_{L_1 \cup L_2} := \{(x,(w_1,w_2)) \; | \; (x,w_1) \in R_{L_1} \vee (x,w_2) \in
+R_{L_2}\}
+\end{eqnarray*}
+eine zu $L_1 \cup L_2$ geh"orende, polynomiell entscheidbare Zeugenrelation, denn es
+gilt:
+\begin{eqnarray*}
+&x \in L_1 \cup L_2 &\Leftrightarrow x \in L_1 \vee x \in L_2\\
+&&\Leftrightarrow \exists \; w_1,w_2: (x,w_1) \in R_{L_1} \vee (x,w_2) \in R_{L_2}\\
+&&\Leftrightarrow \exists \; (w_1,w_2): (x,(w_1,w_2)) \in R_{L_1 \cup L_2}
+\end{eqnarray*}
+\end{enumerate}
+
+\end{document}
