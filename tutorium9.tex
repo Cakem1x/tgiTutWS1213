@@ -97,7 +97,8 @@
 	}
 \end{frame}
 
-\section{Partition}
+\section{NP-Probleme}
+\subsection{Partition}
 \begin{frame}
 	\frametitle{PARTITION}
 	\begin{block}{Kurzdefinition}
@@ -117,7 +118,33 @@
 	$\{5,8,9,2,6,4\}$
 \end{frame}
 
-\section{Bin Packing}
+\subsection{Bin Packing}
+\begin{frame}
+	\frametitle{BIN PACKING}
+	\begin{block}{Kurzdefinition}
+	Teile eine Menge von Objekten mit Gewichten auf eine Menge von Behältern mit Maximallast, sodass jedes Objekt in einem Behälter ist und kein Behälter überladen ist.
+	\end{block}
+	\begin{block}{Formal}
+	Gegeben: Eine Beh"altergr"o"se $b \in \mathbb{N}$, die Anzahl der
+	Beh"alter $k \in \mathbb{N}$\\
+	und Objekte $a_1,...,a_n \; (n \in \mathbb{N})$ mit\\
+	$a_i \in \mathbb{N}, a_i \leq b$ f"ur alle $i \in \{1,...,n\}$\\~\\
+	Gesucht: K"onnen die $n$ Objekte so auf die $k$ Beh"alter verteilt
+	werden,\\
+	dass kein Beh"alter "uberbeladen ist?\\
+	\end{block}
+\end{frame}
+\begin{frame}
+	\frametitle{Beispiel}
+	Seien die Gewichte der Objekte $\{3, 1, 4, 5, 1, 1\}$~\\
+	und es existieren 3 Behälter mit Maximalgröße 5~\\~\\
+	Gibt es eine Verteilung ohne Überlastung?~\\~\\~\\~\\~\\~\\
+	Seien die Gewichte der Objekte $\{5, 4, 3, 3\}$~\\
+	und es existieren 3 Behälter mit Maximalgröße 5~\\~\\
+	Gibt es eine Verteilung ohne Überlastung?
+\end{frame}
+
+
 \subsection{Aufgabe B9 A1}
 \begin{frame}
 	\frametitle{Aufgabe B9 A1}
