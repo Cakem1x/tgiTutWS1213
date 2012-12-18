@@ -46,7 +46,25 @@
 	\{0,1\}$ definiert sind.
 \end{frame}
 
-\section{CLIQUE}
+\section{NP-Probleme}
+\subsection{Clique}
+\begin{frame}
+	\frametitle{CLIQUE}
+	\begin{block}{Kurzdefinition}
+	Enthält der Graph eine Teilgraph von mindestens n Knoten, bei der jeder Knoten eine Kante zu jedem anderen Knoten des Teilgraphs hat?
+	\end{block}
+	\begin{block}{Formal}
+	Gegeben: Ein ungerichteter Graph $G = (V,E)$ mit Knoten $v \in V$ und Kanten $e=(v_1, v_2)\in E$ mit $v_1, v_2 \in V$ und und eine $n \in \mathbb{N}$.\\
+	Gesucht: Ein Teilgraph $G' = (V',E')$ mit $|V'|\ge n$ und $\forall v'_1, v'_2\in V':\exists e'\in E': e'=(v_1,v_2)$.
+	\end{block}
+\end{frame}
+\begin{frame}
+	\frametitle{Beispiel}
+	\textbf{Gibt es eine Clique der Größe 4 in diesem Graphen?}
+	\begin{center}
+	\includegraphics[scale=0.6]{images/4CLIQUE}	
+	\end{center}
+\end{frame}
 \subsection{Aufgabe B9 A2}
 \begin{frame}
 	\frametitle{Aufgabe B9 A2}
@@ -80,9 +98,54 @@
 	}
 \end{frame}
 
-\section{Partition}
+\subsection{Partition}
+\begin{frame}
+	\frametitle{PARTITION}
+	\begin{block}{Kurzdefinition}
+	Teile eine Menge natürlicher Zahlen in zwei Teilmengen, sodass die Summen der Elemente der Teilmengen gleichgroß sind.
+	\end{block}
+	\begin{block}{Formal}
+	Gegeben: Natürliche Zahlen $a_1,...,a_n \in \mathbb{N} \; (n \in 	\mathbb{N})$\\
+	Gesucht: Gibt es eine Teilmenge $J \subseteq \{1,...,n\}$ mit\\
+	\[\sum\limits_{1 \leq i \leq n, i \in J}a_i \; = \;
+	\sum\limits_{1 \leq i \leq n, i \notin J}a_i \text{?}\]
+	\end{block}
+\end{frame}
+\begin{frame}
+	\frametitle{Beispiele}
+	Welche dieser Mengen ist partitionierbar?
+	\[\{16,8,4,3,1,1,1\}\]\\
+	\[\{7,4,8,2,12,8,9,3,6\}\]\\
+	\[\{5,8,9,2,6,4\}\]
+\end{frame}
 
-\section{Bin Packing}
+\subsection{Bin Packing}
+\begin{frame}
+	\frametitle{BIN PACKING}
+	\begin{block}{Kurzdefinition}
+	Teile eine Menge von Objekten mit Gewichten auf eine Menge von Behältern mit Maximallast, sodass jedes Objekt in einem Behälter ist und kein Behälter überladen ist.
+	\end{block}
+	\begin{block}{Formal}
+	Gegeben: Eine Beh"altergr"o"se $b \in \mathbb{N}$, die Anzahl der
+	Beh"alter $k \in \mathbb{N}$\\
+	und Objekte $a_1,...,a_n \; (n \in \mathbb{N})$ mit\\
+	$a_i \in \mathbb{N}, a_i \leq b$ f"ur alle $i \in \{1,...,n\}$\\~\\
+	Gesucht: K"onnen die $n$ Objekte so auf die $k$ Beh"alter verteilt
+	werden,\\
+	dass kein Beh"alter "uberbeladen ist?\\
+	\end{block}
+\end{frame}
+\begin{frame}
+	\frametitle{Beispiel}
+	Seien die Gewichte der Objekte $\{3, 1, 4, 5, 1, 1\}$~\\
+	und es existieren 3 Behälter mit Maximalgröße 5~\\~\\
+	Gibt es eine Verteilung ohne Überlastung?~\\~\\~\\~\\~\\~\\
+	Seien die Gewichte der Objekte $\{5, 4, 3, 3\}$~\\
+	und es existieren 3 Behälter mit Maximalgröße 5~\\~\\
+	Gibt es eine Verteilung ohne Überlastung?
+\end{frame}
+
+
 \subsection{Aufgabe B9 A1}
 \begin{frame}
 	\frametitle{Aufgabe B9 A1}
@@ -113,13 +176,33 @@
 	}
 \end{frame}
 
+\begin{frame}
+	\frametitle{Immer hilfreich: Mehr Probleme}
+	\begin{itemize}
+		\item NP-Probleme
+		\begin{itemize}
+			\item n-Sat ($n \geq 3$)
+			\item 3-Color
+			\item Partition
+			\item Clique
+			\item Bin-Packing
+			\item Traveling Salesman (TSP)
+			\item Knapsack
+			\item Vertex Cover
+			\item Dominating Set
+			\item Independent Set
+			\item Hamilton Kreis
+			\item Super Mario Bros.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
 \section{Schluss}
 \subsection{Schluss}
 \begin{frame}
 \frametitle{Bis zum nächsten Mal!}
 \begin{center}
-	%TODO Comic ändern
-	\includegraphics[width= \textwidth]{images/399_traveling_salesman}
+	\includegraphics[width= \textwidth]{images/838_incident.png}
 \end{center}
 \end{frame}
 
