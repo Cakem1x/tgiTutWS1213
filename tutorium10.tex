@@ -17,7 +17,42 @@
 
 \section{Hamiltonkreis und TSP}
 \subsection{Hamiltonkreis}
+\begin{frame}
+	\frametitle{Hamiltonkreis}
+	\begin{block}{Kurzdefinition}
+	Enthält der gegebene Graph einen Kreis, d.h. gibt es einen Pfad der durch jeden Knoten exakt einmal geht und vom Startknoten wieder zum Startknoten führt (Start- und Endknoten wird nur einmal gezählt).
+	\end{block}
+	\begin{block}{Formal}
+	Gegeben: Ein ungerichteter Graph $G=(V,E)$.\\
+	Gesucht: Besitzt $G$ einen Hamiltonkreis? (Dies ist eine Permutation $\pi$ der Knotenindizes ($v_{\pi(1)}$, $v_{\pi(2)}$,...,$v_{\pi(n)}$), sodass für $i=1,...,n-1$ gilt: $\{v_{\pi(i)},v_{\pi(i+1)}\}\in E$) und 
+außerdem $\{v_{\pi(n)},v_{\pi(1)}\} \in E)$.
+	\end{block}
+\end{frame}
+\begin{frame}
+	\frametitle{Beispiel}
+	Gibt es in diesem Graphen einen Hamiltonkreis?
+	\begin{center}
+		\includegraphics[scale=0.4]{images/4_Faerben}
+	\end{center}
+\end{frame}
 \subsection{Travelling Salesman}
+\begin{frame}
+	\frametitle{Travelling Salesman}
+	\begin{block}{Kurzdefinition}
+	Geben sie einen Kreis des gegeben vollständig verbundenen Graphen mit Kantenlängen an, sodass dessen Gesamtkantenlänge minimal ist.
+	\end{block}
+	\begin{block}{Formal}
+	Gegeben: Ein Graph $G=(V,V \times V)$\\
+	Gesucht: Ein einfacher Kreis $C=(v_1,v_2,...,v_n,v_1)$, sodass $n=|V|$ und $\sum_{(u,v)\in C} d(u,v)$ minimiert wird, wobei $d(u,v)$ die Entfernung zwischen den Knoten $u$ und $v$ ist.\\
+	\end{block}
+\end{frame}
+\begin{frame}
+	\frametitle{Beispiel}
+	Wie lang ist die kürzeste Route und durch welche Kanten geht sie?
+	\begin{center}		
+		\includegraphics[scale=0.5]{images/Weighted_K4}
+	\end{center}
+\end{frame}
 \subsection{Aufgabe B10 A4}
 
 \section{Schluss}
