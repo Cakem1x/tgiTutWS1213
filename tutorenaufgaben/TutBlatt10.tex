@@ -1,0 +1,185 @@
+\documentclass[10pt,oneside,onecolumn,a4paper,german,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{german}
+\usepackage{amsmath,amsfonts,amssymb,latexsym,textcomp,stmaryrd}
+
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{color}
+\usepackage{enumerate}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+\parskip0.5ex plus0.1ex minus0.1ex
+\parindent0pt
+\voffset-1.04cm
+\topmargin0pt
+\headheight0pt
+\headsep0pt
+\topskip0pt
+\textheight26.7cm
+\footskip20pt
+\hoffset-1.04cm
+\oddsidemargin0pt
+\evensidemargin0pt
+\textwidth18cm
+\marginparsep0pt
+\marginparwidth0pt
+\begin{document}
+
+\section*{Tutorien-"Ubungsblatt 10}
+
+\subsection*{Aufgabe 1}
+Gegeben ist das folgende Problem:
+\begin{tabbing}
+HALF-CLIQUE:\\
+\textit{Gegeben:} \= Ein ungerichteter Graph $G = (V,E)$\\
+\textit{Gesucht:} \> Gibt es eine Teilmenge $V' \subseteq V$ mit
+$\forall \; v,w \in V', v \not= w: (v,w) \in E$ und $|V'| \geq |V|/2$
+\end{tabbing}
+Beweisen Sie, dass HALF-CLIQUE \textbf{NP}-vollst"andig ist!\\[4pt]
+\underline{Zur Erinnerung:}\\
+Das als \textbf{NP}-vollst"andig bekannte Problem CLIQUE ist definiert durch:
+\begin{tabbing}
+CLIQUE:\\
+\textit{Gegeben:} \= Ein ungerichteter Graph $G = (V,E)$ und $k \in \mathbb{N}$\\
+\textit{Gesucht:} \> Gibt es eine Teilmenge $V' \subseteq V$ mit
+$\forall \; v,w \in V', v \not= w: (v,w) \in E$ und $|V'| \geq k$
+\end{tabbing}
+
+\subsection*{Aufgabe 2}
+Finden Sie den Fehler im folgenden ``Beweis'' f"ur \textbf{P} $\not=$ \textbf{NP}!\\
+Betrachten Sie folgenden Algorithmus f"ur SAT:\\[4pt]
+- Durchlaufe f"ur die gegebene Formel $\phi$ alle m"oglichen Belegungen der
+Variablen mit den Wahrheitswerten\\
+- Akzeptiere $\phi$, wenn eine der durchlaufenen Belegungen $\phi$ erf"ullt\\[4pt]
+Dieser Algorithmus hat eine mit der Anzahl der Variablen exponentiell wachsende
+Laufzeit. Daher hat das Problem SAT einen exponentiellen Aufwand und kann nicht in
+\textbf{P} liegen. Weil aber SAT in \textbf{NP} liegt, mu"s also \textbf{P} $\not=$
+\textbf{NP} gelten.
+
+\subsection*{Aufgabe 3}
+\begin{enumerate}
+\item Zeigen Sie, dass es unter der Voraussetzung \textbf{P} $=$ \textbf{NP} m"oglich
+ist, f"ur eine aussagenlogische Formel $\phi$ in\\
+polynomieller Zeit eine erf"ullende Belegung der Variablen zu finden, falls eine
+solche Belegung existiert!
+\end{enumerate}
+
+\subsection*{Aufgabe 4}
+\begin{enumerate}
+ \item Gegeben sind folgende Probleme: 
+ \begin{tabbing}
+ \textbf{Hamiltonkreisproblem:} \\
+ \hspace{10pt} \= \textit{Gegeben:} \= Ein ungerichteter Baum $G=(V,E)$.\\
+ \> \textit{Gesucht:} \> Besitzt $G$ einen Hamiltonkreis? (Dies ist eine Permutation $\pi$ der Knotenindizes\\ 
+ \> \> ($v_{\pi(1)}$,$v_{\pi(2)}$,...,$v_{\pi(n)}$), sodass für $i=1,...,n-1$ gilt: $\{v_{\pi(i)},v_{\pi(i+1)}\}\in E$) und \\ 
+ \> \> außerdem $\{v_{\pi(n)},v_{\pi(1)}\} \in E)$.\\ \\
+ \textbf{Travelling Salesman(TSP):}\\
+ \> \textit{Gegeben:} Ein Graph $G=(V,V \times V)$\\
+ \> \textit{Gesucht:} \> Ein einfacher Kreis $C=(v_1,v_2,...,v_n,v_1)$, sodass $n=|V|$ und $\sum_{(u,v)\in C} d(u,v)$\\
+ \> \> minimiert wird, wobei $d(u,v)$ die Entfernung zwischen den Knoten $u$ und $v$ ist.\\
+\end{tabbing}
+Zeigen Sie, dass TSP NP-Vollständig ist, wobei das Hamiltonkreisproblem auch NP-Vollständig ist. Benutzen Sie für den Beweis die Reduktion Hamiltonkreisproblem$\leq_p$TSP. 
+\item Gegeben sei folgender Graph:\newline
+\begin{center}
+\begin{tikzpicture}
+ \draw (0,0) circle (8pt);
+ \draw (0,0) node {$v_0$};
+ \draw (2,0) circle (8pt);
+ \draw (2,0) node {$v_1$};
+ \draw (2,2) circle (8pt);
+ \draw (2,2) node {$v_2$};
+ \draw (1,3) circle (8pt);
+ \draw (1,3) node {$v_3$};
+ \draw (0,2) circle (8pt);
+ \draw (0,2) node {$v_4$};
+ \draw (0.2,0.2) -- (1.8,1.8);
+ \draw (0.2,1.8) -- (1.8,0.2);
+ \draw (0.2,2.2) -- (0.8,2.8);
+ \draw (1.2,2.8) -- (1.8,2.2);
+ \draw (0.3,0) -- (1.7,0);
+ \draw (0.3,2) -- (1.7,2);
+ \draw (0,0.3) -- (0,1.7);
+ \draw (2,0.3) -- (2,1.7);
+\end{tikzpicture}
+\end{center}
+Gibt es einen Hamiltonkreis? Wandeln Sie hierzu das Problem in ein TSP um und finden Sie eine optimale Rundtour.
+\end{enumerate}
+
+\newpage
+
+\subsection*{L"osung zu Aufgabe 1}
+HALF-CLIQUE ist in \textbf{NP}, da f"ur ein Teilgraph der Gr"o"se $|V|/2$ eines
+ungerichteten Graphen $G = (V,E)$ in $O(|V|^2 \cdot |E|) = O(|V|^4)$ gepr"uft werden
+kann, ob dieser Teilgraph vollst"andig und damit eine Clique ist.\\[4pt]
+Zum Nachweis der \textbf{NP}-H"arte von HALF-CLIQUE zeigen wir die polynomielle
+Reduktion CLIQUE $\leq_p$ HALF-CLIQUE. Dazu sei eine Instanz $(G,k)$ mit $G = (V,E)$
+des Problems CLIQUE gegeben.\\
+\underline{Fall 1:} $k = |V|/2$\\
+Dann ist $G$ bereits die gesuchte Instanz von HALF-CLIQUE und es gilt $(G,k) \in$
+CLIQUE $\Leftrightarrow G \in$ HALF-CLIQUE.\\
+\underline{Fall 2:} $k > |V|/2$\\
+Bilde den Graphen $G' = (V',E')$ aus $G$ durch das Hinzuf"ugen $2k - |V| > 0$ Knoten,
+die mit keinem anderen Knoten in $V'$ verbunden sind, also den Grad 0 haben. Es gilt
+$|V'|/2 = (|V| + 2k - |V|)/2 = k$. Damit gilt $(G,k) \in \mbox{CLIQUE}
+\Leftrightarrow G \; \mbox{hat eine Clique mit Umfang} \; k
+\Leftrightarrow G' \; \mbox{hat eine Clique mit Umfang} \; |V'|/2
+\Leftrightarrow G' \in \mbox{HALF-CLIQUE}$.
+Die Bildung von $G'$ aus $(G,k)$ ist in $O(k+|V|)$ m"oglich.\\
+\underline{Fall 3:} $k < |V|/2$\\
+Bilde den Graphen $G' = (V',E')$ aus $G$ durch das Hinzuf"ugen $|V| - 2k > 0$ Knoten,
+die mit jedem anderen Knoten in $V'$ verbunden sind, also den Grad $|V'| - 1$ haben.
+Es gilt $|V'|/2 = (|V| + |V| - 2k)/2 = |V| - k$. Damit gilt $(G,k) \in \mbox{CLIQUE}
+\Leftrightarrow G \; \mbox{hat eine Clique mit Umfang} \; k
+\Leftrightarrow G' \; \mbox{hat eine Clique mit Umfang} \; k + |V| - 2k = |V'|/2
+\Leftrightarrow G' \in \mbox{HALF-CLIQUE}$.
+Die Bildung von $G'$ aus $(G,k)$ ist in $O(|V|^2 \cdot |E|) = O(|V|^4)$ m"oglich.
+
+\subsection*{L"osung zu Aufgabe 2}
+Die Vorgabe eines Algorithmus mit exponentiellem Aufwand zur L"osung eines gegebenen
+Problems bedeutet nicht, dass das Problem eine exponentielle Komplexit"at besitzt und
+damit in \textbf{NP} liegt. Der Denkfehler besteht darin, dass aus der Tatsache, dass
+man nicht auf triviale Weise einen effizienten (polynomiellen) Algorithmus findet,
+geschlossen wird, dass ein solcher effizienter (polynomieller) Algorithmus auch nicht
+existieren kann.
+
+\subsection*{L"osung zu Aufgabe 3}
+\begin{enumerate}
+\item Es ist bekannt, dass SAT $\in$ \textbf{NP} gilt. Wegen der Voraussetzung
+\textbf{P} $=$ \textbf{NP} gilt damit auch SAT $\in$ \textbf{P}. F"ur eine gegebene
+aussagenlogische Formel $\phi$ seien die Variablen mit $X_1,...,X_n$ f"ur ein
+geeignetes $n \in \mathbb{N}$ bezeichnet.\\
+Es wird nun folgender Algorithmus betrachtet:\\[4pt]
+1. Initialisiere $i$ mit $1$\\
+2. Ersetze $X_i$ in $\phi$ mit TRUE und pr"ufe, ob $\phi \in$ SAT gilt\\
+- Falls ja: Gehe zu 4.\\
+- Falls nein: Gehe zu 3.\\
+3. Ersetze $X_i$ in $\phi$ mit FALSE und pr"ufe, ob $\phi \in$ SAT gilt\\
+- Falls ja: Gehe zu 4.\\
+- Falls nein: Gib aus ``$\phi$ ist nicht erf"ullbar''\\
+4. Pr"ufe, ob $i < n$ gilt\\
+- Falls ja: Erh"ohe $i$ um $1$ und gehe zu 2.\\
+- Falls nein: Gib die aktuelle Belegung f"ur $X_1,...,X_n$ als L"osung aus\\[4pt]
+Der Aufwand des Algorithmus ist im wesentlichen das $2n$-fache des Aufwandes von SAT.
+Da SAT nach der Voraussetzung dieser Aufgabe einen polynomiellen Aufwand in $n$ hat,
+so hat auch der obige Algorithmus einen polynomiellen Aufwand in $n$.
+\end{enumerate}
+
+\subsection*{L"osung zu Aufgabe 4}
+\begin{enumerate}
+ \item TSP ist in NP, da man durch einen nichtdeterminitischen Turingmaschine in polynomielle Zeit feststellen kann (da man n Kanten raten kann), ob die Kantenmenge das TSP löst. Somit ist TSP in NP.\newline Es ist noch zu zeigen, dass das TSP in NP-Hart ist: \newline Sei $G=(V,E)$ beliebiger ungerichteter Graph.\newline Definiere
+$d(u,v):=$  
+  $\left\{
+     \begin{array}{l l}
+      &  1, \quad \quad \quad \quad \quad \quad \quad $falls$ (u,v) \in E\\
+      &  1+\alpha , \quad \quad \quad \quad \quad  $sonst$ \\
+     \end{array}\right.$ \newline \newline
+Dann nur dann, wenn $G$ einen Hamiltonkreis hat, gilt $\exists$ TSP Tour mit Kosten $n$. Ansonsten sind die optimale Kosten mindestens $n+\alpha$. Also es existiert einen Rundtour $C$ mit Gewicht $n$, dann gibt es keine Kante, deren Gewicht echt größer als 1 ist. Somit hat jede Kante in $C$ das Gewicht 1 und alle Kanten in $C$ sind in $G$ und $C$ bildet einen Hamiltonkreis in $G$. Umgekehrt hat $G$ einen Hamiltonkreis $C$ und $C$ ist Rundtour mit Gewicht $n$.
+\item Eine optimale Rundtour ist z.B.: $(v_0,v_1,v_2,v_3,v_4,v_0)$ mit Kosten 5, also ist diese optimale Rundtour (da ihre Kosten nicht größer als 5 sind) auch ein Hamiltonkreis.
+\end{enumerate}
+
+
+\end{document}
