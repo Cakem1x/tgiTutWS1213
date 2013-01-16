@@ -1,0 +1,89 @@
+\include{includes/common_start}
+\include{includes/tutBlatt_methods}
+\include{amsmath}
+
+\tutnr{11}
+
+\section{Kolmogorov Komplexität}
+\subsection{Kolmogorov Komplexität}
+\begin{frame}
+	\frametitle{Wiederholung: Kolmogorov Komplexität}
+	Eine minimale Beschreibung eines Wortes $w$ heißt Kolmogorow-Komplexität $K(w)$
+	\begin{itemize}
+		\item Also: $\forall d(w): |d(w)| \geq |K(w)|$
+		\item Die Länge von $K(w)$ ist abhängig von der Struktur von $w$
+	\end{itemize}~\\
+	Falls $|K(w)| \geq |w|$ heißt das Wort unkomprimierbar.~\\~\\
+\end{frame}
+\begin{frame}
+	\frametitle{Wiederholung: Kolmogorov Komplexität}
+	\textbf{Beispiel:}
+	\\Geben Sie eine möglichst gute obere Schranke für die Kolmogorow-Komplexität von $x=0^n$ an!
+	\begin{itemize}
+	\visible<2->{
+		\item $n$ ist die Anzahl an Nullen
+	}
+	\visible<3->{
+		\item $n$ lässt sich binär kodieren mit $log_2(n)$ viel Platz
+	}
+	\visible<4->{
+		\item $K(x) \leq log_2(n) + c$, wobei $c$ die \emph{konstante} Größe einer Turingmaschine ist, die in Bezug auf das Problem bei \emph{jeder} möglichen Kodierung als Eingabe die Ausgabe $x$ liefert.
+	}
+	\end{itemize}
+	\visible<5->{
+	\vspace{1cm}
+		\textbf{Vorsicht:} Aufpassen, in Abhängigkeit wovon eine obere Schranke angegeben werden soll.
+	}
+\end{frame}
+\begin{frame}
+\begin{center}
+\vspace{-0.3cm}
+	\includegraphics[height=0.9\textheight]{images/Mandelpart2_red.png}
+\end{center}
+\end{frame}
+
+\section{Multiple Choice}
+\subsection{Multiple Choice}
+\begin{frame}
+	\frametitle{Multiple Choice}
+	\begin{center}
+	\only<1>{
+		Die Kolmogorov-Komplexität einer Zeichenkette $x \in \{0,1\}^n$ ist immer größer als $log_2(n)$
+	}
+	\only<2>{
+		Das Hamilton-Kreis Problem ist NP-vollständig
+	}
+	\only<3>{
+		In der Klasse NP liegen nicht-entscheidbare Probleme
+	}
+	\only<4>{
+		Das Vertex-Cover Problem ist NP-vollständig
+	}
+	\only<5>{
+		Semi-entscheidbare Sprachen sind unter Komplementbildung
+abgeschlossen
+	}
+	\only<6>{
+		Nichtdeterministische endliche Automaten sind echt mächtiger als
+deterministische
+	}
+	\only<7>{
+		Zu jeder CH-2-Sprache gibt es eine CH-1-Grammatik
+	}
+	\only<8>{
+		Um zu zeigen, dass ein Problem $\Pi$ NP-vollständig ist, genügt es, ein NP-schweres Problem auf $\Pi$ zu reduzieren.
+	}
+	\end{center}
+\end{frame}
+
+\section{Schluss}
+\subsection{Schluss}
+\begin{frame}
+\frametitle{Bis zum nächsten Mal!}
+	\center{Kolmogorov Directions}
+\begin{center}
+	\includegraphics[height=0.85\textheight]{images/kolmogorov_directions.png}
+\end{center}
+\end{frame}
+
+\include{includes/common_end}
