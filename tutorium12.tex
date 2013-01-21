@@ -10,7 +10,30 @@
 \subsection{Aufgabe B11 A1}
 
 \section{Mehr Begriffe der Informationstheorie}
-%Erklären: Empfänger, Kanäle, Verbundentropie, Irrelevanz, Äquivokation, Transinformation, Fehlinformation(="inverse Äquivokation"=Irrelevanz?), Totalinformation (=Verbundentropie?)
+%Erklären: Empfänger, Kanäle, Verbundentropie, Äquivokation, Transinformation, Fehlinformation(="inverse Äquivokation"=Irrelevanz?), Totalinformation (=Verbundentropie?)
+\begin{frame}
+\frametitle{Übertragung von Information}
+Daten können über einen Kanal von der Quelle zu einem Empfänger gesendet werden. Dieser Kanal ist in der Regel nicht störungsfrei, dass heißt die gesendeten Daten können ungleich zu den empfangenen sein.\\ 
+Ein gestörter Kanal kann durch seine Übertragungswahrscheinlichkeiten $P(r|q)$, welche angeben wie wahrscheinlich es ist, dass r beim Empfänger ankommt, wenn q aus der Quelle gesendet wurde, charakterisiert werden.\\
+Damit ergibt sich der Zusammenhang \[P(R=r)=\sum_{r} P(Q=q)P(R=r|Q=q).\]
+\end{frame}
+\begin{frame}
+\frametitle{Einige Definitionen}
+\emph{Totalinformation} oder auch Verbundentropie H(Quelle $Q$, Empfänger $R$) ist die gesamte von Quelle und Empfänger erzeugte Entropie
+\[H(Q,R)=\sum_{q} \sum_{r} P(Q=q)P(R=r)\log(P(Q=q)P(R=r))\]
+\emph{Äquivokation} $H$(Quelle $Q|$ Empfänger $R$) gibt dem Entropieverlust durch die Übertragung an.\\
+\[H(Q|R)=H(Q,R)-H(R)\]
+\emph{Fehlinformation} H(Empfänger $R|$ Quelle $Q$) entspricht dem anscheinenden Informationsgewinn durch die Übertragung.
+\[H(R|Q)=H(Q,R)-H(Q)\]
+\emph{Transinformation} I(Quelle $Q$, Empfänger $R$) ist die richtig empfangene Informationsmenge.
+\[I(Q,R)= H(Q)-H(Q|R)=H(R)-H(R|Q)=H(Q)+H(R)-H(Q,R)\]
+\end{frame}
+\begin{frame}
+\frametitle{Bild zur Veranschaulichung}
+\begin{center}
+\includegraphics[scale=0.35]{images/Entropie_XY}
+\end{center}
+\end{frame}
 \subsection{Erklärung}
 \subsection{Aufgabe B11 A2}
 \subsection{Aufgabe B11 A4}
