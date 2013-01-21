@@ -38,7 +38,9 @@
 	Empf"anger $Y$. Die "Ubertragungswahrscheinlichkeiten $P(Y|X)$ seien durch das
 	folgende Diagramm gegeben:
 	}
+	\only<2->{
 	\vspace{-0.6cm}
+	}
 		\begin{center}
 			\begin{tikzpicture}
 			\draw (0,0) circle (10pt);
@@ -101,6 +103,39 @@
 
 \section{Huffman-Codierung}
 \subsection{Erklärung}
+\begin{frame}
+	\frametitle{Huffman-Codierung}
+	Die Huffman-Codierung ist ein Algorithmus zur verlustfreien Datenkompression.
+	\begin{block}{Problemdefinition}
+	\begin{itemize}
+		\item Gegeben
+		\begin{itemize}
+			\item Ein Alphabet $A = \{a_0, a_1, ..., a_n\}$ der Größe $n$
+			\item Gewichte $W = \{w_0, w_1, ..., w_n\}$ für alle $a \in A$. \\
+			Meist die Wahrscheinlichkeit, dass ein Zeichen auftritt.
+		\end{itemize}
+		\item Gesucht
+		\begin{itemize}
+			\item Eine binäre Codierung für alle Zeichen aus $A$, sodass die erwartete Code-Wortlänge in Bezug auf die Gewichte minimal ist.
+		\end{itemize}		
+	\end{itemize}
+	\end{block}
+	\only<2> {
+	Lässt sich sowohl auf konkrete Wörter anwenden als auch auf Quellen, von denen man weiß, wie wahrscheinlich sie welches Zeichen sendet.
+	}
+\end{frame}
+\begin{frame}
+	\frametitle{Huffman-Codierung Beispiel}
+	Gegeben sei das Wort \textbf{\textcolor{red}{a}\textcolor{blue}{b}\textcolor{red}{a}\textcolor{green}{c}\textcolor{red}{a}\textcolor{blue}{b}\textcolor{red}{a}d\textcolor{red}{a}\textcolor{blue}{b}\textcolor{red}{a}\textcolor{green}{c}\textcolor{red}{a}\textcolor{blue}{b}\textcolor{red}{a}}. Wie lautet eine Huffman-Codierung? \\
+	\visible<2>{
+		\begin{itemize}
+			\item \textcolor{red}{\#a = 8}
+			\item \textcolor{blue}{\#b = 4}
+			\item \textcolor{green}{\#c = 2}
+			\item \textcolor{brown}{\#d = 1}
+		\end{itemize}
+	}
+\end{frame}
 \subsection{Aufgabe B11 A3}
 \begin{frame}
 	\frametitle{Aufgabe B11 A3}
