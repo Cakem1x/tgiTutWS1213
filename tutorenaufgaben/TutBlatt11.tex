@@ -1,0 +1,319 @@
+\documentclass[10pt,oneside,onecolumn,a4paper,german,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{german}
+\usepackage{amsmath,amsfonts,amssymb,latexsym,textcomp,stmaryrd}
+\usepackage{tikz}
+\pagestyle{plain}
+\pagenumbering{arabic}
+\parskip0.5ex plus0.1ex minus0.1ex
+\parindent0pt
+\voffset-1.04cm
+\topmargin0pt
+\headheight0pt
+\headsep0pt
+\topskip0pt
+\textheight26.7cm
+\footskip20pt
+\hoffset-1.04cm
+\oddsidemargin0pt
+\evensidemargin0pt
+\textwidth18cm
+\marginparsep0pt
+\marginparwidth0pt
+\begin{document}
+
+\section*{Tutorien-"Ubungsblatt 11}
+
+\subsection*{Aufgabe 1}
+\begin{enumerate}
+\item Wie gro"s sind der Informationsgehalt und die Entropie, wenn eine Quelle mit
+dem Alphabet $\{0,1\}$ nur aus dem Zeichen $0$ bestehende Folgen sendet?
+\item An einer Quelle mit $n$ Zeichen tritt jedes Zeichen gleichverteilt auf. Wie
+gro"s sind der Informationsgehalt und die Entropie eines einzelnen Zeichens?
+\item Berechnen Sie die Entropie des Wurfes eines idealen W"urfels mit 8 Seiten,
+dessen Wahrscheinlichkeit f"ur jede Seite $p = \frac{1}{8}$ ist!
+\item Was ist der Unterschied zwischen den beiden Folgen, die aus verschiedenen
+ged"achtnislosen Quellen mit der gleichen Wahrscheinlichkeit f"ur $0$ und $1$
+gesendet werden, wenn man sie unter dem Aspekt Entropie und Ordnung betrachtet?
+\begin{enumerate}
+\item ...10101010101010101010...
+\item ...01101100110111000010...
+\end{enumerate}
+\end{enumerate}
+
+\subsection*{Aufgabe 2}
+Studieren Sie den Fall eines asymmetrischen bin"aren Kanals mit Quelle $X$ und
+Empf"anger $Y$. Die "Ubertragungswahrscheinlichkeiten $P(Y|X)$ seien durch das
+folgende Diagramm gegeben:
+\begin{center}
+\begin{tikzpicture}
+\draw (0,0) circle (10pt);
+\draw (0,0) node {$1$};
+\draw (0,2) node {$X$};
+\draw (0,4) circle (10pt);
+\draw (0,4) node {$0$};
+\draw (4,0) circle (10pt);
+\draw (4,0) node {$1$};
+\draw (4,2) node {$Y$};
+\draw (4,4) circle (10pt);
+\draw (4,4) node {$0$};
+\draw [->] (0.35,0) -- (3.65,0);
+\draw (2,0.3) node {$0.9$};
+\draw [->] (0.35,4) -- (3.65,4);
+\draw (2,3.7) node {$0.8$};
+\draw [->] (0.25,0.25) -- (3.75,3.75);
+\draw (1.5,1) node {$0.1$};
+\draw [->] (0.25,3.75) -- (3.75,0.25);
+\draw (1.5,3) node {$0.2$};
+\end{tikzpicture}
+\end{center}
+\begin{enumerate}
+\item Wie gro"s ist die Wahrscheinlichkeit daf"ur, dass die Bitkette ``$1100$'' als
+``$1001$'' "ubertragen wird?
+\item Wenn die Entropie der Quelle $H(X) = 1 \; \mbox{bit}$ ist, wie gro"s ist dann
+$H(Y)$?
+\item Wie gro"s muss $H(X)$ sein, damit $H(Y) = 1 \; \mbox{bit}$ gilt?
+\item Wie gro"s ist die Verbundentropie $H(X,Y)$ des "Ubertragungssystems? Gehen Sie
+ab dieser Teilaufgabe von der Situation der 2. Teilaufgabe aus!
+\item Wie gro"s ist die sog. Irrelevanz $H(Y|X)$? Und wie gro"s ist die sog.
+"Aquivokation $H(X|Y)$?
+\item Wie gro"s ist schlie"slich die Transinformation $I(X;Y)$?
+\end{enumerate}
+
+\newpage
+
+\subsection*{Aufgabe 3}
+Gegeben sei eine Quelle mit Alphabet $\{A,B,C,D\}$ und mit den folgenden
+Wahrscheinlichkeiten:\\
+$P(A)=\frac{1}{2}, P(B)=\frac{1}{4}, P(C)=\frac{1}{8}, P(D)=\frac{1}{8}$
+\begin{enumerate}
+\item Berechnen Sie die Entropie der Quelle!
+\item Erstellen Sie eine entsprechende Huffman-Codierung!
+\item Was ist die mittlere Codewortl"ange? Gibt es einen Zusammenhang zur Entropie?
+\item Gegeben sei der folgende Huffman-Baum:
+\begin{center}
+\begin{tikzpicture}
+\node[circle,draw]{}
+child{
+  node[circle,draw]{}
+  child{
+    node[circle,draw]{$A$}
+    edge from parent
+    node[left]{\textbf{$0$}}
+  }
+  child{
+    node[circle,draw]{$B$}
+    edge from parent
+    node[right]{\textbf{$1$}}
+  }
+  edge from parent
+  node[left]{\textbf{$0$}}
+}
+child{
+  node[circle,draw]{$C$}
+  edge from parent
+  node[right]{\textbf{$1$}}
+};
+\end{tikzpicture}
+\end{center}
+Dekodieren Sie $011011101100101011$! Ist der Huffman-Code geeignet?
+\end{enumerate}
+
+\subsection*{Aufgabe 4}
+Gegeben sei eine ged"achtnislose Quelle $Q$, die mit Wahrscheinlichkeit $p_0 =
+\frac{1}{4}$ eine $0$ und mit Wahrscheinlichkeit $p_1 = \frac{3}{4}$ eine $1$ sendet.
+Gegeben sei zudem ein Empf"anger $R$, der die Zeichen von $Q$ zu empfangen versucht.
+Dieser Empf"anger empf"angt eine $0$ immer richtig. Sendet die Quelle $Q$ jedoch
+eine $1$, so empf"angt $R$ mit Wahrscheinlichkeit $\frac{1}{2}$ eine $1$ und mit
+Wahrscheinlichkeit $\frac{1}{2}$ eine $0$.
+\begin{enumerate}
+\item Berechnen Sie die Information $I(0)$ und $I(1)$ bez"uglich der Quelle $Q$!
+\item Berechnen Sie die Entropie der Quelle $Q$!
+\item Die Quelle $Q$ sendet die Zeichenfolge $0110$. Wie hoch ist der
+Informationsgehalt dieser Zeichenfolge?
+\item Berechnen Sie die Totalinformation $H(Q,R)$, die Fehlinformation $H(R|Q)$,
+die "Aquivokation $H(Q|R)$ und die Transinformation $I(Q;R)$!
+\end{enumerate}
+
+\newpage
+
+\subsection*{L"osung zu Aufgabe 1}
+\begin{enumerate}
+\item Sei $p$ die Wahrscheinlichkeitsfunktion, f"ur die nach der Aufgabenstellung
+$p(X=0) = 1$ und $p(X=1) = 0$ gilt. Der Informationsgehalt $I(x)$ eines von der
+Quelle gesendeten Zeichens $x$ ist $I(x) = -\log_2{p(X=x)}$.
+Somit ist $I(0) = -\log_2{1} = 0$.\\
+Die Entropie ist $H(X) = \sum\limits_{x \in \{0,1\}}(p(X=x) \cdot I(x)) =
+1 \cdot 0 + 0 = 0$.
+\item Für alle $n$ Zeichen der Quelle gilt $p(X=x) = \frac{1}{n}$. Somit gilt $I(x)=
+-\log_2{p(X=x)} = -\log_2{\frac{1}{n}} = \log_2{n}$ f"ur jedes Zeichen $x$.\\
+Die Entropie eines Zeichens ist dann $H(X) = \sum\limits_{i=1}^n(\frac{1}{n} \cdot
+\log_2{n}) = \log_2{n}$.
+\item F"ur jede der 8 W"urfelseiten gilt $p(X=x) = \frac{1}{8}$ und somit ist die
+Entropie eines einzelnen W"urfelwurfs $H(X) = \log_2{8} = 3$.
+\item Der Informationsgehalt \underline{eines} Zeichens ist f"ur die gegebenen Folgen
+gleich, da die Zeichen $0$ und $1$ von beiden Quellen mit der gleichen
+Wahrscheinlichkeit gesendet werden. Zu erkennen ist, dass die Zeichen der ersten
+Quelle durch eine sich wiederholende Struktur geordnet sind, weshalb die erste
+Zeichenkette im Mittel weit weniger Information als in der zweiten Zeichenkette
+enth"alt und damit eine niedrigere Entropie hat.\\
+Wenn die Folge aus voneinander abh"angigen Folgengliedern besteht, dann sind die
+n"achsten Folgenglieder leichter vorherzusagen und damit ist ihr mittlerer
+Informationsgehalt geringer. Man sieht dies an der ersten Zeichenkette besonders
+einfach, wenn man immer Paare der Zeichen $0$ und $1$ jeweils als ein Zeichen eines
+neuen, vierelementigen Alphabets betrachtet. Dann sendet die erste Quelle immer das
+gleiche Zeichen $10$ und der Informationsgehalt dieses Zeichens und die Entropie
+sind $0$.
+\end{enumerate}
+
+\subsection*{L"osung zu Aufgabe 2}
+\begin{enumerate}
+\item Da der Informationskanal kein Ged"achtnis hat, geschieht die "Ubertragung der
+einzelnen Zeichen unabh"angig voneinander. Die Wahrscheinlichkeiten multiplizieren
+sich also:\\
+$p(1001|1100) = p(1|1) \cdot p(0|1) \cdot p(0|0) \cdot p(1|0) = 0.9 \cdot 0.1 \cdot
+0.8 \cdot 0.2 = 0.0144$
+\item Die Entropie der Quelle erreicht wegen des zweielementigen Alphabets genau dann
+ihr Maximum von $H(X) = 1 \; \mbox{bit}$, wenn die beiden Zeichen $0$ und $1$ gleich
+oft auftreten, also wenn $P(X=0) = P(X=1) = 0.5$ gilt.\\
+Dann gilt f"ur den Empf"anger $Y$ $P(Y=y) = \sum\limits_{x \in \{0,1\}}(P(X=x) \cdot
+P(Y=y|X=x))$ und wir erhalten wir $P(Y=0) = 0.5 \cdot 0.8 + 0,5 \cdot 0.1 = 0.45$ und
+$P(Y=1) = 0.5 \cdot 0.9 + 0.5 \cdot 0.9 = 0.55$.\\
+Die Entropie auf der Empf"angerseite ist also $H(Y) = -(0.45 \cdot \log_2{0.45} +
+0.55 \cdot \log_2{0.55}) \; \mbox{bit} \approx 0,9928 \; \mbox{bit}$
+\item Es gilt wieder $H(Y) = 1 \; \mbox{bit} \Leftrightarrow P(Y = 0) = P(Y = 1) =
+0.5$.\\
+Daraus ergeben sich nun die beiden folgenden linearen Gleichungen:\\
+$P(Y=0) = 0.5 = 0.8 \cdot P(X=0) + 0.1 \cdot P(X=1)$\\
+$P(Y=1) = 0.5 = 0.2 \cdot P(X=0) + 0.9 \cdot P(X=1)$\\
+Man erh"alt dann $P(X=0) = \frac{4}{7} \approx 0.571$ und $P(X=1) = \frac{3}{7}
+\approx 0.429$.\\
+Damit ist die Entropie der Quelle $H(X) \approx 0,9852 \; \mbox{bit}$.
+\item Die Verbundentropie des Kanals berechnet sich durch\\
+$H(X,Y) = -\sum\limits_{x \in \{0,1\}}\sum\limits_{y \in \{0,1\}}(P(X=x,Y=y) \cdot
+\log_2{P(X=x,Y=y)}) \approx 1,5955 \; \mbox{bit}$.
+\item Aus der Verbundentropie lassen sich leicht die bedingten Entropien, n"amlich
+die Irrelevanz $H(Y|X)$ und die "Aquivokation $H(X|Y)$, berechnen:\\
+$H(Y|X) = H(X,Y) - H(X) \approx 1,5955 \; \mbox{bit} \; -1 \; \mbox{bit}
+\approx 0,5955 \; \mbox{bit}$\\
+$H(X|Y) = H(X,Y) - H(Y) \approx 1,5955 \; \mbox{bit} \; -0,9928 \; \mbox{bit}
+\approx 0,6027 \; \mbox{bit}$
+\item Die Transinformation $I(X;Y)$ bezeichnet denjenigen Anteil der Quellenentropie
+$H(X)$, der bei der "Ubertragung beim Empf"anger $Y$ ankommt, also genau denjenigen
+Anteil der empfangenen Information $H(Y)$, der "uberhaupt von der Quelle $X$ stammt.
+Sie l"asst sich daher berechnen durch:\\
+$I(X;Y) = H(X) - H(X|Y) = H(Y) - H(Y|X) \approx 0,3973 \; \mbox{bit}$
+\end{enumerate}
+
+\subsection*{L"osung zu Aufgabe 3}
+\begin{enumerate}
+\item $H(X) = -(0.5 \cdot \log_2{0.5} + 0.25 \cdot \log_2{0.25} + 2 \cdot 0.125 \cdot
+\log_2{0.125}) = 0.5 + 0.5 + 0.75 = 1.75$
+
+\newpage
+
+\item \underline{Hinweis:} Der Code ist nicht eindeutig!
+\begin{center}
+\begin{tikzpicture}
+\node[circle,draw]{}
+child{
+  node[circle,draw]{$A$}
+  edge from parent
+  node[left]{\textbf{$0$}}
+}
+child{
+  node[circle,draw]{}
+  child{
+    node[circle,draw]{$B$}
+    edge from parent
+    node[left]{\textbf{$0$}}
+  }
+  child{
+    node[circle,draw]{}
+    child{
+      node[circle,draw]{$C$}
+      edge from parent
+      node[left]{\textbf{$0$}}
+    }
+    child{
+      node[circle,draw]{$D$}
+      edge from parent
+      node[right]{\textbf{$1$}}
+    }
+    edge from parent
+    node[right]{\textbf{$1$}}
+  }
+  edge from parent
+  node[right]{\textbf{$1$}}
+};
+\end{tikzpicture}
+\end{center}
+\item Die mittlere Codewortl"ange ergibt sich aus der Aufsummierung der Produkte aus
+Auftrittswahrscheinlichkeit und Codewortl"ange "uber allen Codew"ortern. Also ist die
+mittlere Codewortl"ange $0.5 \cdot 1 + 0.25 \cdot 2 + 2 * 0.125 \cdot 3 = 1.75$. Die
+mittlere Codewortl"ange ist immer gr"o"ser oder gleich der Entropie. Hier erreicht
+sie sogar den minimalen Wert, weil die Auftrittswahrscheinlichkeiten Potenzen von $2$
+sind.
+\item Dekodiert ergibt sich das Wort BCBCCBCACBBC. Der Huffman-Code eignet sich gut
+wegen der Beachtung der Auftrittswahrscheinlichkeiten.
+\end{enumerate}
+
+\subsection*{L"osung zu Aufgabe 4}
+\begin{enumerate}
+\item Information des Zeichens $0$: $I(0) = -\log_2{p_0} = -\log_2{0.25} =
+2 \; \mbox{bit}$\\
+Information des Zeichens $1$: $I(1) = -\log_2{p_1} = -\log_2{0.75} \approx
+0.415 \; \mbox{bit}$
+\item Entropie der Quelle $Q$: $H(Q) = -(p_0 \cdot \log_2{p_0} + p_1 \cdot
+\log_2{p_1}) = 0.25 \cdot 2 + 0.75 \cdot \log_2{\frac{4}{3}} \approx
+0.81 \; \mbox{bit}$
+\item Informationsgehalt der Zeichenfolge $0110$: $I(0110) = 2 \cdot I(0) + 2 \cdot
+I(1) \approx 4.83 \; \mbox{bit}$
+\item Wir fassen die bedingten Wahrscheinlichkeiten in folgender Skizze zusammen:
+\begin{center}
+\begin{tikzpicture}
+\draw (0,0) circle (10pt);
+\draw (0,0) node {$1$};
+\draw (0,2) node {$Q$};
+\draw (0,4) circle (10pt);
+\draw (0,4) node {$0$};
+\draw (4,0) circle (10pt);
+\draw (4,0) node {$1$};
+\draw (4,2) node {$R$};
+\draw (4,4) circle (10pt);
+\draw (4,4) node {$0$};
+\draw [->] (0.35,0) -- (3.65,0);
+\draw (2,0.3) node {$P(1|1)=0.5$};
+\draw [->] (0.35,4) -- (3.65,4);
+\draw (2,3.7) node {$P(0|0)=1$};
+\draw [->] (0.25,0.25) -- (3.75,3.75);
+\draw (1.3,1) node[above left] {$P(0|1)=0.5$};
+\draw [->] (0.25,3.75) -- (3.75,0.25);
+\draw (1.1,3) node[below left] {$P(1|0)=0$};
+\end{tikzpicture}
+\end{center}
+Weiterhin ben"otigen wir folgende Wahrscheinlichkeiten:\\
+$P(0,0) = p_0 \cdot P(0|0) = 0.25$\\
+$P(0,1) = p_0 \cdot P(1|0) = 0$\\
+$P(1,0) = p_1 \cdot P(0|1) = 0.375$\\
+$P(1,1) = p_1 \cdot P(1|1) = 0.375$\\[4pt]
+Totalinformation: $H(Q,R) = -\sum\limits_{x,y \in \{0,1\}}(P(x,y) \cdot
+\log_2{P(x,y)}) \approx 1,56 \; \mbox{bit}$\\
+Fehlinformation: $H(R|Q) = -\sum\limits_{x,y \in \{0,1\}}(P(x,y) \cdot
+\log_2{P(y|x)}) = -(2 \cdot 0.375 \cdot \log_2{0.5}) = 0,75 \; \mbox{bit}$\\
+Alternativ: $H(R|Q) = H(Q,R) - H(Q) \approx 0,75 \; \mbox{bit}$
+Zur Berechnung der "Aquivokation berechnen wir erst die Empfangswahrscheinlichkeiten
+der Zeichen $0$ und $1$ und die Entropie des Empf"angers $R$.\\
+$p_0' = p_0 \cdot P(0|0) + p_1 \cdot P(0|1) = 0.25 \cdot 1 + 0.75 \cdot 0.5 =
+0.625$\\
+$p_1' = p_0 \cdot P(1|0) + p_1 \cdot P(1|1) = 0.25 \cdot 0 + 0.75 \cdot 0.5 =
+0.375$\\
+$H(R) = -(p_0' \cdot \log_2{p_0'} + p_1' \cdot \log_2{p_1'}) \approx
+0.95 \; \mbox{bit}$\\
+"Aquivokation: $H(Q|R) = H(Q,R) - H(R) \approx 0.61 \; \mbox{bit}$\\
+Transinformation: $I(Q;R) = H(Q) - H(Q|R) \approx 0.20 \; \mbox{bit}$\\
+Alternativ: $I(Q;R) = H(R) - H(R|Q) \approx 0.20 \; \mbox{bit}$
+\end{enumerate}
+
+\end{document}
