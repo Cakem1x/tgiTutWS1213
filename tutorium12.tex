@@ -5,8 +5,53 @@
 \tutnr{12}
 
 \section{Begriffe der Informationstheorie}
-%Erklären: (gedächtnislose) Quelle, Entropie, Informationsgehalt, Ordnung von Zeichenketten
 \subsection{Erklärung}
+\begin{frame}
+	\frametitle{Shannonscher Informationsbegriff}
+	\begin{itemize}
+		\item Jede Information bzw. Nachricht besitzt eine Quelle
+		\begin{itemize}
+			\item Oft randomisiert a.k.a. Zufallsquellen
+			\item Wenn alle gesendete Nachrichten unabhängig voneinander sind, ist die Quelle gedächtnislos
+		\end{itemize}
+		\item Es gibt immer einen Empfänger, der die Nachrichten beobachtet
+		\item Je unvorhersehbarer die Nachricht, desto mehr Informationsgehalt
+		\begin{itemize}
+				\item Wird deshalb auch manchmal Überraschungswert genannt
+		\end{itemize}
+		\item Entropie ist ein Begriff für die Dichte der Informationen
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Etwas genauer}
+	\begin{itemize}
+		\item Informationsgehalt soll nicht negativ sein
+		\item Ein sicheres Ergebnis (p = 1) enthält keine Information
+		\item Informationen von unabhängigen Nachrichten sollen sich addieren
+		\item Kleine Änderungen der Wahrscheinlichkeit $\Rightarrow$ kleine Änderung des Informationsgehalts
+		\item $I(x) = -log_b(p(x)) = log_b(\frac{1}{p(x)})$ erfüllt diese Bedingungen
+		\begin{itemize}
+			\item Meist wird als Basis b = 2 verwendet
+		\end{itemize}~\\~\\
+		\item Entropie ist entsprechend definiert~\\ $H(X) = \sum\limits_{x \in X} (p(x) \cdot log_2(\frac{1}{p(x)}) = \sum\limits_{x \in X} (p(x) \cdot I(x))$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Beispiele}
+	\begin{itemize}
+		\item Zufallsquelle 1: p(A) = $\frac{1}{2}$, p(B) = $\frac{1}{2}$
+		\item I(A) = $log_2(\frac{1}{0.5}) = log_2(2) = 1$ = I(B)
+		\item H(X) = $(p(A) \cdot I(A)) + (p(B) \cdot I(B)) = 0.5 + 0.5 = 1$~\\~\\~\\~\\
+		\item Zufallsquelle 2: p(A) = $\frac{1}{16}$, p(B) = $\frac{15}{16}$
+		\item I(A) = $log_2(\frac{1}{0.0625}) = log_2(16) = 4$
+		\item I(B) = $log_2(\frac{1}{0.9375}) = log_2(\frac{16}{15}) = 0.0931\ldots$
+		\item H(X) = $(p(A) \cdot I(A)) + (p(B) \cdot I(B))$~\\$= (\frac{1}{16} \cdot 4) + (\frac{15}{16} \cdot 0.0931) = \frac{1}{4} + 0.873 = 0.337$
+	\end{itemize}
+\end{frame}
+%Explaining "Ordnung von Zeichenketten would be Bogus"
+
 \subsection{Aufgabe B11 A1}
 \begin{frame}
 	\frametitle{Aufgabe B11 A1}
