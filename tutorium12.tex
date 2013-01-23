@@ -78,12 +78,12 @@
 \frametitle{Übertragung von Information}
 Daten können über einen Kanal von der Quelle zu einem Empfänger gesendet werden. Dieser Kanal ist in der Regel nicht störungsfrei, dass heißt die gesendeten Daten können ungleich zu den empfangenen sein.\\ 
 Ein gestörter Kanal kann durch seine Übertragungswahrscheinlichkeiten $P(r|q)$, welche angeben wie wahrscheinlich es ist, dass r beim Empfänger ankommt, wenn q aus der Quelle gesendet wurde, charakterisiert werden.\\
-Damit ergibt sich der Zusammenhang \[P(R=r)=\sum_{r} P(Q=q)P(R=r|Q=q)\] und für die Wahrscheinlichkeit das r und q gleichzeitig auftreten: \[P(Q=q,R=r)=P(Q=q)P(R=r|Q=q).\]
+Damit ergibt sich der Zusammenhang \[P(R=r)=\sum_{q \in Q} P(Q=q)P(R=r|Q=q)\] und für die Wahrscheinlichkeit das r und q gleichzeitig auftreten: \[P(Q=q,R=r)=P(Q=q)P(R=r|Q=q).\]
 \end{frame}
 \begin{frame}
 \frametitle{Einige Definitionen}
 \emph{Totalinformation} oder auch Verbundentropie H(Quelle $Q$, Empfänger $R$) ist die gesamte von Quelle und Empfänger erzeugte Entropie
-\[H(Q,R)=-\sum_{q} \sum_{r} P(Q=q,R=r)\log(P(Q=q,R=r))\]
+\[H(Q,R)=-\sum_{q \in Q} \sum_{r \in R} P(Q=q,R=r)\log(P(Q=q,R=r))\]
 \emph{Äquivokation} $H$(Quelle $Q|$ Empfänger $R$) gibt dem Entropieverlust durch die Übertragung an.\\
 \[H(Q|R)=H(Q,R)-H(R)\]
 \emph{Fehlinformation} H(Empfänger $R|$ Quelle $Q$) entspricht dem anscheinenden Entropiegewinn durch die Übertragung.
