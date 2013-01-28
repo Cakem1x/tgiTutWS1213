@@ -7,16 +7,80 @@
 \section{Kanalkapazität}
 \subsection{Erklärung}
 \subsection{Aufgabe B13 A1}
+\begin{frame}
+\frametitle{Aufgabe B13 A1}
+Gegeben sei ein bin"arer Kanal mit Sender $X$ und Empf"anger $Y$, genannt Z-Kanal,
+durch die folgende Matrix:\\[4pt]
+$Q = \left( \begin{array}{cc}
+P(Y=0|X=0) & P(Y=0|X=1) \\ P(Y=1|X=0) & P(Y=1|X=1)
+\end{array} \right) = \left( \begin{array}{cc}
+1 & 0.5 \\ 0 & 0.5
+\end{array} \right)$\\[4pt]
+Bestimmen Sie die Kanalkapazit"at!\\[4pt]
+\underline{Hinweis:} Sie k"onnen dabei folgendes verwenden:
+\[ \frac{\log_b{x}}{dx} = \frac{1}{x \cdot \ln{b}} \]
+\end{frame}
 
 
 \section{Binäre Codes}
 \subsection{Erklärung}
 \subsection{Aufgabe B13 A2}
+\begin{frame}
+\frametitle{Aufgabe B13 A2}
+Sei $\mathcal{C}$ ein bin"arer Code, der durch die folgende Generatormatrix gegeben
+ist:\\[4pt]
+$G = \left( \begin{array}{cccc}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+1 & 1 & 0 & 0 \\
+0 & 0 & 1 & 1 \\
+1 & 1 & 1 & 1
+\end{array} \right)$\\[4pt]
+Dekodieren Sie die folgenden empfangenen W"orter!
+\begin{enumerate}
+\item $w_1 = (\begin{array}{ccccccc}1 & 1 & 0 & 1 & 0 & 1 & 1\end{array})$
+\item $w_2 = (\begin{array}{ccccccc}0 & 1 & 1 & 0 & 1 & 1 & 1\end{array})$
+\item $w_3 = (\begin{array}{ccccccc}0 & 1 & 1 & 1 & 0 & 0 & 0\end{array})$
+\end{enumerate}
+\end{frame}
 
 
 \section{Hamming-Code}
 \subsection{Erklärung}
 \subsection{Aufgabe B13 A3}
+\begin{frame}
+\frametitle{Aufgabe B13 A3}
+Gegeben sei der $[7,4]$-Hamming-Code $\mathcal{C}_H$ mit der Erzeugermatrix\\[4pt]
+\begin{columns}
+\column[c]{0.5\textwidth}
+$G = \left( \begin{array}{cccc}
+1 & 1 & 0 & 1 \\
+1 & 0 & 1 & 1 \\
+1 & 0 & 0 & 0 \\
+0 & 1 & 1 & 1 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{array} \right)$\\[4pt]
+\column[c]{0.5\textwidth}
+und der Pr"ufmatrix\\[4pt]
+$H = \left( \begin{array}{ccccccc}
+0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+1 & 0 & 1 & 0 & 1 & 0 & 1
+\end{array} \right)$.\\[4pt]
+\end{columns}
+\vspace{0.5cm}
+Dekodieren Sie die folgenden empfangenen W"orter!
+\begin{enumerate}
+\item $w_1 = (\begin{array}{ccccccc}0 & 0 & 0 & 1 & 1 & 1 & 1\end{array})$
+\item $w_2 = (\begin{array}{ccccccc}1 & 1 & 0 & 0 & 1 & 1 & 1\end{array})$
+\item $w_3 = (\begin{array}{ccccccc}1 & 1 & 1 & 0 & 0 & 0 & 0\end{array})$
+\item $w_4 = (\begin{array}{ccccccc}0 & 1 & 1 & 1 & 1 & 1 & 1\end{array})$
+\end{enumerate}
+\end{frame}
 
 
 \section{Schluss}
