@@ -1,0 +1,183 @@
+\documentclass[10pt,oneside,onecolumn,a4paper,german,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{german}
+\usepackage{amsmath,amsfonts,amssymb,latexsym,textcomp,stmaryrd}
+\usepackage{tikz}
+\pagestyle{plain}
+\pagenumbering{arabic}
+\parskip0.5ex plus0.1ex minus0.1ex
+\parindent0pt
+\voffset-1.04cm
+\topmargin0pt
+\headheight0pt
+\headsep0pt
+\topskip0pt
+\textheight26.7cm
+\footskip20pt
+\hoffset-1.04cm
+\oddsidemargin0pt
+\evensidemargin0pt
+\textwidth18cm
+\marginparsep0pt
+\marginparwidth0pt
+\begin{document}
+
+\section*{Tutorien-"Ubungsblatt 12}
+
+\subsection*{Aufgabe 1}
+Gegeben sei ein bin"arer Kanal mit Sender $X$ und Empf"anger $Y$, genannt Z-Kanal,
+durch die folgende Matrix:\\[4pt]
+$Q = \left( \begin{array}{cc}
+P(Y=0|X=0) & P(Y=0|X=1) \\ P(Y=1|X=0) & P(Y=1|X=1)
+\end{array} \right) = \left( \begin{array}{cc}
+1 & 0.5 \\ 0 & 0.5
+\end{array} \right)$\\[4pt]
+Bestimmen Sie die Kanalkapazit"at!\\[4pt]
+\underline{Hinweis:} Sie k"onnen dabei folgendes verwenden:
+\[ \frac{\log_b{x}}{dx} = \frac{1}{x \cdot \ln{b}} \]
+
+\subsection*{Aufgabe 2}
+Sei $\mathcal{C}$ ein bin"arer Code, der durch die folgende Generatormatrix gegeben
+ist:\\[4pt]
+$G = \left( \begin{array}{cccc}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+1 & 1 & 0 & 0 \\
+0 & 0 & 1 & 1 \\
+1 & 1 & 1 & 1
+\end{array} \right)$\\[4pt]
+Dekodieren Sie die folgenden empfangenen W"orter!
+\begin{enumerate}
+\item $w_1 = (\begin{array}{ccccccc}1 & 1 & 0 & 1 & 0 & 1 & 1\end{array})$
+\item $w_2 = (\begin{array}{ccccccc}0 & 1 & 1 & 0 & 1 & 1 & 1\end{array})$
+\item $w_3 = (\begin{array}{ccccccc}0 & 1 & 1 & 1 & 0 & 0 & 0\end{array})$
+\end{enumerate}
+
+\subsection*{Aufgabe 3}
+Gegeben sei der $[7,4]$-Hamming-Code $\mathcal{C}_H$ mit der Erzeugermatrix\\[4pt]
+$G = \left( \begin{array}{cccc}
+1 & 1 & 0 & 1 \\
+1 & 0 & 1 & 1 \\
+1 & 0 & 0 & 0 \\
+0 & 1 & 1 & 1 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{array} \right)$\\[4pt]
+und der Pr"ufmatrix\\[4pt]
+$H = \left( \begin{array}{ccccccc}
+0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+1 & 0 & 1 & 0 & 1 & 0 & 1
+\end{array} \right)$.\\[4pt]
+Dekodieren Sie die folgenden empfangenen W"orter!
+\begin{enumerate}
+\item $w_1 = (\begin{array}{ccccccc}0 & 0 & 0 & 1 & 1 & 1 & 1\end{array})$
+\item $w_2 = (\begin{array}{ccccccc}1 & 1 & 0 & 0 & 1 & 1 & 1\end{array})$
+\item $w_3 = (\begin{array}{ccccccc}1 & 1 & 1 & 0 & 0 & 0 & 0\end{array})$
+\item $w_4 = (\begin{array}{ccccccc}0 & 1 & 1 & 1 & 1 & 1 & 1\end{array})$
+\end{enumerate}
+
+\newpage
+
+\subsection*{L"osung zu Aufgabe 1}
+Die Kanalkapazit"at wird berechnet durch: $C = \max\limits_{X} I(X;Y) = 
+\max\limits_{p(x)}I(X;Y)$\\[4pt]
+Weil es sich um einen bin"aren Kanal handelt, gilt $P(X=0) = p$ und $P(X=1) = 1 - p$
+f"ur eine feste Wahrscheinlichkeit $p \in \mathbb{R}, 0 \leq p \leq 1$ bez"uglich
+einer entsprechenden Quelle $X$.\\[4pt]
+Dann gilt:\\
+1. $P(Y=0) = P(X=0) \cdot P(Y=0|X=0) + P(X=1) \cdot P(Y=0|X=1) = p \cdot 1 +
+(1 - p) \cdot 0.5 = 0.5 \cdot (1 + p)$\\[4pt]
+2. $P(Y=1) = P(X=0) \cdot P(Y=1|X=0) + P(X=1) \cdot P(Y=1|X=1) = p \cdot 0 +
+(1 - p) \cdot 0.5 = 0.5 \cdot (1 - p)$\\[4pt]
+3. $H(Y) = -(P(Y=0) \cdot \log_2{P(Y=0)} + P(Y=1) \cdot \log_2{P(Y=1)}) =$\\
+$(-0.5) \cdot (1 + p) \cdot \log_2{(0.5 \cdot (1 + p))} +
+ (-0.5) \cdot (1 - p) \cdot \log_2{(0.5 \cdot (1 - p))}$\\[4pt]
+4. $H(Y|X=0) = -(P(Y=0|X=0) \cdot \log_2{P(Y=0|X=0)} + P(Y=1|X=0) \cdot
+\log_2{P(Y=1|X=0)}) =$\\
+$-(1 \cdot \log_2{1} + 0 \cdot \log_2{0}) = 0$\\[4pt]
+5. $H(Y|X=1) = -(P(Y=0|X=1) \cdot \log_2{P(Y=0|X=1)} + P(Y=1|X=1) \cdot
+\log_2{P(Y=1|X=1)}) =$\\
+$-(0.5 \cdot \log_2{0.5} + 0.5 \cdot \log_2{0.5}) = 1$\\[4pt]
+6. $H(Y|X) = P(X=0) \cdot H(Y|X=0) + P(X=1) \cdot H(Y|X=1) = p \cdot 0 +
+(1 - p) \cdot 1 = 1 - p$\\[4pt]
+7. $I(X;Y) = H(Y) - H(Y|X) = (-0.5) \cdot (1 + p) \cdot \log_2{(0.5 \cdot (1 + p))} +
+(-0.5) \cdot (1 - p) \cdot \log_2{(0.5 \cdot (1 - p))} - 1 + p$\\[4pt]
+Damit gilt nun $C = \max\limits_{p} I(X;Y)$ und wir k"onnen "uber die Ableitung von
+$I(X;Y)$ nach $p$ den Wert f"ur $p$ finden, f"ur den $I(X;Y)$ maximal wird.\\[4pt]
+$I'(X;Y) = \frac{dI(X;Y)}{dp} =$\\[4pt]
+$(-0.5) \cdot \log_2{(0.5 \cdot (1 + p))} +
+(-0.5) \cdot (1 + p) \cdot \frac{1}{0.5 \cdot (1 + p) \cdot \ln{2}} \cdot 0.5 +$
+\\[4pt]
+$0.5 \cdot \log_2{(0.5 \cdot (1 - p))} +
+(-0.5) \cdot (1 - p) \cdot \frac{1}{0.5 \cdot (1 - p) \cdot \ln{2}} \cdot (-0.5) + 1
+=$\\[4pt]
+$0.5 \cdot (\log_2{(0.5 \cdot (1 - p))} - \log_2{(0.5 \cdot (1 + p))}) +
+(-0.5) \cdot (\frac{1}{\ln{2}} - \frac{1}{\ln{2}}) + 1 =$\\[4pt]
+$0.5 \cdot \log_2{(\frac{1 - p}{1 + p})} + 1$\\[4pt]
+$I'(X;Y) = 0 \Rightarrow 0.5 \cdot \log_2{(\frac{1 - p}{1 + p})} + 1 = 0
+\Rightarrow \log_2{(\frac{1 - p}{1 + p})} = -2
+\Rightarrow \frac{1 - p}{1 + p} = 0.25
+\Rightarrow 1 - p = 0.25 + 0.25 \cdot p \Rightarrow p = 0.6$\\[4pt]
+Durch Einsetzen von $p = 0.6$ in $I(X;Y)$ ergibt sich dann:\\
+$C = (-0.8) \cdot \log_2{0.8} + (-0.2) \cdot \log_2{0.2} - 0.4 \approx 0.322 \;
+\mbox{bit}$
+
+\subsection*{L"osung zu Aufgabe 2}
+Aufgrund der Tatsache, dass es sich um einen systematischen Code handelt, wie man
+an der Teilmatrix $I_4$ der Generatormatrix $G$ erkennen kann, kann man die drei
+Pr"ufgleichungen direkt aus $G$ ablesen. Sie lauten f"ur ein Codewort
+$c \in \mathcal{C} \subseteq \mathbb{F}_2^7$:\\[4pt]
+1. $c_1 + c_2 + c_5 = s_1$\\
+2. $c_3 + c_4 + c_6 = s_2$\\
+3. $c_1 + c_2 + c_3 + c_4 + c_7 = s_3$\\[4pt]
+Daraus kann nun die Kontrollmatrix bilden:\\[4pt]
+$H = \left( \begin{array}{ccccccc}
+1 & 1 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 1 & 0 & 1 & 0 \\
+1 & 1 & 1 & 1 & 0 & 0 & 1
+\end{array} \right)$\\[4pt]
+Nun kann man f"ur ein empfangenes Wort $w$ "uber die Gleichung $Hw^T = s^T$ das
+Syndrom $s =$ ($s_1$ $s_2$ $s_3$) bestimmen. Gilt $s =$ (0 0 0), so geht man von
+einer korrekten "Ubertragung aus. Gilt $s \not=$ (0 0 0), so geht man zun"achst von
+einem 1-Bit-Fehler aus und vergleicht $s^T$ mit den Spalten der Kontrollmatrix. Bei
+einer eindeutigen "Ubereinstimmung kann das fehlerhafte Bit korrigiert werden. Bei
+mehreren "Ubereinstimmungen ist dann eine Korrektur nicht mehr m"oglich. Bei keiner
+"Ubereinstimmung liegt dann ein Mehr-Bit-Fehler vor und man muss dann Spaltensummen
+f"ur den Vergleich verwenden.
+\begin{enumerate}
+\item Das Syndrom lautet (0 0 0), das Codewort wurde also korrekt "ubertragen und
+die Originalnachricht lautet\\
+(1 1 0 1).
+\item Das Syndrom lautet (0 0 1), das Codewort hat damit einen Fehler in Bit 7 und
+die Originalnachricht lautet\\
+(0 1 1 0).
+\item Das Syndrom lautet (1 0 1), das Codewort hat damit einen Fehler in Bit 1 oder
+in Bit 2. Bei einem Fehler\\
+in Bit 1 lautet die Originalnachricht (1 1 1 1), bei einem Fehler in Bit 2 lautet
+sie (0 0 1 1).
+\end{enumerate}
+
+\newpage
+
+\subsection*{L"osung zu Aufgabe 3}
+\begin{enumerate}
+\item Das Syndrom lautet (0 0 0), das Codewort wurde also korrekt "ubertragen und
+die Originalnachricht lautet\\
+(0 1 1 1).
+\item Das Syndrom lautet (1 1 1), das Codewort hat damit einen Fehler in Bit 7 und
+die Originalnachricht lautet\\
+(0 1 1 0).
+\item Das Syndrom lautet (0 0 0), das Codewort wurde also korrekt "ubertragen und
+die Originalnachricht lautet\\
+(1 0 0 0).
+\item Das Syndrom lautet (0 0 1), das Codewort hat damit einen Fehler in Bit 1 und
+die Originalnachricht lautet\\
+(1 1 1 1).
+\end{enumerate}
+
+\end{document}
