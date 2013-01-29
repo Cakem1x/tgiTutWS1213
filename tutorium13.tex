@@ -91,19 +91,19 @@ Dekodieren Sie die folgenden empfangenen W"orter!
 
 \begin{frame}
 \frametitle{Beispiel}
-1100110  S~\\
-\only<2->{\textcolor{red}{1}1\textcolor{red}{0}0\textcolor{red}{1}1\textcolor{red}{0}  0~\\}
-\only<3->{1\textcolor{red}{10}01\textcolor{red}{10}  0~\\}
-\only<4->{110\textcolor{red}{0110}  0~\\}
-\only<5->{$\Rightarrow$ Keine Fehler! Datenwort = 11\textcolor{red}{0}0\textcolor{red}{110}}~\\~\\~\\~\\
+1100110  \hspace{1 cm}S~\\
+\only<2->{\textcolor{red}{1}1\textcolor{red}{0}0\textcolor{red}{1}1\textcolor{red}{0}  \hspace{1 cm}0~\\}
+\only<3->{1\textcolor{red}{10}01\textcolor{red}{10} \hspace{1 cm}0~\\}
+\only<4->{110\textcolor{red}{0110}  \hspace{1 cm}0~\\}
+\only<5->{$\Rightarrow$ Keine Fehler! Datenwort = 0110} ~\\~\\~\\~\\
 
 
 
-\only<6->{1100010  S~\\}
-\only<7->{\textcolor{red}{1}1\textcolor{red}{0}0\textcolor{red}{0}1\textcolor{red}{0}  1~\\}
-\only<8->{1\textcolor{red}{10}00\textcolor{red}{10}  0~\\}
-\only<9->{110\textcolor{red}{0010}  1~\\}
-\only<10->{$\Rightarrow$ Fehler an der Stelle $2^1 + 2^3 = 5$~\\Korrektur: 1100\textcolor{red}{1}10}
+\only<6->{1100010  \hspace{1 cm}S~\\}
+\only<7->{\textcolor{red}{1}1\textcolor{red}{0}0\textcolor{red}{0}1\textcolor{red}{0}  \hspace{1 cm}1~\\}
+\only<8->{1\textcolor{red}{10}00\textcolor{red}{10}  \hspace{1 cm}0~\\}
+\only<9->{110\textcolor{red}{0010}  \hspace{1 cm}1~\\}
+\only<10->{$\Rightarrow$ Fehler an der Stelle $2^1 + 2^2 = 5$~\\Korrektur: 1100\textcolor{red}{1}10~\\$\Rightarrow$ repariertes Datenwort: 0110}
 
 
 \end{frame}
