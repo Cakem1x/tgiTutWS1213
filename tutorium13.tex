@@ -9,7 +9,7 @@
 \begin{frame}
 	\frametitle{Kanalkapazität}
 	Die Kanalkapazität bezeichnet maximale Bitrate eines Kanals, bei der eine fehlerfreie Übertragung möglich ist.\\
-	Mit einer geeigneten Kodieren diese kann diese Bitrate näherungsweise erreicht werden.
+	Mit einer geeigneten Kodierung kann diese Bitrate näherungsweise erreicht werden.
 	\begin{block}{Definition}
 	Die Kapazität $C$ eines Kanals mit Sender $X$ und Empfänger $Y$ ist
 	\begin{equation}
@@ -40,7 +40,7 @@ Bestimmen Sie die Kanalkapazit"at!\\[4pt]
 	\frametitle{Systematische Codes}
 	Damit überprüft werden kann, ob ein Wort richtig übertragen wurde, müssen zusätzlich Daten übermittelt werden.\\
 	Eine Möglichkeit der Fehlerprüfung ist die Verwendung von Generatormatrizen.\\ 
-	Dabei werden Wörter der festen Länge k mit Wörter der Länge k+r kodiert. Dazu wird eine Generatormatrix der Form \[G^T=\left(I_k|A\right)\] verwendet, wobei $I_k$ die $k \times k$-Einheitsmatrix ist und A eine $k \times r$-Matrix. Das kodierte Wort $\omega_{\text{codiert}}$ erhält man aus dem dazugehörigen Wort $\omega$ mittels der Formel $G\omega=\omega_{\text{codiert}}.$\\
+	Dabei werden Wörter der festen Länge k mit Wörter der Länge k+r kodiert. Dazu wird eine Generatormatrix der Form \[G=\left(\frac{I_k}{A}\right)\] verwendet, wobei $I_k$ die $k \times k$-Einheitsmatrix ist und A eine $r \times k$-Matrix. Das kodierte Wort $\omega_{\text{codiert}}$ erhält man aus dem dazugehörigen Wort $\omega$ mittels der Formel $G\omega=\omega_{\text{codiert}}.$\\
 \end{frame}
 \begin{frame}
 	\frametitle{Systematische Codes}
