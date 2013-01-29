@@ -76,6 +76,38 @@ Dekodieren Sie die folgenden empfangenen W"orter!
 
 \section{Hamming-Code}
 \subsection{Erklärung}
+
+\begin{frame}
+\frametitle{Hamming-Code}
+\begin{itemize}
+	\item Eine Codierung zur Erkennung von bis zu 2-bit-Fehlern und Korrektur von 1-bit-Fehlern
+	\item n Paritätsbits sichern $2^n$ bits - 1 (Code für Fehlerfrei) - n
+\end{itemize}~\\~\\~\\
+\only<2->{Bildlich:~\\}
+\only<2>{$p_1$ $p_2$ $d_3$~\\ \textcolor{red}{$p_1$} $p_2$ \textcolor{red}{$d_3$}~\\$p_1$ \textcolor{red}{$p_2$} \textcolor{red}{$d_3$}}
+\only<3>{$p_1$ $p_2$ $d_3$ $p_4$ $d_5$ $d_6$ $d_7$~\\ \textcolor{red}{$p_1$} $p_2$ \textcolor{red}{$d_3$} $p_4$ \textcolor{red}{$d_5$} $d_6$ \textcolor{red}{$d_7$}~\\$p_1$ \textcolor{red}{$p_2$} \textcolor{red}{$d_3$} $p_4$ $d_5$ \textcolor{red}{$d_6$} \textcolor{red}{$d_7$}~\\$p_1$ $p_2$ $d_3$ \textcolor{red}{$p_4$} \textcolor{red}{$d_5$} \textcolor{red}{$d_6$} \textcolor{red}{$d_7$}}
+\only<4>{$p_1$ $p_2$ $d_3$ $p_4$ $d_5$ $d_6$ $d_7$ $p_8$ $d_9$ $d_{10}$ $d_{11}$ $d_{12}$ $d_{13}$ $d_{14}$ $d_{15}$~\\ \textcolor{red}{$p_1$} $p_2$ \textcolor{red}{$d_3$} $p_4$ \textcolor{red}{$d_5$} $d_6$ \textcolor{red}{$d_7$} $p_8$ \textcolor{red}{$d_9$} $d_{10}$ \textcolor{red}{$d_{11}$} $d_{12}$ \textcolor{red}{$d_{13}$} $d_{14}$ \textcolor{red}{$d_{15}$}~\\$p_1$ \textcolor{red}{$p_2$} \textcolor{red}{$d_3$} $p_4$ $d_5$ \textcolor{red}{$d_6$} \textcolor{red}{$d_7$} $p_8$ $d_9$ \textcolor{red}{$d_{10}$} \textcolor{red}{$d_{11}$} $d_{12}$ $d_{13}$ \textcolor{red}{$d_{14}$} \textcolor{red}{$d_{15}$}~\\$p_1$ $p_2$ $d_3$ \textcolor{red}{$p_4$} \textcolor{red}{$d_5$} \textcolor{red}{$d_6$} \textcolor{red}{$d_7$} $p_8$ $d_9$ $d_{10}$ $d_{11}$ \textcolor{red}{$d_{12}$ $d_{13}$ $d_{14}$ $d_{15}$}~\\$p_1$ $p_2$ $d_3$ $p_4$ $d_5$ $d_6$ $d_7$ \textcolor{red}{$p_8$ $d_9$ $d_{10}$ $d_{11}$ $d_{12}$ $d_{13}$ $d_{14}$ $d_{15}$}}
+\end{frame}
+
+\begin{frame}
+\frametitle{Beispiel}
+1100110  S~\\
+\only<2->{\textcolor{red}{1}1\textcolor{red}{0}0\textcolor{red}{1}1\textcolor{red}{0}  0~\\}
+\only<3->{1\textcolor{red}{10}01\textcolor{red}{10}  0~\\}
+\only<4->{110\textcolor{red}{0110}  0~\\}
+\only<5->{$\Rightarrow$ Keine Fehler! Datenwort = 11\textcolor{red}{0}0\textcolor{red}{110}}~\\~\\~\\~\\
+
+
+
+\only<6->{1100010  S~\\}
+\only<7->{\textcolor{red}{1}1\textcolor{red}{0}0\textcolor{red}{0}1\textcolor{red}{0}  1~\\}
+\only<8->{1\textcolor{red}{10}00\textcolor{red}{10}  0~\\}
+\only<9->{110\textcolor{red}{0010}  1~\\}
+\only<10->{$\Rightarrow$ Fehler an der Stelle $2^1 + 2^3 = 5$~\\Korrektur: 1100\textcolor{red}{1}10}
+
+
+\end{frame}
+
 \subsection{Aufgabe B13 A3}
 \begin{frame}
 \frametitle{Aufgabe B13 A3}
